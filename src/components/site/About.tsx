@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import escritorioAsset from "@/assets/escritorio.jpg.asset.json";
+import escritorioAsset from "@/assets/escritorio-v2.jpg.asset.json";
 
 export function About() {
   return (

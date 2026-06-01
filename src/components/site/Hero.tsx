@@ -1,12 +1,11 @@
 import { MessageCircle, ArrowRight } from "lucide-react";
-import escritorioAsset from "@/assets/escritorio.jpg.asset.json";
 
 export function Hero() {
   return (
     <section id="inicio" className="relative overflow-hidden bg-navy text-navy-foreground">
       <div className="absolute inset-0 placeholder-image-ornament opacity-60" />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:px-10 lg:py-28">
-        <div>
+      <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+        <div className="max-w-3xl">
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-10 bg-gold" />
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
@@ -36,15 +35,6 @@ export function Hero() {
               Conheça as Áreas de Atuação <ArrowRight size={16} />
             </a>
           </div>
-        </div>
-
-        <div className="relative">
-          <img
-            src={escritorioAsset.url}
-            alt="Escritório Denison Henrique Leandro e Advogados Associados"
-            className="aspect-[4/5] w-full rounded-2xl object-cover shadow-elegant ring-1 ring-gold/30"
-          />
-          <div className="absolute -bottom-6 -left-6 hidden h-32 w-32 rounded-2xl border-2 border-gold md:block" />
         </div>
       </div>
     </section>
