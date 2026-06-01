@@ -123,6 +123,25 @@ function ProfissionaisPage() {
           </div>
         </section>
 
+        <section className="bg-background py-20">
+          <div className="mx-auto max-w-7xl px-6 lg:px-10">
+            <div className="mx-auto max-w-2xl text-center">
+              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
+                Formação
+              </span>
+              <h2 className="mt-4 font-serif text-3xl text-deep md:text-4xl">Estagiários</h2>
+              <div className="mx-auto mt-6 h-px w-16 bg-gold" />
+            </div>
+
+            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:max-w-3xl lg:mx-auto lg:grid-cols-2">
+              {interns.map((m) => (
+                <Card key={m.name} {...m} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+
         <CtaBanner />
       </main>
       <Footer />
