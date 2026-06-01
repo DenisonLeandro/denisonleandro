@@ -18,7 +18,7 @@ export function PracticeAreas() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Especialidades</span>
-          <h2 className="mt-4 font-serif text-4xl text-navy md:text-5xl">Áreas de Atuação</h2>
+          <h2 className="mt-4 font-serif text-4xl text-deep md:text-5xl">Áreas de Atuação</h2>
           <div className="mx-auto mt-6 h-px w-16 bg-gold" />
         </div>
 

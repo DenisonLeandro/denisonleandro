@@ -11,7 +11,7 @@ export function PageHeader({ eyebrow, title, description }: Props) {
         <span className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">
           {eyebrow}
         </span>
-        <h1 className="mt-5 font-serif text-4xl md:text-5xl lg:text-6xl">{title}</h1>
+        <h1 className="mt-5 font-serif text-4xl text-white md:text-5xl lg:text-6xl">{title}</h1>
         <div className="mx-auto mt-6 h-px w-20 bg-gold" />
         {description && (
           <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-cream/80">
