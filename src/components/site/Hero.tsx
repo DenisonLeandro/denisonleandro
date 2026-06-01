@@ -40,7 +40,6 @@ export function Hero() {
         </div>
 
         <div className="relative">
-        <div className="relative">
           <img
             src={escritorioAsset.url}
             alt="Escritório Denison Henrique Leandro e Advogados Associados"
