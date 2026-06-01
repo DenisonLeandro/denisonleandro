@@ -37,6 +37,7 @@ function Index() {
         <PracticeAreas />
         <About />
         <Values />
+        <Team />
         <Locations />
         <CtaBanner />
       </main>
