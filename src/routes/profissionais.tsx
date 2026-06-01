@@ -37,13 +37,15 @@ const lawyers = [
   { name: "Dr. João Tadeu Leandro", role: "Advogado", email: "joao@denisonleandro.adv.br", photo: joaoAsset.url },
   { name: "Dra. Renata Henrique Leandro", role: "Advogada", email: "renata@denisonleandro.adv.br", photo: renataAsset.url },
   { name: "Dr. Juan Albner Pereira Veloso", role: "Advogado", email: "juan@denisonleandro.adv.br", photo: null },
-  { name: "Dr. Igor Augusto Batista Antunes", role: "Advogado", email: "igor@denisonleandro.adv.br", photo: null },
   { name: "Dra. Danielle Cristina Mateus Pereira", role: "Advogada", email: "danielle@denisonleandro.adv.br", photo: null },
 ];
 
 const admin = [
   { name: "Maria Inês Gomes da Silva", role: "Administrativo / Financeiro", email: "financeiro@denisonleandro.adv.br", photo: mariaAsset.url },
-  { name: "Leonardo Nascimento de Aguiar", role: "Administrativo / Financeiro", email: "administrativo@denisonleandro.adv.br", photo: null },
+];
+
+const interns = [
+  { name: "Leonardo Nascimento de Aguiar", role: "Estagiário", email: "administrativo@denisonleandro.adv.br", photo: null },
 ];
 
 function Card({ name, role, email, photo }: { name: string; role: string; email: string; photo: string | null }) {
