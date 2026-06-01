@@ -150,7 +150,7 @@ function ProfissionaisPage() {
 
             <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:max-w-3xl lg:mx-auto lg:grid-cols-2">
               {admin.map((m) => (
-                <StaticCard key={m.name} {...m} />
+                <LawyerCard key={m.name} {...m} />
               ))}
             </div>
           </div>
@@ -168,7 +168,7 @@ function ProfissionaisPage() {
 
             <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:max-w-3xl lg:mx-auto lg:grid-cols-2">
               {interns.map((m) => (
-                <StaticCard key={m.name} {...m} />
+                <LawyerCard key={m.name} {...m} />
               ))}
             </div>
           </div>
