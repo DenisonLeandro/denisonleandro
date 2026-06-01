@@ -20,7 +20,7 @@ export function Team() {
           <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
             Equipe
           </span>
-          <h2 className="mt-4 font-serif text-4xl text-navy md:text-5xl">
+          <h2 className="mt-4 font-serif text-4xl text-deep md:text-5xl">
             Nossos Advogados
           </h2>
           <div className="mx-auto mt-6 h-px w-16 bg-gold" />

@@ -12,7 +12,7 @@ export function CtaBanner() {
               <span className="text-xs font-semibold uppercase tracking-[0.25em] text-navy/70">
                 Atendimento Direto
               </span>
-              <h2 className="mt-3 font-serif text-3xl text-navy md:text-4xl lg:text-5xl">
+              <h2 className="mt-3 font-serif text-3xl text-deep md:text-4xl lg:text-5xl">
                 Tire suas dúvidas com um advogado especialista
               </h2>
             </div>

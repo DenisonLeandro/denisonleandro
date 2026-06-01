@@ -75,7 +75,7 @@ function ContatoPage() {
         {/* Contact CTA */}
         <section className="bg-background py-16">
           <div className="mx-auto max-w-4xl px-6 text-center lg:px-10">
-            <h2 className="font-serif text-2xl text-navy md:text-3xl">
+            <h2 className="font-serif text-2xl text-deep md:text-3xl">
               Atendimento rápido pelo WhatsApp
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base text-foreground/75">
@@ -111,7 +111,7 @@ function ContatoPage() {
               <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
                 Unidades
               </span>
-              <h2 className="mt-4 font-serif text-3xl text-navy md:text-4xl">
+              <h2 className="mt-4 font-serif text-3xl text-deep md:text-4xl">
                 Nossos endereços
               </h2>
               <div className="mx-auto mt-6 h-px w-16 bg-gold" />

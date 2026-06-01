@@ -51,7 +51,7 @@ function EscritorioPage() {
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
               Nossa história
             </span>
-            <h2 className="mt-4 font-serif text-3xl text-navy md:text-4xl">
+            <h2 className="mt-4 font-serif text-3xl text-deep md:text-4xl">
               Tradição, técnica e proximidade com o cliente
             </h2>
             <div className="mt-6 h-px w-16 bg-gold" />
@@ -93,7 +93,7 @@ function EscritorioPage() {
               <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
                 Princípios
               </span>
-              <h2 className="mt-4 font-serif text-3xl md:text-4xl">Nossos Valores</h2>
+              <h2 className="mt-4 font-serif text-3xl text-white md:text-4xl">Nossos Valores</h2>
               <div className="mx-auto mt-6 h-px w-16 bg-gold" />
             </div>
 
@@ -121,7 +121,7 @@ function EscritorioPage() {
               <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
                 Como atuamos
               </span>
-              <h2 className="mt-4 font-serif text-3xl text-navy md:text-4xl">
+              <h2 className="mt-4 font-serif text-3xl text-deep md:text-4xl">
                 Formas de Atuação
               </h2>
               <div className="mx-auto mt-6 h-px w-16 bg-gold" />

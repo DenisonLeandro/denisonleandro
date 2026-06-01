@@ -15,7 +15,7 @@ export function About() {
 
         <div>
           <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Quem somos</span>
-          <h2 className="mt-4 font-serif text-4xl text-navy md:text-5xl">O Escritório</h2>
+          <h2 className="mt-4 font-serif text-4xl text-deep md:text-5xl">O Escritório</h2>
           <div className="mt-6 h-px w-16 bg-gold" />
           <p className="mt-8 text-base leading-relaxed text-foreground/80 md:text-lg">
             Com sede em Londrina-PR e filiais em Ibiporã, Curitiba, Maringá, Foz do Iguaçu
