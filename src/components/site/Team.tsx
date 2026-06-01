@@ -16,10 +16,6 @@ const team = [
   { name: "Dra. Danielle Cristina Mateus Pereira", role: "Advogada", email: "danielle@dhleandro.adv.br", photo: null },
 ];
 
-const _legacy_removed_igor = null; void _legacy_removed_igor;
-  { name: "Dr. Igor Augusto Batista Antunes", role: "Advogado", email: "igor@dhleandro.adv.br", photo: null },
-  { name: "Dra. Danielle Cristina Mateus Pereira", role: "Advogada", email: "danielle@dhleandro.adv.br", photo: null },
-];
 
 export function Team() {
   return (
