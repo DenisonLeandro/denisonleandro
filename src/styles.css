@@ -48,34 +48,38 @@
   --radius: 0.5rem;
 
   /* Brand palette */
-  --navy: oklch(0.25 0.06 260);          /* #0F1E3D */
-  --navy-foreground: oklch(0.97 0.01 90);
-  --gold: oklch(0.72 0.13 80);           /* #C9A227 */
-  --gold-foreground: oklch(0.25 0.06 260);
-  --cream: oklch(0.97 0.005 85);         /* #F7F6F2 */
+  --navy: #3C3F50;                       /* primary grayish dark blue */
+  --navy-foreground: #FFFFFF;
+  --deep: #09142E;                       /* deep navy for footer/strong sections */
+  --deep-foreground: #FFFFFF;
+  --gold: #D35400;                       /* burnt orange accent / CTA */
+  --gold-foreground: #FFFFFF;
+  --gold-hover: #B8470A;                 /* darker burnt orange on hover */
+  --orange-soft: #E67E22;                /* lighter orange for icons */
+  --cream: #F7F7F7;                      /* light section background */
 
-  --background: oklch(0.97 0.005 85);
-  --foreground: oklch(0.18 0 0);
+  --background: #FFFFFF;
+  --foreground: #1A1A1A;
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0 0);
+  --card: #FFFFFF;
+  --card-foreground: #1A1A1A;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1A1A;
 
-  --primary: oklch(0.25 0.06 260);
-  --primary-foreground: oklch(0.97 0.01 90);
-  --secondary: oklch(0.93 0.01 85);
-  --secondary-foreground: oklch(0.25 0.06 260);
-  --muted: oklch(0.93 0.01 85);
-  --muted-foreground: oklch(0.45 0.01 260);
-  --accent: oklch(0.72 0.13 80);
-  --accent-foreground: oklch(0.25 0.06 260);
+  --primary: #3C3F50;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F7F7F7;
+  --secondary-foreground: #3C3F50;
+  --muted: #F1F1F1;
+  --muted-foreground: #5A5A5A;
+  --accent: #D35400;
+  --accent-foreground: #FFFFFF;
 
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.88 0.01 85);
-  --input: oklch(0.88 0.01 85);
-  --ring: oklch(0.72 0.13 80);
+  --border: #E5E5E5;
+  --input: #E5E5E5;
+  --ring: #D35400;
 }
 
 @layer base {
