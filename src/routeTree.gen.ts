@@ -15,6 +15,13 @@ import { Route as EscritorioRouteImport } from './routes/escritorio'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as AreasDeAtuacaoRouteImport } from './routes/areas-de-atuacao'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AreasTrabalhistaRouteImport } from './routes/areas.trabalhista'
+import { Route as AreasPrevidenciarioRouteImport } from './routes/areas.previdenciario'
+import { Route as AreasMediacaoRouteImport } from './routes/areas.mediacao'
+import { Route as AreasFamiliaRouteImport } from './routes/areas.familia'
+import { Route as AreasContratosRouteImport } from './routes/areas.contratos'
+import { Route as AreasConsumidorRouteImport } from './routes/areas.consumidor'
+import { Route as AreasBancarioRouteImport } from './routes/areas.bancario'
 
 const ProfissionaisRoute = ProfissionaisRouteImport.update({
   id: '/profissionais',
@@ -46,6 +53,41 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AreasTrabalhistaRoute = AreasTrabalhistaRouteImport.update({
+  id: '/areas/trabalhista',
+  path: '/areas/trabalhista',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasPrevidenciarioRoute = AreasPrevidenciarioRouteImport.update({
+  id: '/areas/previdenciario',
+  path: '/areas/previdenciario',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasMediacaoRoute = AreasMediacaoRouteImport.update({
+  id: '/areas/mediacao',
+  path: '/areas/mediacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasFamiliaRoute = AreasFamiliaRouteImport.update({
+  id: '/areas/familia',
+  path: '/areas/familia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasContratosRoute = AreasContratosRouteImport.update({
+  id: '/areas/contratos',
+  path: '/areas/contratos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasConsumidorRoute = AreasConsumidorRouteImport.update({
+  id: '/areas/consumidor',
+  path: '/areas/consumidor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasBancarioRoute = AreasBancarioRouteImport.update({
+  id: '/areas/bancario',
+  path: '/areas/bancario',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +96,13 @@ export interface FileRoutesByFullPath {
   '/escritorio': typeof EscritorioRoute
   '/noticias': typeof NoticiasRoute
   '/profissionais': typeof ProfissionaisRoute
+  '/areas/bancario': typeof AreasBancarioRoute
+  '/areas/consumidor': typeof AreasConsumidorRoute
+  '/areas/contratos': typeof AreasContratosRoute
+  '/areas/familia': typeof AreasFamiliaRoute
+  '/areas/mediacao': typeof AreasMediacaoRoute
+  '/areas/previdenciario': typeof AreasPrevidenciarioRoute
+  '/areas/trabalhista': typeof AreasTrabalhistaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +111,13 @@ export interface FileRoutesByTo {
   '/escritorio': typeof EscritorioRoute
   '/noticias': typeof NoticiasRoute
   '/profissionais': typeof ProfissionaisRoute
+  '/areas/bancario': typeof AreasBancarioRoute
+  '/areas/consumidor': typeof AreasConsumidorRoute
+  '/areas/contratos': typeof AreasContratosRoute
+  '/areas/familia': typeof AreasFamiliaRoute
+  '/areas/mediacao': typeof AreasMediacaoRoute
+  '/areas/previdenciario': typeof AreasPrevidenciarioRoute
+  '/areas/trabalhista': typeof AreasTrabalhistaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +127,13 @@ export interface FileRoutesById {
   '/escritorio': typeof EscritorioRoute
   '/noticias': typeof NoticiasRoute
   '/profissionais': typeof ProfissionaisRoute
+  '/areas/bancario': typeof AreasBancarioRoute
+  '/areas/consumidor': typeof AreasConsumidorRoute
+  '/areas/contratos': typeof AreasContratosRoute
+  '/areas/familia': typeof AreasFamiliaRoute
+  '/areas/mediacao': typeof AreasMediacaoRoute
+  '/areas/previdenciario': typeof AreasPrevidenciarioRoute
+  '/areas/trabalhista': typeof AreasTrabalhistaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,6 +144,13 @@ export interface FileRouteTypes {
     | '/escritorio'
     | '/noticias'
     | '/profissionais'
+    | '/areas/bancario'
+    | '/areas/consumidor'
+    | '/areas/contratos'
+    | '/areas/familia'
+    | '/areas/mediacao'
+    | '/areas/previdenciario'
+    | '/areas/trabalhista'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -89,6 +159,13 @@ export interface FileRouteTypes {
     | '/escritorio'
     | '/noticias'
     | '/profissionais'
+    | '/areas/bancario'
+    | '/areas/consumidor'
+    | '/areas/contratos'
+    | '/areas/familia'
+    | '/areas/mediacao'
+    | '/areas/previdenciario'
+    | '/areas/trabalhista'
   id:
     | '__root__'
     | '/'
@@ -97,6 +174,13 @@ export interface FileRouteTypes {
     | '/escritorio'
     | '/noticias'
     | '/profissionais'
+    | '/areas/bancario'
+    | '/areas/consumidor'
+    | '/areas/contratos'
+    | '/areas/familia'
+    | '/areas/mediacao'
+    | '/areas/previdenciario'
+    | '/areas/trabalhista'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -106,6 +190,13 @@ export interface RootRouteChildren {
   EscritorioRoute: typeof EscritorioRoute
   NoticiasRoute: typeof NoticiasRoute
   ProfissionaisRoute: typeof ProfissionaisRoute
+  AreasBancarioRoute: typeof AreasBancarioRoute
+  AreasConsumidorRoute: typeof AreasConsumidorRoute
+  AreasContratosRoute: typeof AreasContratosRoute
+  AreasFamiliaRoute: typeof AreasFamiliaRoute
+  AreasMediacaoRoute: typeof AreasMediacaoRoute
+  AreasPrevidenciarioRoute: typeof AreasPrevidenciarioRoute
+  AreasTrabalhistaRoute: typeof AreasTrabalhistaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -152,6 +243,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/areas/trabalhista': {
+      id: '/areas/trabalhista'
+      path: '/areas/trabalhista'
+      fullPath: '/areas/trabalhista'
+      preLoaderRoute: typeof AreasTrabalhistaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas/previdenciario': {
+      id: '/areas/previdenciario'
+      path: '/areas/previdenciario'
+      fullPath: '/areas/previdenciario'
+      preLoaderRoute: typeof AreasPrevidenciarioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas/mediacao': {
+      id: '/areas/mediacao'
+      path: '/areas/mediacao'
+      fullPath: '/areas/mediacao'
+      preLoaderRoute: typeof AreasMediacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas/familia': {
+      id: '/areas/familia'
+      path: '/areas/familia'
+      fullPath: '/areas/familia'
+      preLoaderRoute: typeof AreasFamiliaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas/contratos': {
+      id: '/areas/contratos'
+      path: '/areas/contratos'
+      fullPath: '/areas/contratos'
+      preLoaderRoute: typeof AreasContratosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas/consumidor': {
+      id: '/areas/consumidor'
+      path: '/areas/consumidor'
+      fullPath: '/areas/consumidor'
+      preLoaderRoute: typeof AreasConsumidorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas/bancario': {
+      id: '/areas/bancario'
+      path: '/areas/bancario'
+      fullPath: '/areas/bancario'
+      preLoaderRoute: typeof AreasBancarioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -162,6 +302,13 @@ const rootRouteChildren: RootRouteChildren = {
   EscritorioRoute: EscritorioRoute,
   NoticiasRoute: NoticiasRoute,
   ProfissionaisRoute: ProfissionaisRoute,
+  AreasBancarioRoute: AreasBancarioRoute,
+  AreasConsumidorRoute: AreasConsumidorRoute,
+  AreasContratosRoute: AreasContratosRoute,
+  AreasFamiliaRoute: AreasFamiliaRoute,
+  AreasMediacaoRoute: AreasMediacaoRoute,
+  AreasPrevidenciarioRoute: AreasPrevidenciarioRoute,
+  AreasTrabalhistaRoute: AreasTrabalhistaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
