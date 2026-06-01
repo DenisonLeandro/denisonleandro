@@ -53,12 +53,12 @@
   /* Brand palette */
   --navy: #3C3F50;                       /* primary grayish dark blue */
   --navy-foreground: #FFFFFF;
-  --deep: #09142E;                       /* deep navy for footer/strong sections */
+  --deep: #151A30;                       /* deep navy for footer/strong sections */
   --deep-foreground: #FFFFFF;
-  --gold: #D35400;                       /* burnt orange accent / CTA */
+  --gold: #FF7F0B;                       /* vibrant orange accent / CTA */
   --gold-foreground: #FFFFFF;
-  --gold-hover: #B8470A;                 /* darker burnt orange on hover */
-  --orange-soft: #E67E22;                /* lighter orange for icons */
+  --gold-hover: #E86A00;                 /* darker orange on hover */
+  --orange-soft: #FF9233;                /* lighter orange for icons */
   --cream: #F7F7F7;                      /* light section background */
 
   --background: #FFFFFF;
