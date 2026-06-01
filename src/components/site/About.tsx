@@ -1,15 +1,16 @@
-import { ArrowRight, BookOpen } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import escritorioAsset from "@/assets/escritorio.jpg.asset.json";
 
 export function About() {
   return (
     <section id="escritorio" className="bg-cream py-24">
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2 lg:px-10">
         <div className="relative">
-          <div className="placeholder-image placeholder-image-ornament aspect-[5/6] rounded-2xl shadow-elegant ring-1 ring-gold/30">
-            <div className="flex h-full items-center justify-center">
-              <BookOpen size={88} className="text-gold/70" strokeWidth={1} />
-            </div>
-          </div>
+          <img
+            src={escritorioAsset.url}
+            alt="Escritório Denison Henrique Leandro e Advogados Associados"
+            className="aspect-[5/6] w-full rounded-2xl object-cover shadow-elegant ring-1 ring-gold/30"
+          />
           <div className="absolute -right-5 -top-5 hidden h-28 w-28 rounded-2xl border-2 border-gold md:block" />
         </div>
 

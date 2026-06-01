@@ -4,6 +4,12 @@ import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { CtaBanner } from "@/components/site/CtaBanner";
 import { PageHeader } from "@/components/site/PageHeader";
+import denisonAsset from "@/assets/denison.png.asset.json";
+import marcioAsset from "@/assets/marcio.png.asset.json";
+import higorAsset from "@/assets/higor.png.asset.json";
+import joaoAsset from "@/assets/joao.png.asset.json";
+import renataAsset from "@/assets/renata.png.asset.json";
+import mariaAsset from "@/assets/maria.png.asset.json";
 
 export const Route = createFileRoute("/profissionais")({
   head: () => ({
@@ -25,25 +31,33 @@ export const Route = createFileRoute("/profissionais")({
 });
 
 const lawyers = [
-  { name: "Dr. Denison Henrique Leandro", role: "Sócio Fundador", email: "denison@denisonleandro.adv.br" },
-  { name: "Dr. Márcio Barbosa da Silva", role: "Advogado", email: "marcio@denisonleandro.adv.br" },
-  { name: "Dr. Higor Henrique Leandro", role: "Advogado", email: "higor@denisonleandro.adv.br" },
-  { name: "Dr. João Tadeu Leandro", role: "Advogado", email: "joao@denisonleandro.adv.br" },
-  { name: "Dra. Renata Henrique Leandro", role: "Advogada", email: "renata@denisonleandro.adv.br" },
-  { name: "Dr. Juan Albner Pereira Veloso", role: "Advogado", email: "juan@denisonleandro.adv.br" },
-  { name: "Dr. Igor Augusto Batista Antunes", role: "Advogado", email: "igor@denisonleandro.adv.br" },
-  { name: "Dra. Danielle Cristina Mateus Pereira", role: "Advogada", email: "danielle@denisonleandro.adv.br" },
+  { name: "Dr. Denison Henrique Leandro", role: "Sócio Fundador", email: "denison@denisonleandro.adv.br", photo: denisonAsset.url },
+  { name: "Dr. Márcio Barbosa da Silva", role: "Advogado", email: "marcio@denisonleandro.adv.br", photo: marcioAsset.url },
+  { name: "Dr. Higor Henrique Leandro", role: "Advogado", email: "higor@denisonleandro.adv.br", photo: higorAsset.url },
+  { name: "Dr. João Tadeu Leandro", role: "Advogado", email: "joao@denisonleandro.adv.br", photo: joaoAsset.url },
+  { name: "Dra. Renata Henrique Leandro", role: "Advogada", email: "renata@denisonleandro.adv.br", photo: renataAsset.url },
+  { name: "Dr. Juan Albner Pereira Veloso", role: "Advogado", email: "juan@denisonleandro.adv.br", photo: null },
+  { name: "Dr. Igor Augusto Batista Antunes", role: "Advogado", email: "igor@denisonleandro.adv.br", photo: null },
+  { name: "Dra. Danielle Cristina Mateus Pereira", role: "Advogada", email: "danielle@denisonleandro.adv.br", photo: null },
 ];
 
 const admin = [
-  { name: "Maria Inês Gomes da Silva", role: "Administrativo / Financeiro", email: "financeiro@denisonleandro.adv.br" },
-  { name: "Leonardo Nascimento de Aguiar", role: "Administrativo / Financeiro", email: "administrativo@denisonleandro.adv.br" },
+  { name: "Maria Inês Gomes da Silva", role: "Administrativo / Financeiro", email: "financeiro@denisonleandro.adv.br", photo: mariaAsset.url },
+  { name: "Leonardo Nascimento de Aguiar", role: "Administrativo / Financeiro", email: "administrativo@denisonleandro.adv.br", photo: null },
 ];
 
-function Card({ name, role, email }: { name: string; role: string; email: string }) {
+function Card({ name, role, email, photo }: { name: string; role: string; email: string; photo: string | null }) {
   return (
     <div className="group flex flex-col items-center rounded-xl border border-border bg-card p-6 text-center shadow-card transition-all hover:-translate-y-1 hover:border-gold/60 hover:shadow-elegant">
-      <div className="h-28 w-28 overflow-hidden rounded-full placeholder-image ring-2 ring-gold/20 transition-all group-hover:ring-gold/50" />
+      {photo ? (
+        <img
+          src={photo}
+          alt={name}
+          className="h-28 w-28 rounded-full object-cover ring-2 ring-gold/20 transition-all group-hover:ring-gold/50"
+        />
+      ) : (
+        <div className="h-28 w-28 overflow-hidden rounded-full placeholder-image ring-2 ring-gold/20 transition-all group-hover:ring-gold/50" />
+      )}
       <h3 className="mt-5 font-serif text-lg text-navy">{name}</h3>
       <p className="mt-1 text-sm text-muted-foreground">{role}</p>
       <a

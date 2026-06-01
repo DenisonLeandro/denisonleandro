@@ -1,15 +1,20 @@
 import { Mail } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import denisonAsset from "@/assets/denison.png.asset.json";
+import marcioAsset from "@/assets/marcio.png.asset.json";
+import higorAsset from "@/assets/higor.png.asset.json";
+import joaoAsset from "@/assets/joao.png.asset.json";
+import renataAsset from "@/assets/renata.png.asset.json";
 
 const team = [
-  { name: "Dr. Denison Henrique Leandro", role: "Sócio Fundador", email: "denison@dhleandro.adv.br" },
-  { name: "Dr. Márcio Barbosa da Silva", role: "Advogado", email: "marcio@dhleandro.adv.br" },
-  { name: "Dr. Higor Henrique Leandro", role: "Advogado", email: "higor@dhleandro.adv.br" },
-  { name: "Dr. João Tadeu Leandro", role: "Advogado", email: "joao@dhleandro.adv.br" },
-  { name: "Dra. Renata Henrique Leandro", role: "Advogada", email: "renata@dhleandro.adv.br" },
-  { name: "Dr. Juan Albner Pereira Veloso", role: "Advogado", email: "juan@dhleandro.adv.br" },
-  { name: "Dr. Igor Augusto Batista Antunes", role: "Advogado", email: "igor@dhleandro.adv.br" },
-  { name: "Dra. Danielle Cristina Mateus Pereira", role: "Advogada", email: "danielle@dhleandro.adv.br" },
+  { name: "Dr. Denison Henrique Leandro", role: "Sócio Fundador", email: "denison@dhleandro.adv.br", photo: denisonAsset.url },
+  { name: "Dr. Márcio Barbosa da Silva", role: "Advogado", email: "marcio@dhleandro.adv.br", photo: marcioAsset.url },
+  { name: "Dr. Higor Henrique Leandro", role: "Advogado", email: "higor@dhleandro.adv.br", photo: higorAsset.url },
+  { name: "Dr. João Tadeu Leandro", role: "Advogado", email: "joao@dhleandro.adv.br", photo: joaoAsset.url },
+  { name: "Dra. Renata Henrique Leandro", role: "Advogada", email: "renata@dhleandro.adv.br", photo: renataAsset.url },
+  { name: "Dr. Juan Albner Pereira Veloso", role: "Advogado", email: "juan@dhleandro.adv.br", photo: null },
+  { name: "Dr. Igor Augusto Batista Antunes", role: "Advogado", email: "igor@dhleandro.adv.br", photo: null },
+  { name: "Dra. Danielle Cristina Mateus Pereira", role: "Advogada", email: "danielle@dhleandro.adv.br", photo: null },
 ];
 
 export function Team() {
@@ -32,7 +37,15 @@ export function Team() {
               key={member.name}
               className="group flex flex-col items-center rounded-xl border border-border bg-card p-6 text-center shadow-card transition-all hover:-translate-y-1 hover:border-gold/60 hover:shadow-elegant"
             >
-              <div className="h-28 w-28 overflow-hidden rounded-full placeholder-image ring-2 ring-gold/20 transition-all group-hover:ring-gold/50" />
+              {member.photo ? (
+                <img
+                  src={member.photo}
+                  alt={member.name}
+                  className="h-28 w-28 rounded-full object-cover ring-2 ring-gold/20 transition-all group-hover:ring-gold/50"
+                />
+              ) : (
+                <div className="h-28 w-28 overflow-hidden rounded-full placeholder-image ring-2 ring-gold/20 transition-all group-hover:ring-gold/50" />
+              )}
               <h3 className="mt-5 font-serif text-lg text-navy">{member.name}</h3>
               <p className="mt-1 text-sm text-muted-foreground">{member.role}</p>
               <a

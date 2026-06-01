@@ -1,4 +1,5 @@
-import { MessageCircle, ArrowRight, Scale } from "lucide-react";
+import { MessageCircle, ArrowRight } from "lucide-react";
+import escritorioAsset from "@/assets/escritorio.jpg.asset.json";
 
 export function Hero() {
   return (
@@ -39,11 +40,11 @@ export function Hero() {
         </div>
 
         <div className="relative">
-          <div className="placeholder-image placeholder-image-ornament aspect-[4/5] w-full rounded-2xl shadow-elegant ring-1 ring-gold/30">
-            <div className="flex h-full items-center justify-center">
-              <Scale size={88} className="text-gold/70" strokeWidth={1} />
-            </div>
-          </div>
+          <img
+            src={escritorioAsset.url}
+            alt="Escritório Denison Henrique Leandro e Advogados Associados"
+            className="aspect-[4/5] w-full rounded-2xl object-cover shadow-elegant ring-1 ring-gold/30"
+          />
           <div className="absolute -bottom-6 -left-6 hidden h-32 w-32 rounded-2xl border-2 border-gold md:block" />
         </div>
       </div>
