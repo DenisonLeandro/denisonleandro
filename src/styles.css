@@ -75,14 +75,14 @@
   --secondary-foreground: #3C3F50;
   --muted: #F1F1F1;
   --muted-foreground: #5A5A5A;
-  --accent: #D35400;
+  --accent: #FF7F0B;
   --accent-foreground: #FFFFFF;
 
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
   --border: #E5E5E5;
   --input: #E5E5E5;
-  --ring: #D35400;
+  --ring: #FF7F0B;
 }
 
 @layer base {
