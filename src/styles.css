@@ -36,8 +36,11 @@
 
   --color-navy: var(--navy);
   --color-navy-foreground: var(--navy-foreground);
+  --color-deep: var(--deep);
+  --color-deep-foreground: var(--deep-foreground);
   --color-gold: var(--gold);
   --color-gold-foreground: var(--gold-foreground);
+  --color-orange-soft: var(--orange-soft);
   --color-cream: var(--cream);
 
   --shadow-elegant: 0 10px 40px -10px oklch(0.2 0.05 260 / 0.15);
