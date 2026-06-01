@@ -20,7 +20,7 @@ export function CtaBanner() {
               href="https://wa.me/5543996808308?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex shrink-0 items-center gap-3 rounded-xl bg-navy px-7 py-4 text-base font-semibold text-navy-foreground shadow-elegant transition-all hover:-translate-y-0.5"
+              className="inline-flex shrink-0 items-center gap-3 rounded-xl bg-[#25D366] px-7 py-4 text-base font-semibold text-white shadow-elegant transition-all hover:-translate-y-0.5 hover:bg-[#1DA851]"
             >
               <MessageCircle size={20} /> Falar no WhatsApp
             </a>
