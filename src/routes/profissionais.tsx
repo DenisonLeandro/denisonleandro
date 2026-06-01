@@ -81,31 +81,6 @@ function LawyerCard({ slug, name, role, email, photo }: { slug: string; name: st
   );
 }
 
-function StaticCard({ name, role, email, photo }: { name: string; role: string; email: string; photo: string | null }) {
-  return (
-    <div className="group flex flex-col items-center rounded-xl border border-border bg-card p-6 text-center shadow-card transition-all hover:-translate-y-1 hover:border-gold/60 hover:shadow-elegant">
-      {photo ? (
-        <img
-          src={photo}
-          alt={name}
-          className="h-28 w-28 rounded-full object-cover object-top ring-2 ring-gold/20 transition-all group-hover:ring-gold/50"
-        />
-      ) : (
-        <div className="h-28 w-28 overflow-hidden rounded-full placeholder-image ring-2 ring-gold/20 transition-all group-hover:ring-gold/50" />
-      )}
-      <h3 className="mt-5 font-serif text-lg text-navy">{name}</h3>
-      <p className="mt-1 text-sm text-muted-foreground">{role}</p>
-      <a
-        href={`mailto:${email}`}
-        className="mt-4 inline-flex items-center gap-2 rounded-full bg-gold/10 px-4 py-2 text-sm font-medium text-gold transition-colors hover:bg-gold/20"
-        aria-label={`Enviar e-mail para ${name}`}
-      >
-        <Mail size={16} strokeWidth={1.8} />
-        <span>Contato</span>
-      </a>
-    </div>
-  );
-}
 
 function ProfissionaisPage() {
   return (
