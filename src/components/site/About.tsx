@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import escritorioAsset from "@/assets/escritorio-v2.jpg.asset.json";
 
 export function About() {
@@ -24,12 +25,12 @@ export function About() {
             serviços jurídicos, sempre com transparência e credibilidade, firmando laços
             de parceria e confiança. Priorizamos a busca da melhor solução para cada cliente.
           </p>
-          <a
-            href="#contato"
+          <Link
+            to="/escritorio"
             className="mt-10 inline-flex items-center gap-2 rounded-md bg-gold px-6 py-3.5 text-sm font-semibold text-gold-foreground shadow-card transition-all hover:-translate-y-0.5 hover:shadow-elegant"
           >
             Saiba mais <ArrowRight size={16} />
-          </a>
+          </Link>
         </div>
       </div>
     </section>
