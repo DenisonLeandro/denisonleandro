@@ -15,6 +15,13 @@ import { Route as EscritorioRouteImport } from './routes/escritorio'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as AreasDeAtuacaoRouteImport } from './routes/areas-de-atuacao'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EquipeRenataHenriqueLeandroRouteImport } from './routes/equipe.renata-henrique-leandro'
+import { Route as EquipeMarcioBarbosaDaSilvaRouteImport } from './routes/equipe.marcio-barbosa-da-silva'
+import { Route as EquipeJuanAlbnerPereiraVelosoRouteImport } from './routes/equipe.juan-albner-pereira-veloso'
+import { Route as EquipeJoaoTadeuLeandroRouteImport } from './routes/equipe.joao-tadeu-leandro'
+import { Route as EquipeHigorHenriqueLeandroRouteImport } from './routes/equipe.higor-henrique-leandro'
+import { Route as EquipeDenisonHenriqueLeandroRouteImport } from './routes/equipe.denison-henrique-leandro'
+import { Route as EquipeDanielleCristinaMateusPereiraRouteImport } from './routes/equipe.danielle-cristina-mateus-pereira'
 import { Route as AreasTrabalhistaRouteImport } from './routes/areas.trabalhista'
 import { Route as AreasPrevidenciarioRouteImport } from './routes/areas.previdenciario'
 import { Route as AreasMediacaoRouteImport } from './routes/areas.mediacao'
@@ -53,6 +60,47 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EquipeRenataHenriqueLeandroRoute =
+  EquipeRenataHenriqueLeandroRouteImport.update({
+    id: '/equipe/renata-henrique-leandro',
+    path: '/equipe/renata-henrique-leandro',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EquipeMarcioBarbosaDaSilvaRoute =
+  EquipeMarcioBarbosaDaSilvaRouteImport.update({
+    id: '/equipe/marcio-barbosa-da-silva',
+    path: '/equipe/marcio-barbosa-da-silva',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EquipeJuanAlbnerPereiraVelosoRoute =
+  EquipeJuanAlbnerPereiraVelosoRouteImport.update({
+    id: '/equipe/juan-albner-pereira-veloso',
+    path: '/equipe/juan-albner-pereira-veloso',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EquipeJoaoTadeuLeandroRoute = EquipeJoaoTadeuLeandroRouteImport.update({
+  id: '/equipe/joao-tadeu-leandro',
+  path: '/equipe/joao-tadeu-leandro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EquipeHigorHenriqueLeandroRoute =
+  EquipeHigorHenriqueLeandroRouteImport.update({
+    id: '/equipe/higor-henrique-leandro',
+    path: '/equipe/higor-henrique-leandro',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EquipeDenisonHenriqueLeandroRoute =
+  EquipeDenisonHenriqueLeandroRouteImport.update({
+    id: '/equipe/denison-henrique-leandro',
+    path: '/equipe/denison-henrique-leandro',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EquipeDanielleCristinaMateusPereiraRoute =
+  EquipeDanielleCristinaMateusPereiraRouteImport.update({
+    id: '/equipe/danielle-cristina-mateus-pereira',
+    path: '/equipe/danielle-cristina-mateus-pereira',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AreasTrabalhistaRoute = AreasTrabalhistaRouteImport.update({
   id: '/areas/trabalhista',
   path: '/areas/trabalhista',
@@ -103,6 +151,13 @@ export interface FileRoutesByFullPath {
   '/areas/mediacao': typeof AreasMediacaoRoute
   '/areas/previdenciario': typeof AreasPrevidenciarioRoute
   '/areas/trabalhista': typeof AreasTrabalhistaRoute
+  '/equipe/danielle-cristina-mateus-pereira': typeof EquipeDanielleCristinaMateusPereiraRoute
+  '/equipe/denison-henrique-leandro': typeof EquipeDenisonHenriqueLeandroRoute
+  '/equipe/higor-henrique-leandro': typeof EquipeHigorHenriqueLeandroRoute
+  '/equipe/joao-tadeu-leandro': typeof EquipeJoaoTadeuLeandroRoute
+  '/equipe/juan-albner-pereira-veloso': typeof EquipeJuanAlbnerPereiraVelosoRoute
+  '/equipe/marcio-barbosa-da-silva': typeof EquipeMarcioBarbosaDaSilvaRoute
+  '/equipe/renata-henrique-leandro': typeof EquipeRenataHenriqueLeandroRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -118,6 +173,13 @@ export interface FileRoutesByTo {
   '/areas/mediacao': typeof AreasMediacaoRoute
   '/areas/previdenciario': typeof AreasPrevidenciarioRoute
   '/areas/trabalhista': typeof AreasTrabalhistaRoute
+  '/equipe/danielle-cristina-mateus-pereira': typeof EquipeDanielleCristinaMateusPereiraRoute
+  '/equipe/denison-henrique-leandro': typeof EquipeDenisonHenriqueLeandroRoute
+  '/equipe/higor-henrique-leandro': typeof EquipeHigorHenriqueLeandroRoute
+  '/equipe/joao-tadeu-leandro': typeof EquipeJoaoTadeuLeandroRoute
+  '/equipe/juan-albner-pereira-veloso': typeof EquipeJuanAlbnerPereiraVelosoRoute
+  '/equipe/marcio-barbosa-da-silva': typeof EquipeMarcioBarbosaDaSilvaRoute
+  '/equipe/renata-henrique-leandro': typeof EquipeRenataHenriqueLeandroRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -134,6 +196,13 @@ export interface FileRoutesById {
   '/areas/mediacao': typeof AreasMediacaoRoute
   '/areas/previdenciario': typeof AreasPrevidenciarioRoute
   '/areas/trabalhista': typeof AreasTrabalhistaRoute
+  '/equipe/danielle-cristina-mateus-pereira': typeof EquipeDanielleCristinaMateusPereiraRoute
+  '/equipe/denison-henrique-leandro': typeof EquipeDenisonHenriqueLeandroRoute
+  '/equipe/higor-henrique-leandro': typeof EquipeHigorHenriqueLeandroRoute
+  '/equipe/joao-tadeu-leandro': typeof EquipeJoaoTadeuLeandroRoute
+  '/equipe/juan-albner-pereira-veloso': typeof EquipeJuanAlbnerPereiraVelosoRoute
+  '/equipe/marcio-barbosa-da-silva': typeof EquipeMarcioBarbosaDaSilvaRoute
+  '/equipe/renata-henrique-leandro': typeof EquipeRenataHenriqueLeandroRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -151,6 +220,13 @@ export interface FileRouteTypes {
     | '/areas/mediacao'
     | '/areas/previdenciario'
     | '/areas/trabalhista'
+    | '/equipe/danielle-cristina-mateus-pereira'
+    | '/equipe/denison-henrique-leandro'
+    | '/equipe/higor-henrique-leandro'
+    | '/equipe/joao-tadeu-leandro'
+    | '/equipe/juan-albner-pereira-veloso'
+    | '/equipe/marcio-barbosa-da-silva'
+    | '/equipe/renata-henrique-leandro'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -166,6 +242,13 @@ export interface FileRouteTypes {
     | '/areas/mediacao'
     | '/areas/previdenciario'
     | '/areas/trabalhista'
+    | '/equipe/danielle-cristina-mateus-pereira'
+    | '/equipe/denison-henrique-leandro'
+    | '/equipe/higor-henrique-leandro'
+    | '/equipe/joao-tadeu-leandro'
+    | '/equipe/juan-albner-pereira-veloso'
+    | '/equipe/marcio-barbosa-da-silva'
+    | '/equipe/renata-henrique-leandro'
   id:
     | '__root__'
     | '/'
@@ -181,6 +264,13 @@ export interface FileRouteTypes {
     | '/areas/mediacao'
     | '/areas/previdenciario'
     | '/areas/trabalhista'
+    | '/equipe/danielle-cristina-mateus-pereira'
+    | '/equipe/denison-henrique-leandro'
+    | '/equipe/higor-henrique-leandro'
+    | '/equipe/joao-tadeu-leandro'
+    | '/equipe/juan-albner-pereira-veloso'
+    | '/equipe/marcio-barbosa-da-silva'
+    | '/equipe/renata-henrique-leandro'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -197,6 +287,13 @@ export interface RootRouteChildren {
   AreasMediacaoRoute: typeof AreasMediacaoRoute
   AreasPrevidenciarioRoute: typeof AreasPrevidenciarioRoute
   AreasTrabalhistaRoute: typeof AreasTrabalhistaRoute
+  EquipeDanielleCristinaMateusPereiraRoute: typeof EquipeDanielleCristinaMateusPereiraRoute
+  EquipeDenisonHenriqueLeandroRoute: typeof EquipeDenisonHenriqueLeandroRoute
+  EquipeHigorHenriqueLeandroRoute: typeof EquipeHigorHenriqueLeandroRoute
+  EquipeJoaoTadeuLeandroRoute: typeof EquipeJoaoTadeuLeandroRoute
+  EquipeJuanAlbnerPereiraVelosoRoute: typeof EquipeJuanAlbnerPereiraVelosoRoute
+  EquipeMarcioBarbosaDaSilvaRoute: typeof EquipeMarcioBarbosaDaSilvaRoute
+  EquipeRenataHenriqueLeandroRoute: typeof EquipeRenataHenriqueLeandroRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -241,6 +338,55 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe/renata-henrique-leandro': {
+      id: '/equipe/renata-henrique-leandro'
+      path: '/equipe/renata-henrique-leandro'
+      fullPath: '/equipe/renata-henrique-leandro'
+      preLoaderRoute: typeof EquipeRenataHenriqueLeandroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe/marcio-barbosa-da-silva': {
+      id: '/equipe/marcio-barbosa-da-silva'
+      path: '/equipe/marcio-barbosa-da-silva'
+      fullPath: '/equipe/marcio-barbosa-da-silva'
+      preLoaderRoute: typeof EquipeMarcioBarbosaDaSilvaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe/juan-albner-pereira-veloso': {
+      id: '/equipe/juan-albner-pereira-veloso'
+      path: '/equipe/juan-albner-pereira-veloso'
+      fullPath: '/equipe/juan-albner-pereira-veloso'
+      preLoaderRoute: typeof EquipeJuanAlbnerPereiraVelosoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe/joao-tadeu-leandro': {
+      id: '/equipe/joao-tadeu-leandro'
+      path: '/equipe/joao-tadeu-leandro'
+      fullPath: '/equipe/joao-tadeu-leandro'
+      preLoaderRoute: typeof EquipeJoaoTadeuLeandroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe/higor-henrique-leandro': {
+      id: '/equipe/higor-henrique-leandro'
+      path: '/equipe/higor-henrique-leandro'
+      fullPath: '/equipe/higor-henrique-leandro'
+      preLoaderRoute: typeof EquipeHigorHenriqueLeandroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe/denison-henrique-leandro': {
+      id: '/equipe/denison-henrique-leandro'
+      path: '/equipe/denison-henrique-leandro'
+      fullPath: '/equipe/denison-henrique-leandro'
+      preLoaderRoute: typeof EquipeDenisonHenriqueLeandroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe/danielle-cristina-mateus-pereira': {
+      id: '/equipe/danielle-cristina-mateus-pereira'
+      path: '/equipe/danielle-cristina-mateus-pereira'
+      fullPath: '/equipe/danielle-cristina-mateus-pereira'
+      preLoaderRoute: typeof EquipeDanielleCristinaMateusPereiraRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/areas/trabalhista': {
@@ -309,7 +455,25 @@ const rootRouteChildren: RootRouteChildren = {
   AreasMediacaoRoute: AreasMediacaoRoute,
   AreasPrevidenciarioRoute: AreasPrevidenciarioRoute,
   AreasTrabalhistaRoute: AreasTrabalhistaRoute,
+  EquipeDanielleCristinaMateusPereiraRoute:
+    EquipeDanielleCristinaMateusPereiraRoute,
+  EquipeDenisonHenriqueLeandroRoute: EquipeDenisonHenriqueLeandroRoute,
+  EquipeHigorHenriqueLeandroRoute: EquipeHigorHenriqueLeandroRoute,
+  EquipeJoaoTadeuLeandroRoute: EquipeJoaoTadeuLeandroRoute,
+  EquipeJuanAlbnerPereiraVelosoRoute: EquipeJuanAlbnerPereiraVelosoRoute,
+  EquipeMarcioBarbosaDaSilvaRoute: EquipeMarcioBarbosaDaSilvaRoute,
+  EquipeRenataHenriqueLeandroRoute: EquipeRenataHenriqueLeandroRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
