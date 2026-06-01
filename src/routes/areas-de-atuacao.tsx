@@ -1,0 +1,118 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { MessageCircle, Briefcase, ShieldCheck, ShoppingCart, Users, FileText, Landmark, Handshake } from "lucide-react";
+import { Navbar } from "@/components/site/Navbar";
+import { Footer } from "@/components/site/Footer";
+import { PageHeader } from "@/components/site/PageHeader";
+
+export const Route = createFileRoute("/areas-de-atuacao")({
+  head: () => ({
+    meta: [
+      { title: "Áreas de Atuação | Denison Henrique Leandro e Advogados Associados" },
+      {
+        name: "description",
+        content:
+          "Atuação full service em Direito Trabalhista, Previdenciário, Consumidor, Família, Contratos, Bancário/Financeiro e Mediação de Conflitos.",
+      },
+      { property: "og:title", content: "Áreas de Atuação | Denison Henrique Leandro" },
+      {
+        property: "og:description",
+        content: "Conheça as 7 áreas em que o escritório atua com excelência técnica.",
+      },
+    ],
+  }),
+  component: AreasPage,
+});
+
+const WHATSAPP_URL = "https://wa.me/5543996808308";
+
+const areas = [
+  {
+    icon: Briefcase,
+    title: "Direito Trabalhista",
+    text:
+      "Atuação completa em ações individuais e coletivas, com defesa de empregados e empregadores. Assessoramos em reclamatórias trabalhistas, rescisões, verbas, horas extras, equiparação salarial, assédio moral, acordos e negociações coletivas, com foco em soluções eficientes e juridicamente seguras.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Direito Previdenciário",
+    text:
+      "Orientamos e representamos segurados do INSS em pedidos de aposentadoria por idade, tempo de contribuição, especial, por incapacidade, BPC/LOAS, pensões, revisões e recursos administrativos e judiciais. Análise individualizada da vida contributiva para identificar o melhor benefício.",
+  },
+  {
+    icon: ShoppingCart,
+    title: "Direito do Consumidor",
+    text:
+      "Defesa de consumidores em casos de cobranças indevidas, negativação irregular, vícios e defeitos de produtos e serviços, problemas com bancos, planos de saúde, companhias aéreas, telefonia, e-commerce e cláusulas contratuais abusivas, sempre com base no Código de Defesa do Consumidor.",
+  },
+  {
+    icon: Users,
+    title: "Direito de Família e Sucessões",
+    text:
+      "Atendimento sensível e técnico em divórcios, dissolução de união estável, guarda e regulamentação de visitas, pensão alimentícia, inventários, partilhas, testamentos e planejamento sucessório. Priorizamos sempre que possível soluções consensuais e o melhor interesse das famílias.",
+  },
+  {
+    icon: FileText,
+    title: "Contratos",
+    text:
+      "Elaboração, revisão, negociação e análise de contratos cíveis e empresariais, incluindo prestação de serviços, locação, compra e venda, distribuição, parcerias, confidencialidade e contratos atípicos. Atuação preventiva voltada a reduzir riscos e dar segurança às relações jurídicas.",
+  },
+  {
+    icon: Landmark,
+    title: "Direito Bancário e Financeiro",
+    text:
+      "Defesa de clientes em discussões sobre juros abusivos, capitalização, tarifas indevidas, revisional de contratos bancários, financiamentos, leasing, cédulas de crédito, busca e apreensão e execuções. Atendemos pessoas físicas e jurídicas em demandas contra instituições financeiras.",
+  },
+  {
+    icon: Handshake,
+    title: "Mediação e Resolução de Conflitos",
+    text:
+      "Promovemos a solução de controvérsias por meio de mediação, conciliação e negociação assistida, com foco na construção de acordos duradouros, redução de custos e preservação de relações pessoais, familiares e empresariais.",
+  },
+];
+
+function AreasPage() {
+  return (
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <main>
+        <PageHeader
+          eyebrow="Especialidades"
+          title="Áreas de Atuação"
+          description="Atuação full service em sete áreas estratégicas do Direito, com equipe especializada em cada uma delas."
+        />
+
+        <section className="bg-background py-20">
+          <div className="mx-auto max-w-5xl space-y-10 px-6 lg:px-10">
+            {areas.map((a) => (
+              <article
+                key={a.title}
+                className="rounded-2xl border border-border bg-card p-8 shadow-card transition-all hover:border-gold/50 hover:shadow-elegant md:p-10"
+              >
+                <div className="flex flex-col gap-6 md:flex-row md:items-start">
+                  <div className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-navy text-gold">
+                    <a.icon size={26} strokeWidth={1.6} />
+                  </div>
+                  <div className="flex-1">
+                    <h2 className="font-serif text-2xl text-navy md:text-3xl">{a.title}</h2>
+                    <div className="mt-3 h-px w-12 bg-gold" />
+                    <p className="mt-5 text-base leading-relaxed text-foreground/80">{a.text}</p>
+                    <a
+                      href={WHATSAPP_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-6 inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-gold-foreground shadow-card transition-all hover:-translate-y-0.5 hover:shadow-elegant"
+                    >
+                      <MessageCircle size={16} />
+                      Falar com especialista no WhatsApp
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  );
+}

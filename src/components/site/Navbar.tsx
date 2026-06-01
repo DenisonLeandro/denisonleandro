@@ -3,13 +3,15 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X, MessageCircle } from "lucide-react";
 
 const links = [
-  { label: "Início", href: "#inicio" },
-  { label: "O Escritório", href: "#escritorio" },
-  { label: "Áreas de Atuação", href: "#areas" },
-  { label: "Profissionais", href: "#profissionais" },
-  { label: "Notícias", href: "#noticias" },
-  { label: "Contato", href: "#contato" },
+  { label: "Início", to: "/" as const },
+  { label: "O Escritório", to: "/escritorio" as const },
+  { label: "Áreas de Atuação", to: "/areas-de-atuacao" as const },
+  { label: "Profissionais", to: "/profissionais" as const },
+  { label: "Notícias", to: "/noticias" as const },
+  { label: "Contato", to: "/contato" as const },
 ];
+
+const WHATSAPP_URL = "https://wa.me/5543996808308";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -31,19 +33,24 @@ export function Navbar() {
 
         <nav className="hidden items-center gap-8 lg:flex">
           {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-sm font-medium text-foreground/80 transition-colors hover:text-navy"
+            <Link
+              key={l.to}
+              to={l.to}
+              activeOptions={{ exact: true }}
+              activeProps={{ className: "text-navy" }}
+              inactiveProps={{ className: "text-foreground/80" }}
+              className="text-sm font-medium transition-colors hover:text-navy"
             >
               {l.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
         <div className="hidden lg:block">
           <a
-            href="#contato"
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-md bg-gold px-4 py-2.5 text-sm font-semibold text-gold-foreground shadow-card transition-all hover:-translate-y-0.5 hover:shadow-elegant"
           >
             <MessageCircle size={16} />
@@ -64,17 +71,19 @@ export function Navbar() {
         <div className="border-t border-border bg-background lg:hidden">
           <div className="flex flex-col gap-1 px-6 py-4">
             {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
+              <Link
+                key={l.to}
+                to={l.to}
                 onClick={() => setOpen(false)}
                 className="rounded-md px-3 py-2.5 text-sm font-medium text-foreground/80 hover:bg-secondary"
               >
                 {l.label}
-              </a>
+              </Link>
             ))}
             <a
-              href="#contato"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setOpen(false)}
               className="mt-2 inline-flex items-center justify-center gap-2 rounded-md bg-gold px-4 py-3 text-sm font-semibold text-gold-foreground"
             >
