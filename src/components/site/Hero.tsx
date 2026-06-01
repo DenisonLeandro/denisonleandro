@@ -36,15 +36,6 @@ export function Hero() {
             </a>
           </div>
         </div>
-
-        <div className="relative">
-          <img
-            src={escritorioAsset.url}
-            alt="Escritório Denison Henrique Leandro e Advogados Associados"
-            className="aspect-[4/5] w-full rounded-2xl object-cover shadow-elegant ring-1 ring-gold/30"
-          />
-          <div className="absolute -bottom-6 -left-6 hidden h-32 w-32 rounded-2xl border-2 border-gold md:block" />
-        </div>
       </div>
     </section>
   );
