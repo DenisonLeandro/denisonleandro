@@ -1,30 +1,31 @@
-## Cores extraídas do site de referência
+## Mapeamento das fotos
 
-Amostrei pixel-a-pixel a imagem enviada para identificar as cores reais usadas no site original:
+Tenho 8 advogados no site, mas você enviou 6 fotos. Vou usar as 6 fotos onde correspondem e manter o placeholder atual para os 3 que ainda não têm foto (Juan Albner, Igor Augusto, Danielle Cristina).
 
-- **Navbar / faixas escuras primárias**: `#3C3F50` (cinza-azulado escuro) — já está correto no projeto.
-- **Footer / banda escura profunda**: `#151A30` (azul-marinho muito escuro) — hoje usamos `#09142E`, levemente mais escuro/saturado que o original.
-- **Laranja CTA (botões, acentos)**: `#FF7F0B` (laranja vivo/vibrante) — hoje usamos `#D35400` (queimado, bem mais escuro).
-- **Hover do laranja**: `#E86A00` (versão ~10% mais escura para hover).
-- **Laranja suave (ícones)**: `#FF9233`.
-- **Fundo creme / seções claras**: `#F7F7F7` (mantém).
-- **Texto principal**: `#1A1A1A` (mantém).
+### Fotos de advogados (Team na home + página /profissionais)
+- `denison.png` → Dr. Denison Henrique Leandro
+- `marcio.png` → Dr. Márcio Barbosa da Silva
+- `higor.png` → Dr. Higor Henrique Leandro
+- `joao.png` → Dr. João Tadeu Leandro
+- `renata.png` → Dra. Renata Henrique Leandro
+- `maria.png` → vou usar para **Maria Inês Gomes da Silva** (Administrativo / Financeiro), na página /profissionais — o nome do arquivo bate com a integrante administrativa, não com nenhuma advogada.
 
-## Mudanças
+### Outras imagens
+- `escritorio.jpg.jpg` → imagem do escritório no bloco da Home (`About.tsx`) e também no Hero (`Hero.tsx`). Vou usar nas duas para substituir os blocos de placeholder.
+- `logo.png` → logotipo "D" laranja, vai substituir o "D" desenhado em texto na **Navbar** e no **Footer**.
 
-Edição única em `src/styles.css`, ajustando apenas os tokens de cor:
+## Como vou implementar
 
-- `--deep`: `#09142E` → `#151A30`
-- `--gold`: `#D35400` → `#FF7F0B`
-- `--gold-hover`: `#B8470A` → `#E86A00`
-- `--orange-soft`: `#E67E22` → `#FF9233`
-- `--accent`: `#D35400` → `#FF7F0B`
-- `--ring`: `#D35400` → `#FF7F0B`
-- Atualizar o gradiente da utility `placeholder-image` e os tons da `placeholder-image-ornament` para os novos valores.
+1. Subir todas as 8 imagens via `lovable-assets create` direto de `/mnt/user-uploads/`, gerando pointers em `src/assets/*.asset.json` (sem deixar binários no repo).
+2. Em `src/components/site/Team.tsx`: adicionar campo `photo` no array `team`, importar os asset pointers e renderizar `<img>` para os 5 advogados que têm foto; manter o placeholder atual para os 3 sem foto.
+3. Em `src/routes/profissionais.tsx`: mesma lógica para os 5 advogados + foto da Maria no bloco Administrativo. Leonardo continua com placeholder.
+4. Em `src/components/site/Hero.tsx` e `src/components/site/About.tsx`: substituir as `<div class="placeholder-image ...">` por `<img src={escritorioAsset.url} ...>` preservando aspect ratio, bordas arredondadas, sombra e ring atuais.
+5. Em `src/components/site/Navbar.tsx` e `src/components/site/Footer.tsx`: substituir o "D" textual dentro do quadrado pelo `<img src={logoAsset.url} alt="DL Advogados">`. Como a logo enviada é só o "D" laranja em fundo transparente, vou ajustar o fundo do quadradinho para combinar (provavelmente removendo o `bg-gold` e deixando a logo aparecer sobre o navy).
 
-Sem alterações em layout, textos, espaçamentos, tipografia ou em qualquer componente — só os tokens. Como tudo no site já usa classes semânticas (`bg-gold`, `text-gold`, `bg-deep`, etc.), navbar, footer, botões, WhatsApp flutuante, ícones e acentos passam a refletir as cores exatas do site de referência automaticamente.
+Sem mudanças de layout, texto ou cores fora desses ajustes mínimos.
 
-## Fora de escopo
+## Confirmação rápida
 
-- Não vou alterar `--navy` (já bate com `#3C3F50` do original).
-- Não vou alterar tipografia, fotos placeholder, conteúdo ou estrutura.
+Pode confirmar duas coisas antes de eu executar?
+1. A foto `maria.png` é mesmo da **Maria Inês** (administrativo) e não de alguma advogada listada?
+2. Posso manter o placeholder atual para Juan Albner, Igor Augusto e Danielle até você enviar as fotos deles?
