@@ -4,6 +4,12 @@ import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { CtaBanner } from "@/components/site/CtaBanner";
 import { PageHeader } from "@/components/site/PageHeader";
+import denisonAsset from "@/assets/denison.png.asset.json";
+import marcioAsset from "@/assets/marcio.png.asset.json";
+import higorAsset from "@/assets/higor.png.asset.json";
+import joaoAsset from "@/assets/joao.png.asset.json";
+import renataAsset from "@/assets/renata.png.asset.json";
+import mariaAsset from "@/assets/maria.png.asset.json";
 
 export const Route = createFileRoute("/profissionais")({
   head: () => ({
