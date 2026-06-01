@@ -13,9 +13,9 @@ const team = [
   { name: "Dr. João Tadeu Leandro", role: "Advogado", email: "joao@dhleandro.adv.br", photo: joaoAsset.url },
   { name: "Dra. Renata Henrique Leandro", role: "Advogada", email: "renata@dhleandro.adv.br", photo: renataAsset.url },
   { name: "Dr. Juan Albner Pereira Veloso", role: "Advogado", email: "juan@dhleandro.adv.br", photo: null },
-  { name: "Dr. Igor Augusto Batista Antunes", role: "Advogado", email: "igor@dhleandro.adv.br", photo: null },
   { name: "Dra. Danielle Cristina Mateus Pereira", role: "Advogada", email: "danielle@dhleandro.adv.br", photo: null },
 ];
+
 
 export function Team() {
   return (

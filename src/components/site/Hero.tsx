@@ -14,8 +14,7 @@ export function Hero() {
             </span>
           </div>
           <h1 className="font-serif text-5xl leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-            25 anos defendendo<br />
-            <span className="text-white">seus direitos</span>
+            Denison Henrique Leandro
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-navy-foreground/80">
             Atuação Full Service em Direito Trabalhista, Previdenciário, Consumidor,
@@ -26,7 +25,7 @@ export function Hero() {
               href="https://wa.me/5543996808308?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-md bg-gold px-6 py-3.5 text-sm font-semibold text-gold-foreground shadow-elegant transition-all hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 rounded-md bg-[#25D366] px-6 py-3.5 text-sm font-semibold text-white shadow-elegant transition-all hover:-translate-y-0.5 hover:bg-[#1DA851]"
             >
               <MessageCircle size={18} /> Fale no WhatsApp
             </a>

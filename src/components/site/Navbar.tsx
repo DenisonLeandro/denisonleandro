@@ -53,7 +53,7 @@ export function Navbar() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-md bg-gold px-4 py-2.5 text-sm font-semibold text-gold-foreground shadow-card transition-all hover:-translate-y-0.5 hover:shadow-elegant"
+            className="inline-flex items-center gap-2 rounded-md bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white shadow-card transition-all hover:-translate-y-0.5 hover:bg-[#1DA851] hover:shadow-elegant"
           >
             <MessageCircle size={16} />
             Fale no WhatsApp
@@ -87,7 +87,7 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="mt-2 inline-flex items-center justify-center gap-2 rounded-md bg-gold px-4 py-3 text-sm font-semibold text-gold-foreground"
+              className="mt-2 inline-flex items-center justify-center gap-2 rounded-md bg-[#25D366] px-4 py-3 text-sm font-semibold text-white hover:bg-[#1DA851]"
             >
               <MessageCircle size={16} />
               Fale no WhatsApp

@@ -37,13 +37,15 @@ const lawyers = [
   { name: "Dr. João Tadeu Leandro", role: "Advogado", email: "joao@denisonleandro.adv.br", photo: joaoAsset.url },
   { name: "Dra. Renata Henrique Leandro", role: "Advogada", email: "renata@denisonleandro.adv.br", photo: renataAsset.url },
   { name: "Dr. Juan Albner Pereira Veloso", role: "Advogado", email: "juan@denisonleandro.adv.br", photo: null },
-  { name: "Dr. Igor Augusto Batista Antunes", role: "Advogado", email: "igor@denisonleandro.adv.br", photo: null },
   { name: "Dra. Danielle Cristina Mateus Pereira", role: "Advogada", email: "danielle@denisonleandro.adv.br", photo: null },
 ];
 
 const admin = [
   { name: "Maria Inês Gomes da Silva", role: "Administrativo / Financeiro", email: "financeiro@denisonleandro.adv.br", photo: mariaAsset.url },
-  { name: "Leonardo Nascimento de Aguiar", role: "Administrativo / Financeiro", email: "administrativo@denisonleandro.adv.br", photo: null },
+];
+
+const interns = [
+  { name: "Leonardo Nascimento de Aguiar", role: "Estagiário", email: "administrativo@denisonleandro.adv.br", photo: null },
 ];
 
 function Card({ name, role, email, photo }: { name: string; role: string; email: string; photo: string | null }) {
@@ -120,6 +122,25 @@ function ProfissionaisPage() {
             </div>
           </div>
         </section>
+
+        <section className="bg-background py-20">
+          <div className="mx-auto max-w-7xl px-6 lg:px-10">
+            <div className="mx-auto max-w-2xl text-center">
+              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
+                Formação
+              </span>
+              <h2 className="mt-4 font-serif text-3xl text-deep md:text-4xl">Estagiários</h2>
+              <div className="mx-auto mt-6 h-px w-16 bg-gold" />
+            </div>
+
+            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:max-w-3xl lg:mx-auto lg:grid-cols-2">
+              {interns.map((m) => (
+                <Card key={m.name} {...m} />
+              ))}
+            </div>
+          </div>
+        </section>
+
 
         <CtaBanner />
       </main>
