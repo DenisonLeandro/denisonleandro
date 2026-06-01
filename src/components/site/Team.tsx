@@ -41,7 +41,7 @@ export function Team() {
                 <img
                   src={member.photo}
                   alt={member.name}
-                  className="h-28 w-28 rounded-full object-cover ring-2 ring-gold/20 transition-all group-hover:ring-gold/50"
+                  className="h-28 w-28 rounded-full object-cover object-top ring-2 ring-gold/20 transition-all group-hover:ring-gold/50"
                 />
               ) : (
                 <div className="h-28 w-28 overflow-hidden rounded-full placeholder-image ring-2 ring-gold/20 transition-all group-hover:ring-gold/50" />
