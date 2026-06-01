@@ -26,8 +26,8 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-md bg-gold text-navy">
-                <span className="font-serif text-xl font-bold">D</span>
+              <div className="flex h-11 w-11 items-center justify-center">
+                <img src={logoAsset.url} alt="DL Advogados" className="h-full w-full object-contain" />
               </div>
               <div className="leading-tight">
                 <p className="font-serif text-base">Denison Henrique Leandro</p>
