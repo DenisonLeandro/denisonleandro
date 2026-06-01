@@ -88,7 +88,7 @@ function ContatoPage() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-gold-foreground shadow-elegant transition-all hover:-translate-y-0.5 hover:brightness-110"
+                className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-7 py-3.5 text-sm font-semibold text-white shadow-elegant transition-all hover:-translate-y-0.5 hover:bg-[#1DA851]"
               >
                 <MessageCircle size={18} />
                 Falar no WhatsApp — (43) 99680-8308
