@@ -1,29 +1,45 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Navbar } from "@/components/site/Navbar";
+import { Hero } from "@/components/site/Hero";
+import { PracticeAreas } from "@/components/site/PracticeAreas";
+import { About } from "@/components/site/About";
+import { Values } from "@/components/site/Values";
+import { Locations } from "@/components/site/Locations";
+import { CtaBanner } from "@/components/site/CtaBanner";
+import { Footer } from "@/components/site/Footer";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Denison Henrique Leandro e Advogados Associados | 25 anos de Advocacia" },
+      {
+        name: "description",
+        content:
+          "Escritório de advocacia full service com sede em Londrina-PR. Direito Trabalhista, Previdenciário, Consumidor, Família, Contratos, Bancário e Mediação.",
+      },
+      { property: "og:title", content: "Denison Henrique Leandro e Advogados Associados" },
+      {
+        property: "og:description",
+        content: "25 anos defendendo seus direitos com excelência, ética e credibilidade.",
+      },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <main>
+        <Hero />
+        <PracticeAreas />
+        <About />
+        <Values />
+        <Locations />
+        <CtaBanner />
+      </main>
+      <Footer />
     </div>
   );
 }
