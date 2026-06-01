@@ -41,11 +41,11 @@ const lawyers = [
 ];
 
 const admin = [
-  { name: "Maria Inês Gomes da Silva", role: "Administrativo / Financeiro", email: "financeiro@denisonleandro.adv.br", photo: mariaAsset.url },
+  { slug: "maria-ines-gomes-da-silva", name: "Maria Inês Gomes da Silva", role: "Administrativo / Financeiro", email: "financeiro@denisonleandro.adv.br", photo: mariaAsset.url },
 ];
 
 const interns = [
-  { name: "Leonardo Nascimento de Aguiar", role: "Estagiário", email: "administrativo@denisonleandro.adv.br", photo: null },
+  { slug: "leonardo-nascimento-de-aguiar", name: "Leonardo Nascimento de Aguiar", role: "Estagiário", email: "administrativo@denisonleandro.adv.br", photo: null },
 ];
 
 function LawyerCard({ slug, name, role, email, photo }: { slug: string; name: string; role: string; email: string; photo: string | null }) {
