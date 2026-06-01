@@ -1,25 +1,27 @@
 import { MessageCircle, ArrowRight } from "lucide-react";
+import logoAsset from "@/assets/logo.png.asset.json";
 
 export function Hero() {
   return (
     <section id="inicio" className="relative overflow-hidden bg-navy text-navy-foreground">
       <div className="absolute inset-0 placeholder-image-ornament opacity-60" />
       <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-        <div className="max-w-3xl">
-          <div className="mb-6 flex items-center gap-3">
-            <span className="h-px w-10 bg-gold" />
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
-              Advocacia de Excelência e Credibilidade
-            </span>
+        <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
+          <div className="mb-6 flex h-24 w-24 items-center justify-center md:h-32 md:w-32">
+            <img
+              src={logoAsset.url}
+              alt="DL Advogados"
+              className="h-full w-full object-contain"
+            />
           </div>
-          <h1 className="font-serif text-5xl leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-            Denison Henrique Leandro
+          <h1 className="font-serif text-4xl leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
+            Denison Leandro Advogados Associados
           </h1>
-          <p className="mt-8 max-w-xl text-lg leading-relaxed text-navy-foreground/80">
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-navy-foreground/80">
             Atuação Full Service em Direito Trabalhista, Previdenciário, Consumidor,
             Família, Contratos, Bancário e Mediação.
           </p>
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
             <a
               href="https://wa.me/5543996808308?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio."
               target="_blank"
