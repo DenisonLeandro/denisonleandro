@@ -4,6 +4,7 @@ import { Hero } from "@/components/site/Hero";
 import { PracticeAreas } from "@/components/site/PracticeAreas";
 import { About } from "@/components/site/About";
 import { Values } from "@/components/site/Values";
+import { Team } from "@/components/site/Team";
 import { Locations } from "@/components/site/Locations";
 import { CtaBanner } from "@/components/site/CtaBanner";
 import { Footer } from "@/components/site/Footer";
