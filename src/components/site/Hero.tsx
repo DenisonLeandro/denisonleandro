@@ -14,8 +14,7 @@ export function Hero() {
             </span>
           </div>
           <h1 className="font-serif text-5xl leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-            25 anos defendendo<br />
-            <span className="text-white">seus direitos</span>
+            Denison Henrique Leandro
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-navy-foreground/80">
             Atuação Full Service em Direito Trabalhista, Previdenciário, Consumidor,
