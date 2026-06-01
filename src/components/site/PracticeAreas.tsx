@@ -1,15 +1,16 @@
+import { Link } from "@tanstack/react-router";
 import {
   Briefcase, ShieldCheck, ShoppingBag, Users, FileText, Landmark, Handshake, ArrowUpRight,
 } from "lucide-react";
 
 const areas = [
-  { icon: Briefcase, title: "Trabalhista", desc: "Defesa dos direitos do trabalhador e do empregador." },
-  { icon: ShieldCheck, title: "Previdenciário", desc: "Aposentadorias, revisões e benefícios do INSS." },
-  { icon: ShoppingBag, title: "Consumidor", desc: "Proteção das relações de consumo e indenizações." },
-  { icon: Users, title: "Família", desc: "Divórcios, guarda, pensão e inventários com sensibilidade." },
-  { icon: FileText, title: "Contratos", desc: "Elaboração, análise e revisão de contratos complexos." },
-  { icon: Landmark, title: "Bancário/Financeiro", desc: "Revisões, dívidas e operações bancárias abusivas." },
-  { icon: Handshake, title: "Mediação", desc: "Resolução de conflitos com diálogo e eficiência." },
+  { icon: Briefcase, title: "Trabalhista", desc: "Defesa dos direitos do trabalhador e do empregador.", to: "/areas/trabalhista" as const },
+  { icon: ShieldCheck, title: "Previdenciário", desc: "Aposentadorias, revisões e benefícios do INSS.", to: "/areas/previdenciario" as const },
+  { icon: ShoppingBag, title: "Consumidor", desc: "Proteção das relações de consumo e indenizações.", to: "/areas/consumidor" as const },
+  { icon: Users, title: "Família", desc: "Divórcios, guarda, pensão e inventários com sensibilidade.", to: "/areas/familia" as const },
+  { icon: FileText, title: "Contratos", desc: "Elaboração, análise e revisão de contratos complexos.", to: "/areas/contratos" as const },
+  { icon: Landmark, title: "Bancário/Financeiro", desc: "Revisões, dívidas e operações bancárias abusivas.", to: "/areas/bancario" as const },
+  { icon: Handshake, title: "Mediação", desc: "Resolução de conflitos com diálogo e eficiência.", to: "/areas/mediacao" as const },
 ];
 
 export function PracticeAreas() {
@@ -23,7 +24,7 @@ export function PracticeAreas() {
         </div>
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {areas.map(({ icon: Icon, title, desc }) => (
+          {areas.map(({ icon: Icon, title, desc, to }) => (
             <article
               key={title}
               className="group flex flex-col rounded-xl border border-border bg-card p-7 shadow-card transition-all hover:-translate-y-1 hover:border-gold/60 hover:shadow-elegant"
@@ -33,12 +34,12 @@ export function PracticeAreas() {
               </div>
               <h3 className="font-serif text-xl text-navy">{title}</h3>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{desc}</p>
-              <a
-                href="#contato"
+              <Link
+                to={to}
                 className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-gold transition-all group-hover:gap-2.5"
               >
                 Saiba mais <ArrowUpRight size={14} />
-              </a>
+              </Link>
             </article>
           ))}
         </div>
