@@ -30,42 +30,49 @@ const areas = [
   {
     icon: Briefcase,
     title: "Direito Trabalhista",
+    to: "/areas/trabalhista" as const,
     text:
       "Atuação completa em ações individuais e coletivas, com defesa de empregados e empregadores. Assessoramos em reclamatórias trabalhistas, rescisões, verbas, horas extras, equiparação salarial, assédio moral, acordos e negociações coletivas, com foco em soluções eficientes e juridicamente seguras.",
   },
   {
     icon: ShieldCheck,
     title: "Direito Previdenciário",
+    to: "/areas/previdenciario" as const,
     text:
       "Orientamos e representamos segurados do INSS em pedidos de aposentadoria por idade, tempo de contribuição, especial, por incapacidade, BPC/LOAS, pensões, revisões e recursos administrativos e judiciais. Análise individualizada da vida contributiva para identificar o melhor benefício.",
   },
   {
     icon: ShoppingCart,
     title: "Direito do Consumidor",
+    to: "/areas/consumidor" as const,
     text:
       "Defesa de consumidores em casos de cobranças indevidas, negativação irregular, vícios e defeitos de produtos e serviços, problemas com bancos, planos de saúde, companhias aéreas, telefonia, e-commerce e cláusulas contratuais abusivas, sempre com base no Código de Defesa do Consumidor.",
   },
   {
     icon: Users,
     title: "Direito de Família e Sucessões",
+    to: "/areas/familia" as const,
     text:
       "Atendimento sensível e técnico em divórcios, dissolução de união estável, guarda e regulamentação de visitas, pensão alimentícia, inventários, partilhas, testamentos e planejamento sucessório. Priorizamos sempre que possível soluções consensuais e o melhor interesse das famílias.",
   },
   {
     icon: FileText,
     title: "Contratos",
+    to: "/areas/contratos" as const,
     text:
       "Elaboração, revisão, negociação e análise de contratos cíveis e empresariais, incluindo prestação de serviços, locação, compra e venda, distribuição, parcerias, confidencialidade e contratos atípicos. Atuação preventiva voltada a reduzir riscos e dar segurança às relações jurídicas.",
   },
   {
     icon: Landmark,
     title: "Direito Bancário e Financeiro",
+    to: "/areas/bancario" as const,
     text:
       "Defesa de clientes em discussões sobre juros abusivos, capitalização, tarifas indevidas, revisional de contratos bancários, financiamentos, leasing, cédulas de crédito, busca e apreensão e execuções. Atendemos pessoas físicas e jurídicas em demandas contra instituições financeiras.",
   },
   {
     icon: Handshake,
     title: "Mediação e Resolução de Conflitos",
+    to: "/areas/mediacao" as const,
     text:
       "Promovemos a solução de controvérsias por meio de mediação, conciliação e negociação assistida, com foco na construção de acordos duradouros, redução de custos e preservação de relações pessoais, familiares e empresariais.",
   },
