@@ -17,7 +17,9 @@ export function CtaBanner() {
               </h2>
             </div>
             <a
-              href="https://wa.me/"
+              href="https://wa.me/5543996808308?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio."
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex shrink-0 items-center gap-3 rounded-xl bg-navy px-7 py-4 text-base font-semibold text-navy-foreground shadow-elegant transition-all hover:-translate-y-0.5"
             >
               <MessageCircle size={20} /> Falar no WhatsApp
