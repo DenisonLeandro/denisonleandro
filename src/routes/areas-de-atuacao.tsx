@@ -104,15 +104,23 @@ function AreasPage() {
                     <h2 className="font-serif text-2xl text-navy md:text-3xl">{a.title}</h2>
                     <div className="mt-3 h-px w-12 bg-gold" />
                     <p className="mt-5 text-base leading-relaxed text-foreground/80">{a.text}</p>
-                    <a
-                      href={WHATSAPP_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-semibold text-white shadow-card transition-all hover:-translate-y-0.5 hover:bg-[#1DA851] hover:shadow-elegant"
-                    >
-                      <MessageCircle size={16} />
-                      Falar com especialista no WhatsApp
-                    </a>
+                    <div className="mt-6 flex flex-wrap items-center gap-3">
+                      <Link
+                        to={a.to}
+                        className="inline-flex items-center gap-1.5 rounded-full border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-all hover:-translate-y-0.5 hover:border-gold hover:bg-gold/10"
+                      >
+                        Saiba mais <ArrowUpRight size={14} />
+                      </Link>
+                      <a
+                        href={WHATSAPP_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-semibold text-white shadow-card transition-all hover:-translate-y-0.5 hover:bg-[#1DA851] hover:shadow-elegant"
+                      >
+                        <MessageCircle size={16} />
+                        Falar com especialista no WhatsApp
+                      </a>
+                    </div>
                   </div>
                 </div>
               </article>
