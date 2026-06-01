@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { MessageCircle, Briefcase, ShieldCheck, ShoppingCart, Users, FileText, Landmark, Handshake } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { MessageCircle, ArrowUpRight, Briefcase, ShieldCheck, ShoppingCart, Users, FileText, Landmark, Handshake } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { PageHeader } from "@/components/site/PageHeader";
