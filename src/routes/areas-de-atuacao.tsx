@@ -101,7 +101,7 @@ function AreasPage() {
                       href={WHATSAPP_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-6 inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-gold-foreground shadow-card transition-all hover:-translate-y-0.5 hover:shadow-elegant"
+                      className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-semibold text-white shadow-card transition-all hover:-translate-y-0.5 hover:bg-[#1DA851] hover:shadow-elegant"
                     >
                       <MessageCircle size={16} />
                       Falar com especialista no WhatsApp
