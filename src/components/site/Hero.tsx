@@ -4,8 +4,8 @@ export function Hero() {
   return (
     <section id="inicio" className="relative overflow-hidden bg-navy text-navy-foreground">
       <div className="absolute inset-0 placeholder-image-ornament opacity-60" />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:px-10 lg:py-28">
-        <div>
+      <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+        <div className="max-w-3xl">
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-10 bg-gold" />
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
