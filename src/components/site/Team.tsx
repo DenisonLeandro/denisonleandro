@@ -37,7 +37,15 @@ export function Team() {
               key={member.name}
               className="group flex flex-col items-center rounded-xl border border-border bg-card p-6 text-center shadow-card transition-all hover:-translate-y-1 hover:border-gold/60 hover:shadow-elegant"
             >
-              <div className="h-28 w-28 overflow-hidden rounded-full placeholder-image ring-2 ring-gold/20 transition-all group-hover:ring-gold/50" />
+              {member.photo ? (
+                <img
+                  src={member.photo}
+                  alt={member.name}
+                  className="h-28 w-28 rounded-full object-cover ring-2 ring-gold/20 transition-all group-hover:ring-gold/50"
+                />
+              ) : (
+                <div className="h-28 w-28 overflow-hidden rounded-full placeholder-image ring-2 ring-gold/20 transition-all group-hover:ring-gold/50" />
+              )}
               <h3 className="mt-5 font-serif text-lg text-navy">{member.name}</h3>
               <p className="mt-1 text-sm text-muted-foreground">{member.role}</p>
               <a
