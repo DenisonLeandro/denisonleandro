@@ -1,5 +1,4 @@
 import { MessageCircle, ArrowRight } from "lucide-react";
-import escritorioAsset from "@/assets/escritorio.jpg.asset.json";
 
 export function Hero() {
   return (
