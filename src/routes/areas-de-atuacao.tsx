@@ -23,7 +23,8 @@ export const Route = createFileRoute("/areas-de-atuacao")({
   component: AreasPage,
 });
 
-const WHATSAPP_URL = "https://wa.me/5543996808308";
+const WHATSAPP_URL =
+  "https://wa.me/5543996808308?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio.";
 
 const areas = [
   {
