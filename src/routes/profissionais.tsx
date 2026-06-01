@@ -75,7 +75,7 @@ function ProfissionaisPage() {
               <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
                 Corpo jurídico
               </span>
-              <h2 className="mt-4 font-serif text-3xl text-navy md:text-4xl">Advogados</h2>
+              <h2 className="mt-4 font-serif text-3xl text-deep md:text-4xl">Advogados</h2>
               <div className="mx-auto mt-6 h-px w-16 bg-gold" />
             </div>
 
@@ -93,7 +93,7 @@ function ProfissionaisPage() {
               <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
                 Suporte
               </span>
-              <h2 className="mt-4 font-serif text-3xl text-navy md:text-4xl">
+              <h2 className="mt-4 font-serif text-3xl text-deep md:text-4xl">
                 Administrativo e Financeiro
               </h2>
               <div className="mx-auto mt-6 h-px w-16 bg-gold" />
