@@ -106,12 +106,14 @@
 
 @utility placeholder-image {
   background:
-    linear-gradient(135deg, oklch(0.25 0.06 260) 0%, oklch(0.32 0.07 260) 60%, oklch(0.72 0.13 80) 140%);
+    linear-gradient(135deg, #09142E 0%, #3C3F50 60%, #D35400 140%);
   position: relative;
   overflow: hidden;
 }
 @utility placeholder-image-ornament {
   background-image:
-    radial-gradient(circle at 20% 30%, oklch(0.72 0.13 80 / 0.25) 0, transparent 40%),
+    radial-gradient(circle at 20% 30%, rgba(211, 84, 0, 0.25) 0, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.08) 0, transparent 45%);
+}
     radial-gradient(circle at 80% 70%, oklch(0.97 0.01 90 / 0.08) 0, transparent 45%);
 }
