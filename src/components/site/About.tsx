@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import escritorioAsset from "@/assets/escritorio-v2.jpg.asset.json";
 
 export function About() {
