@@ -1,15 +1,20 @@
 import { Mail } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import denisonAsset from "@/assets/denison.png.asset.json";
+import marcioAsset from "@/assets/marcio.png.asset.json";
+import higorAsset from "@/assets/higor.png.asset.json";
+import joaoAsset from "@/assets/joao.png.asset.json";
+import renataAsset from "@/assets/renata.png.asset.json";
 
 const team = [
-  { name: "Dr. Denison Henrique Leandro", role: "Sócio Fundador", email: "denison@dhleandro.adv.br" },
-  { name: "Dr. Márcio Barbosa da Silva", role: "Advogado", email: "marcio@dhleandro.adv.br" },
-  { name: "Dr. Higor Henrique Leandro", role: "Advogado", email: "higor@dhleandro.adv.br" },
-  { name: "Dr. João Tadeu Leandro", role: "Advogado", email: "joao@dhleandro.adv.br" },
-  { name: "Dra. Renata Henrique Leandro", role: "Advogada", email: "renata@dhleandro.adv.br" },
-  { name: "Dr. Juan Albner Pereira Veloso", role: "Advogado", email: "juan@dhleandro.adv.br" },
-  { name: "Dr. Igor Augusto Batista Antunes", role: "Advogado", email: "igor@dhleandro.adv.br" },
-  { name: "Dra. Danielle Cristina Mateus Pereira", role: "Advogada", email: "danielle@dhleandro.adv.br" },
+  { name: "Dr. Denison Henrique Leandro", role: "Sócio Fundador", email: "denison@dhleandro.adv.br", photo: denisonAsset.url },
+  { name: "Dr. Márcio Barbosa da Silva", role: "Advogado", email: "marcio@dhleandro.adv.br", photo: marcioAsset.url },
+  { name: "Dr. Higor Henrique Leandro", role: "Advogado", email: "higor@dhleandro.adv.br", photo: higorAsset.url },
+  { name: "Dr. João Tadeu Leandro", role: "Advogado", email: "joao@dhleandro.adv.br", photo: joaoAsset.url },
+  { name: "Dra. Renata Henrique Leandro", role: "Advogada", email: "renata@dhleandro.adv.br", photo: renataAsset.url },
+  { name: "Dr. Juan Albner Pereira Veloso", role: "Advogado", email: "juan@dhleandro.adv.br", photo: null },
+  { name: "Dr. Igor Augusto Batista Antunes", role: "Advogado", email: "igor@dhleandro.adv.br", photo: null },
+  { name: "Dra. Danielle Cristina Mateus Pereira", role: "Advogada", email: "danielle@dhleandro.adv.br", photo: null },
 ];
 
 export function Team() {
