@@ -8,7 +8,7 @@ export function Hero() {
       <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
         <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
           <h1 className="flex flex-col items-center gap-4 md:flex-row md:items-center md:gap-6 md:text-left">
-            <span className="flex h-20 w-20 shrink-0 items-center justify-center md:h-28 md:w-28 lg:h-32 lg:w-32">
+            <span className="flex h-28 w-28 shrink-0 items-center justify-center md:h-36 md:w-36 lg:h-44 lg:w-44">
               <img
                 src={logoAsset.url}
                 alt="DL Advogados"
