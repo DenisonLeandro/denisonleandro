@@ -7,7 +7,7 @@ import joaoAsset from "@/assets/joao.png.asset.json";
 import renataAsset from "@/assets/renata.png.asset.json";
 
 const team = [
-  { slug: "denison-henrique-leandro", name: "Dr. Denison Henrique Leandro", role: "Sócio Fundador", email: "denison@dhleandro.adv.br", photo: denisonAsset.url },
+  { slug: "denison-henrique-leandro", name: "Dr. Denison Leandro", role: "Sócio Fundador", email: "denison@dhleandro.adv.br", photo: denisonAsset.url },
   { slug: "marcio-barbosa-da-silva", name: "Dr. Márcio Barbosa da Silva", role: "Advogado", email: "marcio@dhleandro.adv.br", photo: marcioAsset.url },
   { slug: "higor-henrique-leandro", name: "Dr. Higor Henrique Leandro", role: "Advogado", email: "higor@dhleandro.adv.br", photo: higorAsset.url },
   { slug: "joao-tadeu-leandro", name: "Dr. João Tadeu Leandro", role: "Advogado", email: "joao@dhleandro.adv.br", photo: joaoAsset.url },

@@ -12,13 +12,13 @@ import { Footer } from "@/components/site/Footer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Denison Henrique Leandro e Advogados Associados | 25 anos de Advocacia" },
+      { title: "Denison Leandro e Advogados Associados | 25 anos de Advocacia" },
       {
         name: "description",
         content:
           "Escritório de advocacia full service com sede em Londrina-PR. Direito Trabalhista, Previdenciário, Consumidor, Família, Contratos, Bancário e Mediação.",
       },
-      { property: "og:title", content: "Denison Henrique Leandro e Advogados Associados" },
+      { property: "og:title", content: "Denison Leandro e Advogados Associados" },
       {
         property: "og:description",
         content: "25 anos defendendo seus direitos com excelência, ética e credibilidade.",

@@ -7,13 +7,13 @@ import { PageHeader } from "@/components/site/PageHeader";
 export const Route = createFileRoute("/areas-de-atuacao")({
   head: () => ({
     meta: [
-      { title: "Áreas de Atuação | Denison Henrique Leandro e Advogados Associados" },
+      { title: "Áreas de Atuação | Denison Leandro e Advogados Associados" },
       {
         name: "description",
         content:
           "Atuação full service em Direito Trabalhista, Previdenciário, Consumidor, Família, Contratos, Bancário/Financeiro e Mediação de Conflitos.",
       },
-      { property: "og:title", content: "Áreas de Atuação | Denison Henrique Leandro" },
+      { property: "og:title", content: "Áreas de Atuação | Denison Leandro" },
       {
         property: "og:description",
         content: "Conheça as 7 áreas em que o escritório atua com excelência técnica.",

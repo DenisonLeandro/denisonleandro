@@ -14,13 +14,13 @@ import mariaAsset from "@/assets/maria.png.asset.json";
 export const Route = createFileRoute("/profissionais")({
   head: () => ({
     meta: [
-      { title: "Profissionais | Denison Henrique Leandro e Advogados Associados" },
+      { title: "Profissionais | Denison Leandro e Advogados Associados" },
       {
         name: "description",
         content:
-          "Conheça os advogados e a equipe administrativa do escritório Denison Henrique Leandro e Advogados Associados.",
+          "Conheça os advogados e a equipe administrativa do escritório Denison Leandro e Advogados Associados.",
       },
-      { property: "og:title", content: "Profissionais | Denison Henrique Leandro" },
+      { property: "og:title", content: "Profissionais | Denison Leandro" },
       {
         property: "og:description",
         content: "Equipe multidisciplinar formada por advogados experientes e dedicados.",
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/profissionais")({
 });
 
 const lawyers = [
-  { slug: "denison-henrique-leandro", name: "Dr. Denison Henrique Leandro", role: "Sócio Fundador", email: "denison@denisonleandro.adv.br", photo: denisonAsset.url },
+  { slug: "denison-henrique-leandro", name: "Dr. Denison Leandro", role: "Sócio Fundador", email: "denison@denisonleandro.adv.br", photo: denisonAsset.url },
   { slug: "marcio-barbosa-da-silva", name: "Dr. Márcio Barbosa da Silva", role: "Advogado", email: "marcio@denisonleandro.adv.br", photo: marcioAsset.url },
   { slug: "higor-henrique-leandro", name: "Dr. Higor Henrique Leandro", role: "Advogado", email: "higor@denisonleandro.adv.br", photo: higorAsset.url },
   { slug: "joao-tadeu-leandro", name: "Dr. João Tadeu Leandro", role: "Advogado", email: "joao@denisonleandro.adv.br", photo: joaoAsset.url },

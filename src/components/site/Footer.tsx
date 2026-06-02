@@ -30,7 +30,7 @@ export function Footer() {
                 <img src={logoAsset.url} alt="DL Advogados" className="h-full w-full object-contain" />
               </div>
               <div className="leading-tight">
-                <p className="font-serif text-base">Denison Henrique Leandro</p>
+                <p className="font-serif text-base">Denison Leandro</p>
                 <p className="text-[10px] uppercase tracking-[0.18em] text-navy-foreground/60">
                   Advogados Associados
                 </p>
@@ -93,7 +93,7 @@ export function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-navy-foreground/50 md:flex-row">
-          <p>© {new Date().getFullYear()} Denison Henrique Leandro e Advogados Associados. Todos os direitos reservados.</p>
+          <p>© {new Date().getFullYear()} Denison Leandro e Advogados Associados. Todos os direitos reservados.</p>
           <p>OAB/PR — Conforme provimentos da Ordem dos Advogados do Brasil.</p>
         </div>
       </div>

@@ -22,9 +22,9 @@ const items = [
 export const Route = createFileRoute("/areas/previdenciario")({
   head: () => ({
     meta: [
-      { title: `${title} | Denison Henrique Leandro e Advogados Associados` },
+      { title: `${title} | Denison Leandro e Advogados Associados` },
       { name: "description", content: intro },
-      { property: "og:title", content: `${title} | Denison Henrique Leandro` },
+      { property: "og:title", content: `${title} | Denison Leandro` },
       { property: "og:description", content: intro },
     ],
   }),
