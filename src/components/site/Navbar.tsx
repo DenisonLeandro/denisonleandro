@@ -26,7 +26,7 @@ export function Navbar() {
             <img src={logoAsset.url} alt="DL Advogados" className="h-full w-full object-contain" />
           </div>
           <div className="hidden flex-col leading-tight sm:flex">
-            <span className="font-serif text-sm font-semibold text-white">Denison Henrique Leandro</span>
+            <span className="font-serif text-sm font-semibold text-white">Denison Leandro</span>
             <span className="text-[10px] uppercase tracking-[0.18em] text-white/70">
               Advogados Associados
             </span>

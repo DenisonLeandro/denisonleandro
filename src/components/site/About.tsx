@@ -9,7 +9,7 @@ export function About() {
         <div className="relative">
           <img
             src={escritorioAsset.url}
-            alt="Escritório Denison Henrique Leandro e Advogados Associados"
+            alt="Escritório Denison Leandro e Advogados Associados"
             className="aspect-[5/6] w-full rounded-2xl object-cover shadow-elegant ring-1 ring-gold/30"
           />
           <div className="absolute -right-5 -top-5 hidden h-28 w-28 rounded-2xl border-2 border-gold md:block" />

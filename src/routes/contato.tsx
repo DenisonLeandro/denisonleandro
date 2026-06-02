@@ -7,13 +7,13 @@ import { PageHeader } from "@/components/site/PageHeader";
 export const Route = createFileRoute("/contato")({
   head: () => ({
     meta: [
-      { title: "Contato | Denison Henrique Leandro e Advogados Associados" },
+      { title: "Contato | Denison Leandro e Advogados Associados" },
       {
         name: "description",
         content:
-          "Fale com o escritório Denison Henrique Leandro e Advogados Associados. Unidades em Londrina, Curitiba, Foz do Iguaçu, Ibiporã, Maringá e Florianópolis.",
+          "Fale com o escritório Denison Leandro e Advogados Associados. Unidades em Londrina, Curitiba, Foz do Iguaçu, Ibiporã, Maringá e Florianópolis.",
       },
-      { property: "og:title", content: "Contato | Denison Henrique Leandro" },
+      { property: "og:title", content: "Contato | Denison Leandro" },
       {
         property: "og:description",
         content: "Entre em contato com nossas unidades em todo o Brasil.",

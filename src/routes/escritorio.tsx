@@ -8,13 +8,13 @@ import { PageHeader } from "@/components/site/PageHeader";
 export const Route = createFileRoute("/escritorio")({
   head: () => ({
     meta: [
-      { title: "O Escritório | Denison Henrique Leandro e Advogados Associados" },
+      { title: "O Escritório | Denison Leandro e Advogados Associados" },
       {
         name: "description",
         content:
-          "Conheça o escritório Denison Henrique Leandro e Advogados Associados: 25 anos de tradição, excelência técnica e compromisso com a ética em todas as áreas do Direito.",
+          "Conheça o escritório Denison Leandro e Advogados Associados: 25 anos de tradição, excelência técnica e compromisso com a ética em todas as áreas do Direito.",
       },
-      { property: "og:title", content: "O Escritório | Denison Henrique Leandro e Advogados" },
+      { property: "og:title", content: "O Escritório | Denison Leandro e Advogados" },
       {
         property: "og:description",
         content:
@@ -58,8 +58,8 @@ function EscritorioPage() {
 
             <div className="mt-10 space-y-6 text-base leading-relaxed text-foreground/85">
               <p>
-                Fundado pelo Dr. Denison Henrique Leandro, o escritório{" "}
-                <strong className="text-navy">Denison Henrique Leandro e Advogados Associados</strong>{" "}
+                Fundado pelo Dr. Denison Leandro, o escritório{" "}
+                <strong className="text-navy">Denison Leandro e Advogados Associados</strong>{" "}
                 completa 25 anos de atuação ininterrupta na advocacia brasileira, consolidando-se
                 como referência no atendimento full service nas mais diversas áreas do Direito.
               </p>

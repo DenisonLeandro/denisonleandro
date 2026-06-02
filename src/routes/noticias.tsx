@@ -8,13 +8,13 @@ import { PageHeader } from "@/components/site/PageHeader";
 export const Route = createFileRoute("/noticias")({
   head: () => ({
     meta: [
-      { title: "Notícias | Denison Henrique Leandro e Advogados Associados" },
+      { title: "Notícias | Denison Leandro e Advogados Associados" },
       {
         name: "description",
         content:
           "Artigos e novidades jurídicas sobre direito trabalhista, previdenciário, consumidor e mais, escritos pela equipe do escritório.",
       },
-      { property: "og:title", content: "Notícias | Denison Henrique Leandro" },
+      { property: "og:title", content: "Notícias | Denison Leandro" },
       {
         property: "og:description",
         content: "Acompanhe artigos e novidades do mundo jurídico.",

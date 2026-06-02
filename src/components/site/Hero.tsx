@@ -17,7 +17,7 @@ export function Hero() {
             </span>
             <span className="flex flex-col leading-tight">
               <span className="font-serif text-3xl font-semibold text-white md:text-5xl lg:text-6xl">
-                Denison Henrique Leandro
+                Denison Leandro
               </span>
               <span className="mt-1 text-xs uppercase tracking-[0.18em] text-white/70 md:text-sm lg:text-base">
                 Advogados Associados
