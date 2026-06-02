@@ -7,15 +7,22 @@ export function Hero() {
       <div className="absolute inset-0 placeholder-image-ornament opacity-60" />
       <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
         <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-          <div className="mb-6 flex h-24 w-24 items-center justify-center md:h-32 md:w-32">
-            <img
-              src={logoAsset.url}
-              alt="DL Advogados"
-              className="h-full w-full object-contain"
-            />
-          </div>
-          <h1 className="font-serif text-4xl leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
-            Denison Leandro Advogados Associados
+          <h1 className="flex flex-col items-center gap-4 md:flex-row md:items-center md:gap-6 md:text-left">
+            <span className="flex h-20 w-20 shrink-0 items-center justify-center md:h-28 md:w-28 lg:h-32 lg:w-32">
+              <img
+                src={logoAsset.url}
+                alt="DL Advogados"
+                className="h-full w-full object-contain"
+              />
+            </span>
+            <span className="flex flex-col leading-tight">
+              <span className="font-serif text-3xl font-semibold text-white md:text-5xl lg:text-6xl">
+                Denison Henrique Leandro
+              </span>
+              <span className="mt-1 text-xs uppercase tracking-[0.18em] text-white/70 md:text-sm lg:text-base">
+                Advogados Associados
+              </span>
+            </span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-navy-foreground/80">
             Atuação Full Service em Direito Trabalhista, Previdenciário, Consumidor,
