@@ -15,6 +15,7 @@ import { Route as EscritorioRouteImport } from './routes/escritorio'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as AreasDeAtuacaoRouteImport } from './routes/areas-de-atuacao'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as NoticiasSlugRouteImport } from './routes/noticias.$slug'
 import { Route as EquipeRenataHenriqueLeandroRouteImport } from './routes/equipe.renata-henrique-leandro'
 import { Route as EquipeMariaInesGomesDaSilvaRouteImport } from './routes/equipe.maria-ines-gomes-da-silva'
 import { Route as EquipeMarcioBarbosaDaSilvaRouteImport } from './routes/equipe.marcio-barbosa-da-silva'
@@ -61,6 +62,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const NoticiasSlugRoute = NoticiasSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => NoticiasRoute,
 } as any)
 const EquipeRenataHenriqueLeandroRoute =
   EquipeRenataHenriqueLeandroRouteImport.update({
@@ -156,7 +162,7 @@ export interface FileRoutesByFullPath {
   '/areas-de-atuacao': typeof AreasDeAtuacaoRoute
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
-  '/noticias': typeof NoticiasRoute
+  '/noticias': typeof NoticiasRouteWithChildren
   '/profissionais': typeof ProfissionaisRoute
   '/areas/bancario': typeof AreasBancarioRoute
   '/areas/consumidor': typeof AreasConsumidorRoute
@@ -174,13 +180,14 @@ export interface FileRoutesByFullPath {
   '/equipe/marcio-barbosa-da-silva': typeof EquipeMarcioBarbosaDaSilvaRoute
   '/equipe/maria-ines-gomes-da-silva': typeof EquipeMariaInesGomesDaSilvaRoute
   '/equipe/renata-henrique-leandro': typeof EquipeRenataHenriqueLeandroRoute
+  '/noticias/$slug': typeof NoticiasSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/areas-de-atuacao': typeof AreasDeAtuacaoRoute
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
-  '/noticias': typeof NoticiasRoute
+  '/noticias': typeof NoticiasRouteWithChildren
   '/profissionais': typeof ProfissionaisRoute
   '/areas/bancario': typeof AreasBancarioRoute
   '/areas/consumidor': typeof AreasConsumidorRoute
@@ -198,6 +205,7 @@ export interface FileRoutesByTo {
   '/equipe/marcio-barbosa-da-silva': typeof EquipeMarcioBarbosaDaSilvaRoute
   '/equipe/maria-ines-gomes-da-silva': typeof EquipeMariaInesGomesDaSilvaRoute
   '/equipe/renata-henrique-leandro': typeof EquipeRenataHenriqueLeandroRoute
+  '/noticias/$slug': typeof NoticiasSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -205,7 +213,7 @@ export interface FileRoutesById {
   '/areas-de-atuacao': typeof AreasDeAtuacaoRoute
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
-  '/noticias': typeof NoticiasRoute
+  '/noticias': typeof NoticiasRouteWithChildren
   '/profissionais': typeof ProfissionaisRoute
   '/areas/bancario': typeof AreasBancarioRoute
   '/areas/consumidor': typeof AreasConsumidorRoute
@@ -223,6 +231,7 @@ export interface FileRoutesById {
   '/equipe/marcio-barbosa-da-silva': typeof EquipeMarcioBarbosaDaSilvaRoute
   '/equipe/maria-ines-gomes-da-silva': typeof EquipeMariaInesGomesDaSilvaRoute
   '/equipe/renata-henrique-leandro': typeof EquipeRenataHenriqueLeandroRoute
+  '/noticias/$slug': typeof NoticiasSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -249,6 +258,7 @@ export interface FileRouteTypes {
     | '/equipe/marcio-barbosa-da-silva'
     | '/equipe/maria-ines-gomes-da-silva'
     | '/equipe/renata-henrique-leandro'
+    | '/noticias/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -273,6 +283,7 @@ export interface FileRouteTypes {
     | '/equipe/marcio-barbosa-da-silva'
     | '/equipe/maria-ines-gomes-da-silva'
     | '/equipe/renata-henrique-leandro'
+    | '/noticias/$slug'
   id:
     | '__root__'
     | '/'
@@ -297,6 +308,7 @@ export interface FileRouteTypes {
     | '/equipe/marcio-barbosa-da-silva'
     | '/equipe/maria-ines-gomes-da-silva'
     | '/equipe/renata-henrique-leandro'
+    | '/noticias/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -304,7 +316,7 @@ export interface RootRouteChildren {
   AreasDeAtuacaoRoute: typeof AreasDeAtuacaoRoute
   ContatoRoute: typeof ContatoRoute
   EscritorioRoute: typeof EscritorioRoute
-  NoticiasRoute: typeof NoticiasRoute
+  NoticiasRoute: typeof NoticiasRouteWithChildren
   ProfissionaisRoute: typeof ProfissionaisRoute
   AreasBancarioRoute: typeof AreasBancarioRoute
   AreasConsumidorRoute: typeof AreasConsumidorRoute
@@ -367,6 +379,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/noticias/$slug': {
+      id: '/noticias/$slug'
+      path: '/$slug'
+      fullPath: '/noticias/$slug'
+      preLoaderRoute: typeof NoticiasSlugRouteImport
+      parentRoute: typeof NoticiasRoute
     }
     '/equipe/renata-henrique-leandro': {
       id: '/equipe/renata-henrique-leandro'
@@ -483,12 +502,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface NoticiasRouteChildren {
+  NoticiasSlugRoute: typeof NoticiasSlugRoute
+}
+
+const NoticiasRouteChildren: NoticiasRouteChildren = {
+  NoticiasSlugRoute: NoticiasSlugRoute,
+}
+
+const NoticiasRouteWithChildren = NoticiasRoute._addFileChildren(
+  NoticiasRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AreasDeAtuacaoRoute: AreasDeAtuacaoRoute,
   ContatoRoute: ContatoRoute,
   EscritorioRoute: EscritorioRoute,
-  NoticiasRoute: NoticiasRoute,
+  NoticiasRoute: NoticiasRouteWithChildren,
   ProfissionaisRoute: ProfissionaisRoute,
   AreasBancarioRoute: AreasBancarioRoute,
   AreasConsumidorRoute: AreasConsumidorRoute,
@@ -511,13 +542,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
