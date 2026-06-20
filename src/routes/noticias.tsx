@@ -6,6 +6,7 @@ import { Footer } from "@/components/site/Footer";
 import { CtaBanner } from "@/components/site/CtaBanner";
 import { PageHeader } from "@/components/site/PageHeader";
 import { supabase, Article } from "@/integrations/supabase/client";
+import featuredImage from "@/assets/featured-acidente-de-trabalho.jpg";
 
 function FeaturedArticleCard() {
   return (
