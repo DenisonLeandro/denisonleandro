@@ -14,6 +14,7 @@ import { Route as NoticiasRouteImport } from './routes/noticias'
 import { Route as EscritorioRouteImport } from './routes/escritorio'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as AreasDeAtuacaoRouteImport } from './routes/areas-de-atuacao'
+import { Route as AcidenteDeTrabalhoRouteImport } from './routes/acidente-de-trabalho'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as NoticiasSlugRouteImport } from './routes/noticias.$slug'
 import { Route as EquipeRenataHenriqueLeandroRouteImport } from './routes/equipe.renata-henrique-leandro'
@@ -56,6 +57,11 @@ const ContatoRoute = ContatoRouteImport.update({
 const AreasDeAtuacaoRoute = AreasDeAtuacaoRouteImport.update({
   id: '/areas-de-atuacao',
   path: '/areas-de-atuacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcidenteDeTrabalhoRoute = AcidenteDeTrabalhoRouteImport.update({
+  id: '/acidente-de-trabalho',
+  path: '/acidente-de-trabalho',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -159,6 +165,7 @@ const AreasBancarioRoute = AreasBancarioRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/acidente-de-trabalho': typeof AcidenteDeTrabalhoRoute
   '/areas-de-atuacao': typeof AreasDeAtuacaoRoute
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
@@ -184,6 +191,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/acidente-de-trabalho': typeof AcidenteDeTrabalhoRoute
   '/areas-de-atuacao': typeof AreasDeAtuacaoRoute
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
@@ -210,6 +218,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/acidente-de-trabalho': typeof AcidenteDeTrabalhoRoute
   '/areas-de-atuacao': typeof AreasDeAtuacaoRoute
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
@@ -237,6 +246,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/acidente-de-trabalho'
     | '/areas-de-atuacao'
     | '/contato'
     | '/escritorio'
@@ -262,6 +272,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/acidente-de-trabalho'
     | '/areas-de-atuacao'
     | '/contato'
     | '/escritorio'
@@ -287,6 +298,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/acidente-de-trabalho'
     | '/areas-de-atuacao'
     | '/contato'
     | '/escritorio'
@@ -313,6 +325,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AcidenteDeTrabalhoRoute: typeof AcidenteDeTrabalhoRoute
   AreasDeAtuacaoRoute: typeof AreasDeAtuacaoRoute
   ContatoRoute: typeof ContatoRoute
   EscritorioRoute: typeof EscritorioRoute
@@ -371,6 +384,13 @@ declare module '@tanstack/react-router' {
       path: '/areas-de-atuacao'
       fullPath: '/areas-de-atuacao'
       preLoaderRoute: typeof AreasDeAtuacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/acidente-de-trabalho': {
+      id: '/acidente-de-trabalho'
+      path: '/acidente-de-trabalho'
+      fullPath: '/acidente-de-trabalho'
+      preLoaderRoute: typeof AcidenteDeTrabalhoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -516,6 +536,7 @@ const NoticiasRouteWithChildren = NoticiasRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AcidenteDeTrabalhoRoute: AcidenteDeTrabalhoRoute,
   AreasDeAtuacaoRoute: AreasDeAtuacaoRoute,
   ContatoRoute: ContatoRoute,
   EscritorioRoute: EscritorioRoute,
