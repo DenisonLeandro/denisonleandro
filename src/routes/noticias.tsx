@@ -21,8 +21,15 @@ function FeaturedArticleCard() {
         to="/acidente-de-trabalho"
         className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-card transition-all hover:-translate-y-1 hover:border-gold/50 hover:shadow-elegant md:flex-row"
       >
-        <div className="flex aspect-[16/10] w-full items-center justify-center bg-gradient-to-br from-gold/30 to-gold/10 md:aspect-auto md:w-2/5">
-          <span className="font-serif text-6xl text-navy/30">§</span>
+        <div className="w-full overflow-hidden md:w-2/5">
+          <img
+            src={featuredImage}
+            alt="Trabalhador utilizando equipamentos de segurança em ambiente de trabalho"
+            width={1280}
+            height={800}
+            loading="lazy"
+            className="aspect-[16/10] h-full w-full object-cover"
+          />
         </div>
         <div className="flex flex-1 flex-col p-6 md:p-8">
           <span className="inline-flex w-fit rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-gold">
