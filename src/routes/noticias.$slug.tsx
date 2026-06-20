@@ -3,7 +3,19 @@ import { useEffect, useState } from "react";
 import { ArrowLeft, Calendar, Loader2 } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
-import { supabase, Article } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
+
+interface Article {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string | null;
+  category: string | null;
+  cover_image_url: string | null;
+  published_at: string;
+  content: string;
+  status: string;
+}
 
 export const Route = createFileRoute("/noticias/$slug")({
   component: NoticiaDetail,
@@ -19,7 +31,7 @@ function NoticiaDetail() {
     async function loadArticle() {
       if (!slug) return;
       try {
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from("articles")
           .select("*")
           .eq("slug", slug)
