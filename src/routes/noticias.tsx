@@ -91,28 +91,6 @@ function NoticiasPage() {
     loadArticles();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Navbar />
-        <main>
-          <PageHeader
-            eyebrow="Conteúdo jurídico"
-            title="Notícias"
-            description="Artigos, análises e novidades do mundo do Direito produzidos pela equipe do escritório."
-          />
-          <section className="bg-background py-20">
-            <div className="flex items-center justify-center gap-2">
-              <Loader2 className="h-6 w-6 animate-spin" />
-              <p>Carregando artigos...</p>
-            </div>
-          </section>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -126,7 +104,12 @@ function NoticiasPage() {
         <section className="bg-background py-20">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
             <FeaturedArticleCard />
-            {articles.length === 0 ? (
+            {loading ? (
+              <div className="flex items-center justify-center gap-2 py-10">
+                <Loader2 className="h-6 w-6 animate-spin" />
+                <p>Carregando notícias...</p>
+              </div>
+            ) : articles.length === 0 ? (
               <p className="text-center text-muted-foreground">
                 Nenhuma notícia publicada ainda.
               </p>
@@ -138,6 +121,7 @@ function NoticiasPage() {
                     className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-card transition-all hover:-translate-y-1 hover:border-gold/50 hover:shadow-elegant cursor-pointer"
                     onClick={() => navigate({ to: `/noticias/${a.slug}` })}
                   >
+
                     {a.cover_image_url && (
                       <img
                         src={a.cover_image_url}
