@@ -14,6 +14,7 @@ import { Route as EscritorioRouteImport } from './routes/escritorio'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AreasDeAtuacaoRouteImport } from './routes/areas-de-atuacao'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AcidenteDeTrabalhoRouteImport } from './routes/acidente-de-trabalho'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
@@ -60,6 +61,11 @@ const AuthRoute = AuthRouteImport.update({
 const AreasDeAtuacaoRoute = AreasDeAtuacaoRouteImport.update({
   id: '/areas-de-atuacao',
   path: '/areas-de-atuacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AcidenteDeTrabalhoRoute = AcidenteDeTrabalhoRouteImport.update({
@@ -184,6 +190,7 @@ const AuthenticatedAdminArtigosRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/acidente-de-trabalho': typeof AcidenteDeTrabalhoRoute
+  '/admin': typeof AdminRoute
   '/areas-de-atuacao': typeof AreasDeAtuacaoRoute
   '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
@@ -212,6 +219,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/acidente-de-trabalho': typeof AcidenteDeTrabalhoRoute
+  '/admin': typeof AdminRoute
   '/areas-de-atuacao': typeof AreasDeAtuacaoRoute
   '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
@@ -242,6 +250,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/acidente-de-trabalho': typeof AcidenteDeTrabalhoRoute
+  '/admin': typeof AdminRoute
   '/areas-de-atuacao': typeof AreasDeAtuacaoRoute
   '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
@@ -272,6 +281,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/acidente-de-trabalho'
+    | '/admin'
     | '/areas-de-atuacao'
     | '/auth'
     | '/contato'
@@ -300,6 +310,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/acidente-de-trabalho'
+    | '/admin'
     | '/areas-de-atuacao'
     | '/auth'
     | '/contato'
@@ -329,6 +340,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/acidente-de-trabalho'
+    | '/admin'
     | '/areas-de-atuacao'
     | '/auth'
     | '/contato'
@@ -359,6 +371,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AcidenteDeTrabalhoRoute: typeof AcidenteDeTrabalhoRoute
+  AdminRoute: typeof AdminRoute
   AreasDeAtuacaoRoute: typeof AreasDeAtuacaoRoute
   AuthRoute: typeof AuthRoute
   ContatoRoute: typeof ContatoRoute
@@ -419,6 +432,13 @@ declare module '@tanstack/react-router' {
       path: '/areas-de-atuacao'
       fullPath: '/areas-de-atuacao'
       preLoaderRoute: typeof AreasDeAtuacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/acidente-de-trabalho': {
@@ -593,6 +613,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AcidenteDeTrabalhoRoute: AcidenteDeTrabalhoRoute,
+  AdminRoute: AdminRoute,
   AreasDeAtuacaoRoute: AreasDeAtuacaoRoute,
   AuthRoute: AuthRoute,
   ContatoRoute: ContatoRoute,
