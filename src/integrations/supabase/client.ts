@@ -4,7 +4,16 @@ import { createClient } from '@supabase/supabase-js'
 const SUPABASE_URL = 'https://pgimbjfdxwefahxmpdpc.supabase.co'
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_iJUl_R_VWamc4p2eC2XAWw_3Li5jJ0t'
 
-export const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)
+export const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true,
+    storage: typeof window !== 'undefined' ? window.localStorage : undefined,
+  },
+})
+
+export type AppRole = 'editor' | 'admin'
 
 export interface Article {
   id: string
