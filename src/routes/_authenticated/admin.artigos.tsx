@@ -67,6 +67,43 @@ function AdminArtigosPage() {
   const [editing, setEditing] = useState<Article | null>(null);
   const [form, setForm] = useState<FormState>(emptyForm);
   const [slugTouched, setSlugTouched] = useState(false);
+  const [uploading, setUploading] = useState(false);
+
+  const ALLOWED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+  const MAX_BYTES = 5 * 1024 * 1024;
+
+  async function handleCoverUpload(file: File) {
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      setError("Formato inválido. Envie uma imagem JPG, PNG ou WEBP.");
+      return;
+    }
+    if (file.size > MAX_BYTES) {
+      setError("Imagem muito grande. O limite é 5 MB.");
+      return;
+    }
+    setUploading(true);
+    setError(null);
+    try {
+      const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
+      const baseName = file.name.replace(/\.[^.]+$/, "");
+      const safeName = slugify(baseName) || "imagem";
+      const path = `articles/${Date.now()}-${safeName}.${ext}`;
+      const { error: upErr } = await supabase.storage
+        .from("article-covers")
+        .upload(path, file, { upsert: false, contentType: file.type });
+      if (upErr) throw upErr;
+      const { data: pub } = supabase.storage
+        .from("article-covers")
+        .getPublicUrl(path);
+      setForm((f) => ({ ...f, cover_image_url: pub.publicUrl }));
+    } catch (err: any) {
+      console.error("Erro no upload:", err);
+      setError(err?.message ?? "Erro ao enviar imagem.");
+    } finally {
+      setUploading(false);
+    }
+  }
+
 
   async function handleSignOut() {
     await supabase.auth.signOut();
@@ -376,7 +413,7 @@ function AdminArtigosPage() {
                 </Field>
               </div>
 
-              <Field label="URL da imagem de capa">
+              <Field label="URL da imagem de capa" hint="Você pode enviar abaixo ou colar uma URL externa.">
                 <input
                   type="url"
                   value={form.cover_image_url}
@@ -386,7 +423,34 @@ function AdminArtigosPage() {
                   className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
                   placeholder="https://..."
                 />
+                <div className="mt-2 flex flex-wrap items-center gap-3">
+                  <label className="inline-flex cursor-pointer items-center gap-2 rounded-md border border-navy px-3 py-1.5 text-xs font-semibold text-navy hover:bg-navy hover:text-white">
+                    {uploading ? "Enviando..." : "Enviar imagem de capa"}
+                    <input
+                      type="file"
+                      accept="image/jpeg,image/jpg,image/png,image/webp"
+                      className="hidden"
+                      disabled={uploading}
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) handleCoverUpload(file);
+                        e.target.value = "";
+                      }}
+                    />
+                  </label>
+                  <span className="text-xs text-foreground/60">JPG, PNG ou WEBP • até 5 MB</span>
+                </div>
+                {form.cover_image_url && (
+                  <div className="mt-3">
+                    <img
+                      src={form.cover_image_url}
+                      alt="Prévia da imagem de capa"
+                      className="max-h-48 rounded-md border border-border object-cover"
+                    />
+                  </div>
+                )}
               </Field>
+
 
               <Field label="Resumo (excerpt)">
                 <textarea
