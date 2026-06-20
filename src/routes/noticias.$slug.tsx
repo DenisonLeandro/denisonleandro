@@ -231,8 +231,23 @@ function NoticiaDetail() {
     );
   }
 
-  const proseClasses =
-    "prose prose-sm max-w-none dark:prose-invert prose-p:text-foreground prose-h2:text-navy prose-h3:text-navy prose-a:text-gold prose-strong:text-navy";
+  const articleBodyClasses = [
+    "font-sans text-foreground",
+    "[&_p]:font-sans [&_p]:text-justify [&_p]:leading-[1.8] [&_p]:mb-6 [&_p]:text-base [&_p]:text-foreground",
+    "[&_h2]:font-sans [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-navy [&_h2]:mt-10 [&_h2]:mb-4",
+    "[&_h3]:font-sans [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-navy [&_h3]:mt-8 [&_h3]:mb-3",
+    "[&_h4]:font-sans [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-navy [&_h4]:mt-6 [&_h4]:mb-2",
+    "[&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-6 [&_ul]:space-y-2",
+    "[&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-6 [&_ol]:space-y-2",
+    "[&_li]:font-sans [&_li]:leading-[1.8] [&_li]:text-foreground",
+    "[&_a]:text-gold [&_a]:underline hover:[&_a]:text-gold/80",
+    "[&_strong]:font-semibold [&_strong]:text-navy",
+    "[&_em]:italic",
+    "[&_blockquote]:border-l-4 [&_blockquote]:border-gold [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-muted-foreground [&_blockquote]:my-6",
+  ].join(" ");
+
+  const plainParagraphClass =
+    "font-sans text-justify leading-[1.8] mb-6 text-base text-foreground";
 
   return (
     <div className="min-h-screen bg-background">
