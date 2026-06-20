@@ -1,43 +1,38 @@
-# Onde está o artigo e como visualizá-lo
+## Plano: Adicionar card de artigo fixo em /noticias
 
-O artigo **não aparece na home** porque ele é uma página independente com URL própria (foi exatamente isso que você pediu). Ele só aparece quando você acessa a URL dele diretamente.
+### Objetivo
+Inserir um card de destaque na página `/noticias` apontando para o artigo fixo `/acidente-de-trabalho`, sem criar nova aba no menu nem nova rota.
 
-## Passo a passo para ver no PREVIEW (antes de publicar)
+### Alteração única
+- **Arquivo:** `src/routes/noticias.tsx`
 
-1. No preview ao lado, olhe a barra de endereço do preview (logo acima do site renderizado).
-2. No final da URL do preview, **adicione** `/acidente-de-trabalho`.
-3. A URL final fica assim:
+### O que será feito
+1. Adicionar um card estático de "Artigo em destaque" logo acima da lista dinâmica de notícias do Supabase.
+2. O card seguirá o mesmo padrão visual dos cards existentes (bordas arredondadas, sombra, hover, tipografia).
+3. Conteúdo do card:
+   - **Título:** Acidente de trabalho: quais são os direitos do trabalhador?
+   - **Resumo:** Entenda os principais direitos de quem sofreu acidente de trabalho, quando procurar orientação e quais documentos podem ajudar na análise do caso.
+   - **Categoria:** Direito do Trabalho
+   - **Botão:** Ler artigo → link para `/acidente-de-trabalho`
+4. O card ficará visível mesmo que a lista do Supabase esteja vazia.
 
-   ```
-   https://id-preview--ceb23ee7-3a69-4717-9d43-5d07886a2df1.lovable.app/acidente-de-trabalho
-   ```
+### O que NÃO será alterado
+- Navbar / menu superior (a aba "Notícias" permanece única)
+- Página `/acidente-de-trabalho`
+- Rota `/noticias/:slug`
+- Busca/listagem dinâmica do Supabase
+- Home, Footer, layout global, Google Ads, tracking, edge functions
 
-4. Pressione Enter. O artigo deve carregar com:
-   - Navbar no topo
-   - Título "Acidente de trabalho: direitos do trabalhador"
-   - Texto do artigo
-   - 2 botões verdes do WhatsApp
-   - Link "Voltar ao início"
-   - Footer
+### Resultado esperado
+O visitante clica em "Notícias" no menu e vê, no topo, o card destacado do artigo sobre acidente de trabalho, com link claro para a página do artigo.
 
-Se preferir, posso abrir essa rota no preview para você automaticamente (basta aprovar este plano).
+---
 
-## Por que não aparece na home
-
-A home (`/`) não foi alterada — foi uma regra obrigatória sua ("Não alterar layout/menu/home"). Por isso não existe link visível para o artigo ainda. O artigo só é acessível digitando a URL.
-
-## Para ver no SITE PUBLICADO (denisonleandro.adv.br)
-
-A página **ainda não está no ar**. Você pediu para eu não publicar automaticamente. Para o artigo ficar disponível em `https://denisonleandro.adv.br/acidente-de-trabalho` é necessário:
-
-1. Validar a página no preview (passo acima).
-2. Clicar em **Publish** (canto superior direito do editor Lovable) → **Update**.
-3. Aguardar ~1 minuto.
-4. Acessar `https://denisonleandro.adv.br/acidente-de-trabalho`.
-
-## O que farei se você aprovar este plano
-
-- Abrir a rota `/acidente-de-trabalho` no preview automaticamente, para você ver o artigo agora.
-- Não vou publicar, não vou alterar nenhum arquivo, não vou mexer em layout, menu, Supabase ou tracking.
-
-Se ao abrir o preview a página aparecer em branco ou der erro, eu investigo e te aviso antes de qualquer correção.
+### Relatório pós-implementação
+Após aprovação, serão entregues:
+- Arquivo alterado e local exato da inserção
+- Confirmação de que nenhuma nova aba/nova rota foi criada
+- Confirmação de que o link aponta para `/acidente-de-trabalho`
+- Confirmação de que `/acidente-de-trabalho` não foi alterado
+- Confirmação de que a listagem dinâmica de notícias não foi quebrada
+- Instrução para testar no preview antes de publicar

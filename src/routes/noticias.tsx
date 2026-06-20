@@ -1,11 +1,49 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, Calendar, Loader2 } from "lucide-react";
+import { ArrowRight, Calendar, Loader2, Star } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { CtaBanner } from "@/components/site/CtaBanner";
 import { PageHeader } from "@/components/site/PageHeader";
 import { supabase, Article } from "@/integrations/supabase/client";
+
+function FeaturedArticleCard() {
+  return (
+    <div className="mb-12">
+      <div className="mb-4 flex items-center gap-2">
+        <Star size={16} className="text-gold" />
+        <span className="text-xs font-semibold uppercase tracking-wider text-gold">
+          Artigo em destaque
+        </span>
+      </div>
+      <Link
+        to="/acidente-de-trabalho"
+        className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-card transition-all hover:-translate-y-1 hover:border-gold/50 hover:shadow-elegant md:flex-row"
+      >
+        <div className="flex aspect-[16/10] w-full items-center justify-center bg-gradient-to-br from-gold/30 to-gold/10 md:aspect-auto md:w-2/5">
+          <span className="font-serif text-6xl text-navy/30">§</span>
+        </div>
+        <div className="flex flex-1 flex-col p-6 md:p-8">
+          <span className="inline-flex w-fit rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-gold">
+            Direito do Trabalho
+          </span>
+          <h2 className="mt-4 font-serif text-2xl leading-snug text-navy md:text-3xl">
+            Acidente de trabalho: quais são os direitos do trabalhador?
+          </h2>
+          <p className="mt-3 flex-1 text-sm leading-relaxed text-foreground/75 md:text-base">
+            Entenda os principais direitos de quem sofreu acidente de trabalho,
+            quando procurar orientação e quais documentos podem ajudar na
+            análise do caso.
+          </p>
+          <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-white transition-colors group-hover:bg-gold group-hover:text-navy">
+            Ler artigo
+            <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+          </span>
+        </div>
+      </Link>
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/noticias")({
   head: () => ({
