@@ -94,7 +94,12 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-navy-foreground/50 md:flex-row">
           <p>© {new Date().getFullYear()} Denison Leandro e Advogados Associados. Todos os direitos reservados.</p>
-          <p>OAB/PR — Conforme provimentos da Ordem dos Advogados do Brasil.</p>
+          <div className="flex items-center gap-4">
+            <p>OAB/PR — Conforme provimentos da Ordem dos Advogados do Brasil.</p>
+            <Link to="/admin" className="hover:text-gold transition-colors">
+              Área restrita
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
