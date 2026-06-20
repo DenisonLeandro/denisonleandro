@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowRight, Calendar, Loader2, Star } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
@@ -87,7 +87,6 @@ export const Route = createFileRoute("/noticias")({
 function NoticiasPage() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadArticles() {
@@ -136,13 +135,14 @@ function NoticiasPage() {
             ) : (
               <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {articles.map((a) => (
-                  <article
+                  <Link
                     key={a.id}
-                    className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-card transition-all hover:-translate-y-1 hover:border-gold/50 hover:shadow-elegant cursor-pointer"
-                    onClick={() => navigate({ to: `/noticias/${a.slug}` })}
+                    to="/noticias/$slug"
+                    params={{ slug: a.slug }}
+                    className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-card transition-all hover:-translate-y-1 hover:border-gold/50 hover:shadow-elegant"
                   >
-
                     {a.cover_image_url && (
+
                       <img
                         src={a.cover_image_url}
                         alt={a.title}
@@ -187,7 +187,7 @@ function NoticiasPage() {
                         </div>
                       </div>
                     </div>
-                  </article>
+                  </Link>
                 ))}
               </div>
             )}
