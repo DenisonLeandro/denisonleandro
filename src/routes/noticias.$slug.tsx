@@ -302,12 +302,12 @@ function NoticiaDetail() {
         {/* Conteúdo + CTA intermediário */}
         {contentParts?.isHtml ? (
           <>
-            <div className={proseClasses}>
+            <div className={articleBodyClasses}>
               <div dangerouslySetInnerHTML={{ __html: contentParts.first }} />
             </div>
             <CtaCallout />
             {contentParts.second && (
-              <div className={proseClasses}>
+              <div className={articleBodyClasses}>
                 <div
                   dangerouslySetInnerHTML={{ __html: contentParts.second }}
                 />
@@ -316,9 +316,9 @@ function NoticiaDetail() {
           </>
         ) : (
           <>
-            <div className={proseClasses}>
+            <div>
               {(contentParts?.plainParagraphs?.first ?? []).map((p, i) => (
-                <p key={`p1-${i}`} className="whitespace-pre-line">
+                <p key={`p1-${i}`} className={`${plainParagraphClass} whitespace-pre-line`}>
                   {p}
                 </p>
               ))}
@@ -326,9 +326,9 @@ function NoticiaDetail() {
             <CtaCallout />
             {contentParts?.plainParagraphs?.second &&
               contentParts.plainParagraphs.second.length > 0 && (
-                <div className={proseClasses}>
+                <div>
                   {contentParts.plainParagraphs.second.map((p, i) => (
-                    <p key={`p2-${i}`} className="whitespace-pre-line">
+                    <p key={`p2-${i}`} className={`${plainParagraphClass} whitespace-pre-line`}>
                       {p}
                     </p>
                   ))}
