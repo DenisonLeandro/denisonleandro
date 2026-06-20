@@ -31,7 +31,7 @@ function NoticiaDetail() {
     async function loadArticle() {
       if (!slug) return;
       try {
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from("articles")
           .select("*")
           .eq("slug", slug)

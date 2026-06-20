@@ -92,7 +92,7 @@ function NoticiasPage() {
   useEffect(() => {
     async function loadArticles() {
       try {
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from("articles")
           .select("*")
           .eq("status", "published")
