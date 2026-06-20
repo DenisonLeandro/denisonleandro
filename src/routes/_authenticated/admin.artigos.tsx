@@ -413,7 +413,7 @@ function AdminArtigosPage() {
                 </Field>
               </div>
 
-              <Field label="URL da imagem de capa">
+              <Field label="URL da imagem de capa" hint="Você pode enviar abaixo ou colar uma URL externa.">
                 <input
                   type="url"
                   value={form.cover_image_url}
@@ -423,7 +423,34 @@ function AdminArtigosPage() {
                   className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
                   placeholder="https://..."
                 />
+                <div className="mt-2 flex flex-wrap items-center gap-3">
+                  <label className="inline-flex cursor-pointer items-center gap-2 rounded-md border border-navy px-3 py-1.5 text-xs font-semibold text-navy hover:bg-navy hover:text-white">
+                    {uploading ? "Enviando..." : "Enviar imagem de capa"}
+                    <input
+                      type="file"
+                      accept="image/jpeg,image/jpg,image/png,image/webp"
+                      className="hidden"
+                      disabled={uploading}
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) handleCoverUpload(file);
+                        e.target.value = "";
+                      }}
+                    />
+                  </label>
+                  <span className="text-xs text-foreground/60">JPG, PNG ou WEBP • até 5 MB</span>
+                </div>
+                {form.cover_image_url && (
+                  <div className="mt-3">
+                    <img
+                      src={form.cover_image_url}
+                      alt="Prévia da imagem de capa"
+                      className="max-h-48 rounded-md border border-border object-cover"
+                    />
+                  </div>
+                )}
               </Field>
+
 
               <Field label="Resumo (excerpt)">
                 <textarea
