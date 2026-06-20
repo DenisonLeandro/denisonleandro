@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Calendar, User } from "lucide-react";
+import { ArrowLeft, Calendar, MessageCircle, User } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { PageHeader } from "@/components/site/PageHeader";
@@ -51,26 +51,87 @@ export const Route = createFileRoute("/acidente-de-trabalho")({
   component: AcidenteDeTrabalhoPage,
 });
 
-function WhatsAppButton() {
+function WhatsAppIcon({ className }: { className?: string }) {
   return (
-    <div className="my-10 flex justify-center">
-      <a
-        href={WHATSAPP_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center justify-center gap-3 rounded-lg bg-[#25D366] px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-[#1ebe57] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="h-5 w-5"
-          aria-hidden="true"
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12.06 22h-.005A9.93 9.93 0 0 1 7 20.633L3 22l1.396-3.832A9.93 9.93 0 0 1 2 12.06C2 6.555 6.555 2 12.06 2c2.667 0 5.176 1.04 7.063 2.927A9.93 9.93 0 0 1 22 12.06c0 5.505-4.555 9.94-9.94 9.94z" />
+    </svg>
+  );
+}
+
+function CtaButton() {
+  return (
+    <a
+      href={WHATSAPP_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#25D366] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-[#1ebe57] hover:shadow focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2 sm:w-auto"
+    >
+      <WhatsAppIcon className="h-4 w-4" />
+      Receba uma orientação
+    </a>
+  );
+}
+
+function CtaCallout() {
+  return (
+    <div className="my-10 rounded-xl border border-border bg-muted/40 p-5">
+      <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex min-w-0 items-start gap-3">
+          <MessageCircle className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+          <div className="min-w-0">
+            <p className="text-base font-semibold text-foreground">
+              Está com dúvidas sobre seus direitos?
+            </p>
+            <p className="mt-0.5 text-sm text-muted-foreground">
+              Receba orientações iniciais e entenda o que fazer no seu caso.
+            </p>
+          </div>
+        </div>
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-lg border border-navy bg-white px-5 py-2.5 text-sm font-semibold text-navy shadow-sm transition-all hover:bg-navy hover:text-white focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 sm:w-auto"
         >
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12.06 22h-.005A9.93 9.93 0 0 1 7 20.633L3 22l1.396-3.832A9.93 9.93 0 0 1 2 12.06C2 6.555 6.555 2 12.06 2c2.667 0 5.176 1.04 7.063 2.927A9.93 9.93 0 0 1 22 12.06c0 5.505-4.555 9.94-9.94 9.94z" />
-        </svg>
-        Receba uma orientação
-      </a>
+          Solicitar orientação
+        </a>
+      </div>
+    </div>
+  );
+}
+
+function CtaDuvidasBlock() {
+  return (
+    <div className="mt-12 border-t border-border pt-10">
+      <h3 className="text-xl font-semibold text-navy">Envie as suas dúvidas</h3>
+      <p className="mt-1 text-sm text-muted-foreground">
+        Receba orientações iniciais e entenda o que fazer no seu caso.
+      </p>
+      <div className="mt-4">
+        <textarea
+          readOnly
+          placeholder="Descreva o que aconteceu e o que você gostaria de saber..."
+          className="w-full resize-none rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-navy/30"
+          rows={4}
+        />
+      </div>
+      <div className="mt-4 flex justify-end">
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-navy bg-white px-5 py-2.5 text-sm font-semibold text-navy shadow-sm transition-all hover:bg-navy hover:text-white focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 sm:w-auto"
+        >
+          Solicitar orientação
+        </a>
+      </div>
     </div>
   );
 }
@@ -93,7 +154,7 @@ function AcidenteDeTrabalhoPage() {
         />
 
         <article className="mx-auto max-w-3xl px-6 py-16 lg:px-10">
-          <div className="mb-10 flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-border pb-6 text-sm text-muted-foreground">
+          <div className="mb-6 flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-border pb-6 text-sm text-muted-foreground">
             <span className="inline-flex items-center gap-2">
               <Calendar size={16} className="text-gold" />
               Publicado em {dataFormatada}
@@ -102,6 +163,10 @@ function AcidenteDeTrabalhoPage() {
               <User size={16} className="text-gold" />
               {AUTHOR}
             </span>
+          </div>
+
+          <div className="mb-8">
+            <CtaButton />
           </div>
 
           <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-navy prose-p:text-foreground/85 prose-p:leading-relaxed prose-strong:text-navy prose-li:text-foreground/85 prose-a:text-gold">
@@ -152,7 +217,7 @@ function AcidenteDeTrabalhoPage() {
               estresse ocupacional, entre outros.
             </p>
 
-            <WhatsAppButton />
+            <CtaCallout />
 
             <h2>Quais direitos o trabalhador pode ter?</h2>
             <p>
@@ -222,7 +287,7 @@ function AcidenteDeTrabalhoPage() {
             </p>
           </div>
 
-          <WhatsAppButton />
+          <CtaDuvidasBlock />
 
           <div className="mt-12 flex justify-center border-t border-border pt-8">
             <Link
