@@ -125,9 +125,10 @@ function NoticiasPage() {
 
         <section className="bg-background py-20">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
+            <FeaturedArticleCard />
             {articles.length === 0 ? (
               <p className="text-center text-muted-foreground">
-                Nenhum artigo publicado ainda.
+                Nenhuma notícia publicada ainda.
               </p>
             ) : (
               <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
