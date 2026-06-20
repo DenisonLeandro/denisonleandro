@@ -65,7 +65,7 @@ function FeaturedArticleCard() {
   );
 }
 
-export const Route = createFileRoute("/noticias")({
+export const Route = createFileRoute("/noticias/")({
   head: () => ({
     meta: [
       { title: "Notícias | Denison Leandro e Advogados Associados" },

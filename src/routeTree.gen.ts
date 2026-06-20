@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProfissionaisRouteImport } from './routes/profissionais'
-import { Route as NoticiasRouteImport } from './routes/noticias'
 import { Route as EscritorioRouteImport } from './routes/escritorio'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -18,6 +17,7 @@ import { Route as AreasDeAtuacaoRouteImport } from './routes/areas-de-atuacao'
 import { Route as AcidenteDeTrabalhoRouteImport } from './routes/acidente-de-trabalho'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as NoticiasIndexRouteImport } from './routes/noticias.index'
 import { Route as NoticiasSlugRouteImport } from './routes/noticias.$slug'
 import { Route as EquipeRenataHenriqueLeandroRouteImport } from './routes/equipe.renata-henrique-leandro'
 import { Route as EquipeMariaInesGomesDaSilvaRouteImport } from './routes/equipe.maria-ines-gomes-da-silva'
@@ -40,11 +40,6 @@ import { Route as AuthenticatedAdminArtigosRouteImport } from './routes/_authent
 const ProfissionaisRoute = ProfissionaisRouteImport.update({
   id: '/profissionais',
   path: '/profissionais',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NoticiasRoute = NoticiasRouteImport.update({
-  id: '/noticias',
-  path: '/noticias',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EscritorioRoute = EscritorioRouteImport.update({
@@ -81,10 +76,15 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NoticiasIndexRoute = NoticiasIndexRouteImport.update({
+  id: '/noticias/',
+  path: '/noticias/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NoticiasSlugRoute = NoticiasSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => NoticiasRoute,
+  id: '/noticias/$slug',
+  path: '/noticias/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EquipeRenataHenriqueLeandroRoute =
   EquipeRenataHenriqueLeandroRouteImport.update({
@@ -188,7 +188,6 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
-  '/noticias': typeof NoticiasRouteWithChildren
   '/profissionais': typeof ProfissionaisRoute
   '/areas/bancario': typeof AreasBancarioRoute
   '/areas/consumidor': typeof AreasConsumidorRoute
@@ -207,6 +206,7 @@ export interface FileRoutesByFullPath {
   '/equipe/maria-ines-gomes-da-silva': typeof EquipeMariaInesGomesDaSilvaRoute
   '/equipe/renata-henrique-leandro': typeof EquipeRenataHenriqueLeandroRoute
   '/noticias/$slug': typeof NoticiasSlugRoute
+  '/noticias/': typeof NoticiasIndexRoute
   '/admin/artigos': typeof AuthenticatedAdminArtigosRoute
 }
 export interface FileRoutesByTo {
@@ -216,7 +216,6 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
-  '/noticias': typeof NoticiasRouteWithChildren
   '/profissionais': typeof ProfissionaisRoute
   '/areas/bancario': typeof AreasBancarioRoute
   '/areas/consumidor': typeof AreasConsumidorRoute
@@ -235,6 +234,7 @@ export interface FileRoutesByTo {
   '/equipe/maria-ines-gomes-da-silva': typeof EquipeMariaInesGomesDaSilvaRoute
   '/equipe/renata-henrique-leandro': typeof EquipeRenataHenriqueLeandroRoute
   '/noticias/$slug': typeof NoticiasSlugRoute
+  '/noticias': typeof NoticiasIndexRoute
   '/admin/artigos': typeof AuthenticatedAdminArtigosRoute
 }
 export interface FileRoutesById {
@@ -246,7 +246,6 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
-  '/noticias': typeof NoticiasRouteWithChildren
   '/profissionais': typeof ProfissionaisRoute
   '/areas/bancario': typeof AreasBancarioRoute
   '/areas/consumidor': typeof AreasConsumidorRoute
@@ -265,6 +264,7 @@ export interface FileRoutesById {
   '/equipe/maria-ines-gomes-da-silva': typeof EquipeMariaInesGomesDaSilvaRoute
   '/equipe/renata-henrique-leandro': typeof EquipeRenataHenriqueLeandroRoute
   '/noticias/$slug': typeof NoticiasSlugRoute
+  '/noticias/': typeof NoticiasIndexRoute
   '/_authenticated/admin/artigos': typeof AuthenticatedAdminArtigosRoute
 }
 export interface FileRouteTypes {
@@ -276,7 +276,6 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contato'
     | '/escritorio'
-    | '/noticias'
     | '/profissionais'
     | '/areas/bancario'
     | '/areas/consumidor'
@@ -295,6 +294,7 @@ export interface FileRouteTypes {
     | '/equipe/maria-ines-gomes-da-silva'
     | '/equipe/renata-henrique-leandro'
     | '/noticias/$slug'
+    | '/noticias/'
     | '/admin/artigos'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -304,7 +304,6 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contato'
     | '/escritorio'
-    | '/noticias'
     | '/profissionais'
     | '/areas/bancario'
     | '/areas/consumidor'
@@ -323,6 +322,7 @@ export interface FileRouteTypes {
     | '/equipe/maria-ines-gomes-da-silva'
     | '/equipe/renata-henrique-leandro'
     | '/noticias/$slug'
+    | '/noticias'
     | '/admin/artigos'
   id:
     | '__root__'
@@ -333,7 +333,6 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contato'
     | '/escritorio'
-    | '/noticias'
     | '/profissionais'
     | '/areas/bancario'
     | '/areas/consumidor'
@@ -352,6 +351,7 @@ export interface FileRouteTypes {
     | '/equipe/maria-ines-gomes-da-silva'
     | '/equipe/renata-henrique-leandro'
     | '/noticias/$slug'
+    | '/noticias/'
     | '/_authenticated/admin/artigos'
   fileRoutesById: FileRoutesById
 }
@@ -363,7 +363,6 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ContatoRoute: typeof ContatoRoute
   EscritorioRoute: typeof EscritorioRoute
-  NoticiasRoute: typeof NoticiasRouteWithChildren
   ProfissionaisRoute: typeof ProfissionaisRoute
   AreasBancarioRoute: typeof AreasBancarioRoute
   AreasConsumidorRoute: typeof AreasConsumidorRoute
@@ -381,6 +380,8 @@ export interface RootRouteChildren {
   EquipeMarcioBarbosaDaSilvaRoute: typeof EquipeMarcioBarbosaDaSilvaRoute
   EquipeMariaInesGomesDaSilvaRoute: typeof EquipeMariaInesGomesDaSilvaRoute
   EquipeRenataHenriqueLeandroRoute: typeof EquipeRenataHenriqueLeandroRoute
+  NoticiasSlugRoute: typeof NoticiasSlugRoute
+  NoticiasIndexRoute: typeof NoticiasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -390,13 +391,6 @@ declare module '@tanstack/react-router' {
       path: '/profissionais'
       fullPath: '/profissionais'
       preLoaderRoute: typeof ProfissionaisRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/noticias': {
-      id: '/noticias'
-      path: '/noticias'
-      fullPath: '/noticias'
-      preLoaderRoute: typeof NoticiasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/escritorio': {
@@ -448,12 +442,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/noticias/': {
+      id: '/noticias/'
+      path: '/noticias'
+      fullPath: '/noticias/'
+      preLoaderRoute: typeof NoticiasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/noticias/$slug': {
       id: '/noticias/$slug'
-      path: '/$slug'
+      path: '/noticias/$slug'
       fullPath: '/noticias/$slug'
       preLoaderRoute: typeof NoticiasSlugRouteImport
-      parentRoute: typeof NoticiasRoute
+      parentRoute: typeof rootRouteImport
     }
     '/equipe/renata-henrique-leandro': {
       id: '/equipe/renata-henrique-leandro'
@@ -588,18 +589,6 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
-interface NoticiasRouteChildren {
-  NoticiasSlugRoute: typeof NoticiasSlugRoute
-}
-
-const NoticiasRouteChildren: NoticiasRouteChildren = {
-  NoticiasSlugRoute: NoticiasSlugRoute,
-}
-
-const NoticiasRouteWithChildren = NoticiasRoute._addFileChildren(
-  NoticiasRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
@@ -608,7 +597,6 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ContatoRoute: ContatoRoute,
   EscritorioRoute: EscritorioRoute,
-  NoticiasRoute: NoticiasRouteWithChildren,
   ProfissionaisRoute: ProfissionaisRoute,
   AreasBancarioRoute: AreasBancarioRoute,
   AreasConsumidorRoute: AreasConsumidorRoute,
@@ -627,6 +615,8 @@ const rootRouteChildren: RootRouteChildren = {
   EquipeMarcioBarbosaDaSilvaRoute: EquipeMarcioBarbosaDaSilvaRoute,
   EquipeMariaInesGomesDaSilvaRoute: EquipeMariaInesGomesDaSilvaRoute,
   EquipeRenataHenriqueLeandroRoute: EquipeRenataHenriqueLeandroRoute,
+  NoticiasSlugRoute: NoticiasSlugRoute,
+  NoticiasIndexRoute: NoticiasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
