@@ -1,38 +1,29 @@
-## Plano: Adicionar card de artigo fixo em /noticias
+## Diagnóstico
 
-### Objetivo
-Inserir um card de destaque na página `/noticias` apontando para o artigo fixo `/acidente-de-trabalho`, sem criar nova aba no menu nem nova rota.
+Na página `/noticias`, enquanto a busca de notícias no Supabase não termina (ou se demora/falha), é renderizado APENAS o spinner "Carregando artigos...". O card de destaque foi colocado somente no bloco principal (após o loading), então nunca aparece se a query ficar pendente ou falhar silenciosamente.
 
-### Alteração única
-- **Arquivo:** `src/routes/noticias.tsx`
+Screenshot confirma: a página mostra apenas o spinner, sem o card.
 
-### O que será feito
-1. Adicionar um card estático de "Artigo em destaque" logo acima da lista dinâmica de notícias do Supabase.
-2. O card seguirá o mesmo padrão visual dos cards existentes (bordas arredondadas, sombra, hover, tipografia).
-3. Conteúdo do card:
-   - **Título:** Acidente de trabalho: quais são os direitos do trabalhador?
-   - **Resumo:** Entenda os principais direitos de quem sofreu acidente de trabalho, quando procurar orientação e quais documentos podem ajudar na análise do caso.
-   - **Categoria:** Direito do Trabalho
-   - **Botão:** Ler artigo → link para `/acidente-de-trabalho`
-4. O card ficará visível mesmo que a lista do Supabase esteja vazia.
+## Correção proposta
 
-### O que NÃO será alterado
-- Navbar / menu superior (a aba "Notícias" permanece única)
+**Arquivo único alterado:** `src/routes/noticias.tsx`
+
+1. Renderizar o `<FeaturedArticleCard />` SEMPRE, independentemente do estado de loading do Supabase.
+2. Manter o spinner "Carregando artigos..." apenas para a área da listagem dinâmica (abaixo do card), não para a página inteira.
+3. Unificar o retorno do componente: remover o `return` antecipado do loading. A página passa a sempre renderizar:
+   - PageHeader
+   - Card de destaque (acidente de trabalho)
+   - Abaixo: spinner enquanto carrega, depois lista de notícias, ou mensagem "Nenhuma notícia publicada ainda"
+
+## O que NÃO muda
+
+- Navbar, menu, Footer, layout
 - Página `/acidente-de-trabalho`
-- Rota `/noticias/:slug`
-- Busca/listagem dinâmica do Supabase
-- Home, Footer, layout global, Google Ads, tracking, edge functions
+- Query do Supabase (mesma chamada, mesmo comportamento)
+- Rota `/noticias/$slug`
+- Nenhuma nova rota, nenhuma nova aba
+- Tracking, Google Ads, edge functions
 
-### Resultado esperado
-O visitante clica em "Notícias" no menu e vê, no topo, o card destacado do artigo sobre acidente de trabalho, com link claro para a página do artigo.
+## Resultado
 
----
-
-### Relatório pós-implementação
-Após aprovação, serão entregues:
-- Arquivo alterado e local exato da inserção
-- Confirmação de que nenhuma nova aba/nova rota foi criada
-- Confirmação de que o link aponta para `/acidente-de-trabalho`
-- Confirmação de que `/acidente-de-trabalho` não foi alterado
-- Confirmação de que a listagem dinâmica de notícias não foi quebrada
-- Instrução para testar no preview antes de publicar
+O visitante entra em `/noticias` e vê imediatamente o card "Artigo em destaque → Acidente de trabalho", mesmo enquanto as notícias do Supabase carregam.
