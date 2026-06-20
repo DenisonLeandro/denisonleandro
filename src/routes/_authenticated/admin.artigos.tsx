@@ -67,6 +67,43 @@ function AdminArtigosPage() {
   const [editing, setEditing] = useState<Article | null>(null);
   const [form, setForm] = useState<FormState>(emptyForm);
   const [slugTouched, setSlugTouched] = useState(false);
+  const [uploading, setUploading] = useState(false);
+
+  const ALLOWED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+  const MAX_BYTES = 5 * 1024 * 1024;
+
+  async function handleCoverUpload(file: File) {
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      setError("Formato inválido. Envie uma imagem JPG, PNG ou WEBP.");
+      return;
+    }
+    if (file.size > MAX_BYTES) {
+      setError("Imagem muito grande. O limite é 5 MB.");
+      return;
+    }
+    setUploading(true);
+    setError(null);
+    try {
+      const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
+      const baseName = file.name.replace(/\.[^.]+$/, "");
+      const safeName = slugify(baseName) || "imagem";
+      const path = `articles/${Date.now()}-${safeName}.${ext}`;
+      const { error: upErr } = await supabase.storage
+        .from("article-covers")
+        .upload(path, file, { upsert: false, contentType: file.type });
+      if (upErr) throw upErr;
+      const { data: pub } = supabase.storage
+        .from("article-covers")
+        .getPublicUrl(path);
+      setForm((f) => ({ ...f, cover_image_url: pub.publicUrl }));
+    } catch (err: any) {
+      console.error("Erro no upload:", err);
+      setError(err?.message ?? "Erro ao enviar imagem.");
+    } finally {
+      setUploading(false);
+    }
+  }
+
 
   async function handleSignOut() {
     await supabase.auth.signOut();
