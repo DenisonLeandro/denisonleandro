@@ -5,7 +5,19 @@ import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { CtaBanner } from "@/components/site/CtaBanner";
 import { PageHeader } from "@/components/site/PageHeader";
-import { supabase, Article } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
+
+interface Article {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string | null;
+  category: string | null;
+  cover_image_url: string | null;
+  published_at: string;
+  content: string;
+  status: string;
+}
 import featuredImage from "@/assets/featured-acidente-de-trabalho.jpg";
 
 function FeaturedArticleCard() {
