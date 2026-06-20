@@ -1,65 +1,43 @@
-## Implementação aprovada — Artigo `/acidente-de-trabalho`
+# Onde está o artigo e como visualizá-lo
 
-### Arquivo a criar (único)
-`src/routes/acidente-de-trabalho.tsx`
+O artigo **não aparece na home** porque ele é uma página independente com URL própria (foi exatamente isso que você pediu). Ele só aparece quando você acessa a URL dele diretamente.
 
-### O que a rota faz
-- `createFileRoute("/acidente-de-trabalho")` → URL pública: `https://denisonleandro.adv.br/acidente-de-trabalho`
-- Reutiliza componentes existentes (sem alterá-los): `Navbar`, `PageHeader`, `Footer`.
-- Não importa nem chama `supabase`, CTA Kit, edge functions, tracking ou qualquer integração.
+## Passo a passo para ver no PREVIEW (antes de publicar)
 
-### SEO (`head()` da rota)
-- `title`: "Acidente de trabalho: direitos do trabalhador" (49 chars)
-- `meta description`: "Sofreu acidente de trabalho? Entenda seus principais direitos, quando procurar orientação e como agir para proteger sua saúde e seu emprego." (140 chars)
-- `og:title`, `og:description`, `og:type=article`, `og:url`
-- `twitter:card`, `twitter:title`, `twitter:description`
-- `<link rel="canonical">` apontando para `https://denisonleandro.adv.br/acidente-de-trabalho`
-- JSON-LD `Article` (schema.org) com headline, datas, autor e publisher.
+1. No preview ao lado, olhe a barra de endereço do preview (logo acima do site renderizado).
+2. No final da URL do preview, **adicione** `/acidente-de-trabalho`.
+3. A URL final fica assim:
 
-### Estrutura visual
-1. `<Navbar />`
-2. `<PageHeader>` com:
-   - eyebrow: "Artigo jurídico"
-   - title (H1): "Acidente de trabalho: quais são os direitos do trabalhador?"
-   - subtítulo descritivo
-3. Bloco de metadados (data publicação + autor "Denison Leandro Advogados Associados")
-4. Corpo centralizado (`max-w-3xl`) com classes `prose` para boa leitura, contendo:
-   - Introdução
-   - H2 "O que é considerado acidente de trabalho?"
-   - H2 "Exemplos comuns" (lista)
-   - H2 "Acidente típico, acidente de trajeto e doença ocupacional"
-   - **Botão WhatsApp verde (centralizado)**
-   - H2 "Quais direitos o trabalhador pode ter?" (inclui estabilidade 12 meses, FGTS, CAT, INSS)
-   - H2 "Por que os documentos são tão importantes" (CAT, atestados, exames, receitas, comprovantes)
-   - H2 "Quando procurar orientação jurídica?"
-   - H2 "Atenção" (alerta de análise individual, sem promessa de resultado)
-5. **Botão WhatsApp verde (centralizado) ao final**
-6. Link "Voltar ao início" (`<Link to="/" />`)
-7. `<Footer />`
+   ```
+   https://id-preview--ceb23ee7-3a69-4717-9d43-5d07886a2df1.lovable.app/acidente-de-trabalho
+   ```
 
-### Botão WhatsApp (regras obrigatórias)
-- `href` **exato**: `https://wa.me/5548988487889?text=Ol%C3%A1%2C%20vim%20por%20um%20artigo%20no%20site%20Denison%20Leandro%20e%20gostaria%20de%20receber%20uma%20orienta%C3%A7%C3%A3o%20r%C3%A1pida.`
-- `target="_blank"` + `rel="noopener noreferrer"`
-- Texto: **"Receba uma orientação"**
-- Estilo: fundo verde `#25D366`, branco, hover mais escuro, sombra, responsivo, centralizado, ícone SVG do WhatsApp inline.
-- Sem chamada a API, sem Supabase, sem dependência do CTA Kit.
+4. Pressione Enter. O artigo deve carregar com:
+   - Navbar no topo
+   - Título "Acidente de trabalho: direitos do trabalhador"
+   - Texto do artigo
+   - 2 botões verdes do WhatsApp
+   - Link "Voltar ao início"
+   - Footer
 
-### Tom do conteúdo
-Informativo, humano, acessível. Sem "causa ganha", sem promessa de resultado, sem sensacionalismo. Termina com alerta de análise individual de cada caso.
+Se preferir, posso abrir essa rota no preview para você automaticamente (basta aprovar este plano).
 
-### Arquivos alterados além do arquivo novo
-- **Nenhum manual.** Apenas `src/routeTree.gen.ts` é regenerado automaticamente pelo plugin Vite do TanStack Router (não é edição manual, é geração automática a cada build/dev).
+## Por que não aparece na home
 
-### Riscos
-Praticamente nulos: apenas adiciona uma rota nova; não toca Supabase, `/noticias`, home, layout, `__root.tsx`, tracking, Google Ads, domínio ou qualquer componente compartilhado (apenas os importa).
+A home (`/`) não foi alterada — foi uma regra obrigatória sua ("Não alterar layout/menu/home"). Por isso não existe link visível para o artigo ainda. O artigo só é acessível digitando a URL.
 
-### Como testar (depois que eu implementar em build mode)
-1. Abrir o preview na URL `/acidente-de-trabalho`.
-2. Verificar layout (desktop e mobile), botão WhatsApp abrindo na conversa correta com a mensagem pré-preenchida.
-3. Conferir título da aba do navegador e meta description (DevTools → Elements → `<head>`).
-4. Conferir link "Voltar ao início" navegando para `/`.
+## Para ver no SITE PUBLICADO (denisonleandro.adv.br)
 
-Só publicar após sua aprovação visual no preview.
+A página **ainda não está no ar**. Você pediu para eu não publicar automaticamente. Para o artigo ficar disponível em `https://denisonleandro.adv.br/acidente-de-trabalho` é necessário:
 
----
-Aprove este plano para eu entrar em build mode e criar o arquivo.
+1. Validar a página no preview (passo acima).
+2. Clicar em **Publish** (canto superior direito do editor Lovable) → **Update**.
+3. Aguardar ~1 minuto.
+4. Acessar `https://denisonleandro.adv.br/acidente-de-trabalho`.
+
+## O que farei se você aprovar este plano
+
+- Abrir a rota `/acidente-de-trabalho` no preview automaticamente, para você ver o artigo agora.
+- Não vou publicar, não vou alterar nenhum arquivo, não vou mexer em layout, menu, Supabase ou tracking.
+
+Se ao abrir o preview a página aparecer em branco ou der erro, eu investigo e te aviso antes de qualquer correção.
