@@ -49,22 +49,22 @@ export function MediaMentions() {
           imprensa nacional, regional e jurídica.
         </p>
 
-        <ul className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6 sm:gap-6">
+        <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6 sm:gap-4">
           {MEDIA_ITEMS.map((item) => (
             <li key={item.name}>
               <a
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex h-full flex-col items-center justify-center rounded-md border border-border bg-background p-4 transition-colors hover:border-primary/30 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="group flex h-full flex-col items-center justify-center rounded-md border border-border bg-background p-3 transition-colors hover:border-primary/30 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-4"
               >
                 <img
                   src={item.src}
                   alt={item.name}
                   loading="lazy"
-                  className="h-8 w-auto object-contain opacity-90 transition-opacity group-hover:opacity-100 sm:h-10"
+                  className="h-14 w-auto max-w-full object-contain opacity-90 transition-opacity group-hover:opacity-100 sm:h-16"
                 />
-                <span className="mt-3 text-xs font-medium text-primary">
+                <span className="mt-2 text-[10px] leading-tight text-muted-foreground transition-colors group-hover:text-foreground sm:text-xs">
                   Ver publicação
                 </span>
               </a>
