@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, Calendar, Loader2, MessageCircle } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
+import { MediaMentions } from "@/components/site/MediaMentions";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Article {
@@ -336,6 +337,9 @@ function NoticiaDetail() {
               )}
           </>
         )}
+
+        {/* Bloco institucional — menções jornalísticas */}
+        <MediaMentions />
 
         {/* CTA 3 — final */}
         <CtaDuvidasBlock />
