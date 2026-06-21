@@ -1,10 +1,34 @@
-const MEDIA_LOGOS = [
-  { name: "Valor", src: "/media-logos/valor.png" },
-  { name: "Folha de S.Paulo", src: "/media-logos/folha.png" },
-  { name: "G1", src: "/media-logos/g1.png" },
-  { name: "ConJur", src: "/media-logos/conjur.png" },
-  { name: "Estado de Minas", src: "/media-logos/estado-de-minas.png" },
-  { name: "O Tempo", src: "/media-logos/o-tempo.png" },
+const MEDIA_ITEMS = [
+  {
+    name: "Valor Econômico",
+    src: "/media-logos/valor.png",
+    url: "https://valor.globo.com/legislacao/noticia/2023/10/14/tst-determina-pagamento-de-r-12-milhao-de-horas-extras-a-vendedor.ghtml",
+  },
+  {
+    name: "Folha de S.Paulo",
+    src: "/media-logos/folha.png",
+    url: "https://www1.folha.uol.com.br/mercado/2023/10/justica-manda-souza-cruz-pagar-r-12-milhao-de-horas-extras-a-vendedor.shtml",
+  },
+  {
+    name: "G1",
+    src: "/media-logos/g1.png",
+    url: "https://g1.globo.com/trabalho-e-carreira/noticia/2023/10/20/vendedor-externo-ganha-r-1-milhao-por-horas-extras-apos-provar-na-justica-que-empresa-controlava-sua-jornada-entenda.ghtml",
+  },
+  {
+    name: "ConJur",
+    src: "/media-logos/conjur.png",
+    url: "https://www.conjur.com.br/2023-nov-06/possibilidade-controle-jornada-obriga-pagar-hora-extra/",
+  },
+  {
+    name: "Estado de Minas",
+    src: "/media-logos/estado-de-minas.png",
+    url: "https://www.em.com.br/app/noticia/economia/2023/10/17/internas_economia,1577984/justica-condena-souza-cruz-pagar-r-1-2-milhao-de-horas-extras-a-vendedor.shtml",
+  },
+  {
+    name: "O Tempo",
+    src: "/media-logos/o-tempo.png",
+    url: "https://www.otempo.com.br/economia/souza-cruz-e-condenada-a-indenizar-vendedor-em-r-1-2-milhao-por-horas-extra-1.3256229",
+  },
 ] as const;
 
 export function MediaMentions() {
@@ -25,18 +49,25 @@ export function MediaMentions() {
           imprensa nacional, regional e jurídica.
         </p>
 
-        <ul className="mt-8 grid grid-cols-3 items-center gap-6 sm:gap-8 md:grid-cols-6">
-          {MEDIA_LOGOS.map((logo) => (
-            <li
-              key={logo.name}
-              className="flex items-center justify-center"
-            >
-              <img
-                src={logo.src}
-                alt={logo.name}
-                loading="lazy"
-                className="h-8 w-auto object-contain opacity-90 sm:h-10"
-              />
+        <ul className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6 sm:gap-6">
+          {MEDIA_ITEMS.map((item) => (
+            <li key={item.name}>
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex h-full flex-col items-center justify-center rounded-md border border-border bg-background p-4 transition-colors hover:border-primary/30 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <img
+                  src={item.src}
+                  alt={item.name}
+                  loading="lazy"
+                  className="h-8 w-auto object-contain opacity-90 transition-opacity group-hover:opacity-100 sm:h-10"
+                />
+                <span className="mt-3 text-xs font-medium text-primary">
+                  Ver publicação
+                </span>
+              </a>
             </li>
           ))}
         </ul>
