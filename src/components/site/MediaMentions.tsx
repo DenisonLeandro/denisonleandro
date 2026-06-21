@@ -56,15 +56,18 @@ export function MediaMentions() {
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex h-full flex-col items-center justify-center rounded-md border border-border bg-background p-3 transition-colors hover:border-primary/30 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-4"
+                className="group flex h-full min-h-[150px] flex-col items-center justify-center gap-2 rounded-md border border-border bg-background p-4 transition-colors hover:border-primary/30 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:min-h-[180px] sm:p-5"
               >
                 <img
                   src={item.src}
                   alt={item.name}
                   loading="lazy"
-                  className="h-14 w-auto max-w-full object-contain opacity-90 transition-opacity group-hover:opacity-100 sm:h-16"
+                  className="h-24 w-full object-contain opacity-90 transition-opacity group-hover:opacity-100 sm:h-28 lg:h-32"
                 />
-                <span className="mt-2 text-[10px] leading-tight text-muted-foreground transition-colors group-hover:text-foreground sm:text-xs">
+                <span className="text-sm font-semibold text-foreground sm:text-base">
+                  {item.name}
+                </span>
+                <span className="text-[10px] leading-tight text-muted-foreground transition-colors group-hover:text-foreground sm:text-xs">
                   Ver publicação
                 </span>
               </a>
