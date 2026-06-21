@@ -56,15 +56,9 @@ export function MediaMentions() {
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex h-full min-h-[150px] flex-col items-center justify-center gap-2 rounded-md border border-border bg-background p-4 transition-colors hover:border-primary/30 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:min-h-[180px] sm:p-5"
+                className="group flex h-full min-h-[120px] flex-col items-center justify-center gap-2 rounded-md border border-border bg-background p-4 text-center transition-colors hover:border-primary/30 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:min-h-[140px] sm:p-5"
               >
-                <img
-                  src={item.src}
-                  alt={item.name}
-                  loading="lazy"
-                  className="h-24 w-full object-contain opacity-90 transition-opacity group-hover:opacity-100 sm:h-28 lg:h-32"
-                />
-                <span className="text-sm font-semibold text-foreground sm:text-base">
+                <span className="text-base font-semibold leading-tight text-foreground sm:text-lg">
                   {item.name}
                 </span>
                 <span className="text-[10px] leading-tight text-muted-foreground transition-colors group-hover:text-foreground sm:text-xs">
