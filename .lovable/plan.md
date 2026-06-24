@@ -1,32 +1,22 @@
 ## Objetivo
 
-Usar as 6 logos enviadas (Valor, Folha, G1, ConJur, Estado de Minas e O Tempo) dentro dos cards do bloco "Denison Leandro Advogados na mídia", junto com o nome do veículo e o link da matéria.
-
-## Mapeamento (zip → veículo)
-
-- `WhatsApp ... 08.25.50.jpeg` → **O Tempo**
-- `WhatsApp ... (1).jpeg` → **Estado de Minas**
-- `WhatsApp ... (2).jpeg` → **ConJur**
-- `WhatsApp ... (3).jpeg` → **G1**
-- `WhatsApp ... (4).jpeg` → **Folha de S.Paulo**
-- `WhatsApp ... (5).jpeg` → **Valor Econômico**
+Adicionar uma prévia de "Notícias" na home, logo abaixo de `PracticeAreas` (Área de atuação) e antes de `About`.
 
 ## Passos
 
-1. Subir os 6 arquivos para o CDN com `lovable-assets create`, gerando 6 ponteiros em `src/assets/media-logos/*.jpg.asset.json` (valor, folha, g1, conjur, estado-de-minas, o-tempo).
-2. Editar `src/components/site/MediaMentions.tsx`:
-   - Importar os 6 ponteiros `.asset.json` e adicionar `logo: <url>` em cada item de `MEDIA_ITEMS`.
-   - Dentro de cada card, renderizar `<img>` com a logo (altura ~h-12 sm:h-14, `object-contain`, `opacity-90` + `group-hover:opacity-100`), seguido do nome do veículo menor (`text-xs sm:text-sm`) e "Ver publicação" discreto.
-   - Card mantém `min-h-[140px]`, `target="_blank"`, `rel="noopener noreferrer"`.
-3. Não mexer em `public/media-logos/` (mantido como está, mas não mais referenciado).
-4. Rodar `bunx tsc --noEmit` para validar.
+1. Criar `src/components/site/NoticiasPreview.tsx`:
+   - Busca client-side via `supabase.from("articles").select(...).eq("status","published").order("published_at",{ascending:false}).limit(3)`.
+   - Header com eyebrow "Conteúdo jurídico", título "Notícias e artigos" e descrição curta.
+   - Grid de até 3 cards (estilo equivalente ao de `/noticias`: cover, categoria, título, data, "Leia mais"), usando `<Link to="/noticias/$slug" params={{ slug }}>`.
+   - Estados: loading (spinner) e vazio (componente não renderiza nada — `return null`) para não deixar bloco quebrado na home.
+   - Botão "Ver todas as notícias" → `<Link to="/noticias">`.
+   - Sem alterar listagem `/noticias`, artigo `/noticias/$slug`, `/acidente-de-trabalho`, banco, RLS, edge functions, admin, CTAs, etc.
 
-## Preservar
-
-Sem alterações em: banco, migrations, RLS, `/admin/*`, `/noticias`, `/acidente-de-trabalho`, CTAs da Ana, WhatsApp, Google Ads, tracking, edge functions, Navbar, Footer, home, `/auth`. Apenas `MediaMentions.tsx` + novos `.asset.json`.
+2. Editar `src/routes/index.tsx`:
+   - Importar `NoticiasPreview` e renderizar `<NoticiasPreview />` entre `<PracticeAreas />` e `<About />`.
 
 ## Validação
 
-A) `MediaMentions.tsx` alterado e 6 ponteiros criados; B) 6 cards com logo + nome + "Ver publicação"; C) cada card abre a matéria correta em nova aba; D) bloco continua antes do CTA final da Ana; E) layout responsivo (mobile/desktop); F) typecheck sem erro.
+A) Home mostra bloco "Notícias e artigos" logo abaixo de Área de atuação; B) até 3 cards com link para `/noticias/$slug`; C) botão "Ver todas" leva a `/noticias`; D) se não houver artigos publicados, o bloco some sem quebrar layout; E) `/noticias`, `/noticias/{slug}` e `/acidente-de-trabalho` seguem funcionando; F) typecheck/build ok.
 
 Não publicar automaticamente.
