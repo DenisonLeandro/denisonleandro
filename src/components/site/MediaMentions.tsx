@@ -1,32 +1,39 @@
+import valorLogo from "@/assets/media-logos/valor.jpg.asset.json";
+import folhaLogo from "@/assets/media-logos/folha.jpg.asset.json";
+import g1Logo from "@/assets/media-logos/g1.jpg.asset.json";
+import conjurLogo from "@/assets/media-logos/conjur.jpg.asset.json";
+import estadoMinasLogo from "@/assets/media-logos/estado-de-minas.jpg.asset.json";
+import oTempoLogo from "@/assets/media-logos/o-tempo.jpg.asset.json";
+
 const MEDIA_ITEMS = [
   {
     name: "Valor Econômico",
-    src: "/media-logos/valor.png",
+    logo: valorLogo.url,
     url: "https://valor.globo.com/legislacao/noticia/2023/10/14/tst-determina-pagamento-de-r-12-milhao-de-horas-extras-a-vendedor.ghtml",
   },
   {
     name: "Folha de S.Paulo",
-    src: "/media-logos/folha.png",
+    logo: folhaLogo.url,
     url: "https://www1.folha.uol.com.br/mercado/2023/10/justica-manda-souza-cruz-pagar-r-12-milhao-de-horas-extras-a-vendedor.shtml",
   },
   {
     name: "G1",
-    src: "/media-logos/g1.png",
+    logo: g1Logo.url,
     url: "https://g1.globo.com/trabalho-e-carreira/noticia/2023/10/20/vendedor-externo-ganha-r-1-milhao-por-horas-extras-apos-provar-na-justica-que-empresa-controlava-sua-jornada-entenda.ghtml",
   },
   {
     name: "ConJur",
-    src: "/media-logos/conjur.png",
+    logo: conjurLogo.url,
     url: "https://www.conjur.com.br/2023-nov-06/possibilidade-controle-jornada-obriga-pagar-hora-extra/",
   },
   {
     name: "Estado de Minas",
-    src: "/media-logos/estado-de-minas.png",
+    logo: estadoMinasLogo.url,
     url: "https://www.em.com.br/app/noticia/economia/2023/10/17/internas_economia,1577984/justica-condena-souza-cruz-pagar-r-1-2-milhao-de-horas-extras-a-vendedor.shtml",
   },
   {
     name: "O Tempo",
-    src: "/media-logos/o-tempo.png",
+    logo: oTempoLogo.url,
     url: "https://www.otempo.com.br/economia/souza-cruz-e-condenada-a-indenizar-vendedor-em-r-1-2-milhao-por-horas-extra-1.3256229",
   },
 ] as const;
@@ -56,12 +63,16 @@ export function MediaMentions() {
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex h-full min-h-[120px] flex-col items-center justify-center gap-2 rounded-md border border-border bg-background p-4 text-center transition-colors hover:border-primary/30 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:min-h-[140px] sm:p-5"
+                aria-label={`Ver publicação em ${item.name}`}
+                className="group flex h-full min-h-[140px] flex-col items-center justify-center gap-3 rounded-md border border-border bg-background p-4 text-center transition-colors hover:border-primary/30 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:min-h-[160px] sm:p-5"
               >
-                <span className="text-base font-semibold leading-tight text-foreground sm:text-lg">
-                  {item.name}
-                </span>
-                <span className="text-[10px] leading-tight text-muted-foreground transition-colors group-hover:text-foreground sm:text-xs">
+                <img
+                  src={item.logo}
+                  alt={`Logo ${item.name}`}
+                  loading="lazy"
+                  className="h-12 w-full object-contain opacity-90 transition-opacity group-hover:opacity-100 sm:h-14"
+                />
+                <span className="text-xs font-medium leading-tight text-muted-foreground transition-colors group-hover:text-foreground sm:text-sm">
                   Ver publicação
                 </span>
               </a>
