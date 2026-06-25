@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { buildHead } from "@/lib/seo";
 import { useEffect, useState } from "react";
 import { ArrowRight, Calendar, Loader2, Star } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
@@ -66,21 +67,13 @@ function FeaturedArticleCard() {
 }
 
 export const Route = createFileRoute("/noticias/")({
-  head: () => ({
-    meta: [
-      { title: "Notícias | Denison Leandro e Advogados Associados" },
-      {
-        name: "description",
-        content:
-          "Artigos e novidades jurídicas sobre direito trabalhista, previdenciário, consumidor e mais, escritos pela equipe do escritório.",
-      },
-      { property: "og:title", content: "Notícias | Denison Leandro" },
-      {
-        property: "og:description",
-        content: "Acompanhe artigos e novidades do mundo jurídico.",
-      },
-    ],
-  }),
+  head: () =>
+    buildHead({
+      title: "Notícias e Artigos Jurídicos",
+      description:
+        "Artigos e análises sobre Direito Trabalhista, Previdenciário, do Consumidor e mais, produzidos pela equipe do Denison Leandro Advogados Associados.",
+      path: "/noticias",
+    }),
   component: NoticiasPage,
 });
 
