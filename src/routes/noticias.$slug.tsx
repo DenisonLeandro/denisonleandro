@@ -5,6 +5,7 @@ import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { MediaMentions } from "@/components/site/MediaMentions";
 import { supabase } from "@/integrations/supabase/client";
+import { buildHead } from "@/lib/seo";
 
 interface Article {
   id: string;
@@ -22,6 +23,33 @@ const WHATSAPP_URL =
   "https://wa.me/5548988487889?text=Ol%C3%A1%2C%20vim%20por%20um%20artigo%20no%20site%20Denison%20Leandro%20e%20gostaria%20de%20receber%20uma%20orienta%C3%A7%C3%A3o%20r%C3%A1pida.";
 
 export const Route = createFileRoute("/noticias/$slug")({
+  loader: async ({ params }) => {
+    try {
+      const { data } = await (supabase as any)
+        .from("articles")
+        .select("title, excerpt, cover_image_url")
+        .eq("slug", params.slug)
+        .eq("status", "published")
+        .maybeSingle();
+      return { article: data ?? null };
+    } catch {
+      return { article: null };
+    }
+  },
+  head: ({ params, loaderData }) => {
+    const a = loaderData?.article;
+    const title = a?.title ?? "Notícia";
+    const description =
+      a?.excerpt ??
+      "Artigo jurídico publicado pelo Denison Leandro Advogados Associados.";
+    return buildHead({
+      title,
+      description,
+      path: `/noticias/${params.slug}`,
+      type: "article",
+      image: a?.cover_image_url || undefined,
+    });
+  },
   component: NoticiaDetail,
 });
 
