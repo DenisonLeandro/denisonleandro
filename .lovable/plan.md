@@ -1,144 +1,42 @@
-## Objetivo
+# Auditoria de URLs antigas — Relatório
 
-Limpar a indexação do `denisonleandro.adv.br` para que apenas as rotas atuais do site novo apareçam no Google, e que qualquer URL herdada do WordPress hackeado retorne **410 Gone** (sinal explícito para o Google remover do índice), sem afetar o visual do site.
+Testei todas as URLs solicitadas com `User-Agent: Googlebot` direto no domínio oficial `https://denisonleandro.adv.br`. **O comportamento já está correto em todos os casos** — nenhuma URL antiga abre a home, e todas as páginas novas continuam respondendo 200.
 
-## 1. Rotas válidas atuais (única fonte de verdade)
+## Resultado
 
-Estas continuam indexáveis. Tudo fora desta lista deve cair em 404/410.
+| URL testada | Status HTTP | Ação tomada | Observação |
+|---|---|---|---|
+| `/wp-admin/` | **410** | Nenhuma | Já bloqueada (rota `wp-admin.$.ts`) |
+| `/wp-content/` | **410** | Nenhuma | Já bloqueada |
+| `/wp-includes/` | **410** | Nenhuma | Já bloqueada |
+| `/category/` | **410** | Nenhuma | Já bloqueada |
+| `/tag/` | **410** | Nenhuma | Já bloqueada |
+| `/author/` | **410** | Nenhuma | Já bloqueada |
+| `/feed/` | **410** | Nenhuma | Já bloqueada |
+| `/comments/` | **410** | Nenhuma | Já bloqueada |
+| `/xmlrpc.php` | **410** | Nenhuma | Já bloqueada (GET e POST) |
+| `/wp-json/` | **410** | Nenhuma | Já bloqueada |
+| `/1635-2/` | 307 → **404** | Nenhuma | Redirect só remove a barra final; resultado final é 404 real. Google trata como removida. |
+| `/noticias/` | 307 → **200** | Nenhuma | É página válida do site novo (lista de notícias); redirect apenas tira a barra final. |
+| `/teste-url-inexistente-123` | **404** | Nenhuma | 404 real para qualquer URL inexistente |
+| `/` | **200** | Nenhuma | Home funcionando |
+| `/escritorio` | **200** | Nenhuma | OK |
+| `/areas-de-atuacao` | **200** | Nenhuma | OK |
+| `/contato` | **200** | Nenhuma | OK |
 
-```
-/                                     (home)
-/escritorio
-/areas-de-atuacao
-/areas/trabalhista
-/areas/previdenciario
-/areas/consumidor
-/areas/familia
-/areas/contratos
-/areas/bancario
-/areas/mediacao
-/profissionais
-/equipe/denison-henrique-leandro
-/equipe/marcio-barbosa-da-silva
-/equipe/higor-henrique-leandro
-/equipe/joao-tadeu-leandro
-/equipe/renata-henrique-leandro
-/equipe/juan-albner-pereira-veloso
-/equipe/danielle-cristina-mateus-pereira
-/equipe/maria-ines-gomes-da-silva
-/equipe/leonardo-nascimento-de-aguiar
-/contato
-/noticias
-/noticias/{slug}            (dinâmico — apenas artigos publicados)
-/acidente-de-trabalho
-```
+## Conclusão
 
-Não indexáveis (já marcadas `noindex,nofollow`): `/auth`, `/admin`.
+- Todas as URLs típicas de WordPress retornam **410 Gone** com `X-Robots-Tag: noindex, nofollow` — sinal mais forte que 404 para o Google remover do índice.
+- URLs antigas tipo slug numérico do WP (ex.: `/1635-2/`) terminam em **404 real**, não abrem a home.
+- URLs inventadas retornam **404 real**.
+- Nenhuma URL antiga está sendo redirecionada para a home.
+- Nenhum 301 foi criado porque você não forneceu mapeamento de URL antiga → nova equivalente. Se tiver essa lista, posso adicionar 301s pontuais.
+- Nenhuma alteração de código é necessária. Nenhuma alteração visual.
 
-## 2. Bloquear/remover URLs herdadas do WordPress (410 Gone real)
+## Próximo passo no Search Console
 
-Vou criar **server routes** em `src/routes/api/legacy/` que respondem com **HTTP 410 Gone** + `X-Robots-Tag: noindex` + corpo HTML curto em PT-BR. 410 é mais forte que 404 — sinaliza ao Google que a URL foi removida permanentemente.
+Para acelerar a remoção dos links antigos:
+1. Search Console → **Remoções** → "Nova solicitação" → use os prefixos `/wp-admin/`, `/wp-content/`, `/category/`, `/tag/`, `/author/`, `/feed`, `/wp-json/`, `/xmlrpc.php`.
+2. Reenviar `https://denisonleandro.adv.br/sitemap.xml` em **Sitemaps**.
 
-Padrões cobertos (todos com splat `$` para pegar qualquer caminho/arquivo abaixo):
-
-- `/wp-admin/$`
-- `/wp-content/$`
-- `/wp-includes/$`
-- `/wp-json/$`
-- `/category/$`
-- `/tag/$`
-- `/author/$`
-- `/feed` e `/feed/$`
-- `/comments/$`
-- `/xmlrpc.php`
-
-Arquivos:
-
-```
-src/routes/wp-admin.$.ts
-src/routes/wp-content.$.ts
-src/routes/wp-includes.$.ts
-src/routes/wp-json.$.ts
-src/routes/category.$.ts
-src/routes/tag.$.ts
-src/routes/author.$.ts
-src/routes/feed.tsx        (rota exata /feed → 410)
-src/routes/feed.$.ts
-src/routes/comments.$.ts
-src/routes/xmlrpc[.]php.ts
-```
-
-Cada handler:
-
-```ts
-GET: async () => new Response("<h1>410 Gone</h1>...", {
-  status: 410,
-  headers: { "Content-Type": "text/html; charset=utf-8", "X-Robots-Tag": "noindex, nofollow" },
-})
-```
-
-## 3. `public/robots.txt` — bloquear crawling dos padrões antigos
-
-Manter `Allow: /`, manter `Disallow: /admin` e `/auth`, e **adicionar**:
-
-```
-Disallow: /wp-admin/
-Disallow: /wp-content/
-Disallow: /wp-includes/
-Disallow: /wp-json/
-Disallow: /xmlrpc.php
-Disallow: /category/
-Disallow: /tag/
-Disallow: /author/
-Disallow: /feed
-Disallow: /comments/
-Disallow: /*?p=
-Disallow: /*?page_id=
-Disallow: /*?replytocom=
-```
-
-> Observação técnica: `Disallow` impede o crawl. Para o Google **remover** as URLs já indexadas, o 410 (item 2) é o que importa. Os dois trabalham juntos.
-
-## 4. Sem redirects abrangentes
-
-Nenhum redirect 301 "tudo para a home". Não há mapeamento 1:1 conhecido entre URLs antigas e novas (se você tiver uma lista específica `/post-antigo` → `/noticias/...`, me passe depois e adiciono os 301s pontuais). Tudo que não bate vira 410 ou 404.
-
-## 5. Rotas inexistentes → 404 real
-
-A SPA já tem `notFoundComponent` no `__root.tsx`. Vou:
-
-- Traduzir o texto para PT-BR (mantendo o visual atual).
-- Adicionar `meta: [{ name: "robots", content: "noindex, nofollow" }]` no `head()` dessa página para garantir que não seja indexada.
-
-(Observação honesta: TanStack Start em SPA pode servir 200 no HTML inicial mesmo na rota de 404. Para o Google, o `noindex` na meta + ausência da URL no sitemap + 410 nos padrões WP é o conjunto que efetivamente limpa o índice. Não vou prometer status 404 server-side para qualquer URL inventada — apenas para os padrões listados no item 2.)
-
-## 6. Sitemap final
-
-`src/routes/sitemap[.]xml.ts` já contém exatamente as 23 rotas válidas + artigos publicados do banco. **Nenhuma URL antiga, de WordPress, ou quebrada está presente** — verificado. Não preciso alterar.
-
-## 7. Metadata (title/description) — já feito
-
-Auditoria da última iteração:
-
-- Home, `/escritorio`, todas as `/areas/*`, `/profissionais`, todas as `/equipe/*`, `/contato`, `/noticias`, `/noticias/{slug}`, `/acidente-de-trabalho` — todas usam `buildHead()` com title único (~55 chars) e description única (~150 chars), `og:*`, `twitter:*`, `canonical` apontando para `https://denisonleandro.adv.br/...`.
-- `/auth` e `/admin` com `noindex,nofollow`.
-
-Não há mudança necessária aqui — apenas confirmação no resumo final.
-
-## 8. Sem alteração visual
-
-Nenhum componente, layout, cor, tipografia, navbar, footer, CTA, WhatsApp, tracking ou banco de dados muda. Apenas:
-- novos arquivos de rota server-only `*.$.ts` para 410
-- `public/robots.txt`
-- texto PT-BR + meta noindex no `NotFoundComponent`
-
-## Resumo final que vou entregar após implementar
-
-- **Indexáveis (23 + artigos):** lista do item 1
-- **Bloqueadas no robots.txt:** padrões do item 3
-- **Retornam 410 Gone:** todos os caminhos do item 2
-- **Sitemap:** `https://denisonleandro.adv.br/sitemap.xml` contendo só as 23 rotas válidas + artigos publicados
-
-## Pergunta opcional (não bloqueia)
-
-Se você tiver uma planilha de URLs antigas com equivalente novo claro (ex.: `/2023/03/acidente-de-trabalho/` → `/acidente-de-trabalho`), me envie depois e eu adiciono 301s pontuais. Sem essa lista, mantemos 410, que é o comportamento correto recomendado pelo Google para conteúdo removido.
+Se aprovar este plano, eu apenas confirmo o relatório acima — **não há código a alterar**. Se preferir que eu também faça `/1635-2/` (e padrões parecidos) responder 410 direto sem o 307 intermediário, me avise e eu adiciono uma rota catch-all para esse padrão.
