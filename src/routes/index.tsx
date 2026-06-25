@@ -9,23 +9,17 @@ import { Team } from "@/components/site/Team";
 import { Locations } from "@/components/site/Locations";
 import { CtaBanner } from "@/components/site/CtaBanner";
 import { Footer } from "@/components/site/Footer";
+import { buildHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Denison Leandro e Advogados Associados | 25 anos de Advocacia" },
-      {
-        name: "description",
-        content:
-          "Escritório de advocacia full service com sede em Londrina-PR. Direito Trabalhista, Previdenciário, Consumidor, Família, Contratos, Bancário e Mediação.",
-      },
-      { property: "og:title", content: "Denison Leandro e Advogados Associados" },
-      {
-        property: "og:description",
-        content: "25 anos defendendo seus direitos com excelência, ética e credibilidade.",
-      },
-    ],
-  }),
+  head: () =>
+    buildHead({
+      fullTitle: "Denison Leandro Advogados Associados | Advocacia em Londrina-PR",
+      title: "Advocacia em Londrina",
+      description:
+        "Escritório de advocacia full service com 25 anos de atuação. Direito Trabalhista, Previdenciário, do Consumidor, de Família, Contratos, Bancário e Mediação.",
+      path: "/",
+    }),
   component: Index,
 });
 

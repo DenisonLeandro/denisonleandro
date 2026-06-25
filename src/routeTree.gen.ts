@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ProfissionaisRouteImport } from './routes/profissionais'
 import { Route as EscritorioRouteImport } from './routes/escritorio'
 import { Route as ContatoRouteImport } from './routes/contato'
@@ -38,6 +39,11 @@ import { Route as AreasConsumidorRouteImport } from './routes/areas.consumidor'
 import { Route as AreasBancarioRouteImport } from './routes/areas.bancario'
 import { Route as AuthenticatedAdminArtigosRouteImport } from './routes/_authenticated/admin.artigos'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProfissionaisRoute = ProfissionaisRouteImport.update({
   id: '/profissionais',
   path: '/profissionais',
@@ -196,6 +202,7 @@ export interface FileRoutesByFullPath {
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
   '/profissionais': typeof ProfissionaisRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/areas/bancario': typeof AreasBancarioRoute
   '/areas/consumidor': typeof AreasConsumidorRoute
   '/areas/contratos': typeof AreasContratosRoute
@@ -225,6 +232,7 @@ export interface FileRoutesByTo {
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
   '/profissionais': typeof ProfissionaisRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/areas/bancario': typeof AreasBancarioRoute
   '/areas/consumidor': typeof AreasConsumidorRoute
   '/areas/contratos': typeof AreasContratosRoute
@@ -256,6 +264,7 @@ export interface FileRoutesById {
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
   '/profissionais': typeof ProfissionaisRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/areas/bancario': typeof AreasBancarioRoute
   '/areas/consumidor': typeof AreasConsumidorRoute
   '/areas/contratos': typeof AreasContratosRoute
@@ -287,6 +296,7 @@ export interface FileRouteTypes {
     | '/contato'
     | '/escritorio'
     | '/profissionais'
+    | '/sitemap.xml'
     | '/areas/bancario'
     | '/areas/consumidor'
     | '/areas/contratos'
@@ -316,6 +326,7 @@ export interface FileRouteTypes {
     | '/contato'
     | '/escritorio'
     | '/profissionais'
+    | '/sitemap.xml'
     | '/areas/bancario'
     | '/areas/consumidor'
     | '/areas/contratos'
@@ -346,6 +357,7 @@ export interface FileRouteTypes {
     | '/contato'
     | '/escritorio'
     | '/profissionais'
+    | '/sitemap.xml'
     | '/areas/bancario'
     | '/areas/consumidor'
     | '/areas/contratos'
@@ -377,6 +389,7 @@ export interface RootRouteChildren {
   ContatoRoute: typeof ContatoRoute
   EscritorioRoute: typeof EscritorioRoute
   ProfissionaisRoute: typeof ProfissionaisRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AreasBancarioRoute: typeof AreasBancarioRoute
   AreasConsumidorRoute: typeof AreasConsumidorRoute
   AreasContratosRoute: typeof AreasContratosRoute
@@ -399,6 +412,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/profissionais': {
       id: '/profissionais'
       path: '/profissionais'
@@ -619,6 +639,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContatoRoute: ContatoRoute,
   EscritorioRoute: EscritorioRoute,
   ProfissionaisRoute: ProfissionaisRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   AreasBancarioRoute: AreasBancarioRoute,
   AreasConsumidorRoute: AreasConsumidorRoute,
   AreasContratosRoute: AreasContratosRoute,
@@ -642,13 +663,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -1,14 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { buildHead } from "@/lib/seo";
 import { LawyerDetail } from "@/components/site/LawyerDetail";
 import photo from "@/assets/marcio.png.asset.json";
 
 export const Route = createFileRoute("/equipe/marcio-barbosa-da-silva")({
-  head: () => ({
-    meta: [
-      { title: "Dr. Márcio Barbosa da Silva | Denison Leandro e Advogados Associados" },
-      { name: "description", content: "Advogado especialista em Direito do Trabalho e Previdenciário." },
-    ],
-  }),
+  head: () => buildHead({ title: "Dr. Márcio Barbosa da Silva", description: "Advogado especialista em Direito do Trabalho e Previdenciário.", path: "/equipe/marcio-barbosa-da-silva" }),
   component: () => (
     <LawyerDetail
       name="Dr. Márcio Barbosa da Silva"

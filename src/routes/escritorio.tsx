@@ -4,24 +4,16 @@ import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { CtaBanner } from "@/components/site/CtaBanner";
 import { PageHeader } from "@/components/site/PageHeader";
+import { buildHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/escritorio")({
-  head: () => ({
-    meta: [
-      { title: "O Escritório | Denison Leandro e Advogados Associados" },
-      {
-        name: "description",
-        content:
-          "Conheça o escritório Denison Leandro e Advogados Associados: 25 anos de tradição, excelência técnica e compromisso com a ética em todas as áreas do Direito.",
-      },
-      { property: "og:title", content: "O Escritório | Denison Leandro e Advogados" },
-      {
-        property: "og:description",
-        content:
-          "Tradição, ética e excelência técnica. Conheça nossa história, valores e formas de atuação.",
-      },
-    ],
-  }),
+  head: () =>
+    buildHead({
+      title: "O Escritório",
+      description:
+        "25 anos de tradição, ética e excelência técnica. Conheça a história, os valores e a forma de atuação do Denison Leandro Advogados Associados.",
+      path: "/escritorio",
+    }),
   component: EscritorioPage,
 });
 

@@ -78,18 +78,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Denison Leandro Advogados Associados" },
-      { name: "description", content: "A modern, sophisticated institutional website for a Brazilian law firm, showcasing expertise and services." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Denison Leandro Advogados Associados" },
-      { property: "og:description", content: "A modern, sophisticated institutional website for a Brazilian law firm, showcasing expertise and services." },
+      { name: "theme-color", content: "#0B1F3A" },
+      { property: "og:site_name", content: "Denison Leandro Advogados Associados" },
+      { property: "og:locale", content: "pt_BR" },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Denison Leandro Advogados Associados" },
-      { name: "twitter:description", content: "A modern, sophisticated institutional website for a Brazilian law firm, showcasing expertise and services." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/44f701a5-b247-4700-9e78-67b0afbb57de/id-preview-6a5a083c--ceb23ee7-3a69-4717-9d43-5d07886a2df1.lovable.app-1780398320940.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/44f701a5-b247-4700-9e78-67b0afbb57de/id-preview-6a5a083c--ceb23ee7-3a69-4717-9d43-5d07886a2df1.lovable.app-1780398320940.png" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -103,6 +96,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LegalService",
+          name: "Denison Leandro Advogados Associados",
+          url: "https://denisonleandro.adv.br",
+          areaServed: "BR",
+          description:
+            "Escritório de advocacia full service com 25 anos de atuação. Direito Trabalhista, Previdenciário, Consumidor, Família, Contratos, Bancário e Mediação.",
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -112,7 +119,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>

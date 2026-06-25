@@ -1,13 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { buildHead } from "@/lib/seo";
 import { LawyerDetail } from "@/components/site/LawyerDetail";
 
 export const Route = createFileRoute("/equipe/danielle-cristina-mateus-pereira")({
-  head: () => ({
-    meta: [
-      { title: "Dra. Danielle Cristina Mateus Pereira | Denison Leandro e Advogados Associados" },
-      { name: "description", content: "Advogada com ênfase no Direito do Trabalho." },
-    ],
-  }),
+  head: () => buildHead({ title: "Dra. Danielle Cristina Mateus Pereira", description: "Advogada com ênfase no Direito do Trabalho.", path: "/equipe/danielle-cristina-mateus-pereira" }),
   component: () => (
     <LawyerDetail
       name="Dra. Danielle Cristina Mateus Pereira"

@@ -3,23 +3,16 @@ import { MessageCircle, ArrowUpRight, Briefcase, ShieldCheck, ShoppingCart, User
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { PageHeader } from "@/components/site/PageHeader";
+import { buildHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/areas-de-atuacao")({
-  head: () => ({
-    meta: [
-      { title: "Áreas de Atuação | Denison Leandro e Advogados Associados" },
-      {
-        name: "description",
-        content:
-          "Atuação full service em Direito Trabalhista, Previdenciário, Consumidor, Família, Contratos, Bancário/Financeiro e Mediação de Conflitos.",
-      },
-      { property: "og:title", content: "Áreas de Atuação | Denison Leandro" },
-      {
-        property: "og:description",
-        content: "Conheça as 7 áreas em que o escritório atua com excelência técnica.",
-      },
-    ],
-  }),
+  head: () =>
+    buildHead({
+      title: "Áreas de Atuação",
+      description:
+        "Atuação full service em Direito Trabalhista, Previdenciário, do Consumidor, de Família, Contratos, Bancário/Financeiro e Mediação de Conflitos.",
+      path: "/areas-de-atuacao",
+    }),
   component: AreasPage,
 });
 

@@ -3,8 +3,9 @@ import { ArrowLeft, Calendar, MessageCircle, User } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { PageHeader } from "@/components/site/PageHeader";
+import { buildHead, SITE_URL } from "@/lib/seo";
 
-const CANONICAL = "https://denisonleandro.adv.br/acidente-de-trabalho";
+const CANONICAL = `${SITE_URL}/acidente-de-trabalho`;
 const WHATSAPP_URL =
   "https://wa.me/5548988487889?text=Ol%C3%A1%2C%20vim%20por%20um%20artigo%20no%20site%20Denison%20Leandro%20e%20gostaria%20de%20receber%20uma%20orienta%C3%A7%C3%A3o%20r%C3%A1pida.";
 const PUBLISHED_AT = "2026-06-20";
@@ -14,40 +15,37 @@ const DESCRIPTION_SEO =
   "Sofreu acidente de trabalho? Entenda seus principais direitos, quando procurar orientação e como agir para proteger sua saúde e seu emprego.";
 
 export const Route = createFileRoute("/acidente-de-trabalho")({
-  head: () => ({
-    meta: [
-      { title: TITLE_SEO },
-      { name: "description", content: DESCRIPTION_SEO },
-      { property: "og:title", content: TITLE_SEO },
-      { property: "og:description", content: DESCRIPTION_SEO },
-      { property: "og:type", content: "article" },
-      { property: "og:url", content: CANONICAL },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: TITLE_SEO },
-      { name: "twitter:description", content: DESCRIPTION_SEO },
-    ],
-    links: [{ rel: "canonical", href: CANONICAL }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Article",
-          headline:
-            "Acidente de trabalho: quais são os direitos do trabalhador?",
-          description: DESCRIPTION_SEO,
-          datePublished: PUBLISHED_AT,
-          dateModified: PUBLISHED_AT,
-          author: { "@type": "Organization", name: AUTHOR },
-          publisher: {
-            "@type": "Organization",
-            name: "Denison Leandro Advogados Associados",
-          },
-          mainEntityOfPage: { "@type": "WebPage", "@id": CANONICAL },
-        }),
-      },
-    ],
-  }),
+  head: () => {
+    const base = buildHead({
+      title: TITLE_SEO,
+      description: DESCRIPTION_SEO,
+      path: "/acidente-de-trabalho",
+      type: "article",
+    });
+    return {
+      ...base,
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline:
+              "Acidente de trabalho: quais são os direitos do trabalhador?",
+            description: DESCRIPTION_SEO,
+            datePublished: PUBLISHED_AT,
+            dateModified: PUBLISHED_AT,
+            author: { "@type": "Organization", name: AUTHOR },
+            publisher: {
+              "@type": "Organization",
+              name: "Denison Leandro Advogados Associados",
+            },
+            mainEntityOfPage: { "@type": "WebPage", "@id": CANONICAL },
+          }),
+        },
+      ],
+    };
+  },
   component: AcidenteDeTrabalhoPage,
 });
 
