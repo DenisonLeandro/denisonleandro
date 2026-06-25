@@ -1,14 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { buildHead } from "@/lib/seo";
 import { LawyerDetail } from "@/components/site/LawyerDetail";
 import photo from "@/assets/joao.png.asset.json";
 
 export const Route = createFileRoute("/equipe/joao-tadeu-leandro")({
-  head: () => ({
-    meta: [
-      { title: "Dr. João Tadeu Leandro | Denison Leandro e Advogados Associados" },
-      { name: "description", content: "Advogado com ênfase no Direito do Trabalho." },
-    ],
-  }),
+  head: () => buildHead({ title: "Dr. João Tadeu Leandro", description: "Advogado com ênfase no Direito do Trabalho.", path: "/equipe/joao-tadeu-leandro" }),
   component: () => (
     <LawyerDetail
       name="Dr. João Tadeu Leandro"

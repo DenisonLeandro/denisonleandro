@@ -1,13 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { buildHead } from "@/lib/seo";
 import { LawyerDetail } from "@/components/site/LawyerDetail";
 
 export const Route = createFileRoute("/equipe/juan-albner-pereira-veloso")({
-  head: () => ({
-    meta: [
-      { title: "Dr. Juan Albner Pereira Veloso | Denison Leandro e Advogados Associados" },
-      { name: "description", content: "Advogado com ênfase no Direito do Trabalho." },
-    ],
-  }),
+  head: () => buildHead({ title: "Dr. Juan Albner Pereira Veloso", description: "Advogado com ênfase no Direito do Trabalho.", path: "/equipe/juan-albner-pereira-veloso" }),
   component: () => (
     <LawyerDetail
       name="Dr. Juan Albner Pereira Veloso"
