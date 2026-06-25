@@ -2,5 +2,18 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /auth
+Disallow: /wp-admin/
+Disallow: /wp-content/
+Disallow: /wp-includes/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /category/
+Disallow: /tag/
+Disallow: /author/
+Disallow: /feed
+Disallow: /comments/
+Disallow: /*?p=
+Disallow: /*?page_id=
+Disallow: /*?replytocom=
 
 Sitemap: https://denisonleandro.adv.br/sitemap.xml

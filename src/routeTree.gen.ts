@@ -9,8 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as XmlrpcDotphpRouteImport } from './routes/xmlrpc[.]php'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ProfissionaisRouteImport } from './routes/profissionais'
+import { Route as FeedRouteImport } from './routes/feed'
 import { Route as EscritorioRouteImport } from './routes/escritorio'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -20,7 +22,13 @@ import { Route as AcidenteDeTrabalhoRouteImport } from './routes/acidente-de-tra
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as NoticiasIndexRouteImport } from './routes/noticias.index'
+import { Route as WpJsonSplatRouteImport } from './routes/wp-json.$'
+import { Route as WpIncludesSplatRouteImport } from './routes/wp-includes.$'
+import { Route as WpContentSplatRouteImport } from './routes/wp-content.$'
+import { Route as WpAdminSplatRouteImport } from './routes/wp-admin.$'
+import { Route as TagSplatRouteImport } from './routes/tag.$'
 import { Route as NoticiasSlugRouteImport } from './routes/noticias.$slug'
+import { Route as FeedSplatRouteImport } from './routes/feed.$'
 import { Route as EquipeRenataHenriqueLeandroRouteImport } from './routes/equipe.renata-henrique-leandro'
 import { Route as EquipeMariaInesGomesDaSilvaRouteImport } from './routes/equipe.maria-ines-gomes-da-silva'
 import { Route as EquipeMarcioBarbosaDaSilvaRouteImport } from './routes/equipe.marcio-barbosa-da-silva'
@@ -30,6 +38,9 @@ import { Route as EquipeJoaoTadeuLeandroRouteImport } from './routes/equipe.joao
 import { Route as EquipeHigorHenriqueLeandroRouteImport } from './routes/equipe.higor-henrique-leandro'
 import { Route as EquipeDenisonHenriqueLeandroRouteImport } from './routes/equipe.denison-henrique-leandro'
 import { Route as EquipeDanielleCristinaMateusPereiraRouteImport } from './routes/equipe.danielle-cristina-mateus-pereira'
+import { Route as CommentsSplatRouteImport } from './routes/comments.$'
+import { Route as CategorySplatRouteImport } from './routes/category.$'
+import { Route as AuthorSplatRouteImport } from './routes/author.$'
 import { Route as AreasTrabalhistaRouteImport } from './routes/areas.trabalhista'
 import { Route as AreasPrevidenciarioRouteImport } from './routes/areas.previdenciario'
 import { Route as AreasMediacaoRouteImport } from './routes/areas.mediacao'
@@ -39,6 +50,11 @@ import { Route as AreasConsumidorRouteImport } from './routes/areas.consumidor'
 import { Route as AreasBancarioRouteImport } from './routes/areas.bancario'
 import { Route as AuthenticatedAdminArtigosRouteImport } from './routes/_authenticated/admin.artigos'
 
+const XmlrpcDotphpRoute = XmlrpcDotphpRouteImport.update({
+  id: '/xmlrpc.php',
+  path: '/xmlrpc.php',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -47,6 +63,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ProfissionaisRoute = ProfissionaisRouteImport.update({
   id: '/profissionais',
   path: '/profissionais',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeedRoute = FeedRouteImport.update({
+  id: '/feed',
+  path: '/feed',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EscritorioRoute = EscritorioRouteImport.update({
@@ -93,10 +114,40 @@ const NoticiasIndexRoute = NoticiasIndexRouteImport.update({
   path: '/noticias/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WpJsonSplatRoute = WpJsonSplatRouteImport.update({
+  id: '/wp-json/$',
+  path: '/wp-json/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WpIncludesSplatRoute = WpIncludesSplatRouteImport.update({
+  id: '/wp-includes/$',
+  path: '/wp-includes/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WpContentSplatRoute = WpContentSplatRouteImport.update({
+  id: '/wp-content/$',
+  path: '/wp-content/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WpAdminSplatRoute = WpAdminSplatRouteImport.update({
+  id: '/wp-admin/$',
+  path: '/wp-admin/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TagSplatRoute = TagSplatRouteImport.update({
+  id: '/tag/$',
+  path: '/tag/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NoticiasSlugRoute = NoticiasSlugRouteImport.update({
   id: '/noticias/$slug',
   path: '/noticias/$slug',
   getParentRoute: () => rootRouteImport,
+} as any)
+const FeedSplatRoute = FeedSplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => FeedRoute,
 } as any)
 const EquipeRenataHenriqueLeandroRoute =
   EquipeRenataHenriqueLeandroRouteImport.update({
@@ -151,6 +202,21 @@ const EquipeDanielleCristinaMateusPereiraRoute =
     path: '/equipe/danielle-cristina-mateus-pereira',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CommentsSplatRoute = CommentsSplatRouteImport.update({
+  id: '/comments/$',
+  path: '/comments/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategorySplatRoute = CategorySplatRouteImport.update({
+  id: '/category/$',
+  path: '/category/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthorSplatRoute = AuthorSplatRouteImport.update({
+  id: '/author/$',
+  path: '/author/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AreasTrabalhistaRoute = AreasTrabalhistaRouteImport.update({
   id: '/areas/trabalhista',
   path: '/areas/trabalhista',
@@ -201,8 +267,10 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
+  '/feed': typeof FeedRouteWithChildren
   '/profissionais': typeof ProfissionaisRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/xmlrpc.php': typeof XmlrpcDotphpRoute
   '/areas/bancario': typeof AreasBancarioRoute
   '/areas/consumidor': typeof AreasConsumidorRoute
   '/areas/contratos': typeof AreasContratosRoute
@@ -210,6 +278,9 @@ export interface FileRoutesByFullPath {
   '/areas/mediacao': typeof AreasMediacaoRoute
   '/areas/previdenciario': typeof AreasPrevidenciarioRoute
   '/areas/trabalhista': typeof AreasTrabalhistaRoute
+  '/author/$': typeof AuthorSplatRoute
+  '/category/$': typeof CategorySplatRoute
+  '/comments/$': typeof CommentsSplatRoute
   '/equipe/danielle-cristina-mateus-pereira': typeof EquipeDanielleCristinaMateusPereiraRoute
   '/equipe/denison-henrique-leandro': typeof EquipeDenisonHenriqueLeandroRoute
   '/equipe/higor-henrique-leandro': typeof EquipeHigorHenriqueLeandroRoute
@@ -219,7 +290,13 @@ export interface FileRoutesByFullPath {
   '/equipe/marcio-barbosa-da-silva': typeof EquipeMarcioBarbosaDaSilvaRoute
   '/equipe/maria-ines-gomes-da-silva': typeof EquipeMariaInesGomesDaSilvaRoute
   '/equipe/renata-henrique-leandro': typeof EquipeRenataHenriqueLeandroRoute
+  '/feed/$': typeof FeedSplatRoute
   '/noticias/$slug': typeof NoticiasSlugRoute
+  '/tag/$': typeof TagSplatRoute
+  '/wp-admin/$': typeof WpAdminSplatRoute
+  '/wp-content/$': typeof WpContentSplatRoute
+  '/wp-includes/$': typeof WpIncludesSplatRoute
+  '/wp-json/$': typeof WpJsonSplatRoute
   '/noticias/': typeof NoticiasIndexRoute
   '/admin/artigos': typeof AuthenticatedAdminArtigosRoute
 }
@@ -231,8 +308,10 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
+  '/feed': typeof FeedRouteWithChildren
   '/profissionais': typeof ProfissionaisRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/xmlrpc.php': typeof XmlrpcDotphpRoute
   '/areas/bancario': typeof AreasBancarioRoute
   '/areas/consumidor': typeof AreasConsumidorRoute
   '/areas/contratos': typeof AreasContratosRoute
@@ -240,6 +319,9 @@ export interface FileRoutesByTo {
   '/areas/mediacao': typeof AreasMediacaoRoute
   '/areas/previdenciario': typeof AreasPrevidenciarioRoute
   '/areas/trabalhista': typeof AreasTrabalhistaRoute
+  '/author/$': typeof AuthorSplatRoute
+  '/category/$': typeof CategorySplatRoute
+  '/comments/$': typeof CommentsSplatRoute
   '/equipe/danielle-cristina-mateus-pereira': typeof EquipeDanielleCristinaMateusPereiraRoute
   '/equipe/denison-henrique-leandro': typeof EquipeDenisonHenriqueLeandroRoute
   '/equipe/higor-henrique-leandro': typeof EquipeHigorHenriqueLeandroRoute
@@ -249,7 +331,13 @@ export interface FileRoutesByTo {
   '/equipe/marcio-barbosa-da-silva': typeof EquipeMarcioBarbosaDaSilvaRoute
   '/equipe/maria-ines-gomes-da-silva': typeof EquipeMariaInesGomesDaSilvaRoute
   '/equipe/renata-henrique-leandro': typeof EquipeRenataHenriqueLeandroRoute
+  '/feed/$': typeof FeedSplatRoute
   '/noticias/$slug': typeof NoticiasSlugRoute
+  '/tag/$': typeof TagSplatRoute
+  '/wp-admin/$': typeof WpAdminSplatRoute
+  '/wp-content/$': typeof WpContentSplatRoute
+  '/wp-includes/$': typeof WpIncludesSplatRoute
+  '/wp-json/$': typeof WpJsonSplatRoute
   '/noticias': typeof NoticiasIndexRoute
   '/admin/artigos': typeof AuthenticatedAdminArtigosRoute
 }
@@ -263,8 +351,10 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
+  '/feed': typeof FeedRouteWithChildren
   '/profissionais': typeof ProfissionaisRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/xmlrpc.php': typeof XmlrpcDotphpRoute
   '/areas/bancario': typeof AreasBancarioRoute
   '/areas/consumidor': typeof AreasConsumidorRoute
   '/areas/contratos': typeof AreasContratosRoute
@@ -272,6 +362,9 @@ export interface FileRoutesById {
   '/areas/mediacao': typeof AreasMediacaoRoute
   '/areas/previdenciario': typeof AreasPrevidenciarioRoute
   '/areas/trabalhista': typeof AreasTrabalhistaRoute
+  '/author/$': typeof AuthorSplatRoute
+  '/category/$': typeof CategorySplatRoute
+  '/comments/$': typeof CommentsSplatRoute
   '/equipe/danielle-cristina-mateus-pereira': typeof EquipeDanielleCristinaMateusPereiraRoute
   '/equipe/denison-henrique-leandro': typeof EquipeDenisonHenriqueLeandroRoute
   '/equipe/higor-henrique-leandro': typeof EquipeHigorHenriqueLeandroRoute
@@ -281,7 +374,13 @@ export interface FileRoutesById {
   '/equipe/marcio-barbosa-da-silva': typeof EquipeMarcioBarbosaDaSilvaRoute
   '/equipe/maria-ines-gomes-da-silva': typeof EquipeMariaInesGomesDaSilvaRoute
   '/equipe/renata-henrique-leandro': typeof EquipeRenataHenriqueLeandroRoute
+  '/feed/$': typeof FeedSplatRoute
   '/noticias/$slug': typeof NoticiasSlugRoute
+  '/tag/$': typeof TagSplatRoute
+  '/wp-admin/$': typeof WpAdminSplatRoute
+  '/wp-content/$': typeof WpContentSplatRoute
+  '/wp-includes/$': typeof WpIncludesSplatRoute
+  '/wp-json/$': typeof WpJsonSplatRoute
   '/noticias/': typeof NoticiasIndexRoute
   '/_authenticated/admin/artigos': typeof AuthenticatedAdminArtigosRoute
 }
@@ -295,8 +394,10 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contato'
     | '/escritorio'
+    | '/feed'
     | '/profissionais'
     | '/sitemap.xml'
+    | '/xmlrpc.php'
     | '/areas/bancario'
     | '/areas/consumidor'
     | '/areas/contratos'
@@ -304,6 +405,9 @@ export interface FileRouteTypes {
     | '/areas/mediacao'
     | '/areas/previdenciario'
     | '/areas/trabalhista'
+    | '/author/$'
+    | '/category/$'
+    | '/comments/$'
     | '/equipe/danielle-cristina-mateus-pereira'
     | '/equipe/denison-henrique-leandro'
     | '/equipe/higor-henrique-leandro'
@@ -313,7 +417,13 @@ export interface FileRouteTypes {
     | '/equipe/marcio-barbosa-da-silva'
     | '/equipe/maria-ines-gomes-da-silva'
     | '/equipe/renata-henrique-leandro'
+    | '/feed/$'
     | '/noticias/$slug'
+    | '/tag/$'
+    | '/wp-admin/$'
+    | '/wp-content/$'
+    | '/wp-includes/$'
+    | '/wp-json/$'
     | '/noticias/'
     | '/admin/artigos'
   fileRoutesByTo: FileRoutesByTo
@@ -325,8 +435,10 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contato'
     | '/escritorio'
+    | '/feed'
     | '/profissionais'
     | '/sitemap.xml'
+    | '/xmlrpc.php'
     | '/areas/bancario'
     | '/areas/consumidor'
     | '/areas/contratos'
@@ -334,6 +446,9 @@ export interface FileRouteTypes {
     | '/areas/mediacao'
     | '/areas/previdenciario'
     | '/areas/trabalhista'
+    | '/author/$'
+    | '/category/$'
+    | '/comments/$'
     | '/equipe/danielle-cristina-mateus-pereira'
     | '/equipe/denison-henrique-leandro'
     | '/equipe/higor-henrique-leandro'
@@ -343,7 +458,13 @@ export interface FileRouteTypes {
     | '/equipe/marcio-barbosa-da-silva'
     | '/equipe/maria-ines-gomes-da-silva'
     | '/equipe/renata-henrique-leandro'
+    | '/feed/$'
     | '/noticias/$slug'
+    | '/tag/$'
+    | '/wp-admin/$'
+    | '/wp-content/$'
+    | '/wp-includes/$'
+    | '/wp-json/$'
     | '/noticias'
     | '/admin/artigos'
   id:
@@ -356,8 +477,10 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contato'
     | '/escritorio'
+    | '/feed'
     | '/profissionais'
     | '/sitemap.xml'
+    | '/xmlrpc.php'
     | '/areas/bancario'
     | '/areas/consumidor'
     | '/areas/contratos'
@@ -365,6 +488,9 @@ export interface FileRouteTypes {
     | '/areas/mediacao'
     | '/areas/previdenciario'
     | '/areas/trabalhista'
+    | '/author/$'
+    | '/category/$'
+    | '/comments/$'
     | '/equipe/danielle-cristina-mateus-pereira'
     | '/equipe/denison-henrique-leandro'
     | '/equipe/higor-henrique-leandro'
@@ -374,7 +500,13 @@ export interface FileRouteTypes {
     | '/equipe/marcio-barbosa-da-silva'
     | '/equipe/maria-ines-gomes-da-silva'
     | '/equipe/renata-henrique-leandro'
+    | '/feed/$'
     | '/noticias/$slug'
+    | '/tag/$'
+    | '/wp-admin/$'
+    | '/wp-content/$'
+    | '/wp-includes/$'
+    | '/wp-json/$'
     | '/noticias/'
     | '/_authenticated/admin/artigos'
   fileRoutesById: FileRoutesById
@@ -388,8 +520,10 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ContatoRoute: typeof ContatoRoute
   EscritorioRoute: typeof EscritorioRoute
+  FeedRoute: typeof FeedRouteWithChildren
   ProfissionaisRoute: typeof ProfissionaisRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  XmlrpcDotphpRoute: typeof XmlrpcDotphpRoute
   AreasBancarioRoute: typeof AreasBancarioRoute
   AreasConsumidorRoute: typeof AreasConsumidorRoute
   AreasContratosRoute: typeof AreasContratosRoute
@@ -397,6 +531,9 @@ export interface RootRouteChildren {
   AreasMediacaoRoute: typeof AreasMediacaoRoute
   AreasPrevidenciarioRoute: typeof AreasPrevidenciarioRoute
   AreasTrabalhistaRoute: typeof AreasTrabalhistaRoute
+  AuthorSplatRoute: typeof AuthorSplatRoute
+  CategorySplatRoute: typeof CategorySplatRoute
+  CommentsSplatRoute: typeof CommentsSplatRoute
   EquipeDanielleCristinaMateusPereiraRoute: typeof EquipeDanielleCristinaMateusPereiraRoute
   EquipeDenisonHenriqueLeandroRoute: typeof EquipeDenisonHenriqueLeandroRoute
   EquipeHigorHenriqueLeandroRoute: typeof EquipeHigorHenriqueLeandroRoute
@@ -407,11 +544,23 @@ export interface RootRouteChildren {
   EquipeMariaInesGomesDaSilvaRoute: typeof EquipeMariaInesGomesDaSilvaRoute
   EquipeRenataHenriqueLeandroRoute: typeof EquipeRenataHenriqueLeandroRoute
   NoticiasSlugRoute: typeof NoticiasSlugRoute
+  TagSplatRoute: typeof TagSplatRoute
+  WpAdminSplatRoute: typeof WpAdminSplatRoute
+  WpContentSplatRoute: typeof WpContentSplatRoute
+  WpIncludesSplatRoute: typeof WpIncludesSplatRoute
+  WpJsonSplatRoute: typeof WpJsonSplatRoute
   NoticiasIndexRoute: typeof NoticiasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/xmlrpc.php': {
+      id: '/xmlrpc.php'
+      path: '/xmlrpc.php'
+      fullPath: '/xmlrpc.php'
+      preLoaderRoute: typeof XmlrpcDotphpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -424,6 +573,13 @@ declare module '@tanstack/react-router' {
       path: '/profissionais'
       fullPath: '/profissionais'
       preLoaderRoute: typeof ProfissionaisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/feed': {
+      id: '/feed'
+      path: '/feed'
+      fullPath: '/feed'
+      preLoaderRoute: typeof FeedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/escritorio': {
@@ -489,12 +645,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NoticiasIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/wp-json/$': {
+      id: '/wp-json/$'
+      path: '/wp-json/$'
+      fullPath: '/wp-json/$'
+      preLoaderRoute: typeof WpJsonSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wp-includes/$': {
+      id: '/wp-includes/$'
+      path: '/wp-includes/$'
+      fullPath: '/wp-includes/$'
+      preLoaderRoute: typeof WpIncludesSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wp-content/$': {
+      id: '/wp-content/$'
+      path: '/wp-content/$'
+      fullPath: '/wp-content/$'
+      preLoaderRoute: typeof WpContentSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wp-admin/$': {
+      id: '/wp-admin/$'
+      path: '/wp-admin/$'
+      fullPath: '/wp-admin/$'
+      preLoaderRoute: typeof WpAdminSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tag/$': {
+      id: '/tag/$'
+      path: '/tag/$'
+      fullPath: '/tag/$'
+      preLoaderRoute: typeof TagSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/noticias/$slug': {
       id: '/noticias/$slug'
       path: '/noticias/$slug'
       fullPath: '/noticias/$slug'
       preLoaderRoute: typeof NoticiasSlugRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/feed/$': {
+      id: '/feed/$'
+      path: '/$'
+      fullPath: '/feed/$'
+      preLoaderRoute: typeof FeedSplatRouteImport
+      parentRoute: typeof FeedRoute
     }
     '/equipe/renata-henrique-leandro': {
       id: '/equipe/renata-henrique-leandro'
@@ -557,6 +755,27 @@ declare module '@tanstack/react-router' {
       path: '/equipe/danielle-cristina-mateus-pereira'
       fullPath: '/equipe/danielle-cristina-mateus-pereira'
       preLoaderRoute: typeof EquipeDanielleCristinaMateusPereiraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comments/$': {
+      id: '/comments/$'
+      path: '/comments/$'
+      fullPath: '/comments/$'
+      preLoaderRoute: typeof CommentsSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/category/$': {
+      id: '/category/$'
+      path: '/category/$'
+      fullPath: '/category/$'
+      preLoaderRoute: typeof CategorySplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/author/$': {
+      id: '/author/$'
+      path: '/author/$'
+      fullPath: '/author/$'
+      preLoaderRoute: typeof AuthorSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/areas/trabalhista': {
@@ -629,6 +848,16 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface FeedRouteChildren {
+  FeedSplatRoute: typeof FeedSplatRoute
+}
+
+const FeedRouteChildren: FeedRouteChildren = {
+  FeedSplatRoute: FeedSplatRoute,
+}
+
+const FeedRouteWithChildren = FeedRoute._addFileChildren(FeedRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
@@ -638,8 +867,10 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ContatoRoute: ContatoRoute,
   EscritorioRoute: EscritorioRoute,
+  FeedRoute: FeedRouteWithChildren,
   ProfissionaisRoute: ProfissionaisRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  XmlrpcDotphpRoute: XmlrpcDotphpRoute,
   AreasBancarioRoute: AreasBancarioRoute,
   AreasConsumidorRoute: AreasConsumidorRoute,
   AreasContratosRoute: AreasContratosRoute,
@@ -647,6 +878,9 @@ const rootRouteChildren: RootRouteChildren = {
   AreasMediacaoRoute: AreasMediacaoRoute,
   AreasPrevidenciarioRoute: AreasPrevidenciarioRoute,
   AreasTrabalhistaRoute: AreasTrabalhistaRoute,
+  AuthorSplatRoute: AuthorSplatRoute,
+  CategorySplatRoute: CategorySplatRoute,
+  CommentsSplatRoute: CommentsSplatRoute,
   EquipeDanielleCristinaMateusPereiraRoute:
     EquipeDanielleCristinaMateusPereiraRoute,
   EquipeDenisonHenriqueLeandroRoute: EquipeDenisonHenriqueLeandroRoute,
@@ -658,6 +892,11 @@ const rootRouteChildren: RootRouteChildren = {
   EquipeMariaInesGomesDaSilvaRoute: EquipeMariaInesGomesDaSilvaRoute,
   EquipeRenataHenriqueLeandroRoute: EquipeRenataHenriqueLeandroRoute,
   NoticiasSlugRoute: NoticiasSlugRoute,
+  TagSplatRoute: TagSplatRoute,
+  WpAdminSplatRoute: WpAdminSplatRoute,
+  WpContentSplatRoute: WpContentSplatRoute,
+  WpIncludesSplatRoute: WpIncludesSplatRoute,
+  WpJsonSplatRoute: WpJsonSplatRoute,
   NoticiasIndexRoute: NoticiasIndexRoute,
 }
 export const routeTree = rootRouteImport
