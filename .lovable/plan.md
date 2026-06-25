@@ -1,81 +1,144 @@
-## Revisão de SEO técnico
+## Objetivo
 
-Domínio canônico: **https://denisonleandro.adv.br** (sem www, https).
+Limpar a indexação do `denisonleandro.adv.br` para que apenas as rotas atuais do site novo apareçam no Google, e que qualquer URL herdada do WordPress hackeado retorne **410 Gone** (sinal explícito para o Google remover do índice), sem afetar o visual do site.
 
-### 1. `src/routes/__root.tsx` — limpar defaults herdados
-- Remover `name: "author" = "Lovable"` e `twitter:site = "@Lovable"`.
-- Trocar `og:image` (hoje aponta para screenshot `r2.dev` do preview Lovable) por imagem própria hospedada no domínio (ex.: `/og-default.jpg`) — manter como fallback apenas no root.
-- Ajustar título/descrição padrão do root para textos institucionais novos (sem qualquer tagline antiga do WordPress).
-- Adicionar `og:site_name` e `og:locale = pt_BR`.
-- **Não** colocar `canonical` nem `og:image` específicos no root (cada rota define o seu).
+## 1. Rotas válidas atuais (única fonte de verdade)
 
-### 2. Metadata por rota
-Para cada rota pública abaixo, garantir `title` único (~55 chars), `description` única (~150 chars), `og:title`, `og:description`, `og:url` (self-referencing absoluto) e `<link rel="canonical">` apontando ao próprio URL no domínio oficial:
+Estas continuam indexáveis. Tudo fora desta lista deve cair em 404/410.
 
-- `/` (index)
-- `/areas-de-atuacao` + 7 sub-rotas `areas.*`
-- `/escritorio`
-- `/profissionais` + 9 rotas `equipe.*`
-- `/contato`
-- `/noticias` (index)
-- `/noticias/$slug` (dinâmico — derivar de `loaderData`; já existe `acidente-de-trabalho` como referência)
-- `/acidente-de-trabalho` (já ok, só revisar URL canonical)
-
-Adicionar `meta name="robots" = "noindex,nofollow"` em `/auth` e `/admin`.
-
-### 3. H1 único por página
-Auditar cada rota; onde houver mais de um `<h1>` (ou nenhum), ajustar para exatamente um H1 alinhado ao `title` SEO. Componentes `PageHeader`/hero geralmente já usam h1 — confirmar que seções internas usam h2/h3.
-
-### 4. Canonical / domínio único
-- Definir `SITE_URL = "https://denisonleandro.adv.br"` em `src/lib/seo.ts` (novo helper) e usar em todas as rotas.
-- Não emitir canonical no `__root.tsx` (TanStack concatena `links` sem dedup).
-
-### 5. `public/robots.txt` (criar)
 ```
-User-agent: *
-Allow: /
-Disallow: /admin
-Disallow: /auth
-
-Sitemap: https://denisonleandro.adv.br/sitemap.xml
+/                                     (home)
+/escritorio
+/areas-de-atuacao
+/areas/trabalhista
+/areas/previdenciario
+/areas/consumidor
+/areas/familia
+/areas/contratos
+/areas/bancario
+/areas/mediacao
+/profissionais
+/equipe/denison-henrique-leandro
+/equipe/marcio-barbosa-da-silva
+/equipe/higor-henrique-leandro
+/equipe/joao-tadeu-leandro
+/equipe/renata-henrique-leandro
+/equipe/juan-albner-pereira-veloso
+/equipe/danielle-cristina-mateus-pereira
+/equipe/maria-ines-gomes-da-silva
+/equipe/leonardo-nascimento-de-aguiar
+/contato
+/noticias
+/noticias/{slug}            (dinâmico — apenas artigos publicados)
+/acidente-de-trabalho
 ```
 
-### 6. `src/routes/sitemap[.]xml.ts` (criar)
-Server route gerando XML com todas as rotas públicas estáticas + entradas dinâmicas de `articles` publicados (`supabase.from("articles").select("slug, updated_at").eq("status","published")`). Excluir `/auth`, `/admin`, `/noticias/$slug` template. `Cache-Control: public, max-age=3600`.
+Não indexáveis (já marcadas `noindex,nofollow`): `/auth`, `/admin`.
 
-### 7. Open Graph / Twitter
-- Gerar imagem OG padrão (1200×630) com identidade do escritório → `src/assets/og-default.jpg` (premium image, com texto legível: nome + tagline).
-- Usar em root como fallback; rotas com cover própria (notícias) usam a do artigo.
-- `twitter:card = "summary_large_image"` no root.
+## 2. Bloquear/remover URLs herdadas do WordPress (410 Gone real)
 
-### 8. Redirects de URLs antigas do WordPress
-TanStack já devolve 404 nativo para qualquer URL não mapeada (o `NotFoundComponent` retorna status 404). Suficiente para sinalizar ao Google que o conteúdo antigo sumiu. **Não** adicionar redirects sem lista concreta de URLs antigas — caso o usuário forneça lista (`/?p=123`, `/wp-content/...`, `/categoria/...`), criar mapeamento em um server route `src/routes/api/public/legacy-redirect.ts` ou similar. Por padrão: deixar 404 limpo.
+Vou criar **server routes** em `src/routes/api/legacy/` que respondem com **HTTP 410 Gone** + `X-Robots-Tag: noindex` + corpo HTML curto em PT-BR. 410 é mais forte que 404 — sinaliza ao Google que a URL foi removida permanentemente.
 
-### 9. Estrutura do helper SEO
-`src/lib/seo.ts`:
+Padrões cobertos (todos com splat `$` para pegar qualquer caminho/arquivo abaixo):
+
+- `/wp-admin/$`
+- `/wp-content/$`
+- `/wp-includes/$`
+- `/wp-json/$`
+- `/category/$`
+- `/tag/$`
+- `/author/$`
+- `/feed` e `/feed/$`
+- `/comments/$`
+- `/xmlrpc.php`
+
+Arquivos:
+
+```
+src/routes/wp-admin.$.ts
+src/routes/wp-content.$.ts
+src/routes/wp-includes.$.ts
+src/routes/wp-json.$.ts
+src/routes/category.$.ts
+src/routes/tag.$.ts
+src/routes/author.$.ts
+src/routes/feed.tsx        (rota exata /feed → 410)
+src/routes/feed.$.ts
+src/routes/comments.$.ts
+src/routes/xmlrpc[.]php.ts
+```
+
+Cada handler:
+
 ```ts
-export const SITE_URL = "https://denisonleandro.adv.br";
-export const SITE_NAME = "Denison Leandro Advogados Associados";
-export function buildMeta({ title, description, path, image, type = "website" }) { ... }
+GET: async () => new Response("<h1>410 Gone</h1>...", {
+  status: 410,
+  headers: { "Content-Type": "text/html; charset=utf-8", "X-Robots-Tag": "noindex, nofollow" },
+})
 ```
-Cada rota chama `buildMeta` para reduzir repetição.
 
-### Não será alterado
-Design visual, componentes, lógica, banco, edge functions, auth, admin, WhatsApp, tracking, Google Ads, navbar, footer, conteúdo das páginas (apenas `<title>`/`<meta>`/`<h1>` quando necessário).
+## 3. `public/robots.txt` — bloquear crawling dos padrões antigos
 
-### Checklist de entrega
-A) `__root.tsx` limpo (sem refs Lovable, OG image própria).
-B) Helper `src/lib/seo.ts` criado.
-C) Metadata única em todas as rotas públicas + canonical + og:url.
-D) `noindex` em `/auth` e `/admin`.
-E) H1 único validado por página.
-F) `public/robots.txt` criado.
-G) `src/routes/sitemap[.]xml.ts` criado e listando rotas + notícias dinâmicas.
-H) Imagem OG default gerada.
-I) Build/typecheck ok.
-J) Resumo final entregue ao usuário.
+Manter `Allow: /`, manter `Disallow: /admin` e `/auth`, e **adicionar**:
 
-### Perguntas antes de implementar
-1. Confirma **https://denisonleandro.adv.br** (sem www) como canônico?
-2. Posso **gerar** uma imagem OG default (1200×630) com o nome do escritório + tagline, ou você tem uma imagem para usar?
-3. Tem lista de URLs antigas do WordPress que devem redirecionar para páginas novas equivalentes? Se não, deixo 404 (recomendado pelo Google para conteúdo removido).
+```
+Disallow: /wp-admin/
+Disallow: /wp-content/
+Disallow: /wp-includes/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /category/
+Disallow: /tag/
+Disallow: /author/
+Disallow: /feed
+Disallow: /comments/
+Disallow: /*?p=
+Disallow: /*?page_id=
+Disallow: /*?replytocom=
+```
+
+> Observação técnica: `Disallow` impede o crawl. Para o Google **remover** as URLs já indexadas, o 410 (item 2) é o que importa. Os dois trabalham juntos.
+
+## 4. Sem redirects abrangentes
+
+Nenhum redirect 301 "tudo para a home". Não há mapeamento 1:1 conhecido entre URLs antigas e novas (se você tiver uma lista específica `/post-antigo` → `/noticias/...`, me passe depois e adiciono os 301s pontuais). Tudo que não bate vira 410 ou 404.
+
+## 5. Rotas inexistentes → 404 real
+
+A SPA já tem `notFoundComponent` no `__root.tsx`. Vou:
+
+- Traduzir o texto para PT-BR (mantendo o visual atual).
+- Adicionar `meta: [{ name: "robots", content: "noindex, nofollow" }]` no `head()` dessa página para garantir que não seja indexada.
+
+(Observação honesta: TanStack Start em SPA pode servir 200 no HTML inicial mesmo na rota de 404. Para o Google, o `noindex` na meta + ausência da URL no sitemap + 410 nos padrões WP é o conjunto que efetivamente limpa o índice. Não vou prometer status 404 server-side para qualquer URL inventada — apenas para os padrões listados no item 2.)
+
+## 6. Sitemap final
+
+`src/routes/sitemap[.]xml.ts` já contém exatamente as 23 rotas válidas + artigos publicados do banco. **Nenhuma URL antiga, de WordPress, ou quebrada está presente** — verificado. Não preciso alterar.
+
+## 7. Metadata (title/description) — já feito
+
+Auditoria da última iteração:
+
+- Home, `/escritorio`, todas as `/areas/*`, `/profissionais`, todas as `/equipe/*`, `/contato`, `/noticias`, `/noticias/{slug}`, `/acidente-de-trabalho` — todas usam `buildHead()` com title único (~55 chars) e description única (~150 chars), `og:*`, `twitter:*`, `canonical` apontando para `https://denisonleandro.adv.br/...`.
+- `/auth` e `/admin` com `noindex,nofollow`.
+
+Não há mudança necessária aqui — apenas confirmação no resumo final.
+
+## 8. Sem alteração visual
+
+Nenhum componente, layout, cor, tipografia, navbar, footer, CTA, WhatsApp, tracking ou banco de dados muda. Apenas:
+- novos arquivos de rota server-only `*.$.ts` para 410
+- `public/robots.txt`
+- texto PT-BR + meta noindex no `NotFoundComponent`
+
+## Resumo final que vou entregar após implementar
+
+- **Indexáveis (23 + artigos):** lista do item 1
+- **Bloqueadas no robots.txt:** padrões do item 3
+- **Retornam 410 Gone:** todos os caminhos do item 2
+- **Sitemap:** `https://denisonleandro.adv.br/sitemap.xml` contendo só as 23 rotas válidas + artigos publicados
+
+## Pergunta opcional (não bloqueia)
+
+Se você tiver uma planilha de URLs antigas com equivalente novo claro (ex.: `/2023/03/acidente-de-trabalho/` → `/acidente-de-trabalho`), me envie depois e eu adiciono 301s pontuais. Sem essa lista, mantemos 410, que é o comportamento correto recomendado pelo Google para conteúdo removido.
