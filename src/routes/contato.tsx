@@ -3,23 +3,16 @@ import { MessageCircle, MapPin, Phone, Mail } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { PageHeader } from "@/components/site/PageHeader";
+import { buildHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/contato")({
-  head: () => ({
-    meta: [
-      { title: "Contato | Denison Leandro e Advogados Associados" },
-      {
-        name: "description",
-        content:
-          "Fale com o escritório Denison Leandro e Advogados Associados. Unidades em Londrina, Curitiba, Foz do Iguaçu, Ibiporã, Maringá e Florianópolis.",
-      },
-      { property: "og:title", content: "Contato | Denison Leandro" },
-      {
-        property: "og:description",
-        content: "Entre em contato com nossas unidades em todo o Brasil.",
-      },
-    ],
-  }),
+  head: () =>
+    buildHead({
+      title: "Contato",
+      description:
+        "Fale com o escritório Denison Leandro Advogados Associados. Unidades em Londrina, Curitiba, Foz do Iguaçu, Ibiporã, Maringá e Florianópolis.",
+      path: "/contato",
+    }),
   component: ContatoPage,
 });
 
