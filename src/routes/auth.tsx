@@ -157,13 +157,15 @@ function AuthPage() {
         </form>
 
         <div className="mt-6 text-center space-y-3">
-          <button
-            type="button"
-            onClick={toggleMode}
-            className="text-sm text-muted-foreground hover:text-navy underline underline-offset-2"
-          >
-            {isSignIn ? "Não tem conta? Criar conta" : "Já tem conta? Entrar"}
-          </button>
+          {!isSignIn && (
+            <button
+              type="button"
+              onClick={toggleMode}
+              className="text-sm text-muted-foreground hover:text-navy underline underline-offset-2"
+            >
+              Já tem conta? Entrar
+            </button>
+          )}
           <div>
             <Link to="/" className="text-xs text-muted-foreground hover:text-navy">
               ← Voltar ao site
