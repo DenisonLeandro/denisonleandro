@@ -197,6 +197,18 @@ function AdminArtigosPage() {
     }
   }
 
+  async function findAvailableSlug(base: string, ignoreId?: string): Promise<string> {
+    let query = (supabase as any).from("articles").select("slug");
+    if (ignoreId) query = query.neq("id", ignoreId);
+    const { data, error: err } = await query;
+    if (err) throw err;
+    const taken = new Set<string>(((data || []) as { slug: string }[]).map((r) => r.slug));
+    if (!taken.has(base)) return base;
+    let i = 2;
+    while (taken.has(`${base}-${i}`)) i++;
+    return `${base}-${i}`;
+  }
+
   async function save(status: "draft" | "published") {
     if (!form.title.trim()) {
       setError("Informe o título do artigo.");
@@ -207,14 +219,26 @@ function AdminArtigosPage() {
       return;
     }
 
-    const finalSlug = slugify(form.slug || form.title);
-    if (!finalSlug) {
+    const desiredSlug = slugify(form.slug || form.title);
+    if (!desiredSlug) {
       setError("Slug inválido.");
       return;
     }
 
     setSaving(true);
     setError(null);
+    setNotice(null);
+
+    let finalSlug = desiredSlug;
+    try {
+      finalSlug = await findAvailableSlug(desiredSlug, editing?.id);
+    } catch (err: any) {
+      console.error("Erro ao verificar slug:", err);
+      setSaving(false);
+      setError(err?.message ?? "Erro ao verificar o endereço (slug) do artigo.");
+      return;
+    }
+
 
     let publishedAt = editing?.published_at ?? null;
     if (status === "published" && !publishedAt) {
