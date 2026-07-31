@@ -336,6 +336,13 @@ function AdminArtigosPage() {
           </div>
         )}
 
+        {notice && (
+          <div className="mt-6 rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+            {notice}
+          </div>
+        )}
+
+
         {mode === "list" ? (
           <section className="mt-8 overflow-hidden rounded-xl border border-border bg-card shadow-card">
             {loading ? (
