@@ -276,13 +276,26 @@ function AdminArtigosPage() {
       }
       await loadArticles();
       cancelEdit();
+      if (finalSlug !== desiredSlug) {
+        setNotice(
+          `O endereço "${desiredSlug}" já estava em uso. O artigo foi salvo como /noticias/${finalSlug}.`,
+        );
+      }
     } catch (err: any) {
       console.error("Erro ao salvar artigo:", err);
-      setError(err?.message ?? "Erro ao salvar artigo.");
+      const msg = String(err?.message ?? "");
+      if (msg.includes("articles_slug_key") || msg.includes("duplicate key value")) {
+        setError(
+          "Já existe um artigo com este endereço (slug). Altere o campo Slug e tente novamente.",
+        );
+      } else {
+        setError(msg || "Erro ao salvar artigo.");
+      }
     } finally {
       setSaving(false);
     }
   }
+
 
   return (
     <div className="min-h-screen bg-background">
