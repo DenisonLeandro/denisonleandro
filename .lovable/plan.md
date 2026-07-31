@@ -1,19 +1,27 @@
-## Plano: Ocultar link "Não tem conta? Criar conta" na área restrita
+## Problema
 
-### O que será feito
-- Em `src/routes/auth.tsx`, ocultar o botão/link de alternância "Não tem conta? Criar conta" que aparece na tela de login (`mode === 'signin'`).
-- Manter o estado `mode` e toda a lógica de signup no código, apenas sem expor o link na interface do login.
-- Garantir que o visual do restante da página não seja alterado.
+Ao salvar um artigo, o painel mostra o erro cru do banco:
 
-### Alteração técnica
-- Envolver o `<button onClick={toggleMode}>` em uma condição que não renderize quando `mode === 'signin'` (ou comentar/remover apenas o trecho visível).
-- Deixar intactos: formulário de login, validações, redirecionamentos, título e metadados.
+```text
+duplicate key value violates unique constraint "articles_slug_key"
+```
 
-### Validação
-- Recarregar a visualização da página `/auth` e confirmar que o link "Não tem conta? Criar conta" não aparece.
-- Verificar que a página continua funcionando normalmente para login.
+Isso acontece porque a coluna `slug` da tabela `articles` é única e o slug gerado a partir do título já existe em outro artigo (inclusive rascunhos ou artigos não publicados, que não aparecem em /noticias).
 
-### Não será alterado
-- Funcionalidade de criação de conta (signup) continua existindo no código.
-- Design, cores, tipografia e outros elementos da página.
-- Rotas, SEO, sitemap ou robots.txt.
+## Solução proposta
+
+Alterar apenas `src/routes/_authenticated/admin.artigos.tsx` (nenhuma mudança de banco, RLS, migração ou visual do site público):
+
+1. **Sufixo automático no slug**: antes de inserir/atualizar, consultar se o slug já existe em outro artigo. Se existir, gerar `meu-artigo-2`, `meu-artigo-3`, etc., até encontrar um livre.
+2. **Aviso no formulário**: quando o slug for ajustado automaticamente, mostrar uma mensagem discreta informando o slug final usado (ex.: "O endereço já estava em uso; o artigo foi salvo como `/noticias/meu-artigo-2`").
+3. **Mensagem de erro amigável**: se ainda assim o banco retornar violação de unicidade, exibir "Já existe um artigo com este endereço (slug). Altere o campo Slug e tente novamente." em vez do texto técnico.
+
+## Preservado
+
+Banco, migrações, RLS, storage/upload de capa, `/noticias`, `/noticias/{slug}`, `/acidente-de-trabalho`, CTAs, WhatsApp, tracking, Navbar, Footer, home, `/auth`.
+
+## Validação
+
+- Criar dois artigos com o mesmo título → o segundo salva com slug sufixado, sem erro.
+- Editar um artigo existente sem mudar o slug → salva normalmente (não gera sufixo contra si mesmo).
+- Typecheck sem erro.
