@@ -139,8 +139,10 @@ function AdminArtigosPage() {
     setForm(emptyForm);
     setSlugTouched(false);
     setError(null);
+    setNotice(null);
     setMode("edit");
   }
+
 
   function openEdit(a: Article) {
     setEditing(a);
