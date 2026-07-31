@@ -64,6 +64,8 @@ function AdminArtigosPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+
   const [editing, setEditing] = useState<Article | null>(null);
   const [form, setForm] = useState<FormState>(emptyForm);
   const [slugTouched, setSlugTouched] = useState(false);
@@ -137,8 +139,10 @@ function AdminArtigosPage() {
     setForm(emptyForm);
     setSlugTouched(false);
     setError(null);
+    setNotice(null);
     setMode("edit");
   }
+
 
   function openEdit(a: Article) {
     setEditing(a);
@@ -155,6 +159,7 @@ function AdminArtigosPage() {
     });
     setSlugTouched(true);
     setError(null);
+    setNotice(null);
     setMode("edit");
   }
 
@@ -164,7 +169,9 @@ function AdminArtigosPage() {
     setForm(emptyForm);
     setSlugTouched(false);
     setError(null);
+    setNotice(null);
   }
+
 
   function onTitleChange(value: string) {
     setForm((f) => ({
@@ -197,6 +204,18 @@ function AdminArtigosPage() {
     }
   }
 
+  async function findAvailableSlug(base: string, ignoreId?: string): Promise<string> {
+    let query = (supabase as any).from("articles").select("slug");
+    if (ignoreId) query = query.neq("id", ignoreId);
+    const { data, error: err } = await query;
+    if (err) throw err;
+    const taken = new Set<string>(((data || []) as { slug: string }[]).map((r) => r.slug));
+    if (!taken.has(base)) return base;
+    let i = 2;
+    while (taken.has(`${base}-${i}`)) i++;
+    return `${base}-${i}`;
+  }
+
   async function save(status: "draft" | "published") {
     if (!form.title.trim()) {
       setError("Informe o título do artigo.");
@@ -207,14 +226,26 @@ function AdminArtigosPage() {
       return;
     }
 
-    const finalSlug = slugify(form.slug || form.title);
-    if (!finalSlug) {
+    const desiredSlug = slugify(form.slug || form.title);
+    if (!desiredSlug) {
       setError("Slug inválido.");
       return;
     }
 
     setSaving(true);
     setError(null);
+    setNotice(null);
+
+    let finalSlug = desiredSlug;
+    try {
+      finalSlug = await findAvailableSlug(desiredSlug, editing?.id);
+    } catch (err: any) {
+      console.error("Erro ao verificar slug:", err);
+      setSaving(false);
+      setError(err?.message ?? "Erro ao verificar o endereço (slug) do artigo.");
+      return;
+    }
+
 
     let publishedAt = editing?.published_at ?? null;
     if (status === "published" && !publishedAt) {
@@ -250,13 +281,26 @@ function AdminArtigosPage() {
       }
       await loadArticles();
       cancelEdit();
+      if (finalSlug !== desiredSlug) {
+        setNotice(
+          `O endereço "${desiredSlug}" já estava em uso. O artigo foi salvo como /noticias/${finalSlug}.`,
+        );
+      }
     } catch (err: any) {
       console.error("Erro ao salvar artigo:", err);
-      setError(err?.message ?? "Erro ao salvar artigo.");
+      const msg = String(err?.message ?? "");
+      if (msg.includes("articles_slug_key") || msg.includes("duplicate key value")) {
+        setError(
+          "Já existe um artigo com este endereço (slug). Altere o campo Slug e tente novamente.",
+        );
+      } else {
+        setError(msg || "Erro ao salvar artigo.");
+      }
     } finally {
       setSaving(false);
     }
   }
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -291,6 +335,13 @@ function AdminArtigosPage() {
             {error}
           </div>
         )}
+
+        {notice && (
+          <div className="mt-6 rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+            {notice}
+          </div>
+        )}
+
 
         {mode === "list" ? (
           <section className="mt-8 overflow-hidden rounded-xl border border-border bg-card shadow-card">
