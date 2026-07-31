@@ -159,6 +159,7 @@ function AdminArtigosPage() {
     });
     setSlugTouched(true);
     setError(null);
+    setNotice(null);
     setMode("edit");
   }
 
@@ -168,7 +169,9 @@ function AdminArtigosPage() {
     setForm(emptyForm);
     setSlugTouched(false);
     setError(null);
+    setNotice(null);
   }
+
 
   function onTitleChange(value: string) {
     setForm((f) => ({
