@@ -1,13 +1,14 @@
-## Idioma das respostas
+## Respostas em português
 
-A preferência "sempre responder em português (Brasil), em linguagem simples" já está gravada nas suas preferências e vale para todas as conversas deste espaço de trabalho. Não é preciso mudar nada no site.
+Peço desculpas: a última mensagem saiu em inglês por engano. A partir de agora, todas as respostas serão em português (Brasil), em linguagem simples. Essa preferência já está gravada.
 
-## Resumo da última etapa (em português)
+## Tradução da última mensagem
 
-- Corrigi um erro de verificação que impedia o site de atualizar. Agora a verificação passa sem erros.
-- As páginas de notícias e de cada artigo já chegam completas para o Google, as redes sociais e as IAs.
-- Para essas melhorias aparecerem no site no ar, falta publicar.
+- Pedi a publicação do site em https://denisonleandro.adv.br. Costuma levar cerca de um minuto, mas é só uma estimativa. Ainda não confirmei se já está no ar.
+- As melhorias nas notícias e nos artigos vão aparecer lá quando a publicação terminar.
+- Antes de publicar, olhei a verificação de segurança. O único aviso é que qualquer pessoa pode ver a lista de imagens de capa dos artigos. Essas imagens já são públicas de propósito, então não é um problema.
+- Recomendo fazer uma nova verificação de segurança antes de divulgar o site amplamente.
 
 ## Próximo passo
 
-Aprovar este plano para eu publicar o site. Ou você pode me enviar o próximo problema de tráfego orgânico.
+Pode me enviar o próximo problema de tráfego orgânico. Não há nenhuma mudança a fazer no site agora.
