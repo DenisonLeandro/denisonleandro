@@ -1,24 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { buildHead } from "@/lib/seo";
-import { useEffect, useState } from "react";
 import { ArrowRight, Calendar, Loader2, Star } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { CtaBanner } from "@/components/site/CtaBanner";
 import { PageHeader } from "@/components/site/PageHeader";
-import { supabase } from "@/integrations/supabase/client";
+import { listPublishedArticles } from "@/lib/articles.functions";
 
-interface Article {
-  id: string;
-  slug: string;
-  title: string;
-  excerpt: string | null;
-  category: string | null;
-  cover_image_url: string | null;
-  published_at: string;
-  content: string;
-  status: string;
-}
 import featuredImage from "@/assets/featured-acidente-de-trabalho.jpg";
 
 function FeaturedArticleCard() {
@@ -67,41 +55,39 @@ function FeaturedArticleCard() {
 }
 
 export const Route = createFileRoute("/noticias/")({
-  head: () =>
-    buildHead({
-      title: "Notícias e Artigos Jurídicos",
+  validateSearch: (search: Record<string, unknown>): { pagina?: number } => {
+    const n = Math.floor(Number(search.pagina));
+    return Number.isFinite(n) && n > 1 ? { pagina: n } : {};
+  },
+  loaderDeps: ({ search }) => ({ pagina: search.pagina ?? 1 }),
+  loader: ({ deps }) => listPublishedArticles({ data: { page: deps.pagina } }),
+  head: ({ loaderData }) => {
+    const page = loaderData?.page ?? 1;
+    return buildHead({
+      title: page > 1 ? `Notícias e Artigos Jurídicos — Página ${page}` : "Notícias e Artigos Jurídicos",
       description:
         "Artigos e análises sobre Direito Trabalhista, Previdenciário, do Consumidor e mais, produzidos pela equipe do Denison Leandro Advogados Associados.",
-      path: "/noticias",
-    }),
+      path: page > 1 ? `/noticias?pagina=${page}` : "/noticias",
+    });
+  },
+  errorComponent: ({ error }) => (
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <main className="mx-auto max-w-3xl px-6 py-20">
+        <p className="text-muted-foreground">
+          {error instanceof Error ? error.message : "Erro ao carregar as notícias."}
+        </p>
+      </main>
+      <Footer />
+    </div>
+  ),
+  notFoundComponent: () => <p className="py-20 text-center">Nenhuma notícia encontrada.</p>,
   component: NoticiasPage,
 });
 
 function NoticiasPage() {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function loadArticles() {
-      try {
-        const { data, error } = await (supabase as any)
-          .from("articles")
-          .select("*")
-          .eq("status", "published")
-          .order("published_at", { ascending: false })
-          .limit(100);
-
-        if (error) throw error;
-        setArticles(data || []);
-      } catch (err) {
-        console.error("Erro ao carregar artigos:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadArticles();
-  }, []);
+  const { articles, page, totalPages } = Route.useLoaderData();
+  const loading = false;
 
   return (
     <div className="min-h-screen bg-background">
@@ -115,7 +101,7 @@ function NoticiasPage() {
 
         <section className="bg-background py-20">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
-            <FeaturedArticleCard />
+            {page === 1 && <FeaturedArticleCard />}
             {loading ? (
               <div className="flex items-center justify-center gap-2 py-10">
                 <Loader2 className="h-6 w-6 animate-spin" />
@@ -183,6 +169,25 @@ function NoticiasPage() {
                   </Link>
                 ))}
               </div>
+            )}
+            {totalPages > 1 && (
+              <nav aria-label="Paginação" className="mt-12 flex flex-wrap items-center justify-center gap-2">
+                {page > 1 && (
+                  <Link to="/noticias" search={page - 1 > 1 ? { pagina: page - 1 } : {}} rel="prev" className="rounded-md border border-navy px-4 py-2 text-sm font-semibold text-navy transition-colors hover:bg-navy hover:text-white">
+                    Anterior
+                  </Link>
+                )}
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+                  <Link key={n} to="/noticias" search={n > 1 ? { pagina: n } : {}} aria-current={n === page ? "page" : undefined} className={n === page ? "rounded-md bg-navy px-4 py-2 text-sm font-semibold text-white" : "rounded-md border border-navy px-4 py-2 text-sm font-semibold text-navy transition-colors hover:bg-navy hover:text-white"}>
+                    {n}
+                  </Link>
+                ))}
+                {page < totalPages && (
+                  <Link to="/noticias" search={{ pagina: page + 1 }} rel="next" className="rounded-md border border-navy px-4 py-2 text-sm font-semibold text-navy transition-colors hover:bg-navy hover:text-white">
+                    Próxima
+                  </Link>
+                )}
+              </nav>
             )}
           </div>
         </section>
