@@ -20,6 +20,10 @@ export interface BuildHeadInput {
   fullTitle?: string;
   /** When true, emits robots noindex,nofollow (for /auth, /admin). */
   noindex?: boolean;
+  /** ISO dates for article:published_time / article:modified_time. */
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
 }
 
 type MetaTag =
@@ -61,6 +65,12 @@ export function buildHead(input: BuildHeadInput): HeadResult {
     { name: "twitter:description", content: description },
     { name: "twitter:image", content: image },
   ];
+
+  if (input.publishedTime)
+    meta.push({ property: "article:published_time", content: input.publishedTime });
+  if (input.modifiedTime)
+    meta.push({ property: "article:modified_time", content: input.modifiedTime });
+  if (input.author) meta.push({ property: "article:author", content: input.author });
 
   if (noindex) {
     meta.push({ name: "robots", content: "noindex,nofollow" });
