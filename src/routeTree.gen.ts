@@ -9,90 +9,54 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as XmlrpcDotphpRouteImport } from './routes/xmlrpc[.]php'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as ProfissionaisRouteImport } from './routes/profissionais'
-import { Route as FeedRouteImport } from './routes/feed'
-import { Route as EscritorioRouteImport } from './routes/escritorio'
-import { Route as ContatoRouteImport } from './routes/contato'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AreasDeAtuacaoRouteImport } from './routes/areas-de-atuacao'
-import { Route as AdminRouteImport } from './routes/admin'
-import { Route as AcidenteDeTrabalhoRouteImport } from './routes/acidente-de-trabalho'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as NoticiasIndexRouteImport } from './routes/noticias.index'
-import { Route as WpJsonSplatRouteImport } from './routes/wp-json.$'
-import { Route as WpIncludesSplatRouteImport } from './routes/wp-includes.$'
-import { Route as WpContentSplatRouteImport } from './routes/wp-content.$'
-import { Route as WpAdminSplatRouteImport } from './routes/wp-admin.$'
-import { Route as TagSplatRouteImport } from './routes/tag.$'
-import { Route as NoticiasSlugRouteImport } from './routes/noticias.$slug'
-import { Route as FeedSplatRouteImport } from './routes/feed.$'
-import { Route as EquipeRenataHenriqueLeandroRouteImport } from './routes/equipe.renata-henrique-leandro'
-import { Route as EquipeMariaInesGomesDaSilvaRouteImport } from './routes/equipe.maria-ines-gomes-da-silva'
-import { Route as EquipeMarcioBarbosaDaSilvaRouteImport } from './routes/equipe.marcio-barbosa-da-silva'
-import { Route as EquipeLeonardoNascimentoDeAguiarRouteImport } from './routes/equipe.leonardo-nascimento-de-aguiar'
-import { Route as EquipeJuanAlbnerPereiraVelosoRouteImport } from './routes/equipe.juan-albner-pereira-veloso'
-import { Route as EquipeJoaoTadeuLeandroRouteImport } from './routes/equipe.joao-tadeu-leandro'
-import { Route as EquipeHigorHenriqueLeandroRouteImport } from './routes/equipe.higor-henrique-leandro'
-import { Route as EquipeDenisonHenriqueLeandroRouteImport } from './routes/equipe.denison-henrique-leandro'
-import { Route as EquipeDanielleCristinaMateusPereiraRouteImport } from './routes/equipe.danielle-cristina-mateus-pereira'
-import { Route as CommentsSplatRouteImport } from './routes/comments.$'
-import { Route as CategorySplatRouteImport } from './routes/category.$'
-import { Route as AuthorSplatRouteImport } from './routes/author.$'
-import { Route as AreasTrabalhistaRouteImport } from './routes/areas.trabalhista'
-import { Route as AreasPrevidenciarioRouteImport } from './routes/areas.previdenciario'
-import { Route as AreasMediacaoRouteImport } from './routes/areas.mediacao'
-import { Route as AreasFamiliaRouteImport } from './routes/areas.familia'
-import { Route as AreasContratosRouteImport } from './routes/areas.contratos'
-import { Route as AreasConsumidorRouteImport } from './routes/areas.consumidor'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AcidenteDeTrabalhoRouteImport } from './routes/acidente-de-trabalho'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AreasDeAtuacaoRouteImport } from './routes/areas-de-atuacao'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as EscritorioRouteImport } from './routes/escritorio'
+import { Route as FeedRouteImport } from './routes/feed'
+import { Route as ProfissionaisRouteImport } from './routes/profissionais'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as XmlrpcDotphpRouteImport } from './routes/xmlrpc[.]php'
 import { Route as AreasBancarioRouteImport } from './routes/areas.bancario'
+import { Route as AreasConsumidorRouteImport } from './routes/areas.consumidor'
+import { Route as AreasContratosRouteImport } from './routes/areas.contratos'
+import { Route as AreasFamiliaRouteImport } from './routes/areas.familia'
+import { Route as AreasMediacaoRouteImport } from './routes/areas.mediacao'
+import { Route as AreasPrevidenciarioRouteImport } from './routes/areas.previdenciario'
+import { Route as AreasTrabalhistaRouteImport } from './routes/areas.trabalhista'
+import { Route as AuthorSplatRouteImport } from './routes/author.$'
+import { Route as CategorySplatRouteImport } from './routes/category.$'
+import { Route as CommentsSplatRouteImport } from './routes/comments.$'
+import { Route as EquipeDanielleCristinaMateusPereiraRouteImport } from './routes/equipe.danielle-cristina-mateus-pereira'
+import { Route as EquipeDenisonHenriqueLeandroRouteImport } from './routes/equipe.denison-henrique-leandro'
+import { Route as EquipeHigorHenriqueLeandroRouteImport } from './routes/equipe.higor-henrique-leandro'
+import { Route as EquipeJoaoTadeuLeandroRouteImport } from './routes/equipe.joao-tadeu-leandro'
+import { Route as EquipeJuanAlbnerPereiraVelosoRouteImport } from './routes/equipe.juan-albner-pereira-veloso'
+import { Route as EquipeLeonardoNascimentoDeAguiarRouteImport } from './routes/equipe.leonardo-nascimento-de-aguiar'
+import { Route as EquipeMarcioBarbosaDaSilvaRouteImport } from './routes/equipe.marcio-barbosa-da-silva'
+import { Route as EquipeMariaInesGomesDaSilvaRouteImport } from './routes/equipe.maria-ines-gomes-da-silva'
+import { Route as EquipeRenataHenriqueLeandroRouteImport } from './routes/equipe.renata-henrique-leandro'
+import { Route as FeedSplatRouteImport } from './routes/feed.$'
+import { Route as NoticiasIndexRouteImport } from './routes/noticias.index'
+import { Route as NoticiasSlugRouteImport } from './routes/noticias.$slug'
+import { Route as TagSplatRouteImport } from './routes/tag.$'
+import { Route as WpAdminSplatRouteImport } from './routes/wp-admin.$'
+import { Route as WpContentSplatRouteImport } from './routes/wp-content.$'
+import { Route as WpIncludesSplatRouteImport } from './routes/wp-includes.$'
+import { Route as WpJsonSplatRouteImport } from './routes/wp-json.$'
 import { Route as AuthenticatedAdminArtigosRouteImport } from './routes/_authenticated/admin.artigos'
 
-const XmlrpcDotphpRoute = XmlrpcDotphpRouteImport.update({
-  id: '/xmlrpc.php',
-  path: '/xmlrpc.php',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProfissionaisRoute = ProfissionaisRouteImport.update({
-  id: '/profissionais',
-  path: '/profissionais',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FeedRoute = FeedRouteImport.update({
-  id: '/feed',
-  path: '/feed',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EscritorioRoute = EscritorioRouteImport.update({
-  id: '/escritorio',
-  path: '/escritorio',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContatoRoute = ContatoRouteImport.update({
-  id: '/contato',
-  path: '/contato',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AreasDeAtuacaoRoute = AreasDeAtuacaoRouteImport.update({
-  id: '/areas-de-atuacao',
-  path: '/areas-de-atuacao',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AcidenteDeTrabalhoRoute = AcidenteDeTrabalhoRouteImport.update({
@@ -100,94 +64,105 @@ const AcidenteDeTrabalhoRoute = AcidenteDeTrabalhoRouteImport.update({
   path: '/acidente-de-trabalho',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AreasDeAtuacaoRoute = AreasDeAtuacaoRouteImport.update({
+  id: '/areas-de-atuacao',
+  path: '/areas-de-atuacao',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NoticiasIndexRoute = NoticiasIndexRouteImport.update({
-  id: '/noticias/',
-  path: '/noticias/',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WpJsonSplatRoute = WpJsonSplatRouteImport.update({
-  id: '/wp-json/$',
-  path: '/wp-json/$',
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WpIncludesSplatRoute = WpIncludesSplatRouteImport.update({
-  id: '/wp-includes/$',
-  path: '/wp-includes/$',
+const EscritorioRoute = EscritorioRouteImport.update({
+  id: '/escritorio',
+  path: '/escritorio',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WpContentSplatRoute = WpContentSplatRouteImport.update({
-  id: '/wp-content/$',
-  path: '/wp-content/$',
+const FeedRoute = FeedRouteImport.update({
+  id: '/feed',
+  path: '/feed',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WpAdminSplatRoute = WpAdminSplatRouteImport.update({
-  id: '/wp-admin/$',
-  path: '/wp-admin/$',
+const ProfissionaisRoute = ProfissionaisRouteImport.update({
+  id: '/profissionais',
+  path: '/profissionais',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TagSplatRoute = TagSplatRouteImport.update({
-  id: '/tag/$',
-  path: '/tag/$',
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NoticiasSlugRoute = NoticiasSlugRouteImport.update({
-  id: '/noticias/$slug',
-  path: '/noticias/$slug',
+const XmlrpcDotphpRoute = XmlrpcDotphpRouteImport.update({
+  id: '/xmlrpc.php',
+  path: '/xmlrpc.php',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FeedSplatRoute = FeedSplatRouteImport.update({
-  id: '/$',
-  path: '/$',
-  getParentRoute: () => FeedRoute,
-} as any)
-const EquipeRenataHenriqueLeandroRoute =
-  EquipeRenataHenriqueLeandroRouteImport.update({
-    id: '/equipe/renata-henrique-leandro',
-    path: '/equipe/renata-henrique-leandro',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const EquipeMariaInesGomesDaSilvaRoute =
-  EquipeMariaInesGomesDaSilvaRouteImport.update({
-    id: '/equipe/maria-ines-gomes-da-silva',
-    path: '/equipe/maria-ines-gomes-da-silva',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const EquipeMarcioBarbosaDaSilvaRoute =
-  EquipeMarcioBarbosaDaSilvaRouteImport.update({
-    id: '/equipe/marcio-barbosa-da-silva',
-    path: '/equipe/marcio-barbosa-da-silva',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const EquipeLeonardoNascimentoDeAguiarRoute =
-  EquipeLeonardoNascimentoDeAguiarRouteImport.update({
-    id: '/equipe/leonardo-nascimento-de-aguiar',
-    path: '/equipe/leonardo-nascimento-de-aguiar',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const EquipeJuanAlbnerPereiraVelosoRoute =
-  EquipeJuanAlbnerPereiraVelosoRouteImport.update({
-    id: '/equipe/juan-albner-pereira-veloso',
-    path: '/equipe/juan-albner-pereira-veloso',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const EquipeJoaoTadeuLeandroRoute = EquipeJoaoTadeuLeandroRouteImport.update({
-  id: '/equipe/joao-tadeu-leandro',
-  path: '/equipe/joao-tadeu-leandro',
+const AreasBancarioRoute = AreasBancarioRouteImport.update({
+  id: '/areas/bancario',
+  path: '/areas/bancario',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EquipeHigorHenriqueLeandroRoute =
-  EquipeHigorHenriqueLeandroRouteImport.update({
-    id: '/equipe/higor-henrique-leandro',
-    path: '/equipe/higor-henrique-leandro',
+const AreasConsumidorRoute = AreasConsumidorRouteImport.update({
+  id: '/areas/consumidor',
+  path: '/areas/consumidor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasContratosRoute = AreasContratosRouteImport.update({
+  id: '/areas/contratos',
+  path: '/areas/contratos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasFamiliaRoute = AreasFamiliaRouteImport.update({
+  id: '/areas/familia',
+  path: '/areas/familia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasMediacaoRoute = AreasMediacaoRouteImport.update({
+  id: '/areas/mediacao',
+  path: '/areas/mediacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasPrevidenciarioRoute = AreasPrevidenciarioRouteImport.update({
+  id: '/areas/previdenciario',
+  path: '/areas/previdenciario',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasTrabalhistaRoute = AreasTrabalhistaRouteImport.update({
+  id: '/areas/trabalhista',
+  path: '/areas/trabalhista',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthorSplatRoute = AuthorSplatRouteImport.update({
+  id: '/author/$',
+  path: '/author/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategorySplatRoute = CategorySplatRouteImport.update({
+  id: '/category/$',
+  path: '/category/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommentsSplatRoute = CommentsSplatRouteImport.update({
+  id: '/comments/$',
+  path: '/comments/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EquipeDanielleCristinaMateusPereiraRoute =
+  EquipeDanielleCristinaMateusPereiraRouteImport.update({
+    id: '/equipe/danielle-cristina-mateus-pereira',
+    path: '/equipe/danielle-cristina-mateus-pereira',
     getParentRoute: () => rootRouteImport,
   } as any)
 const EquipeDenisonHenriqueLeandroRoute =
@@ -196,60 +171,85 @@ const EquipeDenisonHenriqueLeandroRoute =
     path: '/equipe/denison-henrique-leandro',
     getParentRoute: () => rootRouteImport,
   } as any)
-const EquipeDanielleCristinaMateusPereiraRoute =
-  EquipeDanielleCristinaMateusPereiraRouteImport.update({
-    id: '/equipe/danielle-cristina-mateus-pereira',
-    path: '/equipe/danielle-cristina-mateus-pereira',
+const EquipeHigorHenriqueLeandroRoute =
+  EquipeHigorHenriqueLeandroRouteImport.update({
+    id: '/equipe/higor-henrique-leandro',
+    path: '/equipe/higor-henrique-leandro',
     getParentRoute: () => rootRouteImport,
   } as any)
-const CommentsSplatRoute = CommentsSplatRouteImport.update({
-  id: '/comments/$',
-  path: '/comments/$',
+const EquipeJoaoTadeuLeandroRoute = EquipeJoaoTadeuLeandroRouteImport.update({
+  id: '/equipe/joao-tadeu-leandro',
+  path: '/equipe/joao-tadeu-leandro',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CategorySplatRoute = CategorySplatRouteImport.update({
-  id: '/category/$',
-  path: '/category/$',
+const EquipeJuanAlbnerPereiraVelosoRoute =
+  EquipeJuanAlbnerPereiraVelosoRouteImport.update({
+    id: '/equipe/juan-albner-pereira-veloso',
+    path: '/equipe/juan-albner-pereira-veloso',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EquipeLeonardoNascimentoDeAguiarRoute =
+  EquipeLeonardoNascimentoDeAguiarRouteImport.update({
+    id: '/equipe/leonardo-nascimento-de-aguiar',
+    path: '/equipe/leonardo-nascimento-de-aguiar',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EquipeMarcioBarbosaDaSilvaRoute =
+  EquipeMarcioBarbosaDaSilvaRouteImport.update({
+    id: '/equipe/marcio-barbosa-da-silva',
+    path: '/equipe/marcio-barbosa-da-silva',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EquipeMariaInesGomesDaSilvaRoute =
+  EquipeMariaInesGomesDaSilvaRouteImport.update({
+    id: '/equipe/maria-ines-gomes-da-silva',
+    path: '/equipe/maria-ines-gomes-da-silva',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EquipeRenataHenriqueLeandroRoute =
+  EquipeRenataHenriqueLeandroRouteImport.update({
+    id: '/equipe/renata-henrique-leandro',
+    path: '/equipe/renata-henrique-leandro',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const FeedSplatRoute = FeedSplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => FeedRoute,
+} as any)
+const NoticiasIndexRoute = NoticiasIndexRouteImport.update({
+  id: '/noticias/',
+  path: '/noticias/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthorSplatRoute = AuthorSplatRouteImport.update({
-  id: '/author/$',
-  path: '/author/$',
+const NoticiasSlugRoute = NoticiasSlugRouteImport.update({
+  id: '/noticias/$slug',
+  path: '/noticias/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AreasTrabalhistaRoute = AreasTrabalhistaRouteImport.update({
-  id: '/areas/trabalhista',
-  path: '/areas/trabalhista',
+const TagSplatRoute = TagSplatRouteImport.update({
+  id: '/tag/$',
+  path: '/tag/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AreasPrevidenciarioRoute = AreasPrevidenciarioRouteImport.update({
-  id: '/areas/previdenciario',
-  path: '/areas/previdenciario',
+const WpAdminSplatRoute = WpAdminSplatRouteImport.update({
+  id: '/wp-admin/$',
+  path: '/wp-admin/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AreasMediacaoRoute = AreasMediacaoRouteImport.update({
-  id: '/areas/mediacao',
-  path: '/areas/mediacao',
+const WpContentSplatRoute = WpContentSplatRouteImport.update({
+  id: '/wp-content/$',
+  path: '/wp-content/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AreasFamiliaRoute = AreasFamiliaRouteImport.update({
-  id: '/areas/familia',
-  path: '/areas/familia',
+const WpIncludesSplatRoute = WpIncludesSplatRouteImport.update({
+  id: '/wp-includes/$',
+  path: '/wp-includes/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AreasContratosRoute = AreasContratosRouteImport.update({
-  id: '/areas/contratos',
-  path: '/areas/contratos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AreasConsumidorRoute = AreasConsumidorRouteImport.update({
-  id: '/areas/consumidor',
-  path: '/areas/consumidor',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AreasBancarioRoute = AreasBancarioRouteImport.update({
-  id: '/areas/bancario',
-  path: '/areas/bancario',
+const WpJsonSplatRoute = WpJsonSplatRouteImport.update({
+  id: '/wp-json/$',
+  path: '/wp-json/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminArtigosRoute =
@@ -554,74 +554,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/xmlrpc.php': {
-      id: '/xmlrpc.php'
-      path: '/xmlrpc.php'
-      fullPath: '/xmlrpc.php'
-      preLoaderRoute: typeof XmlrpcDotphpRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/profissionais': {
-      id: '/profissionais'
-      path: '/profissionais'
-      fullPath: '/profissionais'
-      preLoaderRoute: typeof ProfissionaisRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/feed': {
-      id: '/feed'
-      path: '/feed'
-      fullPath: '/feed'
-      preLoaderRoute: typeof FeedRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/escritorio': {
-      id: '/escritorio'
-      path: '/escritorio'
-      fullPath: '/escritorio'
-      preLoaderRoute: typeof EscritorioRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contato': {
-      id: '/contato'
-      path: '/contato'
-      fullPath: '/contato'
-      preLoaderRoute: typeof ContatoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/areas-de-atuacao': {
-      id: '/areas-de-atuacao'
-      path: '/areas-de-atuacao'
-      fullPath: '/areas-de-atuacao'
-      preLoaderRoute: typeof AreasDeAtuacaoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/acidente-de-trabalho': {
-      id: '/acidente-de-trabalho'
-      path: '/acidente-de-trabalho'
-      fullPath: '/acidente-de-trabalho'
-      preLoaderRoute: typeof AcidenteDeTrabalhoRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -631,186 +568,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/acidente-de-trabalho': {
+      id: '/acidente-de-trabalho'
+      path: '/acidente-de-trabalho'
+      fullPath: '/acidente-de-trabalho'
+      preLoaderRoute: typeof AcidenteDeTrabalhoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/noticias/': {
-      id: '/noticias/'
-      path: '/noticias'
-      fullPath: '/noticias/'
-      preLoaderRoute: typeof NoticiasIndexRouteImport
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/wp-json/$': {
-      id: '/wp-json/$'
-      path: '/wp-json/$'
-      fullPath: '/wp-json/$'
-      preLoaderRoute: typeof WpJsonSplatRouteImport
+    '/areas-de-atuacao': {
+      id: '/areas-de-atuacao'
+      path: '/areas-de-atuacao'
+      fullPath: '/areas-de-atuacao'
+      preLoaderRoute: typeof AreasDeAtuacaoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/wp-includes/$': {
-      id: '/wp-includes/$'
-      path: '/wp-includes/$'
-      fullPath: '/wp-includes/$'
-      preLoaderRoute: typeof WpIncludesSplatRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/wp-content/$': {
-      id: '/wp-content/$'
-      path: '/wp-content/$'
-      fullPath: '/wp-content/$'
-      preLoaderRoute: typeof WpContentSplatRouteImport
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/wp-admin/$': {
-      id: '/wp-admin/$'
-      path: '/wp-admin/$'
-      fullPath: '/wp-admin/$'
-      preLoaderRoute: typeof WpAdminSplatRouteImport
+    '/escritorio': {
+      id: '/escritorio'
+      path: '/escritorio'
+      fullPath: '/escritorio'
+      preLoaderRoute: typeof EscritorioRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/tag/$': {
-      id: '/tag/$'
-      path: '/tag/$'
-      fullPath: '/tag/$'
-      preLoaderRoute: typeof TagSplatRouteImport
+    '/feed': {
+      id: '/feed'
+      path: '/feed'
+      fullPath: '/feed'
+      preLoaderRoute: typeof FeedRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/noticias/$slug': {
-      id: '/noticias/$slug'
-      path: '/noticias/$slug'
-      fullPath: '/noticias/$slug'
-      preLoaderRoute: typeof NoticiasSlugRouteImport
+    '/profissionais': {
+      id: '/profissionais'
+      path: '/profissionais'
+      fullPath: '/profissionais'
+      preLoaderRoute: typeof ProfissionaisRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/feed/$': {
-      id: '/feed/$'
-      path: '/$'
-      fullPath: '/feed/$'
-      preLoaderRoute: typeof FeedSplatRouteImport
-      parentRoute: typeof FeedRoute
-    }
-    '/equipe/renata-henrique-leandro': {
-      id: '/equipe/renata-henrique-leandro'
-      path: '/equipe/renata-henrique-leandro'
-      fullPath: '/equipe/renata-henrique-leandro'
-      preLoaderRoute: typeof EquipeRenataHenriqueLeandroRouteImport
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/equipe/maria-ines-gomes-da-silva': {
-      id: '/equipe/maria-ines-gomes-da-silva'
-      path: '/equipe/maria-ines-gomes-da-silva'
-      fullPath: '/equipe/maria-ines-gomes-da-silva'
-      preLoaderRoute: typeof EquipeMariaInesGomesDaSilvaRouteImport
+    '/xmlrpc.php': {
+      id: '/xmlrpc.php'
+      path: '/xmlrpc.php'
+      fullPath: '/xmlrpc.php'
+      preLoaderRoute: typeof XmlrpcDotphpRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/equipe/marcio-barbosa-da-silva': {
-      id: '/equipe/marcio-barbosa-da-silva'
-      path: '/equipe/marcio-barbosa-da-silva'
-      fullPath: '/equipe/marcio-barbosa-da-silva'
-      preLoaderRoute: typeof EquipeMarcioBarbosaDaSilvaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/equipe/leonardo-nascimento-de-aguiar': {
-      id: '/equipe/leonardo-nascimento-de-aguiar'
-      path: '/equipe/leonardo-nascimento-de-aguiar'
-      fullPath: '/equipe/leonardo-nascimento-de-aguiar'
-      preLoaderRoute: typeof EquipeLeonardoNascimentoDeAguiarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/equipe/juan-albner-pereira-veloso': {
-      id: '/equipe/juan-albner-pereira-veloso'
-      path: '/equipe/juan-albner-pereira-veloso'
-      fullPath: '/equipe/juan-albner-pereira-veloso'
-      preLoaderRoute: typeof EquipeJuanAlbnerPereiraVelosoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/equipe/joao-tadeu-leandro': {
-      id: '/equipe/joao-tadeu-leandro'
-      path: '/equipe/joao-tadeu-leandro'
-      fullPath: '/equipe/joao-tadeu-leandro'
-      preLoaderRoute: typeof EquipeJoaoTadeuLeandroRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/equipe/higor-henrique-leandro': {
-      id: '/equipe/higor-henrique-leandro'
-      path: '/equipe/higor-henrique-leandro'
-      fullPath: '/equipe/higor-henrique-leandro'
-      preLoaderRoute: typeof EquipeHigorHenriqueLeandroRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/equipe/denison-henrique-leandro': {
-      id: '/equipe/denison-henrique-leandro'
-      path: '/equipe/denison-henrique-leandro'
-      fullPath: '/equipe/denison-henrique-leandro'
-      preLoaderRoute: typeof EquipeDenisonHenriqueLeandroRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/equipe/danielle-cristina-mateus-pereira': {
-      id: '/equipe/danielle-cristina-mateus-pereira'
-      path: '/equipe/danielle-cristina-mateus-pereira'
-      fullPath: '/equipe/danielle-cristina-mateus-pereira'
-      preLoaderRoute: typeof EquipeDanielleCristinaMateusPereiraRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/comments/$': {
-      id: '/comments/$'
-      path: '/comments/$'
-      fullPath: '/comments/$'
-      preLoaderRoute: typeof CommentsSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/category/$': {
-      id: '/category/$'
-      path: '/category/$'
-      fullPath: '/category/$'
-      preLoaderRoute: typeof CategorySplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/author/$': {
-      id: '/author/$'
-      path: '/author/$'
-      fullPath: '/author/$'
-      preLoaderRoute: typeof AuthorSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/areas/trabalhista': {
-      id: '/areas/trabalhista'
-      path: '/areas/trabalhista'
-      fullPath: '/areas/trabalhista'
-      preLoaderRoute: typeof AreasTrabalhistaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/areas/previdenciario': {
-      id: '/areas/previdenciario'
-      path: '/areas/previdenciario'
-      fullPath: '/areas/previdenciario'
-      preLoaderRoute: typeof AreasPrevidenciarioRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/areas/mediacao': {
-      id: '/areas/mediacao'
-      path: '/areas/mediacao'
-      fullPath: '/areas/mediacao'
-      preLoaderRoute: typeof AreasMediacaoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/areas/familia': {
-      id: '/areas/familia'
-      path: '/areas/familia'
-      fullPath: '/areas/familia'
-      preLoaderRoute: typeof AreasFamiliaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/areas/contratos': {
-      id: '/areas/contratos'
-      path: '/areas/contratos'
-      fullPath: '/areas/contratos'
-      preLoaderRoute: typeof AreasContratosRouteImport
+    '/areas/bancario': {
+      id: '/areas/bancario'
+      path: '/areas/bancario'
+      fullPath: '/areas/bancario'
+      preLoaderRoute: typeof AreasBancarioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/areas/consumidor': {
@@ -820,11 +652,179 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AreasConsumidorRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/areas/bancario': {
-      id: '/areas/bancario'
-      path: '/areas/bancario'
-      fullPath: '/areas/bancario'
-      preLoaderRoute: typeof AreasBancarioRouteImport
+    '/areas/contratos': {
+      id: '/areas/contratos'
+      path: '/areas/contratos'
+      fullPath: '/areas/contratos'
+      preLoaderRoute: typeof AreasContratosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas/familia': {
+      id: '/areas/familia'
+      path: '/areas/familia'
+      fullPath: '/areas/familia'
+      preLoaderRoute: typeof AreasFamiliaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas/mediacao': {
+      id: '/areas/mediacao'
+      path: '/areas/mediacao'
+      fullPath: '/areas/mediacao'
+      preLoaderRoute: typeof AreasMediacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas/previdenciario': {
+      id: '/areas/previdenciario'
+      path: '/areas/previdenciario'
+      fullPath: '/areas/previdenciario'
+      preLoaderRoute: typeof AreasPrevidenciarioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas/trabalhista': {
+      id: '/areas/trabalhista'
+      path: '/areas/trabalhista'
+      fullPath: '/areas/trabalhista'
+      preLoaderRoute: typeof AreasTrabalhistaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/author/$': {
+      id: '/author/$'
+      path: '/author/$'
+      fullPath: '/author/$'
+      preLoaderRoute: typeof AuthorSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/category/$': {
+      id: '/category/$'
+      path: '/category/$'
+      fullPath: '/category/$'
+      preLoaderRoute: typeof CategorySplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comments/$': {
+      id: '/comments/$'
+      path: '/comments/$'
+      fullPath: '/comments/$'
+      preLoaderRoute: typeof CommentsSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe/danielle-cristina-mateus-pereira': {
+      id: '/equipe/danielle-cristina-mateus-pereira'
+      path: '/equipe/danielle-cristina-mateus-pereira'
+      fullPath: '/equipe/danielle-cristina-mateus-pereira'
+      preLoaderRoute: typeof EquipeDanielleCristinaMateusPereiraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe/denison-henrique-leandro': {
+      id: '/equipe/denison-henrique-leandro'
+      path: '/equipe/denison-henrique-leandro'
+      fullPath: '/equipe/denison-henrique-leandro'
+      preLoaderRoute: typeof EquipeDenisonHenriqueLeandroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe/higor-henrique-leandro': {
+      id: '/equipe/higor-henrique-leandro'
+      path: '/equipe/higor-henrique-leandro'
+      fullPath: '/equipe/higor-henrique-leandro'
+      preLoaderRoute: typeof EquipeHigorHenriqueLeandroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe/joao-tadeu-leandro': {
+      id: '/equipe/joao-tadeu-leandro'
+      path: '/equipe/joao-tadeu-leandro'
+      fullPath: '/equipe/joao-tadeu-leandro'
+      preLoaderRoute: typeof EquipeJoaoTadeuLeandroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe/juan-albner-pereira-veloso': {
+      id: '/equipe/juan-albner-pereira-veloso'
+      path: '/equipe/juan-albner-pereira-veloso'
+      fullPath: '/equipe/juan-albner-pereira-veloso'
+      preLoaderRoute: typeof EquipeJuanAlbnerPereiraVelosoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe/leonardo-nascimento-de-aguiar': {
+      id: '/equipe/leonardo-nascimento-de-aguiar'
+      path: '/equipe/leonardo-nascimento-de-aguiar'
+      fullPath: '/equipe/leonardo-nascimento-de-aguiar'
+      preLoaderRoute: typeof EquipeLeonardoNascimentoDeAguiarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe/marcio-barbosa-da-silva': {
+      id: '/equipe/marcio-barbosa-da-silva'
+      path: '/equipe/marcio-barbosa-da-silva'
+      fullPath: '/equipe/marcio-barbosa-da-silva'
+      preLoaderRoute: typeof EquipeMarcioBarbosaDaSilvaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe/maria-ines-gomes-da-silva': {
+      id: '/equipe/maria-ines-gomes-da-silva'
+      path: '/equipe/maria-ines-gomes-da-silva'
+      fullPath: '/equipe/maria-ines-gomes-da-silva'
+      preLoaderRoute: typeof EquipeMariaInesGomesDaSilvaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe/renata-henrique-leandro': {
+      id: '/equipe/renata-henrique-leandro'
+      path: '/equipe/renata-henrique-leandro'
+      fullPath: '/equipe/renata-henrique-leandro'
+      preLoaderRoute: typeof EquipeRenataHenriqueLeandroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/feed/$': {
+      id: '/feed/$'
+      path: '/$'
+      fullPath: '/feed/$'
+      preLoaderRoute: typeof FeedSplatRouteImport
+      parentRoute: typeof FeedRoute
+    }
+    '/noticias/': {
+      id: '/noticias/'
+      path: '/noticias'
+      fullPath: '/noticias/'
+      preLoaderRoute: typeof NoticiasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/noticias/$slug': {
+      id: '/noticias/$slug'
+      path: '/noticias/$slug'
+      fullPath: '/noticias/$slug'
+      preLoaderRoute: typeof NoticiasSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tag/$': {
+      id: '/tag/$'
+      path: '/tag/$'
+      fullPath: '/tag/$'
+      preLoaderRoute: typeof TagSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wp-admin/$': {
+      id: '/wp-admin/$'
+      path: '/wp-admin/$'
+      fullPath: '/wp-admin/$'
+      preLoaderRoute: typeof WpAdminSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wp-content/$': {
+      id: '/wp-content/$'
+      path: '/wp-content/$'
+      fullPath: '/wp-content/$'
+      preLoaderRoute: typeof WpContentSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wp-includes/$': {
+      id: '/wp-includes/$'
+      path: '/wp-includes/$'
+      fullPath: '/wp-includes/$'
+      preLoaderRoute: typeof WpIncludesSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wp-json/$': {
+      id: '/wp-json/$'
+      path: '/wp-json/$'
+      fullPath: '/wp-json/$'
+      preLoaderRoute: typeof WpJsonSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin/artigos': {
