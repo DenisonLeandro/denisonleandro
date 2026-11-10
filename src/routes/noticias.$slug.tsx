@@ -1,55 +1,105 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, Calendar, Loader2, MessageCircle } from "lucide-react";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { useMemo } from "react";
+import { ArrowLeft, Calendar, MessageCircle } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { MediaMentions } from "@/components/site/MediaMentions";
-import { supabase } from "@/integrations/supabase/client";
-import { buildHead } from "@/lib/seo";
-
-interface Article {
-  id: string;
-  slug: string;
-  title: string;
-  excerpt: string | null;
-  category: string | null;
-  cover_image_url: string | null;
-  published_at: string;
-  content: string;
-  status: string;
-}
+import { buildHead, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { getPublishedArticle } from "@/lib/articles.functions";
 
 const WHATSAPP_URL =
   "https://wa.me/5548988487889?text=Ol%C3%A1%2C%20vim%20por%20um%20artigo%20no%20site%20Denison%20Leandro%20e%20gostaria%20de%20receber%20uma%20orienta%C3%A7%C3%A3o%20r%C3%A1pida.";
 
+const DEFAULT_AUTHOR = "Equipe Denison Leandro Advogados";
+
+function stripHtml(s: string) {
+  return s.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+}
+
 export const Route = createFileRoute("/noticias/$slug")({
   loader: async ({ params }) => {
-    try {
-      const { data } = await (supabase as any)
-        .from("articles")
-        .select("title, excerpt, cover_image_url")
-        .eq("slug", params.slug)
-        .eq("status", "published")
-        .maybeSingle();
-      return { article: data ?? null };
-    } catch {
-      return { article: null };
-    }
+    const article = await getPublishedArticle({ data: { slug: params.slug } });
+    if (!article) throw notFound();
+    return { article };
   },
   head: ({ params, loaderData }) => {
     const a = loaderData?.article;
-    const title = a?.title ?? "Notícia";
-    const description =
-      a?.excerpt ??
-      "Artigo jurídico publicado pelo Denison Leandro Advogados Associados.";
-    return buildHead({
-      title,
+    if (!a) return buildHead({ title: "Artigo não encontrado", description: "Artigo não encontrado.", path: `/noticias/${params.slug}`, noindex: true });
+    const description = (
+      a.seo_description || a.excerpt || stripHtml(a.content).slice(0, 160)
+    ).slice(0, 300);
+    const author = a.author || DEFAULT_AUTHOR;
+    const url = `${SITE_URL}/noticias/${a.slug}`;
+    const image = a.cover_image_url || DEFAULT_OG_IMAGE;
+    const head = buildHead({
+      title: a.seo_title || a.title,
       description,
-      path: `/noticias/${params.slug}`,
+      path: `/noticias/${a.slug}`,
       type: "article",
-      image: a?.cover_image_url || undefined,
+      image,
+      publishedTime: a.published_at,
+      modifiedTime: a.updated_at,
+      author,
     });
+    return {
+      ...head,
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline: a.title,
+              description,
+              image: [image],
+              datePublished: a.published_at,
+              dateModified: a.updated_at,
+              author: { "@type": a.author ? "Person" : "Organization", name: author },
+              publisher: { "@type": "Organization", name: SITE_NAME, logo: { "@type": "ImageObject", url: DEFAULT_OG_IMAGE } },
+              mainEntityOfPage: url,
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Início", item: `${SITE_URL}/` },
+                { "@type": "ListItem", position: 2, name: "Notícias", item: `${SITE_URL}/noticias` },
+                { "@type": "ListItem", position: 3, name: a.title, item: url },
+              ],
+            },
+          ]),
+        },
+      ],
+    };
   },
+  errorComponent: ({ error }) => (
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <main className="mx-auto max-w-3xl px-6 py-20 lg:px-10">
+        <p className="text-muted-foreground">
+          {error instanceof Error ? error.message : "Erro ao carregar o artigo."}
+        </p>
+      </main>
+      <Footer />
+    </div>
+  ),
+  notFoundComponent: () => (
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <main className="mx-auto max-w-3xl px-6 py-20 lg:px-10">
+        <Link
+          to="/noticias"
+          className="mb-6 inline-flex items-center gap-2 text-gold hover:text-gold/80 transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Voltar para Notícias
+        </Link>
+        <p className="text-muted-foreground">Artigo não encontrado.</p>
+      </main>
+      <Footer />
+    </div>
+  ),
   component: NoticiaDetail,
 });
 
@@ -193,72 +243,8 @@ function splitContent(content: string): ContentParts {
 }
 
 function NoticiaDetail() {
-  const { slug } = Route.useParams();
-  const [article, setArticle] = useState<Article | null>(null);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    async function loadArticle() {
-      if (!slug) return;
-      try {
-        const { data, error } = await (supabase as any)
-          .from("articles")
-          .select("*")
-          .eq("slug", slug)
-          .eq("status", "published")
-          .single();
-
-        if (error) throw error;
-        setArticle(data);
-      } catch (err) {
-        console.error("Erro ao carregar artigo:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadArticle();
-  }, [slug]);
-
-  const contentParts = useMemo(
-    () => (article ? splitContent(article.content) : null),
-    [article],
-  );
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Navbar />
-        <main className="py-20">
-          <div className="flex items-center justify-center gap-2">
-            <Loader2 className="h-6 w-6 animate-spin" />
-            <p>Carregando artigo...</p>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
-  if (!article) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Navbar />
-        <main className="mx-auto max-w-3xl px-6 py-20 lg:px-10">
-          <button
-            onClick={() => navigate({ to: "/noticias" })}
-            className="mb-6 inline-flex items-center gap-2 text-gold hover:text-gold/80 transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Voltar para Notícias
-          </button>
-          <p className="text-muted-foreground">Artigo não encontrado.</p>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
+  const { article } = Route.useLoaderData();
+  const contentParts = useMemo(() => splitContent(article.content), [article]);
 
   const articleBodyClasses = [
     "font-sans text-foreground",
@@ -282,13 +268,13 @@ function NoticiaDetail() {
     <div className="min-h-screen bg-background">
       <Navbar />
       <main className="mx-auto max-w-3xl px-6 py-20 lg:px-10">
-        <button
-          onClick={() => navigate({ to: "/noticias" })}
+        <Link
+          to="/noticias"
           className="mb-6 inline-flex items-center gap-2 text-gold hover:text-gold/80 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
           Voltar para Notícias
-        </button>
+        </Link>
 
         {article.cover_image_url && (
           <img
@@ -309,11 +295,13 @@ function NoticiaDetail() {
           </h1>
           <p className="inline-flex items-center gap-2 text-muted-foreground">
             <Calendar size={16} />
-            {new Date(article.published_at).toLocaleDateString("pt-BR", {
+            <time dateTime={article.published_at}>{new Date(article.published_at).toLocaleDateString("pt-BR", {
               year: "numeric",
               month: "long",
               day: "numeric",
-            })}
+            })}</time>
+            <span aria-hidden="true">·</span>
+            <span>{article.author || DEFAULT_AUTHOR}</span>
           </p>
         </header>
 
