@@ -17,7 +17,7 @@ export const Route = createFileRoute("/contato")({
 });
 
 const WHATSAPP_URL =
-  "https://wa.me/5543996808308?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio.";
+  "https://wa.me/5543999948455?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio.";
 const EMAIL = "contato@denisonleandro.adv.br";
 
 type Office = { address: string; phone: string };
@@ -50,7 +50,7 @@ const cities: City[] = [
   },
   {
     city: "Florianópolis – SC",
-    offices: [{ address: "Av. Trompowsky, 354, salas 501/502, Centro", phone: "(43) 99680-8308" }],
+    offices: [{ address: "Av. Trompowsky, 354, salas 501/502, Centro", phone: "(43) 99994-8455" }],
   },
 ];
 
@@ -84,7 +84,7 @@ function ContatoPage() {
                 className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-7 py-3.5 text-sm font-semibold text-white shadow-elegant transition-all hover:-translate-y-0.5 hover:bg-[#1DA851]"
               >
                 <MessageCircle size={18} />
-                Falar no WhatsApp — (43) 99680-8308
+                Falar no WhatsApp — (43) 99994-8455
               </a>
               <a
                 href={`mailto:${EMAIL}`}
