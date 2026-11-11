@@ -8,7 +8,7 @@ import { buildHead, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { getPublishedArticle } from "@/lib/articles.functions";
 
 const WHATSAPP_URL =
-  "https://wa.me/5548988487889?text=Ol%C3%A1%2C%20vim%20por%20um%20artigo%20no%20site%20Denison%20Leandro%20e%20gostaria%20de%20receber%20uma%20orienta%C3%A7%C3%A3o%20r%C3%A1pida.";
+  "https://wa.me/5543999948455?text=Ol%C3%A1%2C%20vim%20por%20um%20artigo%20no%20site%20Denison%20Leandro%20e%20gostaria%20de%20receber%20uma%20orienta%C3%A7%C3%A3o%20r%C3%A1pida.";
 
 const DEFAULT_AUTHOR = "Equipe Denison Leandro Advogados";
 
