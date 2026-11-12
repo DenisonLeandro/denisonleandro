@@ -1,4 +1,4 @@
-import denison from "@/assets/denison.png.asset.json";
+import denison from "@/assets/denison-escritorio-rosto.webp.asset.json";
 import higor from "@/assets/higor.png.asset.json";
 import joao from "@/assets/joao.png.asset.json";
 import marcio from "@/assets/marcio.png.asset.json";

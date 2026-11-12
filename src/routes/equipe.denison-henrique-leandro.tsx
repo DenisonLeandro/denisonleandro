@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { personHead } from "@/lib/seo";
 import { LawyerDetail } from "@/components/site/LawyerDetail";
-import photo from "@/assets/denison.png.asset.json";
+import photo from "@/assets/denison-escritorio-rosto.webp.asset.json";
+import share from "@/assets/denison-escritorio-600.jpg.asset.json";
 
 export const Route = createFileRoute("/equipe/denison-henrique-leandro")({
-  head: () => personHead({ slug: "denison-henrique-leandro", name: "Dr. Denison Leandro", jobTitle: "Sócio Fundador", description: "Sócio fundador, especialista em Direito do Trabalho, Pós-Graduado pela FGV.", email: "denison@denisonleandro.adv.br", oab: "OAB/PR 28.764", photo: photo.url, knowsAbout: ["Direito do Trabalho", "Direito e Saúde"], credentials: ["Pós-Graduação em Direito do Trabalho (FGV)", "Pós-Graduação em Direito e Saúde (Albert Einstein – Instituto Israelita de Ensino e Pesquisa)"], alumniOf: ["Fundação Getulio Vargas (FGV)", "Albert Einstein – Instituto Israelita de Ensino e Pesquisa"], sameAs: ["https://www.linkedin.com/in/denison-leandro-297b82286/"] }),
+  head: () => personHead({ slug: "denison-henrique-leandro", name: "Dr. Denison Leandro", jobTitle: "Sócio Fundador", description: "Sócio fundador, especialista em Direito do Trabalho, Pós-Graduado pela FGV.", email: "denison@denisonleandro.adv.br", oab: "OAB/PR 28.764", photo: share.url, shareImage: { url: share.url, width: 600, height: 600 }, knowsAbout: ["Direito do Trabalho", "Direito e Saúde"], credentials: ["Pós-Graduação em Direito do Trabalho (FGV)", "Pós-Graduação em Direito e Saúde (Albert Einstein – Instituto Israelita de Ensino e Pesquisa)"], alumniOf: ["Fundação Getulio Vargas (FGV)", "Albert Einstein – Instituto Israelita de Ensino e Pesquisa"], sameAs: ["https://www.linkedin.com/in/denison-leandro-297b82286/"] }),
   component: () => (
     <LawyerDetail
       name="Dr. Denison Leandro"

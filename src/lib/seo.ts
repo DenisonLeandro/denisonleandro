@@ -206,13 +206,15 @@ export function personSchema(p: PersonInput) {
 }
 
 /** Full head for a team member page (profile type, photo as share image, Person JSON-LD). */
-export function personHead(p: PersonInput & { description: string }) {
+export function personHead(p: PersonInput & { description: string; shareImage?: { url: string; width: number; height: number } }) {
   return buildHead({
     title: p.name,
     description: p.description,
     path: `/equipe/${p.slug}`,
     type: "profile",
-    ...(p.photo ? { image: absUrl(p.photo), imageAlt: `Foto de ${p.name}` } : {}),
+    ...(p.shareImage
+      ? { image: absUrl(p.shareImage.url), imageAlt: `Foto de ${p.name}`, imageWidth: p.shareImage.width, imageHeight: p.shareImage.height }
+      : p.photo ? { image: absUrl(p.photo), imageAlt: `Foto de ${p.name}` } : {}),
     jsonLd: [
       personSchema(p),
       breadcrumb([
