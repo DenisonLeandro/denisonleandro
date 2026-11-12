@@ -25,3 +25,23 @@ describe("subtítulos em texto simples", () => {
     expect(plainToHtml("Prazo: 12 meses")).not.toContain("<h2>");
   });
 });
+
+import { prepareArticleHtml } from "./article-content";
+describe("marcadores no texto simples", () => {
+  it("## vira H2 e ### vira H3, ambos no índice", () => {
+    const r = prepareArticleHtml("## Cinco sinais\n\n### Sinal 1 — Você fica além do horário.\nTexto.");
+    expect(r.toc).toEqual([
+      { id: "cinco-sinais", text: "Cinco sinais", level: 2 },
+      { id: "sinal-1-voce-fica-alem-do-horario", text: "Sinal 1 — Você fica além do horário.", level: 3 },
+    ]);
+  });
+  it("[texto](/url) vira link e bloqueia javascript:", () => {
+    expect(plainToHtml("Leia [este artigo](/noticias/x).")).toBe('<p>Leia <a href="/noticias/x">este artigo</a>.</p>');
+    expect(plainToHtml("[x](javascript:alert(1))")).not.toContain("javascript");
+  });
+  it("[[destaque|...]] vira caixa com botão", () => {
+    const h = plainToHtml("[[destaque|Você é vendedor?|Ver análise|https://vendedorexterno.denisonleandro.adv.br]]");
+    expect(h).toContain('href="https://vendedorexterno.denisonleandro.adv.br"');
+    expect(h).toContain("Ver análise");
+  });
+});

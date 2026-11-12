@@ -2,7 +2,6 @@
 // Specific entries win over generic 410 routes (/tag, /category, /author...).
 export type RedirectResult = { status: 301; to: string } | { status: 410 };
 
-const VENDEDOR = "https://vendedorexterno.denisonleandro.adv.br";
 const VENDEDOR_ARTIGO = "/noticias/vendedor-externo-tem-direito-a-horas-extras-entenda-quando-a-empresa-deve-pagar";
 const HORAS = "/noticias/5-sinais-de-que-a-empresa-esta-devendo-horas-extras-a-voce-e-o-que-fazer";
 const MOTORISTA =
