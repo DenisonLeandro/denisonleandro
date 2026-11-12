@@ -45,21 +45,27 @@ export function isPlainHeading(line: string): boolean {
   if (/^[-•*\d]/.test(t)) return false;
   if (/[.,;:]$/.test(t)) return false;
   if (/:\s+\S/.test(t)) return false;
+  if (/\s[—–-]\s/.test(t)) return false; // assinatura, ex.: "Nome — Advogado"
   return /^[A-ZÁÉÍÓÚÂÊÔÃÕÇ]/.test(t);
 }
 
 /** Converts plain-text article content into simple semantic HTML. Drops a first line equal to the title. */
 export function plainToHtml(text: string, title?: string): string {
   const norm = (s: string) => s.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "");
-  const lines = text.replace(/\r/g, "").split("\n").map((l) => l.trim()).filter(Boolean);
-  if (title && lines[0] && norm(lines[0]) === norm(title)) lines.shift();
+  // Keep whether each line starts a new block (preceded by a blank line): a subtitle must,
+  // so source citations glued under a paragraph ("Planalto", "Jurisprudência TST") stay text.
+  const raw = text.replace(/\r/g, "").split("\n");
+  const lines: string[] = [];
+  const starts: boolean[] = [];
+  raw.forEach((l, i) => { const t = l.trim(); if (!t) return; lines.push(t); starts.push(i === 0 || !raw[i - 1].trim()); });
+  if (title && lines[0] && norm(lines[0]) === norm(title)) { lines.shift(); starts.shift(); }
   const out: string[] = [];
   let list: string[] = [];
   const flush = () => { if (list.length) { out.push(`<ul>${list.map((l) => `<li>${esc(l)}</li>`).join("")}</ul>`); list = []; } };
-  for (const l of lines) {
+  for (const [i, l] of lines.entries()) {
     if (/^[-•*]\s+/.test(l)) { list.push(l.replace(/^[-•*]\s+/, "")); continue; }
     flush();
-    out.push(isPlainHeading(l) ? `<h2>${esc(l)}</h2>` : `<p>${esc(l)}</p>`);
+    out.push(starts[i] && isPlainHeading(l) ? `<h2>${esc(l)}</h2>` : `<p>${esc(l)}</p>`);
   }
   flush();
   return out.join("");
