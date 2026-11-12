@@ -8,6 +8,13 @@
       "when": 1794449675621,
       "tag": "0000_article_answer_fields",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794449689590,
+      "tag": "0001_article_area_acidente",
+      "breakpoints": true
     }
   ]
 }
