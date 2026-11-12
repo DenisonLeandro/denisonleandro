@@ -1,39 +1,27 @@
-# Ajustes no artigo "Vendedor externo tem direito a horas extras?"
+# Capas dos artigos sem corte
 
-O visual da página não muda. Só entram o texto novo e uma caixa de destaque no mesmo estilo das caixas que o artigo já tem.
+## O que muda para o visitante
+- Em todos os lugares onde a capa aparece (artigos na página inicial, lista de /noticias, artigo em destaque, "Artigos relacionados", topo do artigo), a arte aparece **inteira**, sem cortar texto, centralizada.
+- Os cards continuam todos do mesmo tamanho. O espaço que sobrar é preenchido com a própria capa desfocada e escurecida (sem faixas brancas).
+- No topo do artigo, a capa aparece inteira, sem ser esticada além do tamanho original.
+- Ao compartilhar um artigo no WhatsApp, LinkedIn ou Facebook, a prévia mostra a capa inteira no formato 1200x630, sobre o mesmo fundo desfocado.
+- Os arquivos originais das capas não são alterados.
 
-## 1. Caixa de destaque com link para a página do vendedor externo
-- Logo depois da seção "Como comprovar as horas extras do vendedor externo?", entra a caixa: "Você é ou foi vendedor externo? Veja como funciona a análise do seu caso", com um botão que abre https://vendedorexterno.denisonleandro.adv.br.
-- O texto do artigo é guardado como texto simples, sem formatação, e esse formato não comporta um botão. Por isso, a caixa vai ficar no código da página e só aparece neste artigo, logo abaixo dessa seção. Assim, é fácil usar a mesma caixa em outros artigos depois.
-
-## 2. Intervalo de almoço
-- O parágrafo "Atenção: a regra do Tema 73 do TST..." entra no fim da seção "O vendedor externo tem direito ao intervalo para almoço?", com o texto exato que você mandou.
-
-## 3. Seção "Caso do escritório repercutiu na imprensa": fica esperando aprovação
-- Como você pediu para só publicar depois da aprovação do Dr. Denison, eu **não coloco essa seção no ar agora**. O artigo já está publicado, então qualquer texto que entrar nele aparece na hora.
-- No fim, te mando o texto final para enviar a ele. Quando ele aprovar, é só me avisar que eu coloco a seção antes da "Conclusão", com os links de Valor, Folha, G1 e ConJur que já estão na parte "na mídia" da página.
-
-## 4. Perguntas frequentes
-- As 3 perguntas atuais saem e entram as 6 novas, com o texto exato que você mandou. O código que o Google usa para mostrar as perguntas (FAQPage) é atualizado junto.
-
-## 5. Data
-- "Atualizado em" passa a ser hoje. A data de publicação continua a mesma.
-
-## 6. Redirecionamentos
-- Os 10 endereços antigos da sua lista deixam de ir para a página vendedorexterno e passam a ir para este artigo: continuam com status 301 (mudança permanente) e chegam em um passo só.
-- O teste automático dos redirecionamentos é atualizado para conferir o novo destino.
-
-## 7. Artigo "5 sinais de que a empresa está devendo horas extras"
-- Esse artigo ainda não tem a seção sobre vendedor externo. Ela entra antes da "Conclusão", com este texto:
-  - **E quem trabalha na rua, como vendedor externo?**
-  - "Muita gente acha que quem trabalha externamente não tem direito a horas extras. Não é bem assim: se a empresa conseguia acompanhar sua rotina, por roteiro, GPS, aplicativo, metas diárias ou reuniões obrigatórias, as horas extras podem ser devidas. Expliquei os detalhes neste artigo: Vendedor externo tem direito a horas extras?"
-- O link vai para o novo artigo, não para a página vendedorexterno. O link fica no código da página, do mesmo jeito que a caixa do item 1, porque o texto simples não guarda links.
-
-## Conferência
-- Teste dos 10 endereços antigos no site de testes, com e sem barra no final, mostrando o status e o destino de cada um. No site oficial, e com www, eu testo depois que você publicar.
-- Confirmar no código que vem do servidor: as 6 perguntas no FAQPage, a caixa de destaque, o parágrafo do almoço, a data nova e o link no artigo dos 5 sinais.
+## Etapas
+1. **Prints "antes"** da página inicial, de /noticias e dos 3 artigos (vendedor externo, estabilidade, perdeu movimentos), em tamanho de computador e de celular.
+2. **Um único bloco de capa** usado em todos os lugares: a imagem desfocada e escurecida no fundo e a imagem inteira por cima. Os cards mantêm a proporção atual (16:10).
+3. **Topo do artigo:** capa inteira, largura máxima limitada ao tamanho original da imagem, com o mesmo fundo desfocado nas laterais quando sobrar espaço.
+4. **Imagem de compartilhamento:**
+   - Novo campo no artigo para guardar a versão 1200x630, salva ao lado da original (a original não muda).
+   - No painel, quando uma capa for enviada ou trocada, a versão 1200x630 é gerada automaticamente no navegador e salva junto.
+   - Para os artigos que já existem, gero as versões 1200x630 de uma vez só e salvo nos artigos, **sem mudar a data "Atualizado em"** (essa data só muda quando título, texto, resumo ou FAQ são editados).
+   - A página do artigo passa a usar essa versão no og:image e no twitter:image, com largura 1200 e altura 630. Se faltar a versão, usa a imagem padrão do site.
+5. **Prints "depois"** nos mesmos lugares, e conferência do HTML dos 3 artigos (og:image com 1200x630).
 
 ## Detalhes técnicos
-- Edições de texto via migration de dados: desligar e religar o gatilho `update_articles_updated_at` e definir `updated_at = now()` só nos dois artigos alterados.
-- Novo mapa (slug → { depois do id do H2, componente }) usado em `noticias.$slug.tsx` para dividir o HTML depois desse H2 e inserir a caixa ou o link. A lógica de divisão fica em `article-content.ts`, com teste.
-- Em `redirects.ts`, os 10 caminhos passam a usar uma constante `VENDEDOR_ARTIGO`. `redirects.test.ts` é atualizado.
+- Componente `ArticleCover` (camada de fundo `object-cover` + blur forte + overlay escuro do tema; imagem `object-contain` centralizada). Vai substituir as `<img>` em `NoticiasPreview.tsx`, `noticias.index.tsx` (card de destaque e grade) e `noticias.$slug.tsx` (topo e relacionados). O formulário do painel passa a mostrar a prévia com `object-contain`.
+- Migration: `og_image_url text` (pode ficar vazio) em `articles`. O gatilho de data só olha título/conteúdo/resumo/FAQ, então o preenchimento não muda o `updated_at`. Mesmo assim, o preenchimento é feito com o gatilho desligado, seguindo a regra do projeto.
+- Preenchimento: script em Python/PIL no ambiente de trabalho (baixa a capa, cria o fundo com blur + escurecimento, centraliza a capa sem ampliar além do original, gera JPG com cerca de 85% de qualidade), faz upload em `article-covers/og/<slug>-1200x630.jpg` e grava a URL.
+- No painel: geração via canvas ao enviar a capa, com o mesmo algoritmo, e upload no mesmo bucket.
+- `head()` em `noticias.$slug.tsx`: usa `og_image_url`, com fallback para `DEFAULT_OG_IMAGE`, e envia `og:image:width=1200` e `og:image:height=630`. O JSON-LD continua usando a capa original.
+- Para entrar no site oficial, é preciso publicar.
