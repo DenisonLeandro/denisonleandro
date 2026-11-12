@@ -1,1 +1,3 @@
 - [x] Segunda foto do Dr. Denison (denison-escritorio) no perfil, artigos, compartilhamento e Person
+- [x] Ajustes artigo vendedor externo + 5 sinais (resumo, FAQ, H2/H3, link)
+- [ ] Seção "Caso do escritório repercutiu na imprensa" — aguarda aprovação do Dr. Denison
