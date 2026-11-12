@@ -17,6 +17,10 @@ export interface PublicArticle {
   content: string;
   seo_title: string | null;
   seo_description: string | null;
+  summary: string | null;
+  faq: unknown;
+  author_slug: string;
+  area_slug: string | null;
 }
 
 export type ArticleSummary = Pick<
@@ -40,7 +44,7 @@ export const getPublishedArticle = createServerFn({ method: "GET" })
     const { data: row, error } = await publicClient()
       .from("articles")
       .select(
-        "id, slug, title, excerpt, category, cover_image_url, published_at, updated_at, author, content, seo_title, seo_description",
+        "id, slug, title, excerpt, category, cover_image_url, published_at, updated_at, author, content, seo_title, seo_description, summary, faq, author_slug, area_slug",
       )
       .eq("slug", data.slug)
       .eq("status", "published")
@@ -88,4 +92,25 @@ export const listPublishedArticles = createServerFn({ method: "GET" })
       page: data.page,
       totalPages: Math.max(1, Math.ceil(total / ARTICLES_PER_PAGE)),
     };
+  });
+
+export const listRelatedArticles = createServerFn({ method: "GET" })
+  .inputValidator((d: { slug: string; area: string | null; category: string | null }) => ({
+    slug: String(d.slug).slice(0, 300),
+    area: d.area ? String(d.area).slice(0, 50) : null,
+    category: d.category ? String(d.category).slice(0, 200) : null,
+  }))
+  .handler(async ({ data }) => {
+    const sb = publicClient();
+    const base = () =>
+      sb.from("articles").select("slug, title").eq("status", "published").neq("slug", data.slug)
+        .order("published_at", { ascending: false }).limit(3);
+    const picked: { slug: string; title: string }[] = [];
+    const add = (rows: { slug: string; title: string }[] | null) => {
+      for (const r of rows ?? []) if (picked.length < 3 && !picked.some((p) => p.slug === r.slug)) picked.push(r);
+    };
+    if (data.area) add((await base().eq("area_slug", data.area)).data);
+    if (picked.length < 3 && data.category) add((await base().eq("category", data.category)).data);
+    if (picked.length < 3) add((await base().limit(6)).data);
+    return picked;
   });
