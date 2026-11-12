@@ -5,9 +5,12 @@ import { ArrowLeft, Calendar, MessageCircle } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { MediaMentions } from "@/components/site/MediaMentions";
-import { buildHead, breadcrumb, DEFAULT_OG_IMAGE, FOUNDER_ID, ORG_ID, SITE_URL } from "@/lib/seo";
+import { buildHead, breadcrumb, absUrl, DEFAULT_OG_IMAGE, ORG_ID, SITE_URL } from "@/lib/seo";
 import { ShareButtons } from "@/components/site/ShareButtons";
-import { getPublishedArticle } from "@/lib/articles.functions";
+import { getPublishedArticle, listRelatedArticles } from "@/lib/articles.functions";
+import { getAuthor, getArea, normalizeFaq, type Author } from "@/lib/authors";
+import { prepareArticleHtml, splitHtmlInHalf } from "@/lib/article-content";
+import logoAsset from "@/assets/logo.png.asset.json";
 
 
 const DEFAULT_AUTHOR = "Equipe Denison Leandro Advogados";
@@ -20,7 +23,10 @@ export const Route = createFileRoute("/noticias/$slug")({
   loader: async ({ params }) => {
     const article = await getPublishedArticle({ data: { slug: params.slug } });
     if (!article) throw notFound();
-    return { article };
+    const related = await listRelatedArticles({
+      data: { slug: article.slug, area: article.area_slug, category: article.category },
+    }).catch(() => []);
+    return { article, related };
   },
   head: ({ params, loaderData }) => {
     const a = loaderData?.article;
@@ -28,7 +34,10 @@ export const Route = createFileRoute("/noticias/$slug")({
     const description = (
       a.seo_description || a.excerpt || stripHtml(a.content).slice(0, 160)
     ).slice(0, 300);
-    const author = a.author || DEFAULT_AUTHOR;
+    const writer = getAuthor(a.author_slug);
+    const author = writer.name;
+    const faq = normalizeFaq(a.faq);
+    const ldDescription = (a.summary || description).slice(0, 500);
     const url = `${SITE_URL}/noticias/${a.slug}`;
     const image = a.cover_image_url || DEFAULT_OG_IMAGE;
     const head = buildHead({
@@ -46,17 +55,40 @@ export const Route = createFileRoute("/noticias/$slug")({
         {
           "@type": "BlogPosting",
           headline: a.title,
-          description,
-          image: [image],
+          description: ldDescription,
+          image: a.cover_image_url
+            ? [image]
+            : [{ "@type": "ImageObject", url: image, width: 1200, height: 630 }],
           datePublished: a.published_at,
           dateModified: a.updated_at,
-          author: { "@type": "Person", "@id": FOUNDER_ID, name: a.author || "Dr. Denison Leandro" },
-          publisher: { "@id": ORG_ID },
+          author: {
+            "@type": "Person",
+            "@id": `${SITE_URL}/equipe/${writer.slug}#pessoa`,
+            name: writer.name,
+            url: `${SITE_URL}/equipe/${writer.slug}`,
+          },
+          publisher: {
+            "@type": "Organization",
+            "@id": ORG_ID,
+            name: "Denison Leandro Advogados Associados",
+            url: SITE_URL,
+            logo: { "@type": "ImageObject", url: absUrl(logoAsset.url), width: 270, height: 110 },
+          },
           mainEntityOfPage: { "@type": "WebPage", "@id": url },
           inLanguage: "pt-BR",
           ...(a.category ? { articleSection: a.category } : {}),
           wordCount: stripHtml(a.content).split(" ").filter(Boolean).length,
         },
+        ...(faq.length
+          ? [{
+              "@type": "FAQPage",
+              mainEntity: faq.map((f) => ({
+                "@type": "Question",
+                name: f.pergunta,
+                acceptedAnswer: { "@type": "Answer", text: f.resposta },
+              })),
+            }]
+          : []),
         breadcrumb([
           ["Início", "/"],
           ["Notícias", "/noticias"],
