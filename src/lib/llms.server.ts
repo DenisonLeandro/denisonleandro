@@ -29,7 +29,7 @@ export async function loadArticles(limit: number) {
   const sb = createClient<Database>(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
   const { data, error } = await sb
     .from("articles")
-    .select("slug, title, excerpt, seo_description, content")
+    .select("slug, title, excerpt, seo_description, content, summary")
     .eq("status", "published")
     .order("published_at", { ascending: false })
     .limit(limit);
@@ -58,7 +58,7 @@ export async function buildLlmsTxt(): Promise<string> {
   for (const l of LAWYERS) out.push(`- [${l.name}](${SITE_URL}/equipe/${l.slug}): ${l.role}, ${l.oab}, ${l.specialty}`);
   out.push("", "## Artigos");
   for (const a of arts) {
-    const desc = a.seo_description || a.excerpt || stripHtml(a.content ?? "");
+    const desc = a.summary || a.seo_description || a.excerpt || stripHtml(a.content ?? "");
     out.push(`- [${oneLine(a.title, 200)}](${SITE_URL}/noticias/${a.slug}): ${oneLine(desc)}`);
   }
   out.push(

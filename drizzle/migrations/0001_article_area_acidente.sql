@@ -1,0 +1,1 @@
+UPDATE public.articles SET area_slug = 'trabalhista' WHERE area_slug IS NULL AND category ~* 'acidente|hora extra';
