@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { whatsappUrl } from "@/lib/whatsapp";
 import { MessageCircle } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
@@ -9,7 +10,7 @@ type Props = {
   title: string;
   intro: string;
   items: string[];
-  extra?: React.ReactNode;
+  extra?: ReactNode;
 };
 
 export function AreaDetail({ title, intro, items, extra }: Props) {
