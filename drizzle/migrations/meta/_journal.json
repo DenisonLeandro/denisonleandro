@@ -15,6 +15,13 @@
       "when": 1794449689590,
       "tag": "0001_article_area_acidente",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794449960238,
+      "tag": "0002_restore_article_updated_at",
+      "breakpoints": true
     }
   ]
 }
