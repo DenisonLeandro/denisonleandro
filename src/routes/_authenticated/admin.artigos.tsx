@@ -13,6 +13,7 @@ interface Article {
   category: string | null;
   author: string | null;
   cover_image_url: string | null;
+  og_image_url?: string | null;
   seo_title: string | null;
   seo_description: string | null;
   summary: string | null;
@@ -34,6 +35,7 @@ interface FormState {
   category: string;
   author: string;
   cover_image_url: string;
+  og_image_url: string;
   seo_title: string;
   seo_description: string;
   summary: string;
@@ -51,6 +53,7 @@ const emptyForm: FormState = {
   category: "",
   author: "",
   cover_image_url: "",
+  og_image_url: "",
   seo_title: "",
   seo_description: "",
   summary: "",
@@ -113,7 +116,11 @@ function AdminArtigosPage() {
       const { data: pub } = supabase.storage
         .from("article-covers")
         .getPublicUrl(path);
-      setForm((f) => ({ ...f, cover_image_url: pub.publicUrl }));
+      const ogUrl = await uploadShareImage(file, safeName).catch((e) => {
+        console.error("Erro ao gerar imagem de compartilhamento:", e);
+        return "";
+      });
+      setForm((f) => ({ ...f, cover_image_url: pub.publicUrl, og_image_url: ogUrl }));
     } catch (err: any) {
       console.error("Erro no upload:", err);
       setError(err?.message ?? "Erro ao enviar imagem.");
@@ -170,6 +177,7 @@ function AdminArtigosPage() {
       category: a.category ?? "",
       author: a.author ?? "",
       cover_image_url: a.cover_image_url ?? "",
+      og_image_url: a.og_image_url ?? "",
       seo_title: a.seo_title ?? "",
       seo_description: a.seo_description ?? "",
       summary: a.summary ?? "",
@@ -288,6 +296,7 @@ function AdminArtigosPage() {
         .map((q) => ({ pergunta: q.pergunta.trim(), resposta: q.resposta.trim() }))
         .filter((q) => q.pergunta && q.resposta),
       cover_image_url: form.cover_image_url.trim() || null,
+      og_image_url: ogImageUrl,
       seo_title: form.seo_title.trim() || null,
       seo_description: form.seo_description.trim() || null,
       status,
@@ -511,7 +520,7 @@ function AdminArtigosPage() {
                   type="url"
                   value={form.cover_image_url}
                   onChange={(e) =>
-                    setForm((f) => ({ ...f, cover_image_url: e.target.value }))
+                    setForm((f) => ({ ...f, cover_image_url: e.target.value, og_image_url: "" }))
                   }
                   className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
                   placeholder="https://..."
@@ -538,7 +547,7 @@ function AdminArtigosPage() {
                     <img
                       src={form.cover_image_url}
                       alt="Prévia da imagem de capa"
-                      className="max-h-48 rounded-md border border-border object-cover"
+                      className="max-h-48 rounded-md border border-border object-contain"
                     />
                   </div>
                 )}
