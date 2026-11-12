@@ -21,6 +21,7 @@ export interface PublicArticle {
   faq: { pergunta: string; resposta: string }[];
   author_slug: string;
   area_slug: string | null;
+  og_image_url: string | null;
 }
 
 export type ArticleSummary = Pick<
@@ -44,7 +45,7 @@ export const getPublishedArticle = createServerFn({ method: "GET" })
     const { data: row, error } = await publicClient()
       .from("articles")
       .select(
-        "id, slug, title, excerpt, category, cover_image_url, published_at, updated_at, author, content, seo_title, seo_description, summary, faq, author_slug, area_slug",
+        "id, slug, title, excerpt, category, cover_image_url, published_at, updated_at, author, content, seo_title, seo_description, summary, faq, author_slug, area_slug, og_image_url",
       )
       .eq("slug", data.slug)
       .eq("status", "published")

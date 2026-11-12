@@ -1,3 +1,4 @@
+import { ArticleCover } from "@/components/site/ArticleCover";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { whatsappUrl, articleMessage } from "@/lib/whatsapp";
@@ -38,7 +39,8 @@ export const Route = createFileRoute("/noticias/$slug")({
     const faq = normalizeFaq(a.faq);
     const ldDescription = (a.summary || description).slice(0, 500);
     const url = `${SITE_URL}/noticias/${a.slug}`;
-    const image = a.cover_image_url || DEFAULT_OG_IMAGE;
+    const image = a.og_image_url || DEFAULT_OG_IMAGE;
+    const coverImage = a.cover_image_url || image;
     const head = buildHead({
       title: a.seo_title || a.title,
       description,
@@ -50,13 +52,15 @@ export const Route = createFileRoute("/noticias/$slug")({
       author,
       section: a.category || undefined,
       imageAlt: a.title,
+      imageWidth: 1200,
+      imageHeight: 630,
       jsonLd: [
         {
           "@type": "BlogPosting",
           headline: a.title,
           description: ldDescription,
           image: a.cover_image_url
-            ? [image]
+            ? [coverImage]
             : [{ "@type": "ImageObject", url: image, width: 1200, height: 630 }],
           datePublished: a.published_at,
           dateModified: a.updated_at,
@@ -265,10 +269,11 @@ function NoticiaDetail() {
         </Link>
 
         {article.cover_image_url && (
-          <img
+          <ArticleCover
             src={article.cover_image_url}
             alt={article.title}
-            className="mb-8 w-full rounded-lg object-cover"
+            className="mb-8 w-full rounded-lg"
+            imgClassName="max-h-[70vh] w-auto max-w-full object-contain"
           />
         )}
 

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Loader2, Pencil, Plus, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { buildShareImage } from "@/lib/share-image";
 import { AUTHORS, AREAS, getAuthor, normalizeFaq, type FaqItem } from "@/lib/authors";
 
 interface Article {
@@ -13,6 +14,7 @@ interface Article {
   category: string | null;
   author: string | null;
   cover_image_url: string | null;
+  og_image_url?: string | null;
   seo_title: string | null;
   seo_description: string | null;
   summary: string | null;
@@ -34,6 +36,7 @@ interface FormState {
   category: string;
   author: string;
   cover_image_url: string;
+  og_image_url: string;
   seo_title: string;
   seo_description: string;
   summary: string;
@@ -51,6 +54,7 @@ const emptyForm: FormState = {
   category: "",
   author: "",
   cover_image_url: "",
+  og_image_url: "",
   seo_title: "",
   seo_description: "",
   summary: "",
@@ -59,6 +63,17 @@ const emptyForm: FormState = {
   area_slug: "",
   is_featured: false,
 };
+
+/** Generates the uncropped 1200x630 share image and uploads it next to the covers. */
+async function uploadShareImage(src: string | Blob, name: string): Promise<string> {
+  const blob = await buildShareImage(src);
+  const path = `og/${Date.now()}-${name}-1200x630.jpg`;
+  const { error } = await supabase.storage
+    .from("article-covers")
+    .upload(path, blob, { upsert: false, contentType: "image/jpeg" });
+  if (error) throw error;
+  return supabase.storage.from("article-covers").getPublicUrl(path).data.publicUrl;
+}
 
 function slugify(text: string): string {
   return text
@@ -113,7 +128,11 @@ function AdminArtigosPage() {
       const { data: pub } = supabase.storage
         .from("article-covers")
         .getPublicUrl(path);
-      setForm((f) => ({ ...f, cover_image_url: pub.publicUrl }));
+      const ogUrl = await uploadShareImage(file, safeName).catch((e) => {
+        console.error("Erro ao gerar imagem de compartilhamento:", e);
+        return "";
+      });
+      setForm((f) => ({ ...f, cover_image_url: pub.publicUrl, og_image_url: ogUrl }));
     } catch (err: any) {
       console.error("Erro no upload:", err);
       setError(err?.message ?? "Erro ao enviar imagem.");
@@ -170,6 +189,7 @@ function AdminArtigosPage() {
       category: a.category ?? "",
       author: a.author ?? "",
       cover_image_url: a.cover_image_url ?? "",
+      og_image_url: a.og_image_url ?? "",
       seo_title: a.seo_title ?? "",
       seo_description: a.seo_description ?? "",
       summary: a.summary ?? "",
@@ -273,6 +293,15 @@ function AdminArtigosPage() {
       publishedAt = new Date().toISOString();
     }
 
+    const coverUrl = form.cover_image_url.trim();
+    let ogImageUrl: string | null = coverUrl ? form.og_image_url || null : null;
+    if (coverUrl && !ogImageUrl) {
+      ogImageUrl = await uploadShareImage(coverUrl, finalSlug).catch((e) => {
+        console.error("Erro ao gerar imagem de compartilhamento:", e);
+        return null;
+      });
+    }
+
     const payload = {
       title: form.title.trim(),
       slug: finalSlug,
@@ -288,6 +317,7 @@ function AdminArtigosPage() {
         .map((q) => ({ pergunta: q.pergunta.trim(), resposta: q.resposta.trim() }))
         .filter((q) => q.pergunta && q.resposta),
       cover_image_url: form.cover_image_url.trim() || null,
+      og_image_url: ogImageUrl,
       seo_title: form.seo_title.trim() || null,
       seo_description: form.seo_description.trim() || null,
       status,
@@ -511,7 +541,7 @@ function AdminArtigosPage() {
                   type="url"
                   value={form.cover_image_url}
                   onChange={(e) =>
-                    setForm((f) => ({ ...f, cover_image_url: e.target.value }))
+                    setForm((f) => ({ ...f, cover_image_url: e.target.value, og_image_url: "" }))
                   }
                   className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
                   placeholder="https://..."
@@ -538,7 +568,7 @@ function AdminArtigosPage() {
                     <img
                       src={form.cover_image_url}
                       alt="Prévia da imagem de capa"
-                      className="max-h-48 rounded-md border border-border object-cover"
+                      className="max-h-48 rounded-md border border-border object-contain"
                     />
                   </div>
                 )}

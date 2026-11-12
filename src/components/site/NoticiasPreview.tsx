@@ -1,3 +1,4 @@
+import { ArticleCover } from "@/components/site/ArticleCover";
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Calendar, Loader2 } from "lucide-react";
@@ -82,12 +83,7 @@ export function NoticiasPreview() {
                 className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-card transition-all hover:-translate-y-1 hover:border-gold/50 hover:shadow-elegant"
               >
                 {a.cover_image_url ? (
-                  <img
-                    src={a.cover_image_url}
-                    alt={a.title}
-                    loading="lazy"
-                    className="aspect-[16/10] w-full object-cover"
-                  />
+                  <ArticleCover src={a.cover_image_url} alt={a.title} loading="lazy" />
                 ) : (
                   <div className="aspect-[16/10] w-full bg-gradient-to-br from-gold/20 to-gold/10" />
                 )}

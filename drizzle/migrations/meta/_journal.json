@@ -50,6 +50,13 @@
       "when": 1794482860573,
       "tag": "0006_articles_updated_at_content_only",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1794483200375,
+      "tag": "0007_article_og_image",
+      "breakpoints": true
     }
   ]
 }
