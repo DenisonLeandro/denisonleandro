@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { buildHead } from "@/lib/seo";
+import { personHead } from "@/lib/seo";
 import { LawyerDetail } from "@/components/site/LawyerDetail";
 import photo from "@/assets/renata.png.asset.json";
 
 export const Route = createFileRoute("/equipe/renata-henrique-leandro")({
-  head: () => buildHead({ title: "Dra. Renata Henrique Leandro", description: "Advogada pós-graduada em Mediação, Conciliação e Arbitragem.", path: "/equipe/renata-henrique-leandro" }),
+  head: () => personHead({ slug: "renata-henrique-leandro", name: "Dra. Renata Henrique Leandro", jobTitle: "Advogada", description: "Advogada pós-graduada em Mediação, Conciliação e Arbitragem.", email: "renata@denisonleandro.adv.br", oab: "OAB/PR 77.170", photo: photo.url, knowsAbout: ["Mediação", "Conciliação", "Arbitragem", "Direito do Trabalho"], credentials: ["Pós-Graduação lato sensu em Mediação, Conciliação e Arbitragem"] }),
   component: () => (
     <LawyerDetail
       name="Dra. Renata Henrique Leandro"

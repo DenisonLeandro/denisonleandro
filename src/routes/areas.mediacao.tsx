@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AreaDetail } from "@/components/site/AreaDetail";
-import { buildHead } from "@/lib/seo";
+import { areaHead } from "@/lib/seo";
 
 const title = "Mediação";
 const intro =
@@ -14,6 +14,6 @@ const items = [
 ];
 
 export const Route = createFileRoute("/areas/mediacao")({
-  head: () => buildHead({ title: `${title} e Arbitragem`, description: intro, path: "/areas/mediacao" }),
+  head: () => areaHead({ title: `${title} e Arbitragem`, serviceName: "Mediação e Arbitragem em Londrina", serviceType: "Mediação, Conciliação e Arbitragem", description: intro, path: "/areas/mediacao" }),
   component: () => <AreaDetail title={title} intro={intro} items={items} />,
 });
