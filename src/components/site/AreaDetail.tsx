@@ -9,9 +9,10 @@ type Props = {
   title: string;
   intro: string;
   items: string[];
+  extra?: React.ReactNode;
 };
 
-export function AreaDetail({ title, intro, items }: Props) {
+export function AreaDetail({ title, intro, items, extra }: Props) {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -31,6 +32,7 @@ export function AreaDetail({ title, intro, items }: Props) {
                   </li>
                 ))}
               </ul>
+              {extra}
 
               <div className="mt-10">
                 <a

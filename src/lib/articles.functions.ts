@@ -117,3 +117,27 @@ export const listRelatedArticles = createServerFn({ method: "GET" })
     if (picked.length < 3) add((await base().limit(6)).data);
     return picked;
   });
+
+export interface FeaturedArticle {
+  slug: string;
+  title: string;
+  category: string | null;
+  cover_image_url: string | null;
+  text: string;
+}
+
+export const getFeaturedArticle = createServerFn({ method: "GET" }).handler(
+  async (): Promise<FeaturedArticle | null> => {
+    const sb = publicClient();
+    const cols = "slug, title, category, cover_image_url, summary, seo_description, excerpt";
+    let { data: row } = await sb.from("articles").select(cols).eq("status", "published").eq("is_featured", true).maybeSingle();
+    if (!row) {
+      ({ data: row } = await sb.from("articles").select(cols).eq("status", "published")
+        .order("published_at", { ascending: false }).limit(1).maybeSingle());
+    }
+    if (!row) return null;
+    const summary = row.summary?.trim() ?? "";
+    const text = summary && summary.length <= 260 ? summary : (row.seo_description || row.excerpt || summary || "");
+    return { slug: row.slug, title: row.title, category: row.category, cover_image_url: row.cover_image_url, text };
+  },
+);
