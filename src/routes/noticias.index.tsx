@@ -5,11 +5,9 @@ import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { CtaBanner } from "@/components/site/CtaBanner";
 import { PageHeader } from "@/components/site/PageHeader";
-import { listPublishedArticles } from "@/lib/articles.functions";
+import { listPublishedArticles, getFeaturedArticle, type FeaturedArticle } from "@/lib/articles.functions";
 
-import featuredImage from "@/assets/featured-acidente-de-trabalho.jpg";
-
-function FeaturedArticleCard() {
+function FeaturedArticleCard({ article }: { article: FeaturedArticle }) {
   return (
     <div className="mb-12">
       <div className="mb-4 flex items-center gap-2">
@@ -19,30 +17,34 @@ function FeaturedArticleCard() {
         </span>
       </div>
       <Link
-        to="/acidente-de-trabalho"
+        to="/noticias/$slug"
+        params={{ slug: article.slug }}
         className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-card transition-all hover:-translate-y-1 hover:border-gold/50 hover:shadow-elegant md:flex-row"
       >
         <div className="w-full overflow-hidden md:w-2/5">
-          <img
-            src={featuredImage}
-            alt="Trabalhador utilizando equipamentos de segurança em ambiente de trabalho"
-            width={1280}
-            height={800}
-            loading="lazy"
-            className="aspect-[16/10] h-full w-full object-cover"
-          />
+          {article.cover_image_url ? (
+            <img
+              src={article.cover_image_url}
+              alt={article.title}
+              width={1280}
+              height={800}
+              className="aspect-[16/10] h-full w-full object-cover"
+            />
+          ) : (
+            <div className="aspect-[16/10] h-full w-full bg-gradient-to-br from-gold/20 to-gold/10" />
+          )}
         </div>
         <div className="flex flex-1 flex-col p-6 md:p-8">
-          <span className="inline-flex w-fit rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-gold">
-            Direito do Trabalho
-          </span>
+          {article.category && (
+            <span className="inline-flex w-fit rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-gold">
+              {article.category}
+            </span>
+          )}
           <h2 className="mt-4 font-serif text-2xl leading-snug text-navy md:text-3xl">
-            Acidente de trabalho: quais são os direitos do trabalhador?
+            {article.title}
           </h2>
           <p className="mt-3 flex-1 text-sm leading-relaxed text-foreground/75 md:text-base">
-            Entenda os principais direitos de quem sofreu acidente de trabalho,
-            quando procurar orientação e quais documentos podem ajudar na
-            análise do caso.
+            {article.text}
           </p>
           <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-white transition-colors group-hover:bg-gold group-hover:text-navy">
             Ler artigo
@@ -60,7 +62,13 @@ export const Route = createFileRoute("/noticias/")({
     return Number.isFinite(n) && n > 1 ? { pagina: n } : {};
   },
   loaderDeps: ({ search }) => ({ pagina: search.pagina ?? 1 }),
-  loader: ({ deps }) => listPublishedArticles({ data: { page: deps.pagina } }),
+  loader: async ({ deps }) => {
+    const [list, featured] = await Promise.all([
+      listPublishedArticles({ data: { page: deps.pagina } }),
+      deps.pagina === 1 ? getFeaturedArticle() : Promise.resolve(null),
+    ]);
+    return { ...list, featured };
+  },
   head: ({ loaderData }) => {
     const page = loaderData?.page ?? 1;
     return buildHead({
@@ -86,7 +94,7 @@ export const Route = createFileRoute("/noticias/")({
 });
 
 function NoticiasPage() {
-  const { articles, page, totalPages } = Route.useLoaderData();
+  const { articles, page, totalPages, featured } = Route.useLoaderData();
   const loading = false;
 
   return (
@@ -101,7 +109,7 @@ function NoticiasPage() {
 
         <section className="bg-background py-20">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
-            {page === 1 && <FeaturedArticleCard />}
+            {page === 1 && featured && <FeaturedArticleCard article={featured} />}
             {loading ? (
               <div className="flex items-center justify-center gap-2 py-10">
                 <Loader2 className="h-6 w-6 animate-spin" />

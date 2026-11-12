@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { whatsappUrl } from "@/lib/whatsapp";
 import { MessageCircle } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
@@ -9,9 +10,10 @@ type Props = {
   title: string;
   intro: string;
   items: string[];
+  extra?: ReactNode;
 };
 
-export function AreaDetail({ title, intro, items }: Props) {
+export function AreaDetail({ title, intro, items, extra }: Props) {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -31,6 +33,7 @@ export function AreaDetail({ title, intro, items }: Props) {
                   </li>
                 ))}
               </ul>
+              {extra}
 
               <div className="mt-10">
                 <a

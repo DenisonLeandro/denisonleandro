@@ -26,6 +26,7 @@ export type Database = {
           excerpt: string | null
           faq: Json
           id: string
+          is_featured: boolean
           published_at: string | null
           seo_description: string | null
           seo_title: string | null
@@ -46,6 +47,7 @@ export type Database = {
           excerpt?: string | null
           faq?: Json
           id?: string
+          is_featured?: boolean
           published_at?: string | null
           seo_description?: string | null
           seo_title?: string | null
@@ -66,6 +68,7 @@ export type Database = {
           excerpt?: string | null
           faq?: Json
           id?: string
+          is_featured?: boolean
           published_at?: string | null
           seo_description?: string | null
           seo_title?: string | null

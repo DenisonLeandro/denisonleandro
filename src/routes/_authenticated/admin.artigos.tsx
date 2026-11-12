@@ -19,6 +19,7 @@ interface Article {
   faq: unknown;
   author_slug: string;
   area_slug: string | null;
+  is_featured: boolean;
   status: string;
   published_at: string | null;
   created_at: string;
@@ -39,6 +40,7 @@ interface FormState {
   faq: FaqItem[];
   author_slug: string;
   area_slug: string;
+  is_featured: boolean;
 }
 
 const emptyForm: FormState = {
@@ -55,6 +57,7 @@ const emptyForm: FormState = {
   faq: [],
   author_slug: "denison-henrique-leandro",
   area_slug: "",
+  is_featured: false,
 };
 
 function slugify(text: string): string {
@@ -173,6 +176,7 @@ function AdminArtigosPage() {
       faq: normalizeFaq(a.faq),
       author_slug: a.author_slug || "denison-henrique-leandro",
       area_slug: a.area_slug ?? "",
+      is_featured: !!a.is_featured,
     });
     setSlugTouched(true);
     setError(null);
@@ -278,6 +282,7 @@ function AdminArtigosPage() {
       author: getAuthor(form.author_slug).name,
       author_slug: form.author_slug,
       area_slug: form.area_slug || null,
+      is_featured: form.is_featured,
       summary: form.summary.trim().slice(0, 500) || null,
       faq: form.faq
         .map((q) => ({ pergunta: q.pergunta.trim(), resposta: q.resposta.trim() }))
@@ -539,6 +544,17 @@ function AdminArtigosPage() {
                 )}
               </Field>
 
+
+              <label className="flex items-center gap-3 rounded-md border border-border p-3 text-sm">
+                <input
+                  type="checkbox"
+                  checked={form.is_featured}
+                  onChange={(e) => setForm((f) => ({ ...f, is_featured: e.target.checked }))}
+                />
+                <span>
+                  <strong>Artigo em destaque</strong> — aparece no topo de /noticias. Só um por vez: ao marcar este, o anterior é desmarcado.
+                </span>
+              </label>
 
               <Field label="Resumo (resposta direta)" hint={`2 a 4 frases que respondem à pergunta do título. Aparece em destaque no topo do artigo. ${form.summary.length}/500`}>
                 <textarea
