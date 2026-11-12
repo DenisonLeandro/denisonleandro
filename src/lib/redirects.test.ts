@@ -16,3 +16,21 @@ describe("findRedirect", () => {
     expect(findRedirect("/noticias")).toBeNull();
   });
 });
+
+import { resolveOldUrl } from "./redirects";
+describe("resolveOldUrl (WordPress)", () => {
+  it("strips trailing slash on institutional pages", () => expect(resolveOldUrl("/contato/")).toEqual({ status: 301, to: "/contato" }));
+  it("date archives go to noticias", () => {
+    expect(resolveOldUrl("/2022/06/")).toEqual({ status: 301, to: "/noticias" });
+    expect(resolveOldUrl("/2021")).toEqual({ status: 301, to: "/noticias" });
+  });
+  it("team dr- prefix goes to profile", () => expect(resolveOldUrl("/team/dra-renata-henrique-leandro")).toEqual({ status: 301, to: "/equipe/renata-henrique-leandro" }));
+  it("unknown team member goes to profissionais", () => expect(resolveOldUrl("/team/otavio-niwa")).toEqual({ status: 301, to: "/profissionais" }));
+  it("current profile untouched", () => expect(resolveOldUrl("/equipe/denison-henrique-leandro")).toBeNull());
+  it("specific tag beats generic 410", () => expect(resolveOldUrl("/tag/inss/")).toEqual({ status: 301, to: "/areas/previdenciario" }));
+  it("vendedor externo goes to subdomain", () => expect(resolveOldUrl("/tag/vendedor-externo")?.status).toBe(301));
+  it("numeric -2 spam is 410", () => expect(resolveOldUrl("/1638-2")).toEqual({ status: 410 }));
+  it("current pages untouched", () => {
+    for (const p of ["/", "/noticias", "/llms.txt", "/sitemap.xml", "/google9f6aaca8a92e26ca.html", "/favicon.ico"]) expect(resolveOldUrl(p)).toBeNull();
+  });
+});
