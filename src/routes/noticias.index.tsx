@@ -1,3 +1,4 @@
+import { ArticleCover } from "@/components/site/ArticleCover";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { buildHead } from "@/lib/seo";
 import { ArrowRight, Calendar, Loader2, Star } from "lucide-react";
@@ -23,13 +24,7 @@ function FeaturedArticleCard({ article }: { article: FeaturedArticle }) {
       >
         <div className="w-full overflow-hidden md:w-2/5">
           {article.cover_image_url ? (
-            <img
-              src={article.cover_image_url}
-              alt={article.title}
-              width={1280}
-              height={800}
-              className="aspect-[16/10] h-full w-full object-cover"
-            />
+            <ArticleCover src={article.cover_image_url} alt={article.title} className="aspect-[16/10] h-full w-full" />
           ) : (
             <div className="aspect-[16/10] h-full w-full bg-gradient-to-br from-gold/20 to-gold/10" />
           )}
@@ -130,11 +125,7 @@ function NoticiasPage() {
                   >
                     {a.cover_image_url && (
 
-                      <img
-                        src={a.cover_image_url}
-                        alt={a.title}
-                        className="aspect-[16/10] w-full object-cover"
-                      />
+                      <ArticleCover src={a.cover_image_url} alt={a.title} />
                     )}
                     {!a.cover_image_url && (
                       <div className="aspect-[16/10] w-full bg-gradient-to-br from-gold/20 to-gold/10" />
