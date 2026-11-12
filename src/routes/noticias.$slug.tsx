@@ -13,7 +13,6 @@ import { prepareArticleHtml, splitHtmlInHalf } from "@/lib/article-content";
 import logoAsset from "@/assets/logo.png.asset.json";
 
 
-const DEFAULT_AUTHOR = "Equipe Denison Leandro Advogados";
 
 function stripHtml(s: string) {
   return s.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
@@ -215,68 +214,33 @@ function CtaDuvidasBlock({ title }: { title: string }) {
   );
 }
 
-function isHtmlContent(content: string): boolean {
-  return /<\/?[a-z][\s\S]*>/i.test(content);
-}
+const fmtDate = (d: string) =>
+  new Date(d).toLocaleDateString("pt-BR", { year: "numeric", month: "long", day: "numeric", timeZone: "America/Sao_Paulo" });
+const dayKey = (d: string) => new Date(d).toLocaleDateString("en-CA", { timeZone: "America/Sao_Paulo" });
 
-interface ContentParts {
-  isHtml: boolean;
-  first: string;
-  second: string;
-  plainParagraphs?: { first: string[]; second: string[] };
-}
-
-function splitContent(content: string): ContentParts {
-  const raw = content ?? "";
-  if (isHtmlContent(raw)) {
-    // Split by closing </p> preserving each paragraph
-    const parts = raw
-      .split(/<\/p>/i)
-      .map((p) => p.trim())
-      .filter((p) => p.length > 0)
-      .map((p) => p + "</p>");
-    if (parts.length <= 1) {
-      return { isHtml: true, first: raw, second: "" };
-    }
-    const mid = Math.floor(parts.length / 2);
-    return {
-      isHtml: true,
-      first: parts.slice(0, mid).join(""),
-      second: parts.slice(mid).join(""),
-    };
-  }
-  const paragraphs = raw
-    .split(/\n\s*\n|\n/)
-    .map((p) => p.trim())
-    .filter((p) => p.length > 0);
-  if (paragraphs.length <= 1) {
-    return {
-      isHtml: false,
-      first: "",
-      second: "",
-      plainParagraphs: { first: paragraphs, second: [] },
-    };
-  }
-  const mid = Math.floor(paragraphs.length / 2);
-  return {
-    isHtml: false,
-    first: "",
-    second: "",
-    plainParagraphs: {
-      first: paragraphs.slice(0, mid),
-      second: paragraphs.slice(mid),
-    },
-  };
+function AuthorAvatar({ author, size }: { author: Author; size: string }) {
+  return author.photo ? (
+    <img src={author.photo} alt={author.name} width={96} height={96} className={`${size} shrink-0 rounded-full object-cover object-top`} />
+  ) : (
+    <span aria-hidden="true" className={`${size} flex shrink-0 items-center justify-center rounded-full bg-gold/15 font-serif text-navy`}>
+      {author.name.replace(/^Dra?\.\s*/, "").charAt(0)}
+    </span>
+  );
 }
 
 function NoticiaDetail() {
-  const { article } = Route.useLoaderData();
-  const contentParts = useMemo(() => splitContent(article.content), [article]);
+  const { article, related } = Route.useLoaderData();
+  const author = getAuthor(article.author_slug);
+  const area = getArea(article.area_slug);
+  const faq = normalizeFaq(article.faq);
+  const { html, toc } = useMemo(() => prepareArticleHtml(article.content ?? "", article.title), [article]);
+  const [first, second] = useMemo(() => splitHtmlInHalf(html), [html]);
+  const updated = dayKey(article.updated_at) !== dayKey(article.published_at);
 
   const articleBodyClasses = [
     "font-sans text-foreground",
     "[&_p]:font-sans [&_p]:text-justify [&_p]:leading-[1.8] [&_p]:mb-6 [&_p]:text-base [&_p]:text-foreground",
-    "[&_h2]:font-sans [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-navy [&_h2]:mt-10 [&_h2]:mb-4",
+    "[&_h2]:font-sans [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-navy [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:scroll-mt-24",
     "[&_h3]:font-sans [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-navy [&_h3]:mt-8 [&_h3]:mb-3",
     "[&_h4]:font-sans [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-navy [&_h4]:mt-6 [&_h4]:mb-2",
     "[&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-6 [&_ul]:space-y-2",
@@ -287,9 +251,6 @@ function NoticiaDetail() {
     "[&_em]:italic",
     "[&_blockquote]:border-l-4 [&_blockquote]:border-gold [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-muted-foreground [&_blockquote]:my-6",
   ].join(" ");
-
-  const plainParagraphClass =
-    "font-sans text-justify leading-[1.8] mb-6 text-base text-foreground";
 
   return (
     <div className="min-h-screen bg-background">
@@ -317,20 +278,39 @@ function NoticiaDetail() {
               {article.category}
             </p>
           )}
-          <h1 className="mb-4 font-serif text-4xl font-bold text-navy">
-            {article.title}
-          </h1>
-          <p className="inline-flex items-center gap-2 text-muted-foreground">
-            <Calendar size={16} />
-            <time dateTime={article.published_at}>{new Date(article.published_at).toLocaleDateString("pt-BR", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}</time>
-            <span aria-hidden="true">·</span>
-            <span>{article.author || DEFAULT_AUTHOR}</span>
-          </p>
+          <h1 className="mb-5 font-serif text-4xl font-bold text-navy">{article.title}</h1>
+          <div className="flex items-center gap-3">
+            <AuthorAvatar author={author} size="h-11 w-11 text-lg" />
+            <div className="text-sm text-muted-foreground">
+              <p>
+                Por{" "}
+                <a href={`/equipe/${author.slug}`} className="font-semibold text-navy hover:text-gold">
+                  {author.name}
+                </a>{" "}
+                — {author.oab}
+              </p>
+              <p className="mt-0.5 inline-flex flex-wrap items-center gap-x-2">
+                <Calendar size={14} />
+                <time dateTime={article.published_at}>{fmtDate(article.published_at)}</time>
+                {updated && (
+                  <>
+                    <span aria-hidden="true">·</span>
+                    <span>
+                      Atualizado em <time dateTime={article.updated_at}>{fmtDate(article.updated_at)}</time>
+                    </span>
+                  </>
+                )}
+              </p>
+            </div>
+          </div>
         </header>
+
+        {article.summary && (
+          <section aria-label="Resumo" className="mb-8 rounded-r-lg border-l-4 border-gold bg-muted/50 px-5 py-4">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-gold">Resumo</p>
+            <p className="leading-[1.8] text-foreground">{article.summary}</p>
+          </section>
+        )}
 
         {/* CTA 1 — topo */}
         <div className="mb-8">
@@ -343,45 +323,78 @@ function NoticiaDetail() {
           </p>
         )}
 
-        {/* Conteúdo + CTA intermediário */}
-        {contentParts?.isHtml ? (
-          <>
-            <div className={articleBodyClasses}>
-              <div dangerouslySetInnerHTML={{ __html: contentParts.first }} />
-            </div>
-            <CtaCallout title={article.title} />
-            {contentParts.second && (
-              <div className={articleBodyClasses}>
-                <div
-                  dangerouslySetInnerHTML={{ __html: contentParts.second }}
-                />
-              </div>
-            )}
-          </>
-        ) : (
-          <>
-            <div>
-              {(contentParts?.plainParagraphs?.first ?? []).map((p, i) => (
-                <p key={`p1-${i}`} className={`${plainParagraphClass} whitespace-pre-line`}>
-                  {p}
-                </p>
+        {toc.length >= 3 && (
+          <nav aria-label="Neste artigo" className="mb-10 rounded-lg border border-border p-5">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-navy">Neste artigo</p>
+            <ol className="list-decimal space-y-1.5 pl-5 text-sm">
+              {toc.map((t) => (
+                <li key={t.id}>
+                  <a href={`#${t.id}`} className="text-foreground/80 hover:text-gold">{t.text}</a>
+                </li>
               ))}
-            </div>
-            <CtaCallout title={article.title} />
-            {contentParts?.plainParagraphs?.second &&
-              contentParts.plainParagraphs.second.length > 0 && (
-                <div>
-                  {contentParts.plainParagraphs.second.map((p, i) => (
-                    <p key={`p2-${i}`} className={`${plainParagraphClass} whitespace-pre-line`}>
-                      {p}
-                    </p>
-                  ))}
-                </div>
-              )}
-          </>
+            </ol>
+          </nav>
+        )}
+
+        {/* Conteúdo + CTA intermediário */}
+        <div className={articleBodyClasses} dangerouslySetInnerHTML={{ __html: first }} />
+        <CtaCallout title={article.title} />
+        {second && <div className={articleBodyClasses} dangerouslySetInnerHTML={{ __html: second }} />}
+
+        {faq.length > 0 && (
+          <section aria-labelledby="faq-title" className="mt-12 border-t border-border pt-10">
+            <h2 id="faq-title" className="mb-6 font-sans text-2xl font-semibold text-navy">Perguntas frequentes</h2>
+            {faq.map((f, i) => (
+              <div key={i} className="mb-6">
+                <h3 className="mb-2 font-sans text-lg font-semibold text-navy">{f.pergunta}</h3>
+                <p className="whitespace-pre-line text-justify leading-[1.8] text-foreground">{f.resposta}</p>
+              </div>
+            ))}
+          </section>
+        )}
+
+        <aside aria-label="Sobre o autor" className="mt-12 flex gap-4 rounded-xl border border-border bg-card p-5">
+          <AuthorAvatar author={author} size="h-16 w-16 text-2xl" />
+          <div>
+            <p className="font-serif text-lg text-navy">{author.name}</p>
+            <p className="text-xs text-muted-foreground">{author.oab}</p>
+            <p className="mt-2 text-sm text-foreground/80">{author.specialty}</p>
+            <a href={`/equipe/${author.slug}`} className="mt-2 inline-block text-sm font-semibold text-gold hover:text-gold/80">
+              Ver perfil
+            </a>
+          </div>
+        </aside>
+
+        {area && (
+          <aside aria-label="Contato" className="mt-6 rounded-xl border border-border bg-muted/40 p-5">
+            <p className="text-base font-semibold text-foreground">
+              Tem dúvidas sobre {area.name} em Londrina? Fale com um advogado
+            </p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Conheça como o escritório atua em{" "}
+              <a href={`/areas/${area.slug}`} className="text-gold underline hover:text-gold/80">{area.name}</a>{" "}
+              ou envie sua dúvida pelo WhatsApp para uma orientação inicial.
+            </p>
+            <div className="mt-4"><CtaButton title={article.title} /></div>
+          </aside>
         )}
 
         <ShareButtons url={`${SITE_URL}/noticias/${article.slug}`} title={article.title} />
+
+        {related.length > 0 && (
+          <section aria-labelledby="rel-title" className="mt-10">
+            <h2 id="rel-title" className="mb-4 font-sans text-xl font-semibold text-navy">Artigos relacionados</h2>
+            <ul className="space-y-2">
+              {related.map((r) => (
+                <li key={r.slug}>
+                  <a href={`/noticias/${r.slug}`} className="text-foreground/85 underline-offset-4 hover:text-gold hover:underline">
+                    {r.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {/* Bloco institucional — menções jornalísticas */}
         <MediaMentions />
