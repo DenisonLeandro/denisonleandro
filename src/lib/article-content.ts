@@ -52,12 +52,18 @@ export function isPlainHeading(line: string): boolean {
 /** Converts plain-text article content into simple semantic HTML. Drops a first line equal to the title. */
 export function plainToHtml(text: string, title?: string): string {
   const norm = (s: string) => s.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "");
-  // A subtitle must start a new block (blank line before) or be a question,
-  // so source citations glued under a paragraph ("Planalto", "Jurisprudência TST") stay text.
+    // so source citations glued under a paragraph ("Planalto", "Jurisprudência TST") stay text.
   const raw = text.replace(/\r/g, "").split("\n");
   const lines: string[] = [];
+  // A citation glued under a paragraph and followed by a blank line ("Planalto") is not a subtitle.
   const starts: boolean[] = [];
-  raw.forEach((l, i) => { const t = l.trim(); if (!t) return; lines.push(t); starts.push(i === 0 || !raw[i - 1].trim()); });
+  raw.forEach((l, i) => {
+    const t = l.trim(); if (!t) return;
+    lines.push(t);
+    const blankBefore = i === 0 || !raw[i - 1].trim();
+    const textAfter = i + 1 < raw.length && !!raw[i + 1].trim();
+    starts.push(blankBefore || textAfter);
+  });
   if (title && lines[0] && norm(lines[0]) === norm(title)) { lines.shift(); starts.shift(); }
   const out: string[] = [];
   let list: string[] = [];
