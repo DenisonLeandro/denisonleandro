@@ -1,28 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AreaDetail } from "@/components/site/AreaDetail";
 import { areaHead } from "@/lib/seo";
+import { getArea } from "@/lib/site-content";
 
-const title = "Família";
-const intro =
-  "Atendimento sensível e técnico em Direito de Família e Sucessões, com foco em soluções consensuais sempre que possível.";
-const items = [
-  "Alimentos (concessão, revisão, exoneração e execução)",
-  "Casamento (regime de bens e pacto antenupcial)",
-  "União estável (reconhecimento e dissolução)",
-  "Medida cautelar de separação de corpos",
-  "Divórcio",
-  "Filiação (adoção e investigação de paternidade)",
-  "Guarda e regulamentação de visita de menores",
-  "Interdição",
-  "Doação",
-  "Planejamento familiar e sucessório",
-  "Inventário e arrolamento",
-  "Medida cautelar de arrolamento de bens",
-  "Partilha de bens",
-  "Testamentos",
-  "Tutela",
-  "Cessão de herança",
-];
+const { title, intro, items } = getArea("familia");
 
 export const Route = createFileRoute("/areas/familia")({
   head: () => areaHead({ title: `Direito de ${title} e Sucessões`, serviceName: "Advocacia de Família e Sucessões em Londrina", serviceType: "Direito de Família e Sucessões", description: intro, path: "/areas/familia" }),
