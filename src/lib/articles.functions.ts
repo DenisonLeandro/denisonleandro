@@ -18,7 +18,7 @@ export interface PublicArticle {
   seo_title: string | null;
   seo_description: string | null;
   summary: string | null;
-  faq: unknown;
+  faq: { pergunta: string; resposta: string }[];
   author_slug: string;
   area_slug: string | null;
 }
@@ -56,6 +56,9 @@ export const getPublishedArticle = createServerFn({ method: "GET" })
     if (!row) return null;
     return {
       ...row,
+      faq: Array.isArray(row.faq)
+        ? (row.faq as any[]).map((x) => ({ pergunta: String(x?.pergunta ?? ""), resposta: String(x?.resposta ?? "") }))
+        : [],
       published_at: row.published_at ?? row.updated_at,
     } as PublicArticle;
   });
