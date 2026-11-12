@@ -1,4 +1,4 @@
-import { whatsappUrl, articleMessage } from "@/lib/whatsapp";
+import { whatsappUrl } from "@/lib/whatsapp";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X, MessageCircle } from "lucide-react";

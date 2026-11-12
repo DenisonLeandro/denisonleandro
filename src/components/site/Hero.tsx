@@ -1,4 +1,4 @@
-import { whatsappUrl, articleMessage } from "@/lib/whatsapp";
+import { whatsappUrl } from "@/lib/whatsapp";
 import { MessageCircle, ArrowRight } from "lucide-react";
 import logoAsset from "@/assets/logo.png.asset.json";
 

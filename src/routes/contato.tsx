@@ -1,4 +1,4 @@
-import { whatsappUrl, articleMessage } from "@/lib/whatsapp";
+import { whatsappUrl } from "@/lib/whatsapp";
 import { createFileRoute } from "@tanstack/react-router";
 import { MessageCircle, MapPin, Phone, Mail } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";

@@ -1,4 +1,4 @@
-import { whatsappUrl, articleMessage } from "@/lib/whatsapp";
+import { whatsappUrl } from "@/lib/whatsapp";
 import { MessageCircle } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
