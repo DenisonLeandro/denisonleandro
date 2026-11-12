@@ -13,7 +13,11 @@ Deixar cada artigo em /noticias/{endereço} no formato que Google e IAs mais cit
 - Caixa "Resumo" com fundo suave e borda lateral dourada, só quando houver resumo.
 
 ## 3. Corpo
-- Subtítulos viram títulos de verdade (H2/H3). Parágrafos curtos, em negrito e sozinhos na linha passam a ser tratados como subtítulo na hora de mostrar a página. O texto salvo não muda.
+- Subtítulos viram títulos de verdade (H2/H3). Um parágrafo em negrito só vira subtítulo quando atender às três regras:
+  - o parágrafo inteiro está em negrito;
+  - tem até 90 caracteres;
+  - não é um rótulo com dois-pontos seguido de texto comum (ex.: "**Prazo:** 12 meses").
+- A troca acontece só na hora de mostrar a página. O texto salvo não muda.
 - Com 3 ou mais subtítulos, aparece antes do texto um índice "Neste artigo" com links para cada parte.
 
 ## 4. Fim do artigo (nesta ordem)
@@ -36,6 +40,7 @@ O CTA do topo, o do meio e o final, além do bloco de imprensa, continuam como e
 - Um artigo sem resumo e sem perguntas: os blocos não aparecem e nada quebra.
 - Vou preencher um artigo de teste pelo painel, tirar uma foto da página com todos os blocos e depois apagar os dados de teste.
 - Vou listar quais avisos do Google foram corrigidos.
+- Antes de concluir, vou enviar a lista dos subtítulos detectados em 3 artigos (metas, estabilidade e perdeu movimentos) para você conferir.
 
 ## Detalhes técnicos
 - Migração: `summary text`, `faq jsonb default '[]'`, `author_slug text default 'denison-henrique-leandro'`, `area_slug text`, com UPDATE de `area_slug` a partir de `category` (mapeamento por palavra-chave). As políticas de acesso atuais continuam valendo.
