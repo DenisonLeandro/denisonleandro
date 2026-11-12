@@ -328,7 +328,7 @@ function NoticiaDetail() {
             <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-navy">Neste artigo</p>
             <ol className="list-decimal space-y-1.5 pl-5 text-sm">
               {toc.map((t) => (
-                <li key={t.id}>
+                <li key={t.id} className={t.level === 3 ? "ml-4 list-[circle]" : undefined}>
                   <a href={`#${t.id}`} className="text-foreground/80 hover:text-gold">{t.text}</a>
                 </li>
               ))}

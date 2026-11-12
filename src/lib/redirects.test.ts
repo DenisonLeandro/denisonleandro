@@ -28,7 +28,11 @@ describe("resolveOldUrl (WordPress)", () => {
   it("unknown team member goes to profissionais", () => expect(resolveOldUrl("/team/otavio-niwa")).toEqual({ status: 301, to: "/profissionais" }));
   it("current profile untouched", () => expect(resolveOldUrl("/equipe/denison-henrique-leandro")).toBeNull());
   it("specific tag beats generic 410", () => expect(resolveOldUrl("/tag/inss/")).toEqual({ status: 301, to: "/areas/previdenciario" }));
-  it("vendedor externo goes to subdomain", () => expect(resolveOldUrl("/tag/vendedor-externo")?.status).toBe(301));
+  it("vendedor externo old pages go to the article", () => {
+    const to = "/noticias/vendedor-externo-tem-direito-a-horas-extras-entenda-quando-a-empresa-deve-pagar";
+    expect(resolveOldUrl("/tag/vendedor-externo/")).toEqual({ status: 301, to });
+    expect(resolveOldUrl("/horas-extras-para-o-vendedor-externo")).toEqual({ status: 301, to });
+  });
   it("numeric -2 spam is 410", () => expect(resolveOldUrl("/1638-2")).toEqual({ status: 410 }));
   it("current pages untouched", () => {
     for (const p of ["/", "/noticias", "/llms.txt", "/sitemap.xml", "/google9f6aaca8a92e26ca.html", "/favicon.ico"]) expect(resolveOldUrl(p)).toBeNull();

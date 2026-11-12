@@ -1,4 +1,4 @@
-export interface TocItem { id: string; text: string }
+export interface TocItem { id: string; text: string; level: 2 | 3 }
 
 export function slugify(s: string) {
   return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
@@ -25,18 +25,33 @@ export function enhanceContent(html: string): { html: string; toc: TocItem[] } {
     const t = boldHeadingText(inner);
     return t ? `<h2>${t.replace(/</g, "&lt;")}</h2>` : full;
   });
-  out = out.replace(/<h2(\s[^>]*)?>([\s\S]*?)<\/h2>/gi, (_f, attrs = "", inner) => {
+  out = out.replace(/<h([23])(\s[^>]*)?>([\s\S]*?)<\/h\1>/gi, (_f, lv, attrs = "", inner) => {
     const t = textOf(inner);
     const existing = /\sid="([^"]+)"/.exec(attrs)?.[1];
     const id = existing ?? uid(t);
     if (existing) used.add(existing);
-    toc.push({ id, text: t });
-    return existing ? `<h2${attrs}>${inner}</h2>` : `<h2${attrs} id="${id}">${inner}</h2>`;
+    toc.push({ id, text: t, level: lv === "3" ? 3 : 2 });
+    return existing ? `<h${lv}${attrs}>${inner}</h${lv}>` : `<h${lv}${attrs} id="${id}">${inner}</h${lv}>`;
   });
   return { html: out, toc };
 }
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const safeHref = (u: string) => (/^(https:\/\/|\/)/.test(u) ? u.replace(/"/g, "%22") : "#");
+/** Escapes text and turns [texto](/url ou https://...) into links. */
+export function inlineText(s: string): string {
+  return esc(s).replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_m, t, u) => {
+    const href = safeHref(u.replace(/&amp;/g, "&"));
+    const ext = href.startsWith("http") ? ' target="_blank" rel="noopener noreferrer"' : "";
+    return `<a href="${href}"${ext}>${t}</a>`;
+  });
+}
+/** Highlight box line: [[destaque|Texto|Botão|URL]] */
+function calloutHtml(text: string, label: string, url: string): string {
+  const href = safeHref(url);
+  const ext = href.startsWith("http") ? ' target="_blank" rel="noopener noreferrer"' : "";
+  return `<aside class="not-prose my-10 rounded-xl border border-border bg-muted/40 p-5"><p class="!mb-4 font-semibold !text-left">${esc(text)}</p><a href="${href}"${ext} class="inline-flex items-center justify-center rounded-lg border border-navy bg-white px-5 py-2.5 text-sm font-semibold !text-navy !no-underline shadow-sm transition-all hover:bg-navy hover:!text-white">${esc(label)}</a></aside>`;
+}
 
 /** Plain-text line that is clearly a subtitle: own line, ≤90 chars, no final ".", ",", ";" or ":", not a list item. */
 export function isPlainHeading(line: string): boolean {
@@ -67,11 +82,16 @@ export function plainToHtml(text: string, title?: string): string {
   if (title && lines[0] && norm(lines[0]) === norm(title)) { lines.shift(); starts.shift(); }
   const out: string[] = [];
   let list: string[] = [];
-  const flush = () => { if (list.length) { out.push(`<ul>${list.map((l) => `<li>${esc(l)}</li>`).join("")}</ul>`); list = []; } };
+  const flush = () => { if (list.length) { out.push(`<ul>${list.map((l) => `<li>${inlineText(l)}</li>`).join("")}</ul>`); list = []; } };
   for (const [i, l] of lines.entries()) {
     if (/^[-•*]\s+/.test(l)) { list.push(l.replace(/^[-•*]\s+/, "")); continue; }
     flush();
-    out.push((starts[i] || l.endsWith("?")) && isPlainHeading(l) ? `<h2>${esc(l)}</h2>` : `<p>${esc(l)}</p>`);
+    // Explicit markers written in the panel: "## " = H2, "### " = H3, [[destaque|...]] = highlight box.
+    const mk = /^(#{2,3})\s+(.+)$/.exec(l);
+    if (mk) { out.push(`<h${mk[1].length}>${esc(mk[2])}</h${mk[1].length}>`); continue; }
+    const co = /^\[\[destaque\|([^|]+)\|([^|]+)\|([^\]]+)\]\]$/.exec(l);
+    if (co) { out.push(calloutHtml(co[1].trim(), co[2].trim(), co[3].trim())); continue; }
+    out.push((starts[i] || l.endsWith("?")) && isPlainHeading(l) ? `<h2>${esc(l)}</h2>` : `<p>${inlineText(l)}</p>`);
   }
   flush();
   return out.join("");
@@ -84,7 +104,7 @@ export function prepareArticleHtml(content: string, title?: string) {
 
 /** Splits HTML at a top-level block boundary near the middle (for the mid-article CTA). */
 export function splitHtmlInHalf(html: string): [string, string] {
-  const blocks = html.split(/(?<=<\/(?:p|h2|h3|h4|ul|ol|blockquote)>)/i).filter((b) => b.trim());
+  const blocks = html.split(/(?<=<\/(?:p|h2|h3|h4|ul|ol|blockquote|aside)>)/i).filter((b) => b.trim());
   if (blocks.length <= 1) return [html, ""];
   let mid = Math.floor(blocks.length / 2);
   while (mid < blocks.length - 1 && /^\s*<h[2-4]/i.test(blocks[mid - 1])) mid++; // don't orphan a heading
