@@ -1,10 +1,9 @@
+import { whatsappUrl } from "@/lib/whatsapp";
 import { Mail, MessageCircle } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { PageHeader } from "@/components/site/PageHeader";
 
-const WHATSAPP_URL =
-  "https://wa.me/5543999948455?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio.";
 
 type Props = {
   name: string;
@@ -53,7 +52,7 @@ export function StaffDetail({ name, role, bio = "Mais informações em breve.", 
                     contato@denisonleandro.adv.br
                   </a>
                   <a
-                    href={WHATSAPP_URL}
+                    href={whatsappUrl(`Olá! Vi o perfil de ${name} no site Denison Leandro e gostaria de agendar um atendimento.`)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-semibold text-white shadow-card transition-all hover:-translate-y-0.5 hover:bg-[#1DA851] hover:shadow-elegant"

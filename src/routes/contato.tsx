@@ -1,3 +1,4 @@
+import { whatsappUrl } from "@/lib/whatsapp";
 import { createFileRoute } from "@tanstack/react-router";
 import { MessageCircle, MapPin, Phone, Mail } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
@@ -16,8 +17,6 @@ export const Route = createFileRoute("/contato")({
   component: ContatoPage,
 });
 
-const WHATSAPP_URL =
-  "https://wa.me/5543999948455?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio.";
 const EMAIL = "contato@denisonleandro.adv.br";
 
 type Office = { address: string; phone: string };
@@ -78,7 +77,7 @@ function ContatoPage() {
 
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <a
-                href={WHATSAPP_URL}
+                href={whatsappUrl("Olá! Vim pela página de Contato do site Denison Leandro e gostaria de falar com um advogado.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-7 py-3.5 text-sm font-semibold text-white shadow-elegant transition-all hover:-translate-y-0.5 hover:bg-[#1DA851]"

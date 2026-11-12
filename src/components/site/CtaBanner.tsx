@@ -1,3 +1,4 @@
+import { whatsappUrl } from "@/lib/whatsapp";
 import { MessageCircle } from "lucide-react";
 
 export function CtaBanner() {
@@ -17,7 +18,7 @@ export function CtaBanner() {
               </h2>
             </div>
             <a
-              href="https://wa.me/5543999948455?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio."
+              href={whatsappUrl("Olá! Vim pela página principal do site Denison Leandro (seção Tire suas dúvidas) e gostaria de falar com um advogado.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex shrink-0 items-center gap-3 rounded-xl bg-[#25D366] px-7 py-4 text-base font-semibold text-white shadow-elegant transition-all hover:-translate-y-0.5 hover:bg-[#1DA851]"
