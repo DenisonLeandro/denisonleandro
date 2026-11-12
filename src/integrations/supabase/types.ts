@@ -16,50 +16,62 @@ export type Database = {
     Tables: {
       articles: {
         Row: {
+          area_slug: string | null
           author: string | null
+          author_slug: string
           category: string | null
           content: string
           cover_image_url: string | null
           created_at: string
           excerpt: string | null
+          faq: Json
           id: string
           published_at: string | null
           seo_description: string | null
           seo_title: string | null
           slug: string
           status: string
+          summary: string | null
           title: string
           updated_at: string
         }
         Insert: {
+          area_slug?: string | null
           author?: string | null
+          author_slug?: string
           category?: string | null
           content: string
           cover_image_url?: string | null
           created_at?: string
           excerpt?: string | null
+          faq?: Json
           id?: string
           published_at?: string | null
           seo_description?: string | null
           seo_title?: string | null
           slug: string
           status?: string
+          summary?: string | null
           title: string
           updated_at?: string
         }
         Update: {
+          area_slug?: string | null
           author?: string | null
+          author_slug?: string
           category?: string | null
           content?: string
           cover_image_url?: string | null
           created_at?: string
           excerpt?: string | null
+          faq?: Json
           id?: string
           published_at?: string | null
           seo_description?: string | null
           seo_title?: string | null
           slug?: string
           status?: string
+          summary?: string | null
           title?: string
           updated_at?: string
         }
