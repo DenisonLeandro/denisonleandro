@@ -4,7 +4,7 @@ import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { CtaBanner } from "@/components/site/CtaBanner";
 import { PageHeader } from "@/components/site/PageHeader";
-import { buildHead } from "@/lib/seo";
+import { buildHead, personId, SITE_URL } from "@/lib/seo";
 import denisonAsset from "@/assets/denison.png.asset.json";
 import marcioAsset from "@/assets/marcio.png.asset.json";
 import higorAsset from "@/assets/higor.png.asset.json";
@@ -19,6 +19,18 @@ export const Route = createFileRoute("/profissionais")({
       description:
         "Conheça os advogados e a equipe administrativa do escritório Denison Leandro Advogados Associados, com formação sólida e experiência multidisciplinar.",
       path: "/profissionais",
+      jsonLd: [
+        {
+          "@type": "ItemList",
+          name: "Advogados do escritório Denison Leandro Advogados Associados",
+          itemListElement: lawyers.map((l, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            url: `${SITE_URL}/equipe/${l.slug}`,
+            item: { "@type": "Person", "@id": personId(l.slug), name: l.name, jobTitle: l.role },
+          })),
+        },
+      ],
     }),
   component: ProfissionaisPage,
 });

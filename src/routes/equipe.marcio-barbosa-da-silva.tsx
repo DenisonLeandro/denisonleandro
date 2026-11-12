@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { buildHead } from "@/lib/seo";
+import { personHead } from "@/lib/seo";
 import { LawyerDetail } from "@/components/site/LawyerDetail";
 import photo from "@/assets/marcio.png.asset.json";
 
 export const Route = createFileRoute("/equipe/marcio-barbosa-da-silva")({
-  head: () => buildHead({ title: "Dr. Márcio Barbosa da Silva", description: "Advogado especialista em Direito do Trabalho e Previdenciário.", path: "/equipe/marcio-barbosa-da-silva" }),
+  head: () => personHead({ slug: "marcio-barbosa-da-silva", name: "Dr. Márcio Barbosa da Silva", jobTitle: "Advogado", description: "Advogado especialista em Direito do Trabalho e Previdenciário.", email: "marcio@denisonleandro.adv.br", oab: "OAB/PR 52.894", photo: photo.url, knowsAbout: ["Direito do Trabalho", "Direito Previdenciário", "Cálculos Previdenciários"], credentials: ["Pós-Graduação em Direito do Trabalho e Processo do Trabalho", "Especialização em Cálculos Previdenciários", "Especialização em Espécies de Benefícios Previdenciários"] }),
   component: () => (
     <LawyerDetail
       name="Dr. Márcio Barbosa da Silva"

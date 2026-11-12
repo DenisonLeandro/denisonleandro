@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AreaDetail } from "@/components/site/AreaDetail";
-import { buildHead } from "@/lib/seo";
+import { areaHead } from "@/lib/seo";
 
 const title = "Bancário e Financeiro";
 const intro =
@@ -11,6 +11,6 @@ const items = [
 ];
 
 export const Route = createFileRoute("/areas/bancario")({
-  head: () => buildHead({ title: `Direito ${title}`, description: intro, path: "/areas/bancario" }),
+  head: () => areaHead({ title: `Direito ${title}`, serviceName: "Advocacia Bancária em Londrina", serviceType: "Direito Bancário", description: intro, path: "/areas/bancario" }),
   component: () => <AreaDetail title={title} intro={intro} items={items} />,
 });

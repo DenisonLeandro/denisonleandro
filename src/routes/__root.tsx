@@ -12,6 +12,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { orgGraph, DEFAULT_OG_IMAGE } from "@/lib/seo";
+import logoAsset from "@/assets/logo.png.asset.json";
 import { FloatingWhatsApp } from "@/components/site/FloatingWhatsApp";
 
 function NotFoundComponent() {
@@ -96,6 +98,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:locale", content: "pt_BR" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      // Fallback share image (e.g. 404 pages). Every page overrides it via buildHead.
+      { property: "og:image", content: DEFAULT_OG_IMAGE },
+      { name: "twitter:image", content: DEFAULT_OG_IMAGE },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -112,15 +117,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "LegalService",
-          name: "Denison Leandro Advogados Associados",
-          url: "https://denisonleandro.adv.br",
-          areaServed: "BR",
-          description:
-            "Escritório de advocacia full service com 25 anos de atuação. Direito Trabalhista, Previdenciário, Consumidor, Família, Contratos, Bancário e Mediação.",
-        }),
+        children: JSON.stringify({ "@context": "https://schema.org", "@graph": orgGraph(logoAsset.url) }),
       },
     ],
   }),

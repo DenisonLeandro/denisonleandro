@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { buildHead } from "@/lib/seo";
+import { personHead } from "@/lib/seo";
 import { LawyerDetail } from "@/components/site/LawyerDetail";
 
 export const Route = createFileRoute("/equipe/juan-albner-pereira-veloso")({
-  head: () => buildHead({ title: "Dr. Juan Albner Pereira Veloso", description: "Advogado com ênfase no Direito do Trabalho.", path: "/equipe/juan-albner-pereira-veloso" }),
+  head: () => personHead({ slug: "juan-albner-pereira-veloso", name: "Dr. Juan Albner Pereira Veloso", jobTitle: "Advogado", description: "Advogado com ênfase no Direito do Trabalho.", email: "juan@denisonleandro.adv.br", oab: "OAB/PR 104.933", knowsAbout: ["Direito do Trabalho"] }),
   component: () => (
     <LawyerDetail
       name="Dr. Juan Albner Pereira Veloso"

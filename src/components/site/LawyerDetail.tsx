@@ -1,5 +1,5 @@
 import { whatsappUrl } from "@/lib/whatsapp";
-import { Mail, MessageCircle } from "lucide-react";
+import { Mail, MessageCircle, Linkedin } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { PageHeader } from "@/components/site/PageHeader";
@@ -11,9 +11,10 @@ type Props = {
   email: string;
   bio: string;
   photo: string | null;
+  linkedin?: string;
 };
 
-export function LawyerDetail({ name, oab, email, bio, photo }: Props) {
+export function LawyerDetail({ name, oab, email, bio, photo, linkedin }: Props) {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -52,6 +53,17 @@ export function LawyerDetail({ name, oab, email, bio, photo }: Props) {
                     <Mail size={16} strokeWidth={1.8} />
                     {email}
                   </a>
+                  {linkedin && (
+                    <a
+                      href={linkedin}
+                      target="_blank"
+                      rel="me noopener"
+                      className="inline-flex items-center gap-2 rounded-full bg-gold/10 px-5 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold/20"
+                    >
+                      <Linkedin size={16} strokeWidth={1.8} />
+                      LinkedIn
+                    </a>
+                  )}
                   <a
                     href={whatsappUrl(`Olá! Vi o perfil de ${name} no site Denison Leandro e gostaria de agendar um atendimento.`)}
                     target="_blank"
