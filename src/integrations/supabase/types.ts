@@ -27,6 +27,7 @@ export type Database = {
           faq: Json
           id: string
           is_featured: boolean
+          og_image_url: string | null
           published_at: string | null
           seo_description: string | null
           seo_title: string | null
@@ -48,6 +49,7 @@ export type Database = {
           faq?: Json
           id?: string
           is_featured?: boolean
+          og_image_url?: string | null
           published_at?: string | null
           seo_description?: string | null
           seo_title?: string | null
@@ -69,6 +71,7 @@ export type Database = {
           faq?: Json
           id?: string
           is_featured?: boolean
+          og_image_url?: string | null
           published_at?: string | null
           seo_description?: string | null
           seo_title?: string | null
