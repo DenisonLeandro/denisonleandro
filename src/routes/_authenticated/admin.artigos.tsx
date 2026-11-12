@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Loader2, Pencil, Plus, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { AUTHORS, AREAS, getAuthor, normalizeFaq, type FaqItem } from "@/lib/authors";
 
 interface Article {
   id: string;
@@ -14,6 +15,10 @@ interface Article {
   cover_image_url: string | null;
   seo_title: string | null;
   seo_description: string | null;
+  summary: string | null;
+  faq: unknown;
+  author_slug: string;
+  area_slug: string | null;
   status: string;
   published_at: string | null;
   created_at: string;
@@ -30,6 +35,10 @@ interface FormState {
   cover_image_url: string;
   seo_title: string;
   seo_description: string;
+  summary: string;
+  faq: FaqItem[];
+  author_slug: string;
+  area_slug: string;
 }
 
 const emptyForm: FormState = {
@@ -42,6 +51,10 @@ const emptyForm: FormState = {
   cover_image_url: "",
   seo_title: "",
   seo_description: "",
+  summary: "",
+  faq: [],
+  author_slug: "denison-henrique-leandro",
+  area_slug: "",
 };
 
 function slugify(text: string): string {
@@ -156,6 +169,10 @@ function AdminArtigosPage() {
       cover_image_url: a.cover_image_url ?? "",
       seo_title: a.seo_title ?? "",
       seo_description: a.seo_description ?? "",
+      summary: a.summary ?? "",
+      faq: normalizeFaq(a.faq),
+      author_slug: a.author_slug || "denison-henrique-leandro",
+      area_slug: a.area_slug ?? "",
     });
     setSlugTouched(true);
     setError(null);
@@ -258,7 +275,13 @@ function AdminArtigosPage() {
       excerpt: form.excerpt.trim() || null,
       content: form.content,
       category: form.category.trim() || null,
-      author: form.author.trim() || null,
+      author: getAuthor(form.author_slug).name,
+      author_slug: form.author_slug,
+      area_slug: form.area_slug || null,
+      summary: form.summary.trim().slice(0, 500) || null,
+      faq: form.faq
+        .map((q) => ({ pergunta: q.pergunta.trim(), resposta: q.resposta.trim() }))
+        .filter((q) => q.pergunta && q.resposta),
       cover_image_url: form.cover_image_url.trim() || null,
       seo_title: form.seo_title.trim() || null,
       seo_description: form.seo_description.trim() || null,
@@ -454,13 +477,27 @@ function AdminArtigosPage() {
                   />
                 </Field>
                 <Field label="Autor">
-                  <input
-                    type="text"
-                    value={form.author}
-                    onChange={(e) => setForm((f) => ({ ...f, author: e.target.value }))}
+                  <select
+                    value={form.author_slug}
+                    onChange={(e) => setForm((f) => ({ ...f, author_slug: e.target.value }))}
                     className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-                    placeholder="Nome do autor"
-                  />
+                  >
+                    {AUTHORS.map((a) => (
+                      <option key={a.slug} value={a.slug}>{a.name} — {a.oab}</option>
+                    ))}
+                  </select>
+                </Field>
+                <Field label="Área relacionada">
+                  <select
+                    value={form.area_slug}
+                    onChange={(e) => setForm((f) => ({ ...f, area_slug: e.target.value }))}
+                    className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
+                  >
+                    <option value="">Nenhuma</option>
+                    {AREAS.map((a) => (
+                      <option key={a.slug} value={a.slug}>{a.name}</option>
+                    ))}
+                  </select>
                 </Field>
               </div>
 
@@ -503,7 +540,18 @@ function AdminArtigosPage() {
               </Field>
 
 
-              <Field label="Resumo (excerpt)">
+              <Field label="Resumo (resposta direta)" hint={`2 a 4 frases que respondem à pergunta do título. Aparece em destaque no topo do artigo. ${form.summary.length}/500`}>
+                <textarea
+                  value={form.summary}
+                  maxLength={500}
+                  onChange={(e) => setForm((f) => ({ ...f, summary: e.target.value }))}
+                  rows={4}
+                  className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
+                  placeholder="Ex.: Sim. O trabalhador que sofre acidente de trabalho tem estabilidade de 12 meses..."
+                />
+              </Field>
+
+              <Field label="Chamada (excerpt)">
                 <textarea
                   value={form.excerpt}
                   onChange={(e) => setForm((f) => ({ ...f, excerpt: e.target.value }))}
@@ -521,6 +569,43 @@ function AdminArtigosPage() {
                   className="w-full rounded-md border border-border bg-background px-3 py-2 font-mono text-sm"
                   placeholder="Conteúdo completo do artigo."
                 />
+              </Field>
+
+              <Field label="Perguntas frequentes" hint="Cada pergunta aparece no fim do artigo, com a resposta visível.">
+                <div className="space-y-4">
+                  {form.faq.map((q, i) => (
+                    <div key={i} className="rounded-md border border-border p-3">
+                      <input
+                        type="text"
+                        value={q.pergunta}
+                        onChange={(e) => setForm((f) => ({ ...f, faq: f.faq.map((x, j) => (j === i ? { ...x, pergunta: e.target.value } : x)) }))}
+                        className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
+                        placeholder={`Pergunta ${i + 1}`}
+                      />
+                      <textarea
+                        value={q.resposta}
+                        onChange={(e) => setForm((f) => ({ ...f, faq: f.faq.map((x, j) => (j === i ? { ...x, resposta: e.target.value } : x)) }))}
+                        rows={3}
+                        className="mt-2 w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
+                        placeholder="Resposta"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setForm((f) => ({ ...f, faq: f.faq.filter((_, j) => j !== i) }))}
+                        className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-destructive hover:underline"
+                      >
+                        <Trash2 size={12} /> Remover pergunta
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => setForm((f) => ({ ...f, faq: [...f.faq, { pergunta: "", resposta: "" }] }))}
+                    className="inline-flex items-center gap-1 rounded-md border border-navy px-3 py-1.5 text-xs font-semibold text-navy hover:bg-navy hover:text-white"
+                  >
+                    <Plus size={12} /> Adicionar pergunta
+                  </button>
+                </div>
               </Field>
 
               <Field label="SEO — Título">
