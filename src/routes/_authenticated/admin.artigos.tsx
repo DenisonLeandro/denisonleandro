@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Loader2, Pencil, Plus, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { buildShareImage } from "@/lib/share-image";
 import { AUTHORS, AREAS, getAuthor, normalizeFaq, type FaqItem } from "@/lib/authors";
 
 interface Article {
@@ -62,6 +63,17 @@ const emptyForm: FormState = {
   area_slug: "",
   is_featured: false,
 };
+
+/** Generates the uncropped 1200x630 share image and uploads it next to the covers. */
+async function uploadShareImage(src: string | Blob, name: string): Promise<string> {
+  const blob = await buildShareImage(src);
+  const path = `og/${Date.now()}-${name}-1200x630.jpg`;
+  const { error } = await supabase.storage
+    .from("article-covers")
+    .upload(path, blob, { upsert: false, contentType: "image/jpeg" });
+  if (error) throw error;
+  return supabase.storage.from("article-covers").getPublicUrl(path).data.publicUrl;
+}
 
 function slugify(text: string): string {
   return text
@@ -279,6 +291,15 @@ function AdminArtigosPage() {
     let publishedAt = editing?.published_at ?? null;
     if (status === "published" && !publishedAt) {
       publishedAt = new Date().toISOString();
+    }
+
+    const coverUrl = form.cover_image_url.trim();
+    let ogImageUrl: string | null = coverUrl ? form.og_image_url || null : null;
+    if (coverUrl && !ogImageUrl) {
+      ogImageUrl = await uploadShareImage(coverUrl, finalSlug).catch((e) => {
+        console.error("Erro ao gerar imagem de compartilhamento:", e);
+        return null;
+      });
     }
 
     const payload = {

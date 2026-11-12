@@ -21,6 +21,7 @@ export interface PublicArticle {
   faq: { pergunta: string; resposta: string }[];
   author_slug: string;
   area_slug: string | null;
+  og_image_url: string | null;
 }
 
 export type ArticleSummary = Pick<
