@@ -220,7 +220,7 @@ const dayKey = (d: string) => new Date(d).toLocaleDateString("en-CA", { timeZone
 
 function AuthorAvatar({ author, size }: { author: Author; size: string }) {
   return author.photo ? (
-    <img src={author.photo} alt={author.name} width={96} height={96} className={`${size} shrink-0 rounded-full object-cover object-top`} />
+    <img src={author.photo} alt={`Foto de ${author.name}`} width={96} height={96} className={`${size} shrink-0 rounded-full object-cover object-top`} />
   ) : (
     <span aria-hidden="true" className={`${size} flex shrink-0 items-center justify-center rounded-full bg-gold/15 font-serif text-navy`}>
       {author.name.replace(/^Dra?\.\s*/, "").charAt(0)}

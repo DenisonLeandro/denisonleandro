@@ -28,7 +28,7 @@ export function LawyerDetail({ name, oab, email, bio, photo, linkedin }: Props) 
                 {photo ? (
                   <img
                     src={photo}
-                    alt={name}
+                    alt={`Foto de ${name}`}
                     className="h-56 w-56 rounded-full object-cover object-top ring-2 ring-gold/30"
                   />
                 ) : (

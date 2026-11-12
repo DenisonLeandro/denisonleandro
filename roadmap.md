@@ -1,0 +1,1 @@
+- [x] Segunda foto do Dr. Denison (denison-escritorio) no perfil, artigos, compartilhamento e Person
