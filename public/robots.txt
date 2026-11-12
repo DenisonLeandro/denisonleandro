@@ -2,18 +2,65 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /auth
-Disallow: /wp-admin/
-Disallow: /wp-content/
-Disallow: /wp-includes/
-Disallow: /wp-json/
-Disallow: /xmlrpc.php
-Disallow: /category/
-Disallow: /tag/
-Disallow: /author/
-Disallow: /feed
-Disallow: /comments/
-Disallow: /*?p=
-Disallow: /*?page_id=
-Disallow: /*?replytocom=
+
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+Disallow: /auth
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /auth
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin
+Disallow: /auth
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+Disallow: /auth
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /auth
+
+User-agent: Claude-User
+Allow: /
+Disallow: /admin
+Disallow: /auth
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin
+Disallow: /auth
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /admin
+Disallow: /auth
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin
+Disallow: /auth
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin
+Disallow: /auth
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+Disallow: /auth
+
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /auth
 
 Sitemap: https://denisonleandro.adv.br/sitemap.xml
