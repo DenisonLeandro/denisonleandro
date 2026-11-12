@@ -22,7 +22,13 @@ export function FloatingWhatsApp() {
   if (article?.title) message = articleMessage(article.title);
   else if (pathname === "/acidente-de-trabalho") message = articleMessage("Acidente de Trabalho");
   else {
-    const where = PAGES[pathname] ?? `na página ${pathname}`;
+    const nice = (slug: string) =>
+      slug.split("-").map((w) => (w.length > 2 ? w[0].toUpperCase() + w.slice(1) : w)).join(" ");
+    const area = pathname.match(/^\/areas\/([^/]+)/);
+    const equipe = pathname.match(/^\/equipe\/([^/]+)/);
+    const where =
+      PAGES[pathname] ??
+      (area ? `na área de ${nice(area[1])}` : equipe ? `no perfil de ${nice(equipe[1])}` : "no site");
     message = `Olá! Estava navegando ${where} do site Denison Leandro e gostaria de falar com um advogado.`;
   }
   return (
