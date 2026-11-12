@@ -5,7 +5,8 @@ import { ArrowLeft, Calendar, MessageCircle } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { MediaMentions } from "@/components/site/MediaMentions";
-import { buildHead, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { buildHead, breadcrumb, DEFAULT_OG_IMAGE, FOUNDER_ID, ORG_ID, SITE_URL } from "@/lib/seo";
+import { ShareButtons } from "@/components/site/ShareButtons";
 import { getPublishedArticle } from "@/lib/articles.functions";
 
 
@@ -39,38 +40,31 @@ export const Route = createFileRoute("/noticias/$slug")({
       publishedTime: a.published_at,
       modifiedTime: a.updated_at,
       author,
-    });
-    return {
-      ...head,
-      scripts: [
+      section: a.category || undefined,
+      imageAlt: a.title,
+      jsonLd: [
         {
-          type: "application/ld+json",
-          children: JSON.stringify([
-            {
-              "@context": "https://schema.org",
-              "@type": "Article",
-              headline: a.title,
-              description,
-              image: [image],
-              datePublished: a.published_at,
-              dateModified: a.updated_at,
-              author: { "@type": a.author ? "Person" : "Organization", name: author },
-              publisher: { "@type": "Organization", name: SITE_NAME, logo: { "@type": "ImageObject", url: DEFAULT_OG_IMAGE } },
-              mainEntityOfPage: url,
-            },
-            {
-              "@context": "https://schema.org",
-              "@type": "BreadcrumbList",
-              itemListElement: [
-                { "@type": "ListItem", position: 1, name: "Início", item: `${SITE_URL}/` },
-                { "@type": "ListItem", position: 2, name: "Notícias", item: `${SITE_URL}/noticias` },
-                { "@type": "ListItem", position: 3, name: a.title, item: url },
-              ],
-            },
-          ]),
+          "@type": "BlogPosting",
+          headline: a.title,
+          description,
+          image: [image],
+          datePublished: a.published_at,
+          dateModified: a.updated_at,
+          author: { "@type": "Person", "@id": FOUNDER_ID, name: a.author || "Dr. Denison Leandro" },
+          publisher: { "@id": ORG_ID },
+          mainEntityOfPage: { "@type": "WebPage", "@id": url },
+          inLanguage: "pt-BR",
+          ...(a.category ? { articleSection: a.category } : {}),
+          wordCount: stripHtml(a.content).split(" ").filter(Boolean).length,
         },
+        breadcrumb([
+          ["Início", "/"],
+          ["Notícias", "/noticias"],
+          [a.title, `/noticias/${a.slug}`],
+        ]),
       ],
-    };
+    });
+    return head;
   },
   errorComponent: ({ error }) => (
     <div className="min-h-screen bg-background">
@@ -354,6 +348,8 @@ function NoticiaDetail() {
               )}
           </>
         )}
+
+        <ShareButtons url={`${SITE_URL}/noticias/${article.slug}`} title={article.title} />
 
         {/* Bloco institucional — menções jornalísticas */}
         <MediaMentions />

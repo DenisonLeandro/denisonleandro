@@ -1,4 +1,5 @@
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram, Facebook, Youtube } from "lucide-react";
+import { SOCIAL_LINKS } from "@/lib/seo";
 import { Link } from "@tanstack/react-router";
 import logoAsset from "@/assets/logo.png.asset.json";
 
@@ -89,6 +90,24 @@ export function Footer() {
                 <a href="mailto:contato@denisonleandro.adv.br" className="hover:text-gold">contato@denisonleandro.adv.br</a>
               </li>
             </ul>
+            <div className="mt-6 flex items-center gap-3">
+              {[
+                { href: SOCIAL_LINKS.instagram, label: "Instagram", Icon: Instagram },
+                { href: SOCIAL_LINKS.facebook, label: "Facebook", Icon: Facebook },
+                { href: SOCIAL_LINKS.youtube, label: "YouTube", Icon: Youtube },
+              ].map(({ href, label, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="me noopener"
+                  aria-label={label}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/30 text-gold transition-colors hover:bg-gold/15"
+                >
+                  <Icon size={16} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
