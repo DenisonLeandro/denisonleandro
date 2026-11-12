@@ -17,3 +17,9 @@
 ## Proposta
 
 Nenhuma mudança é necessária. Se mesmo na janela anônima ainda aparecer "Carregando artigo...", me mande o endereço exato e o horário do teste, que eu investigo.
+
+## Verificação do Google Search Console
+
+- Criar o arquivo público /google9f6aaca8a92e26ca.html, com exatamente o conteúdo `google-site-verification: google9f6aaca8a92e26ca.html`. Ele vai responder com status 200 e como página comum (text/html).
+- Gravar uma regra para que esse arquivo nunca seja removido.
+- Depois de publicar, conferir se ele abre em https://denisonleandro.adv.br/google9f6aaca8a92e26ca.html.
