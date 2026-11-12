@@ -18,6 +18,8 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as EscritorioRouteImport } from './routes/escritorio'
 import { Route as FeedRouteImport } from './routes/feed'
+import { Route as LlmsFullDottxtRouteImport } from './routes/llms-full[.]txt'
+import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as ProfissionaisRouteImport } from './routes/profissionais'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as XmlrpcDotphpRouteImport } from './routes/xmlrpc[.]php'
@@ -92,6 +94,16 @@ const EscritorioRoute = EscritorioRouteImport.update({
 const FeedRoute = FeedRouteImport.update({
   id: '/feed',
   path: '/feed',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LlmsFullDottxtRoute = LlmsFullDottxtRouteImport.update({
+  id: '/llms-full.txt',
+  path: '/llms-full.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfissionaisRoute = ProfissionaisRouteImport.update({
@@ -268,6 +280,8 @@ export interface FileRoutesByFullPath {
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
   '/feed': typeof FeedRouteWithChildren
+  '/llms-full.txt': typeof LlmsFullDottxtRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/profissionais': typeof ProfissionaisRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/xmlrpc.php': typeof XmlrpcDotphpRoute
@@ -309,6 +323,8 @@ export interface FileRoutesByTo {
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
   '/feed': typeof FeedRouteWithChildren
+  '/llms-full.txt': typeof LlmsFullDottxtRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/profissionais': typeof ProfissionaisRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/xmlrpc.php': typeof XmlrpcDotphpRoute
@@ -352,6 +368,8 @@ export interface FileRoutesById {
   '/contato': typeof ContatoRoute
   '/escritorio': typeof EscritorioRoute
   '/feed': typeof FeedRouteWithChildren
+  '/llms-full.txt': typeof LlmsFullDottxtRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/profissionais': typeof ProfissionaisRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/xmlrpc.php': typeof XmlrpcDotphpRoute
@@ -395,6 +413,8 @@ export interface FileRouteTypes {
     | '/contato'
     | '/escritorio'
     | '/feed'
+    | '/llms-full.txt'
+    | '/llms.txt'
     | '/profissionais'
     | '/sitemap.xml'
     | '/xmlrpc.php'
@@ -436,6 +456,8 @@ export interface FileRouteTypes {
     | '/contato'
     | '/escritorio'
     | '/feed'
+    | '/llms-full.txt'
+    | '/llms.txt'
     | '/profissionais'
     | '/sitemap.xml'
     | '/xmlrpc.php'
@@ -478,6 +500,8 @@ export interface FileRouteTypes {
     | '/contato'
     | '/escritorio'
     | '/feed'
+    | '/llms-full.txt'
+    | '/llms.txt'
     | '/profissionais'
     | '/sitemap.xml'
     | '/xmlrpc.php'
@@ -521,6 +545,8 @@ export interface RootRouteChildren {
   ContatoRoute: typeof ContatoRoute
   EscritorioRoute: typeof EscritorioRoute
   FeedRoute: typeof FeedRouteWithChildren
+  LlmsFullDottxtRoute: typeof LlmsFullDottxtRoute
+  LlmsDottxtRoute: typeof LlmsDottxtRoute
   ProfissionaisRoute: typeof ProfissionaisRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   XmlrpcDotphpRoute: typeof XmlrpcDotphpRoute
@@ -615,6 +641,20 @@ declare module '@tanstack/react-router' {
       path: '/feed'
       fullPath: '/feed'
       preLoaderRoute: typeof FeedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llms-full.txt': {
+      id: '/llms-full.txt'
+      path: '/llms-full.txt'
+      fullPath: '/llms-full.txt'
+      preLoaderRoute: typeof LlmsFullDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llms.txt': {
+      id: '/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/llms.txt'
+      preLoaderRoute: typeof LlmsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profissionais': {
@@ -868,6 +908,8 @@ const rootRouteChildren: RootRouteChildren = {
   ContatoRoute: ContatoRoute,
   EscritorioRoute: EscritorioRoute,
   FeedRoute: FeedRouteWithChildren,
+  LlmsFullDottxtRoute: LlmsFullDottxtRoute,
+  LlmsDottxtRoute: LlmsDottxtRoute,
   ProfissionaisRoute: ProfissionaisRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   XmlrpcDotphpRoute: XmlrpcDotphpRoute,
