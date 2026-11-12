@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { whatsappUrl, articleMessage } from "@/lib/whatsapp";
 import { ArrowLeft, Calendar, MessageCircle } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
@@ -7,8 +8,6 @@ import { MediaMentions } from "@/components/site/MediaMentions";
 import { buildHead, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { getPublishedArticle } from "@/lib/articles.functions";
 
-const WHATSAPP_URL =
-  "https://wa.me/5543999948455?text=Ol%C3%A1%2C%20vim%20por%20um%20artigo%20no%20site%20Denison%20Leandro%20e%20gostaria%20de%20receber%20uma%20orienta%C3%A7%C3%A3o%20r%C3%A1pida.";
 
 const DEFAULT_AUTHOR = "Equipe Denison Leandro Advogados";
 
@@ -117,10 +116,10 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-function CtaButton() {
+function CtaButton({ title }: { title: string }) {
   return (
     <a
-      href={WHATSAPP_URL}
+      href={whatsappUrl(articleMessage(title))}
       target="_blank"
       rel="noopener noreferrer"
       className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#25D366] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-[#1ebe57] hover:shadow focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2 sm:w-auto"
@@ -131,7 +130,7 @@ function CtaButton() {
   );
 }
 
-function CtaCallout() {
+function CtaCallout({ title }: { title: string }) {
   return (
     <div className="my-10 rounded-xl border border-border bg-muted/40 p-5">
       <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -147,7 +146,7 @@ function CtaCallout() {
           </div>
         </div>
         <a
-          href={WHATSAPP_URL}
+          href={whatsappUrl(articleMessage(title))}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-lg border border-navy bg-white px-5 py-2.5 text-sm font-semibold text-navy shadow-sm transition-all hover:bg-navy hover:text-white focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 sm:w-auto"
@@ -159,7 +158,8 @@ function CtaCallout() {
   );
 }
 
-function CtaDuvidasBlock() {
+function CtaDuvidasBlock({ title }: { title: string }) {
+  const [question, setQuestion] = useState("");
   return (
     <div className="mt-12 border-t border-border pt-10">
       <h3 className="text-xl font-semibold text-navy">Envie as suas dúvidas</h3>
@@ -168,7 +168,8 @@ function CtaDuvidasBlock() {
       </p>
       <div className="mt-4">
         <textarea
-          readOnly
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
           placeholder="Descreva o que aconteceu e o que você gostaria de saber..."
           className="w-full resize-none rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-navy/30"
           rows={4}
@@ -176,7 +177,7 @@ function CtaDuvidasBlock() {
       </div>
       <div className="mt-4 flex justify-end">
         <a
-          href={WHATSAPP_URL}
+          href={whatsappUrl(articleMessage(title, question))}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-navy bg-white px-5 py-2.5 text-sm font-semibold text-navy shadow-sm transition-all hover:bg-navy hover:text-white focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 sm:w-auto"
@@ -307,7 +308,7 @@ function NoticiaDetail() {
 
         {/* CTA 1 — topo */}
         <div className="mb-8">
-          <CtaButton />
+          <CtaButton title={article.title} />
         </div>
 
         {article.excerpt && (
@@ -322,7 +323,7 @@ function NoticiaDetail() {
             <div className={articleBodyClasses}>
               <div dangerouslySetInnerHTML={{ __html: contentParts.first }} />
             </div>
-            <CtaCallout />
+            <CtaCallout title={article.title} />
             {contentParts.second && (
               <div className={articleBodyClasses}>
                 <div
@@ -340,7 +341,7 @@ function NoticiaDetail() {
                 </p>
               ))}
             </div>
-            <CtaCallout />
+            <CtaCallout title={article.title} />
             {contentParts?.plainParagraphs?.second &&
               contentParts.plainParagraphs.second.length > 0 && (
                 <div>
@@ -358,7 +359,7 @@ function NoticiaDetail() {
         <MediaMentions />
 
         {/* CTA 3 — final */}
-        <CtaDuvidasBlock />
+        <CtaDuvidasBlock title={article.title} />
       </main>
       <Footer />
     </div>

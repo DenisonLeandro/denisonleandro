@@ -1,3 +1,4 @@
+import { whatsappUrl, articleMessage } from "@/lib/whatsapp";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Calendar, MessageCircle, User } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
@@ -6,8 +7,7 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { buildHead, SITE_URL } from "@/lib/seo";
 
 const CANONICAL = `${SITE_URL}/acidente-de-trabalho`;
-const WHATSAPP_URL =
-  "https://wa.me/5543999948455?text=Ol%C3%A1%2C%20vim%20por%20um%20artigo%20no%20site%20Denison%20Leandro%20e%20gostaria%20de%20receber%20uma%20orienta%C3%A7%C3%A3o%20r%C3%A1pida.";
+const WHATSAPP_URL = whatsappUrl(articleMessage("Acidente de Trabalho"));
 const PUBLISHED_AT = "2026-06-20";
 const AUTHOR = "Denison Leandro Advogados Associados";
 const TITLE_SEO = "Acidente de trabalho: direitos do trabalhador";

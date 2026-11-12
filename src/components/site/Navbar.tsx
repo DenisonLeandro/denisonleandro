@@ -1,3 +1,4 @@
+import { whatsappUrl, articleMessage } from "@/lib/whatsapp";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X, MessageCircle } from "lucide-react";
@@ -12,8 +13,6 @@ const links = [
   { label: "Contato", to: "/contato" as const },
 ];
 
-const WHATSAPP_URL =
-  "https://wa.me/5543999948455?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio.";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -50,7 +49,7 @@ export function Navbar() {
 
         <div className="hidden lg:block">
           <a
-            href={WHATSAPP_URL}
+            href={whatsappUrl("Olá! Cliquei no menu do site Denison Leandro e gostaria de falar com um advogado.")}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-md bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white shadow-card transition-all hover:-translate-y-0.5 hover:bg-[#1DA851] hover:shadow-elegant"
@@ -83,7 +82,7 @@ export function Navbar() {
               </Link>
             ))}
             <a
-              href={WHATSAPP_URL}
+              href={whatsappUrl("Olá! Cliquei no menu do site Denison Leandro e gostaria de falar com um advogado.")}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}

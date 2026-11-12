@@ -1,3 +1,4 @@
+import { whatsappUrl, articleMessage } from "@/lib/whatsapp";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { MessageCircle, ArrowUpRight, Briefcase, ShieldCheck, ShoppingCart, Users, FileText, Landmark, Handshake } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
@@ -16,8 +17,6 @@ export const Route = createFileRoute("/areas-de-atuacao")({
   component: AreasPage,
 });
 
-const WHATSAPP_URL =
-  "https://wa.me/5543999948455?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio.";
 
 const areas = [
   {
@@ -105,7 +104,7 @@ function AreasPage() {
                         Saiba mais <ArrowUpRight size={14} />
                       </Link>
                       <a
-                        href={WHATSAPP_URL}
+                        href={whatsappUrl("Olá! Vim pela página de Áreas de Atuação do site Denison Leandro e gostaria de falar com um advogado.")}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-semibold text-white shadow-card transition-all hover:-translate-y-0.5 hover:bg-[#1DA851] hover:shadow-elegant"
