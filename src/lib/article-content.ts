@@ -35,3 +35,46 @@ export function enhanceContent(html: string): { html: string; toc: TocItem[] } {
   });
   return { html: out, toc };
 }
+
+const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+/** Plain-text line that is clearly a subtitle: own line, ≤90 chars, no final ".", ",", ";" or ":", not a list item. */
+export function isPlainHeading(line: string): boolean {
+  const t = line.trim();
+  if (t.length < 3 || t.length > 90) return false;
+  if (/^[-•*\d]/.test(t)) return false;
+  if (/[.,;:]$/.test(t)) return false;
+  if (/:\s+\S/.test(t)) return false;
+  return /^[A-ZÁÉÍÓÚÂÊÔÃÕÇ]/.test(t);
+}
+
+/** Converts plain-text article content into simple semantic HTML. Drops a first line equal to the title. */
+export function plainToHtml(text: string, title?: string): string {
+  const norm = (s: string) => s.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "");
+  const lines = text.replace(/\r/g, "").split("\n").map((l) => l.trim()).filter(Boolean);
+  if (title && lines[0] && norm(lines[0]) === norm(title)) lines.shift();
+  const out: string[] = [];
+  let list: string[] = [];
+  const flush = () => { if (list.length) { out.push(`<ul>${list.map((l) => `<li>${esc(l)}</li>`).join("")}</ul>`); list = []; } };
+  for (const l of lines) {
+    if (/^[-•*]\s+/.test(l)) { list.push(l.replace(/^[-•*]\s+/, "")); continue; }
+    flush();
+    out.push(isPlainHeading(l) ? `<h2>${esc(l)}</h2>` : `<p>${esc(l)}</p>`);
+  }
+  flush();
+  return out.join("");
+}
+
+export function prepareArticleHtml(content: string, title?: string) {
+  const isHtml = /<\/?[a-z][\s\S]*>/i.test(content);
+  return enhanceContent(isHtml ? content : plainToHtml(content, title));
+}
+
+/** Splits HTML at a top-level block boundary near the middle (for the mid-article CTA). */
+export function splitHtmlInHalf(html: string): [string, string] {
+  const blocks = html.split(/(?<=<\/(?:p|h2|h3|h4|ul|ol|blockquote)>)/i).filter((b) => b.trim());
+  if (blocks.length <= 1) return [html, ""];
+  let mid = Math.floor(blocks.length / 2);
+  while (mid < blocks.length - 1 && /^\s*<h[2-4]/i.test(blocks[mid - 1])) mid++; // don't orphan a heading
+  return [blocks.slice(0, mid).join(""), blocks.slice(mid).join("")];
+}
