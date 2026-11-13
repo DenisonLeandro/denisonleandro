@@ -5,7 +5,7 @@ import type { Database } from "@/integrations/supabase/types";
 export interface TopicSummary { area_slug: string; slug: string; title: string; summary: string | null; sort_order: number; updated_at: string }
 export interface PublicTopic extends TopicSummary {
   id: string; seo_title: string | null; seo_description: string | null; content: string;
-  faq: unknown; created_at: string; published: boolean;
+  faq: { pergunta: string; resposta: string }[]; created_at: string; published: boolean;
 }
 
 function publicClient() {
@@ -34,5 +34,7 @@ export const getPublishedTopic = createServerFn({ method: "GET" })
     const { data: row, error } = await publicClient().from("area_topics").select("*")
       .eq("area_slug", data.area).eq("slug", data.slug).eq("published", true).maybeSingle();
     if (error) { console.error("getPublishedTopic", error); throw new Error("Não foi possível carregar o tema."); }
-    return (row as PublicTopic | null) ?? null;
+    if (!row) return null;
+    const faq = Array.isArray(row.faq) ? (row.faq as any[]).map((x) => ({ pergunta: String(x?.pergunta ?? ""), resposta: String(x?.resposta ?? "") })) : [];
+    return { ...(row as any), faq } as PublicTopic;
   });

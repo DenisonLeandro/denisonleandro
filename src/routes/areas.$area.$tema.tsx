@@ -140,7 +140,7 @@ function DraftOrNotFound() {
       if (!data) { if (alive) setState(null); return; }
       const { data: sib } = await supabase.from("area_topics").select("area_slug, slug, title, summary, sort_order, updated_at")
         .eq("area_slug", params.area).eq("published", true).order("sort_order");
-      if (alive) setState({ topic: data as PublicTopic, siblings: sib ?? [] });
+      if (alive) setState({ topic: { ...(data as any), faq: normalizeFaq(data.faq) } as PublicTopic, siblings: sib ?? [] });
     })();
     return () => { alive = false; };
   }, [params.area, params.tema]);
