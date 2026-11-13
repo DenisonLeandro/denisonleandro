@@ -48,6 +48,6 @@ _t("área de Mediação foi retirada e redireciona para Áreas de Atuação", ()
 import { resolveOldUrl as _r } from "./redirects";
 import { test as _t, expect as _e } from "vitest";
 _t("perfil do Dr. Juan (saiu) vai para /profissionais", () => {
-  _e(_r("/equipe/juan-albner-pereira-veloso")).toMatchObject({ status: 301, location: "/profissionais" });
-  _e(_r("/equipe/juan-albner-pereira-veloso/")).toMatchObject({ status: 301, location: "/profissionais" });
+  _e(_r("/equipe/juan-albner-pereira-veloso")).toMatchObject({ status: 301, to: "/profissionais" });
+  _e(_r("/equipe/juan-albner-pereira-veloso/")).toMatchObject({ status: 301, to: "/profissionais" });
 });
