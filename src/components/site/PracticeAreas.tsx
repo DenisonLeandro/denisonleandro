@@ -9,11 +9,15 @@ export function AreaCardsGrid({ topics = [], exclude }: { topics?: TopicSummary[
     <div className="flex flex-wrap justify-center gap-6">
       {AREA_CARDS.filter((a) => a.slug !== exclude).map((a) => {
         const top = topics.filter((t) => t.area_slug === a.slug).slice(0, 2);
+        const Icon = a.icon;
         return (
           <article
             key={a.slug}
-            className="group flex h-[300px] w-full flex-col rounded-xl border border-border bg-card p-7 shadow-card transition-all hover:-translate-y-1 hover:border-gold/60 hover:shadow-elegant sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] xl:w-[calc((100%-4.5rem)/4)]"
+            className="group flex w-full flex-col rounded-xl border border-border bg-card p-7 shadow-card transition-all hover:-translate-y-1 hover:border-gold/60 hover:shadow-elegant sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] xl:w-[calc((100%-4.5rem)/4)]"
           >
+            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-navy text-gold transition-colors group-hover:bg-gold group-hover:text-navy">
+              <Icon size={22} />
+            </div>
             <h3 className="font-serif text-xl text-navy">
               <Link to={a.to} className="hover:text-gold">{a.title}</Link>
             </h3>
