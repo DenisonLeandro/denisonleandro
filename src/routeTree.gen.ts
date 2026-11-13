@@ -27,7 +27,6 @@ import { Route as AreasBancarioRouteImport } from './routes/areas.bancario'
 import { Route as AreasConsumidorRouteImport } from './routes/areas.consumidor'
 import { Route as AreasContratosRouteImport } from './routes/areas.contratos'
 import { Route as AreasFamiliaRouteImport } from './routes/areas.familia'
-import { Route as AreasMediacaoRouteImport } from './routes/areas.mediacao'
 import { Route as AreasPrevidenciarioRouteImport } from './routes/areas.previdenciario'
 import { Route as AreasTrabalhistaRouteImport } from './routes/areas.trabalhista'
 import { Route as AuthorSplatRouteImport } from './routes/author.$'
@@ -139,11 +138,6 @@ const AreasContratosRoute = AreasContratosRouteImport.update({
 const AreasFamiliaRoute = AreasFamiliaRouteImport.update({
   id: '/areas/familia',
   path: '/areas/familia',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AreasMediacaoRoute = AreasMediacaoRouteImport.update({
-  id: '/areas/mediacao',
-  path: '/areas/mediacao',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AreasPrevidenciarioRoute = AreasPrevidenciarioRouteImport.update({
@@ -289,7 +283,6 @@ export interface FileRoutesByFullPath {
   '/areas/consumidor': typeof AreasConsumidorRoute
   '/areas/contratos': typeof AreasContratosRoute
   '/areas/familia': typeof AreasFamiliaRoute
-  '/areas/mediacao': typeof AreasMediacaoRoute
   '/areas/previdenciario': typeof AreasPrevidenciarioRoute
   '/areas/trabalhista': typeof AreasTrabalhistaRoute
   '/author/$': typeof AuthorSplatRoute
@@ -332,7 +325,6 @@ export interface FileRoutesByTo {
   '/areas/consumidor': typeof AreasConsumidorRoute
   '/areas/contratos': typeof AreasContratosRoute
   '/areas/familia': typeof AreasFamiliaRoute
-  '/areas/mediacao': typeof AreasMediacaoRoute
   '/areas/previdenciario': typeof AreasPrevidenciarioRoute
   '/areas/trabalhista': typeof AreasTrabalhistaRoute
   '/author/$': typeof AuthorSplatRoute
@@ -377,7 +369,6 @@ export interface FileRoutesById {
   '/areas/consumidor': typeof AreasConsumidorRoute
   '/areas/contratos': typeof AreasContratosRoute
   '/areas/familia': typeof AreasFamiliaRoute
-  '/areas/mediacao': typeof AreasMediacaoRoute
   '/areas/previdenciario': typeof AreasPrevidenciarioRoute
   '/areas/trabalhista': typeof AreasTrabalhistaRoute
   '/author/$': typeof AuthorSplatRoute
@@ -422,7 +413,6 @@ export interface FileRouteTypes {
     | '/areas/consumidor'
     | '/areas/contratos'
     | '/areas/familia'
-    | '/areas/mediacao'
     | '/areas/previdenciario'
     | '/areas/trabalhista'
     | '/author/$'
@@ -465,7 +455,6 @@ export interface FileRouteTypes {
     | '/areas/consumidor'
     | '/areas/contratos'
     | '/areas/familia'
-    | '/areas/mediacao'
     | '/areas/previdenciario'
     | '/areas/trabalhista'
     | '/author/$'
@@ -509,7 +498,6 @@ export interface FileRouteTypes {
     | '/areas/consumidor'
     | '/areas/contratos'
     | '/areas/familia'
-    | '/areas/mediacao'
     | '/areas/previdenciario'
     | '/areas/trabalhista'
     | '/author/$'
@@ -554,7 +542,6 @@ export interface RootRouteChildren {
   AreasConsumidorRoute: typeof AreasConsumidorRoute
   AreasContratosRoute: typeof AreasContratosRoute
   AreasFamiliaRoute: typeof AreasFamiliaRoute
-  AreasMediacaoRoute: typeof AreasMediacaoRoute
   AreasPrevidenciarioRoute: typeof AreasPrevidenciarioRoute
   AreasTrabalhistaRoute: typeof AreasTrabalhistaRoute
   AuthorSplatRoute: typeof AuthorSplatRoute
@@ -704,13 +691,6 @@ declare module '@tanstack/react-router' {
       path: '/areas/familia'
       fullPath: '/areas/familia'
       preLoaderRoute: typeof AreasFamiliaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/areas/mediacao': {
-      id: '/areas/mediacao'
-      path: '/areas/mediacao'
-      fullPath: '/areas/mediacao'
-      preLoaderRoute: typeof AreasMediacaoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/areas/previdenciario': {
@@ -917,7 +897,6 @@ const rootRouteChildren: RootRouteChildren = {
   AreasConsumidorRoute: AreasConsumidorRoute,
   AreasContratosRoute: AreasContratosRoute,
   AreasFamiliaRoute: AreasFamiliaRoute,
-  AreasMediacaoRoute: AreasMediacaoRoute,
   AreasPrevidenciarioRoute: AreasPrevidenciarioRoute,
   AreasTrabalhistaRoute: AreasTrabalhistaRoute,
   AuthorSplatRoute: AuthorSplatRoute,

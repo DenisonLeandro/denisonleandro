@@ -66,19 +66,6 @@ export const AREAS: Area[] = [
     ]
   },
   {
-    "slug": "mediacao",
-    "title": "Mediação",
-    "name": "Mediação e Arbitragem",
-    "intro": "Atuação em arbitragem, mediação e métodos alternativos de resolução de conflitos, com foco na construção de acordos eficientes.",
-    "items": [
-      "Representação em procedimentos arbitrais nacionais e internacionais, institucionais e ad hoc",
-      "Representação em juízo em medidas que garantem a efetividade do procedimento arbitral",
-      "Representação em procedimentos de mediação",
-      "Elaboração e revisão de cláusulas compromissórias e de resolução de disputas, incluindo aconselhamento em contratações empresariais complexas",
-      "Atuação como árbitros e mediadores"
-    ]
-  },
-  {
     "slug": "previdenciario",
     "title": "Previdenciário",
     "name": "Direito Previdenciário",
@@ -97,6 +84,13 @@ export const AREAS: Area[] = [
       "Defesas em processos instaurados pela Previdência Social ou Receita Federal",
       "Formalização de consultas aos órgãos competentes"
     ]
+  },
+  {
+    "slug": "saude",
+    "title": "Direito da Saúde",
+    "name": "Direito da Saúde e Direito Médico",
+    "intro": "Orientação e defesa de pacientes e familiares em negativas de plano de saúde, medicamentos de alto custo, reajustes, cancelamentos, erro médico e acesso a tratamentos pelo SUS. Atendimento online em todo o Brasil e presencial em Londrina-PR.",
+    "items": []
   },
   {
     "slug": "trabalhista",

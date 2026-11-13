@@ -38,3 +38,9 @@ describe("resolveOldUrl (WordPress)", () => {
     for (const p of ["/", "/noticias", "/llms.txt", "/sitemap.xml", "/google9f6aaca8a92e26ca.html", "/favicon.ico"]) expect(resolveOldUrl(p)).toBeNull();
   });
 });
+
+import { resolveOldUrl as _r } from "./redirects";
+import { test as _t, expect as _e } from "vitest";
+_t("área de Mediação foi retirada e redireciona para Áreas de Atuação", () => {
+  _e(_r("/areas/mediacao")).toEqual({ status: 301, to: "/areas-de-atuacao" });
+});
