@@ -35,7 +35,6 @@ const STATIC_ENTRIES: SitemapEntry[] = [
   { path: "/equipe/higor-henrique-leandro", changefreq: "yearly", priority: "0.6" },
   { path: "/equipe/joao-tadeu-leandro", changefreq: "yearly", priority: "0.6" },
   { path: "/equipe/renata-henrique-leandro", changefreq: "yearly", priority: "0.6" },
-  { path: "/equipe/juan-albner-pereira-veloso", changefreq: "yearly", priority: "0.6" },
   { path: "/equipe/danielle-cristina-mateus-pereira", changefreq: "yearly", priority: "0.6" },
   { path: "/equipe/maria-ines-gomes-da-silva", changefreq: "yearly", priority: "0.6" },
   { path: "/equipe/leonardo-nascimento-de-aguiar", changefreq: "yearly", priority: "0.6" },
