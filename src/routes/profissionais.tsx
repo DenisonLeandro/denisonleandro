@@ -41,7 +41,6 @@ const lawyers = [
   { slug: "higor-henrique-leandro", name: "Dr. Higor Henrique Leandro", role: "Advogado", email: "higor@denisonleandro.adv.br", photo: higorAsset.url },
   { slug: "joao-tadeu-leandro", name: "Dr. João Tadeu Leandro", role: "Advogado", email: "joao@denisonleandro.adv.br", photo: joaoAsset.url },
   { slug: "renata-henrique-leandro", name: "Dra. Renata Henrique Leandro", role: "Advogada", email: "renata@denisonleandro.adv.br", photo: renataAsset.url },
-  { slug: "juan-albner-pereira-veloso", name: "Dr. Juan Albner Pereira Veloso", role: "Advogado", email: "juan@denisonleandro.adv.br", photo: null },
   { slug: "danielle-cristina-mateus-pereira", name: "Dra. Danielle Cristina Mateus Pereira", role: "Advogada", email: "danielle@denisonleandro.adv.br", photo: null },
 ];
 

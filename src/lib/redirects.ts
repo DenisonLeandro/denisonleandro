@@ -12,6 +12,8 @@ const tags = (names: string[]) => names.map((n) => `/tag/${n}`);
 
 /** "old path" -> "new path" (permanent 301). Add new entries here. */
 export const PERMANENT_REDIRECTS: Record<string, string> = {
+  // Dr. Juan saiu do escritório (nov/2026)
+  "/equipe/juan-albner-pereira-veloso": "/profissionais",
   "/noticias/acidente-de-trabalho-estabilidade-apos-acidente-de-trabalho-quanto-tempo-a-empresa-nao-pode-demitir":
     "/noticias/estabilidade-apos-acidente-de-trabalho-quanto-tempo-a-empresa-nao-pode-demitir",
   "/noticias/fim-da-escala-6x1-o-que-pode-mudar-para-quem-trabalha-aos-domingos":
@@ -127,7 +129,7 @@ export const GONE_PATHS = new Set([
 
 /** Current team profile slugs (/equipe/{slug}). */
 export const TEAM_SLUGS = new Set([
-  "denison-henrique-leandro", "higor-henrique-leandro", "joao-tadeu-leandro", "juan-albner-pereira-veloso",
+  "denison-henrique-leandro", "higor-henrique-leandro", "joao-tadeu-leandro",
   "marcio-barbosa-da-silva", "danielle-cristina-mateus-pereira", "renata-henrique-leandro",
   "maria-ines-gomes-da-silva", "leonardo-nascimento-de-aguiar",
 ]);

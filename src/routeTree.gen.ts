@@ -37,7 +37,6 @@ import { Route as EquipeDanielleCristinaMateusPereiraRouteImport } from './route
 import { Route as EquipeDenisonHenriqueLeandroRouteImport } from './routes/equipe.denison-henrique-leandro'
 import { Route as EquipeHigorHenriqueLeandroRouteImport } from './routes/equipe.higor-henrique-leandro'
 import { Route as EquipeJoaoTadeuLeandroRouteImport } from './routes/equipe.joao-tadeu-leandro'
-import { Route as EquipeJuanAlbnerPereiraVelosoRouteImport } from './routes/equipe.juan-albner-pereira-veloso'
 import { Route as EquipeLeonardoNascimentoDeAguiarRouteImport } from './routes/equipe.leonardo-nascimento-de-aguiar'
 import { Route as EquipeMarcioBarbosaDaSilvaRouteImport } from './routes/equipe.marcio-barbosa-da-silva'
 import { Route as EquipeMariaInesGomesDaSilvaRouteImport } from './routes/equipe.maria-ines-gomes-da-silva'
@@ -196,12 +195,6 @@ const EquipeJoaoTadeuLeandroRoute = EquipeJoaoTadeuLeandroRouteImport.update({
   path: '/equipe/joao-tadeu-leandro',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EquipeJuanAlbnerPereiraVelosoRoute =
-  EquipeJuanAlbnerPereiraVelosoRouteImport.update({
-    id: '/equipe/juan-albner-pereira-veloso',
-    path: '/equipe/juan-albner-pereira-veloso',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const EquipeLeonardoNascimentoDeAguiarRoute =
   EquipeLeonardoNascimentoDeAguiarRouteImport.update({
     id: '/equipe/leonardo-nascimento-de-aguiar',
@@ -311,7 +304,6 @@ export interface FileRoutesByFullPath {
   '/equipe/denison-henrique-leandro': typeof EquipeDenisonHenriqueLeandroRoute
   '/equipe/higor-henrique-leandro': typeof EquipeHigorHenriqueLeandroRoute
   '/equipe/joao-tadeu-leandro': typeof EquipeJoaoTadeuLeandroRoute
-  '/equipe/juan-albner-pereira-veloso': typeof EquipeJuanAlbnerPereiraVelosoRoute
   '/equipe/leonardo-nascimento-de-aguiar': typeof EquipeLeonardoNascimentoDeAguiarRoute
   '/equipe/marcio-barbosa-da-silva': typeof EquipeMarcioBarbosaDaSilvaRoute
   '/equipe/maria-ines-gomes-da-silva': typeof EquipeMariaInesGomesDaSilvaRoute
@@ -356,7 +348,6 @@ export interface FileRoutesByTo {
   '/equipe/denison-henrique-leandro': typeof EquipeDenisonHenriqueLeandroRoute
   '/equipe/higor-henrique-leandro': typeof EquipeHigorHenriqueLeandroRoute
   '/equipe/joao-tadeu-leandro': typeof EquipeJoaoTadeuLeandroRoute
-  '/equipe/juan-albner-pereira-veloso': typeof EquipeJuanAlbnerPereiraVelosoRoute
   '/equipe/leonardo-nascimento-de-aguiar': typeof EquipeLeonardoNascimentoDeAguiarRoute
   '/equipe/marcio-barbosa-da-silva': typeof EquipeMarcioBarbosaDaSilvaRoute
   '/equipe/maria-ines-gomes-da-silva': typeof EquipeMariaInesGomesDaSilvaRoute
@@ -403,7 +394,6 @@ export interface FileRoutesById {
   '/equipe/denison-henrique-leandro': typeof EquipeDenisonHenriqueLeandroRoute
   '/equipe/higor-henrique-leandro': typeof EquipeHigorHenriqueLeandroRoute
   '/equipe/joao-tadeu-leandro': typeof EquipeJoaoTadeuLeandroRoute
-  '/equipe/juan-albner-pereira-veloso': typeof EquipeJuanAlbnerPereiraVelosoRoute
   '/equipe/leonardo-nascimento-de-aguiar': typeof EquipeLeonardoNascimentoDeAguiarRoute
   '/equipe/marcio-barbosa-da-silva': typeof EquipeMarcioBarbosaDaSilvaRoute
   '/equipe/maria-ines-gomes-da-silva': typeof EquipeMariaInesGomesDaSilvaRoute
@@ -450,7 +440,6 @@ export interface FileRouteTypes {
     | '/equipe/denison-henrique-leandro'
     | '/equipe/higor-henrique-leandro'
     | '/equipe/joao-tadeu-leandro'
-    | '/equipe/juan-albner-pereira-veloso'
     | '/equipe/leonardo-nascimento-de-aguiar'
     | '/equipe/marcio-barbosa-da-silva'
     | '/equipe/maria-ines-gomes-da-silva'
@@ -495,7 +484,6 @@ export interface FileRouteTypes {
     | '/equipe/denison-henrique-leandro'
     | '/equipe/higor-henrique-leandro'
     | '/equipe/joao-tadeu-leandro'
-    | '/equipe/juan-albner-pereira-veloso'
     | '/equipe/leonardo-nascimento-de-aguiar'
     | '/equipe/marcio-barbosa-da-silva'
     | '/equipe/maria-ines-gomes-da-silva'
@@ -541,7 +529,6 @@ export interface FileRouteTypes {
     | '/equipe/denison-henrique-leandro'
     | '/equipe/higor-henrique-leandro'
     | '/equipe/joao-tadeu-leandro'
-    | '/equipe/juan-albner-pereira-veloso'
     | '/equipe/leonardo-nascimento-de-aguiar'
     | '/equipe/marcio-barbosa-da-silva'
     | '/equipe/maria-ines-gomes-da-silva'
@@ -588,7 +575,6 @@ export interface RootRouteChildren {
   EquipeDenisonHenriqueLeandroRoute: typeof EquipeDenisonHenriqueLeandroRoute
   EquipeHigorHenriqueLeandroRoute: typeof EquipeHigorHenriqueLeandroRoute
   EquipeJoaoTadeuLeandroRoute: typeof EquipeJoaoTadeuLeandroRoute
-  EquipeJuanAlbnerPereiraVelosoRoute: typeof EquipeJuanAlbnerPereiraVelosoRoute
   EquipeLeonardoNascimentoDeAguiarRoute: typeof EquipeLeonardoNascimentoDeAguiarRoute
   EquipeMarcioBarbosaDaSilvaRoute: typeof EquipeMarcioBarbosaDaSilvaRoute
   EquipeMariaInesGomesDaSilvaRoute: typeof EquipeMariaInesGomesDaSilvaRoute
@@ -801,13 +787,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EquipeJoaoTadeuLeandroRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/equipe/juan-albner-pereira-veloso': {
-      id: '/equipe/juan-albner-pereira-veloso'
-      path: '/equipe/juan-albner-pereira-veloso'
-      fullPath: '/equipe/juan-albner-pereira-veloso'
-      preLoaderRoute: typeof EquipeJuanAlbnerPereiraVelosoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/equipe/leonardo-nascimento-de-aguiar': {
       id: '/equipe/leonardo-nascimento-de-aguiar'
       path: '/equipe/leonardo-nascimento-de-aguiar'
@@ -969,7 +948,6 @@ const rootRouteChildren: RootRouteChildren = {
   EquipeDenisonHenriqueLeandroRoute: EquipeDenisonHenriqueLeandroRoute,
   EquipeHigorHenriqueLeandroRoute: EquipeHigorHenriqueLeandroRoute,
   EquipeJoaoTadeuLeandroRoute: EquipeJoaoTadeuLeandroRoute,
-  EquipeJuanAlbnerPereiraVelosoRoute: EquipeJuanAlbnerPereiraVelosoRoute,
   EquipeLeonardoNascimentoDeAguiarRoute: EquipeLeonardoNascimentoDeAguiarRoute,
   EquipeMarcioBarbosaDaSilvaRoute: EquipeMarcioBarbosaDaSilvaRoute,
   EquipeMariaInesGomesDaSilvaRoute: EquipeMariaInesGomesDaSilvaRoute,

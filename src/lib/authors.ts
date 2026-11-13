@@ -13,7 +13,6 @@ export const AUTHORS: Author[] = [
   { slug: "marcio-barbosa-da-silva", name: "Dr. Márcio Barbosa da Silva", oab: "OAB/PR 52.894", photo: marcio.url, specialty: "Advogado especialista em Direito do Trabalho e Previdenciário." },
   { slug: "renata-henrique-leandro", name: "Dra. Renata Henrique Leandro", oab: "OAB/PR 77.170", photo: renata.url, specialty: "Advogada pós-graduada em Mediação, Conciliação e Arbitragem." },
   { slug: "danielle-cristina-mateus-pereira", name: "Dra. Danielle Cristina Mateus Pereira", oab: "OAB/PR 57.927", photo: null, specialty: "Advogada com ênfase no Direito do Trabalho." },
-  { slug: "juan-albner-pereira-veloso", name: "Dr. Juan Albner Pereira Veloso", oab: "OAB/PR 104.933", photo: null, specialty: "Advogado com ênfase no Direito do Trabalho." },
 ];
 
 export const getAuthor = (slug?: string | null) => AUTHORS.find((a) => a.slug === slug) ?? AUTHORS[0];

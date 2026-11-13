@@ -155,13 +155,6 @@ export const LAWYERS: Lawyer[] = [
     "role": "Advogada",
     "oab": "OAB/PR 57.927",
     "specialty": "ênfase em Direito do Trabalho"
-  },
-  {
-    "slug": "juan-albner-pereira-veloso",
-    "name": "Dr. Juan Albner Pereira Veloso",
-    "role": "Advogado",
-    "oab": "OAB/PR 104.933",
-    "specialty": "ênfase em Direito do Trabalho"
   }
 ];
 
