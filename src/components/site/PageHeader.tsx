@@ -1,10 +1,12 @@
+import type React from "react";
 type Props = {
   eyebrow: string;
   title: string;
   description?: string;
+  children?: React.ReactNode;
 };
 
-export function PageHeader({ eyebrow, title, description }: Props) {
+export function PageHeader({ eyebrow, title, description, children }: Props) {
   return (
     <section className="bg-navy text-cream">
       <div className="mx-auto max-w-7xl px-6 py-24 text-center lg:px-10 lg:py-32">
@@ -18,6 +20,7 @@ export function PageHeader({ eyebrow, title, description }: Props) {
             {description}
           </p>
         )}
+        {children && <div className="mt-10 flex justify-center">{children}</div>}
       </div>
     </section>
   );

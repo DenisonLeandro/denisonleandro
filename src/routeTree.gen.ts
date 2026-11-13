@@ -27,8 +27,8 @@ import { Route as AreasBancarioRouteImport } from './routes/areas.bancario'
 import { Route as AreasConsumidorRouteImport } from './routes/areas.consumidor'
 import { Route as AreasContratosRouteImport } from './routes/areas.contratos'
 import { Route as AreasFamiliaRouteImport } from './routes/areas.familia'
-import { Route as AreasMediacaoRouteImport } from './routes/areas.mediacao'
 import { Route as AreasPrevidenciarioRouteImport } from './routes/areas.previdenciario'
+import { Route as AreasSaudeRouteImport } from './routes/areas.saude'
 import { Route as AreasTrabalhistaRouteImport } from './routes/areas.trabalhista'
 import { Route as AuthorSplatRouteImport } from './routes/author.$'
 import { Route as CategorySplatRouteImport } from './routes/category.$'
@@ -51,6 +51,8 @@ import { Route as WpContentSplatRouteImport } from './routes/wp-content.$'
 import { Route as WpIncludesSplatRouteImport } from './routes/wp-includes.$'
 import { Route as WpJsonSplatRouteImport } from './routes/wp-json.$'
 import { Route as AuthenticatedAdminArtigosRouteImport } from './routes/_authenticated/admin.artigos'
+import { Route as AuthenticatedAdminTemasRouteImport } from './routes/_authenticated/admin.temas'
+import { Route as AreasAreaTemaRouteImport } from './routes/areas.$area.$tema'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -141,14 +143,14 @@ const AreasFamiliaRoute = AreasFamiliaRouteImport.update({
   path: '/areas/familia',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AreasMediacaoRoute = AreasMediacaoRouteImport.update({
-  id: '/areas/mediacao',
-  path: '/areas/mediacao',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AreasPrevidenciarioRoute = AreasPrevidenciarioRouteImport.update({
   id: '/areas/previdenciario',
   path: '/areas/previdenciario',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasSaudeRoute = AreasSaudeRouteImport.update({
+  id: '/areas/saude',
+  path: '/areas/saude',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AreasTrabalhistaRoute = AreasTrabalhistaRouteImport.update({
@@ -270,6 +272,16 @@ const AuthenticatedAdminArtigosRoute =
     path: '/admin/artigos',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminTemasRoute = AuthenticatedAdminTemasRouteImport.update({
+  id: '/admin/temas',
+  path: '/admin/temas',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AreasAreaTemaRoute = AreasAreaTemaRouteImport.update({
+  id: '/areas/$area/$tema',
+  path: '/areas/$area/$tema',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -289,8 +301,8 @@ export interface FileRoutesByFullPath {
   '/areas/consumidor': typeof AreasConsumidorRoute
   '/areas/contratos': typeof AreasContratosRoute
   '/areas/familia': typeof AreasFamiliaRoute
-  '/areas/mediacao': typeof AreasMediacaoRoute
   '/areas/previdenciario': typeof AreasPrevidenciarioRoute
+  '/areas/saude': typeof AreasSaudeRoute
   '/areas/trabalhista': typeof AreasTrabalhistaRoute
   '/author/$': typeof AuthorSplatRoute
   '/category/$': typeof CategorySplatRoute
@@ -313,6 +325,8 @@ export interface FileRoutesByFullPath {
   '/wp-json/$': typeof WpJsonSplatRoute
   '/noticias/': typeof NoticiasIndexRoute
   '/admin/artigos': typeof AuthenticatedAdminArtigosRoute
+  '/admin/temas': typeof AuthenticatedAdminTemasRoute
+  '/areas/$area/$tema': typeof AreasAreaTemaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -332,8 +346,8 @@ export interface FileRoutesByTo {
   '/areas/consumidor': typeof AreasConsumidorRoute
   '/areas/contratos': typeof AreasContratosRoute
   '/areas/familia': typeof AreasFamiliaRoute
-  '/areas/mediacao': typeof AreasMediacaoRoute
   '/areas/previdenciario': typeof AreasPrevidenciarioRoute
+  '/areas/saude': typeof AreasSaudeRoute
   '/areas/trabalhista': typeof AreasTrabalhistaRoute
   '/author/$': typeof AuthorSplatRoute
   '/category/$': typeof CategorySplatRoute
@@ -356,6 +370,8 @@ export interface FileRoutesByTo {
   '/wp-json/$': typeof WpJsonSplatRoute
   '/noticias': typeof NoticiasIndexRoute
   '/admin/artigos': typeof AuthenticatedAdminArtigosRoute
+  '/admin/temas': typeof AuthenticatedAdminTemasRoute
+  '/areas/$area/$tema': typeof AreasAreaTemaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -377,8 +393,8 @@ export interface FileRoutesById {
   '/areas/consumidor': typeof AreasConsumidorRoute
   '/areas/contratos': typeof AreasContratosRoute
   '/areas/familia': typeof AreasFamiliaRoute
-  '/areas/mediacao': typeof AreasMediacaoRoute
   '/areas/previdenciario': typeof AreasPrevidenciarioRoute
+  '/areas/saude': typeof AreasSaudeRoute
   '/areas/trabalhista': typeof AreasTrabalhistaRoute
   '/author/$': typeof AuthorSplatRoute
   '/category/$': typeof CategorySplatRoute
@@ -401,6 +417,8 @@ export interface FileRoutesById {
   '/wp-json/$': typeof WpJsonSplatRoute
   '/noticias/': typeof NoticiasIndexRoute
   '/_authenticated/admin/artigos': typeof AuthenticatedAdminArtigosRoute
+  '/_authenticated/admin/temas': typeof AuthenticatedAdminTemasRoute
+  '/areas/$area/$tema': typeof AreasAreaTemaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -422,8 +440,8 @@ export interface FileRouteTypes {
     | '/areas/consumidor'
     | '/areas/contratos'
     | '/areas/familia'
-    | '/areas/mediacao'
     | '/areas/previdenciario'
+    | '/areas/saude'
     | '/areas/trabalhista'
     | '/author/$'
     | '/category/$'
@@ -446,6 +464,8 @@ export interface FileRouteTypes {
     | '/wp-json/$'
     | '/noticias/'
     | '/admin/artigos'
+    | '/admin/temas'
+    | '/areas/$area/$tema'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -465,8 +485,8 @@ export interface FileRouteTypes {
     | '/areas/consumidor'
     | '/areas/contratos'
     | '/areas/familia'
-    | '/areas/mediacao'
     | '/areas/previdenciario'
+    | '/areas/saude'
     | '/areas/trabalhista'
     | '/author/$'
     | '/category/$'
@@ -489,6 +509,8 @@ export interface FileRouteTypes {
     | '/wp-json/$'
     | '/noticias'
     | '/admin/artigos'
+    | '/admin/temas'
+    | '/areas/$area/$tema'
   id:
     | '__root__'
     | '/'
@@ -509,8 +531,8 @@ export interface FileRouteTypes {
     | '/areas/consumidor'
     | '/areas/contratos'
     | '/areas/familia'
-    | '/areas/mediacao'
     | '/areas/previdenciario'
+    | '/areas/saude'
     | '/areas/trabalhista'
     | '/author/$'
     | '/category/$'
@@ -533,6 +555,8 @@ export interface FileRouteTypes {
     | '/wp-json/$'
     | '/noticias/'
     | '/_authenticated/admin/artigos'
+    | '/_authenticated/admin/temas'
+    | '/areas/$area/$tema'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -554,8 +578,8 @@ export interface RootRouteChildren {
   AreasConsumidorRoute: typeof AreasConsumidorRoute
   AreasContratosRoute: typeof AreasContratosRoute
   AreasFamiliaRoute: typeof AreasFamiliaRoute
-  AreasMediacaoRoute: typeof AreasMediacaoRoute
   AreasPrevidenciarioRoute: typeof AreasPrevidenciarioRoute
+  AreasSaudeRoute: typeof AreasSaudeRoute
   AreasTrabalhistaRoute: typeof AreasTrabalhistaRoute
   AuthorSplatRoute: typeof AuthorSplatRoute
   CategorySplatRoute: typeof CategorySplatRoute
@@ -576,6 +600,7 @@ export interface RootRouteChildren {
   WpIncludesSplatRoute: typeof WpIncludesSplatRoute
   WpJsonSplatRoute: typeof WpJsonSplatRoute
   NoticiasIndexRoute: typeof NoticiasIndexRoute
+  AreasAreaTemaRoute: typeof AreasAreaTemaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -706,18 +731,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AreasFamiliaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/areas/mediacao': {
-      id: '/areas/mediacao'
-      path: '/areas/mediacao'
-      fullPath: '/areas/mediacao'
-      preLoaderRoute: typeof AreasMediacaoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/areas/previdenciario': {
       id: '/areas/previdenciario'
       path: '/areas/previdenciario'
       fullPath: '/areas/previdenciario'
       preLoaderRoute: typeof AreasPrevidenciarioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas/saude': {
+      id: '/areas/saude'
+      path: '/areas/saude'
+      fullPath: '/areas/saude'
+      preLoaderRoute: typeof AreasSaudeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/areas/trabalhista': {
@@ -874,15 +899,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminArtigosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/temas': {
+      id: '/_authenticated/admin/temas'
+      path: '/admin/temas'
+      fullPath: '/admin/temas'
+      preLoaderRoute: typeof AuthenticatedAdminTemasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/areas/$area/$tema': {
+      id: '/areas/$area/$tema'
+      path: '/areas/$area/$tema'
+      fullPath: '/areas/$area/$tema'
+      preLoaderRoute: typeof AreasAreaTemaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminArtigosRoute: typeof AuthenticatedAdminArtigosRoute
+  AuthenticatedAdminTemasRoute: typeof AuthenticatedAdminTemasRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminArtigosRoute: AuthenticatedAdminArtigosRoute,
+  AuthenticatedAdminTemasRoute: AuthenticatedAdminTemasRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -917,8 +958,8 @@ const rootRouteChildren: RootRouteChildren = {
   AreasConsumidorRoute: AreasConsumidorRoute,
   AreasContratosRoute: AreasContratosRoute,
   AreasFamiliaRoute: AreasFamiliaRoute,
-  AreasMediacaoRoute: AreasMediacaoRoute,
   AreasPrevidenciarioRoute: AreasPrevidenciarioRoute,
+  AreasSaudeRoute: AreasSaudeRoute,
   AreasTrabalhistaRoute: AreasTrabalhistaRoute,
   AuthorSplatRoute: AuthorSplatRoute,
   CategorySplatRoute: CategorySplatRoute,
@@ -940,6 +981,7 @@ const rootRouteChildren: RootRouteChildren = {
   WpIncludesSplatRoute: WpIncludesSplatRoute,
   WpJsonSplatRoute: WpJsonSplatRoute,
   NoticiasIndexRoute: NoticiasIndexRoute,
+  AreasAreaTemaRoute: AreasAreaTemaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

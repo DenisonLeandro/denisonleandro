@@ -17,6 +17,7 @@ export const PERMANENT_REDIRECTS: Record<string, string> = {
   "/noticias/fim-da-escala-6x1-o-que-pode-mudar-para-quem-trabalha-aos-domingos":
     "/noticias/fim-da-escala-6x1-congresso-aprova-mudanca-na-jornada-de-trabalho-veja-o-que-muda",
   "/consumidor": "/areas/consumidor",
+  "/areas/mediacao": "/areas-de-atuacao",
   "/profissionais-2": "/profissionais",
   "/eventos-sociais": "/escritorio",
   "/precisou-de-ajuda-entre-em-contato-com-a-gente": "/contato",

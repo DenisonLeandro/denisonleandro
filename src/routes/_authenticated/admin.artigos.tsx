@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Loader2, Pencil, Plus, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -376,7 +376,10 @@ function AdminArtigosPage() {
 
       <main className="mx-auto max-w-6xl px-6 py-10">
         <div className="flex items-center justify-between">
-          <h1 className="font-serif text-3xl text-navy">Painel de artigos</h1>
+          <div>
+            <h1 className="font-serif text-3xl text-navy">Painel de artigos</h1>
+            <Link to="/admin/temas" className="mt-1 inline-block text-sm font-semibold text-gold hover:underline">Ir para Temas das áreas →</Link>
+          </div>
           {mode === "list" && (
             <button
               onClick={openNew}

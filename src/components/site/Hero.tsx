@@ -26,8 +26,8 @@ export function Hero() {
             </span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-navy-foreground/80">
-            Atuação Full Service em Direito Trabalhista, Previdenciário, Consumidor,
-            Família, Contratos, Bancário e Mediação.
+            Atuação Full Service em Direito Trabalhista, Previdenciário, da Saúde,
+            Consumidor, Bancário, Família e Contratos.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <a

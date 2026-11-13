@@ -7,7 +7,7 @@ import renata from "@/assets/renata.png.asset.json";
 export interface Author { slug: string; name: string; oab: string; photo: string | null; specialty: string }
 
 export const AUTHORS: Author[] = [
-  { slug: "denison-henrique-leandro", name: "Dr. Denison Leandro", oab: "OAB/PR 28.764", photo: denison.url, specialty: "Sócio fundador, especialista em Direito do Trabalho, Pós-Graduado pela FGV." },
+  { slug: "denison-henrique-leandro", name: "Dr. Denison Leandro", oab: "OAB/PR 28.764", photo: denison.url, specialty: "Sócio fundador, especialista em Direito do Trabalho, Pós-Graduado pela FGV. Pós-graduado em Direito da Saúde e Direito Médico pelo Hospital Israelita Albert Einstein." },
   { slug: "higor-henrique-leandro", name: "Dr. Higor Henrique Leandro", oab: "OAB/PR 64.072", photo: higor.url, specialty: "Advogado com ênfase no Direito do Trabalho." },
   { slug: "joao-tadeu-leandro", name: "Dr. João Tadeu Leandro", oab: "OAB/PR 67.404", photo: joao.url, specialty: "Advogado com ênfase no Direito do Trabalho." },
   { slug: "marcio-barbosa-da-silva", name: "Dr. Márcio Barbosa da Silva", oab: "OAB/PR 52.894", photo: marcio.url, specialty: "Advogado especialista em Direito do Trabalho e Previdenciário." },
@@ -21,11 +21,11 @@ export const getAuthor = (slug?: string | null) => AUTHORS.find((a) => a.slug ==
 export const AREAS: Array<{ slug: string; name: string }> = [
   { slug: "trabalhista", name: "Direito Trabalhista" },
   { slug: "previdenciario", name: "Direito Previdenciário" },
+  { slug: "saude", name: "Direito da Saúde" },
   { slug: "consumidor", name: "Direito do Consumidor" },
   { slug: "familia", name: "Direito de Família" },
   { slug: "contratos", name: "Contratos" },
   { slug: "bancario", name: "Direito Bancário" },
-  { slug: "mediacao", name: "Mediação e Conciliação" },
 ];
 export const getArea = (slug?: string | null) => AREAS.find((a) => a.slug === slug) ?? null;
 

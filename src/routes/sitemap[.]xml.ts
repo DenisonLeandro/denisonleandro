@@ -28,7 +28,7 @@ const STATIC_ENTRIES: SitemapEntry[] = [
   { path: "/areas/familia", changefreq: "monthly", priority: "0.8" },
   { path: "/areas/contratos", changefreq: "monthly", priority: "0.8" },
   { path: "/areas/bancario", changefreq: "monthly", priority: "0.8" },
-  { path: "/areas/mediacao", changefreq: "monthly", priority: "0.8" },
+  { path: "/areas/saude", changefreq: "monthly", priority: "0.8" },
   { path: "/profissionais", changefreq: "monthly", priority: "0.8" },
   { path: "/equipe/denison-henrique-leandro", changefreq: "yearly", priority: "0.6" },
   { path: "/equipe/marcio-barbosa-da-silva", changefreq: "yearly", priority: "0.6" },
@@ -66,6 +66,20 @@ export const Route = createFileRoute("/sitemap.xml")({
           }
         } catch (err) {
           console.error("[sitemap] failed to load articles", err);
+        }
+
+        try {
+          const { data } = await (supabase as any)
+            .from("area_topics")
+            .select("area_slug, slug, updated_at")
+            .eq("published", true);
+          if (Array.isArray(data)) {
+            for (const t of data) {
+              dynamic.push({ path: `/areas/${t.area_slug}/${t.slug}`, lastmod: String(t.updated_at ?? "").slice(0, 10) || undefined, changefreq: "monthly", priority: "0.7" });
+            }
+          }
+        } catch (err) {
+          console.error("[sitemap] failed to load topics", err);
         }
 
         const entries = [...STATIC_ENTRIES, ...dynamic];

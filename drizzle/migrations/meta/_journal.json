@@ -57,6 +57,13 @@
       "when": 1794483200375,
       "tag": "0007_article_og_image",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1794564141423,
+      "tag": "0008_area_topics",
+      "breakpoints": true
     }
   ]
 }

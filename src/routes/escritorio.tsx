@@ -11,14 +11,14 @@ export const Route = createFileRoute("/escritorio")({
     buildHead({
       title: "O Escritório",
       description:
-        "25 anos de tradição, ética e excelência técnica. Conheça a história, os valores e a forma de atuação do Denison Leandro Advogados Associados.",
+        "Desde 2000 com tradição, ética e excelência técnica. Conheça a história, os valores e a forma de atuação do Denison Leandro Advogados Associados.",
       path: "/escritorio",
     }),
   component: EscritorioPage,
 });
 
 const values = [
-  { icon: ShieldCheck, title: "Credibilidade", desc: "Reputação construída ao longo de 25 anos de atuação séria e transparente." },
+  { icon: ShieldCheck, title: "Credibilidade", desc: "Reputação construída desde 2000 em uma atuação séria e transparente." },
   { icon: Award, title: "Competência", desc: "Equipe altamente qualificada, em constante atualização técnica e jurídica." },
   { icon: BookOpenCheck, title: "Excelência", desc: "Padrão elevado de qualidade em cada parecer, petição e atendimento prestado." },
   { icon: Handshake, title: "Compromisso", desc: "Dedicação integral à causa de cada cliente, com presença e parceria efetivas." },
@@ -34,7 +34,7 @@ function EscritorioPage() {
         <PageHeader
           eyebrow="Sobre nós"
           title="O Escritório"
-          description="25 anos de história dedicados à defesa dos direitos de pessoas, famílias e empresas em todo o Brasil."
+          description="Desde 2000 dedicados à defesa dos direitos de pessoas, famílias e empresas em todo o Brasil."
         />
 
         {/* Institutional text */}
@@ -52,7 +52,7 @@ function EscritorioPage() {
               <p>
                 Fundado pelo Dr. Denison Leandro, o escritório{" "}
                 <strong className="text-navy">Denison Leandro e Advogados Associados</strong>{" "}
-                completa 25 anos de atuação ininterrupta na advocacia brasileira, consolidando-se
+                atua desde 2000, de forma ininterrupta, na advocacia brasileira, consolidando-se
                 como referência no atendimento full service nas mais diversas áreas do Direito.
               </p>
               <p>

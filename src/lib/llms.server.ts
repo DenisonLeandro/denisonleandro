@@ -3,7 +3,7 @@ import type { Database } from "@/integrations/supabase/types";
 import { AREAS, LAWYERS } from "@/lib/site-content";
 import { SITE_URL } from "@/lib/seo";
 
-const ORDER = ["trabalhista", "previdenciario", "consumidor", "familia", "contratos", "bancario", "mediacao"];
+const ORDER = ["trabalhista", "previdenciario", "saude", "consumidor", "bancario", "familia", "contratos"];
 const areas = () => ORDER.map((s) => AREAS.find((a) => a.slug === s)!).filter(Boolean);
 
 export function stripHtml(html: string): string {
@@ -37,9 +37,18 @@ export async function loadArticles(limit: number) {
   return data ?? [];
 }
 
+export async function loadTopics() {
+  const url = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
+  const key = process.env.SUPABASE_PUBLISHABLE_KEY ?? process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+  if (!url || !key) return [];
+  const sb = createClient<Database>(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
+  const { data } = await sb.from("area_topics").select("area_slug, slug, title, summary, content").eq("published", true).order("sort_order");
+  return data ?? [];
+}
+
 export const HEADER = `# Denison Leandro Advogados Associados
 
-> Escritório de advocacia em Londrina-PR, fundado em 2000, com atuação em Direito Trabalhista, Previdenciário, do Consumidor, de Família, Contratos, Bancário e Mediação. Fundado pelo Dr. Denison Leandro (OAB/PR 28.764), pós-graduado pela FGV e especialista em Direito do Trabalho.
+> Escritório de advocacia em Londrina-PR, fundado em 2000, com atuação em Direito Trabalhista, Previdenciário, da Saúde, do Consumidor, Bancário, de Família e Contratos, com atendimento online em todo o Brasil. Fundado pelo Dr. Denison Leandro (OAB/PR 28.764), pós-graduado pela FGV, especialista em Direito do Trabalho e pós-graduado em Direito da Saúde e Direito Médico pelo Hospital Israelita Albert Einstein.
 
 ## Contato
 - Endereço: Av. Paraná, 343, 9º andar, sala 902 - Ed. Satélite, Centro, Londrina-PR, CEP 86010-920
@@ -51,9 +60,13 @@ export const HEADER = `# Denison Leandro Advogados Associados
 `;
 
 export async function buildLlmsTxt(): Promise<string> {
-  const arts = await loadArticles(30);
+  const [arts, topics] = await Promise.all([loadArticles(30), loadTopics()]);
   const out = [HEADER, "## Áreas de atuação"];
-  for (const a of areas()) out.push(`- [${a.name}](${SITE_URL}/areas/${a.slug}): ${a.intro}`);
+  for (const a of areas()) {
+    out.push(`- [${a.name}](${SITE_URL}/areas/${a.slug}): ${a.intro}`);
+    for (const t of topics.filter((x) => x.area_slug === a.slug))
+      out.push(`  - [${oneLine(t.title, 200)}](${SITE_URL}/areas/${t.area_slug}/${t.slug}): ${oneLine(t.summary || stripHtml(t.content ?? ""))}`);
+  }
   out.push("", "## Advogados");
   for (const l of LAWYERS) out.push(`- [${l.name}](${SITE_URL}/equipe/${l.slug}): ${l.role}, ${l.oab}, ${l.specialty}`);
   out.push("", "## Artigos");
@@ -73,10 +86,12 @@ export async function buildLlmsTxt(): Promise<string> {
 }
 
 export async function buildLlmsFullTxt(): Promise<string> {
-  const arts = await loadArticles(20);
+  const [arts, topics] = await Promise.all([loadArticles(20), loadTopics()]);
   const parts = [HEADER];
   for (const a of areas()) {
-    parts.push(`## ${a.name}\nURL: ${SITE_URL}/areas/${a.slug}\n\n${a.intro}\n\n${a.items.map((i) => `- ${i}`).join("\n")}`);
+    parts.push(`## ${a.name}\nURL: ${SITE_URL}/areas/${a.slug}\n\n${a.intro}${a.items.length ? `\n\n${a.items.map((i) => `- ${i}`).join("\n")}` : ""}`);
+    for (const t of topics.filter((x) => x.area_slug === a.slug))
+      parts.push(`## ${t.title}\nURL: ${SITE_URL}/areas/${t.area_slug}/${t.slug}\n\n${t.summary ? `${t.summary}\n\n` : ""}${stripHtml(t.content ?? "")}`);
   }
   for (const a of arts) {
     parts.push(`## ${a.title}\nURL: ${SITE_URL}/noticias/${a.slug}\n\n${stripHtml(a.content ?? "")}`);

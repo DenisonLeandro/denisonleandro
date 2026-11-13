@@ -127,7 +127,7 @@ export function orgGraph(logoUrl: string) {
       logo: absUrl(logoUrl),
       image: DEFAULT_OG_IMAGE,
       description:
-        "Escritório de advocacia em Londrina-PR, fundado em 2000, com atuação em Direito Trabalhista, Previdenciário, do Consumidor, de Família, Contratos, Bancário e Mediação.",
+        "Escritório de advocacia em Londrina-PR, fundado em 2000, com atuação em Direito Trabalhista, Previdenciário, da Saúde, do Consumidor, Bancário, de Família e Contratos. Atendimento online em todo o Brasil.",
       telephone: "+55-43-3322-8455",
       email: "contato@denisonleandro.adv.br",
       foundingDate: "2000",
@@ -162,7 +162,7 @@ export function orgGraph(logoUrl: string) {
         { "@type": "State", name: "Paraná" },
         { "@type": "Country", name: "Brasil" },
       ],
-      knowsAbout: ["Direito do Trabalho", "Direito Previdenciário", "Direito do Consumidor", "Direito de Família", "Contratos", "Direito Bancário", "Mediação"],
+      knowsAbout: ["Direito do Trabalho", "Direito Previdenciário", "Direito do Consumidor", "Direito de Família", "Contratos", "Direito Bancário", "Direito da Saúde", "Plano de Saúde", "Direito Médico"],
       sameAs: [SOCIAL_LINKS.instagram, SOCIAL_LINKS.facebook, SOCIAL_LINKS.youtube, MAP_URL],
     },
     { "@type": "WebSite", "@id": SITE_ID, name: SITE_NAME, url: SITE_URL, inLanguage: "pt-BR", publisher: { "@id": ORG_ID } },

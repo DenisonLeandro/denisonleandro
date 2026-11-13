@@ -14,6 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      area_topics: {
+        Row: {
+          area_slug: string
+          content: string
+          created_at: string
+          faq: Json
+          id: string
+          published: boolean
+          seo_description: string | null
+          seo_title: string | null
+          slug: string
+          sort_order: number
+          summary: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          area_slug: string
+          content?: string
+          created_at?: string
+          faq?: Json
+          id?: string
+          published?: boolean
+          seo_description?: string | null
+          seo_title?: string | null
+          slug: string
+          sort_order?: number
+          summary?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          area_slug?: string
+          content?: string
+          created_at?: string
+          faq?: Json
+          id?: string
+          published?: boolean
+          seo_description?: string | null
+          seo_title?: string | null
+          slug?: string
+          sort_order?: number
+          summary?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       articles: {
         Row: {
           area_slug: string | null
