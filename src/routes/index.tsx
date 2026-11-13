@@ -10,8 +10,10 @@ import { Locations } from "@/components/site/Locations";
 import { CtaBanner } from "@/components/site/CtaBanner";
 import { Footer } from "@/components/site/Footer";
 import { buildHead } from "@/lib/seo";
+import { listPublishedTopics } from "@/lib/area-topics.functions";
 
 export const Route = createFileRoute("/")({
+  loader: async () => ({ topics: await listPublishedTopics({ data: {} }).catch(() => []) }),
   head: () =>
     buildHead({
       fullTitle: "Denison Leandro Advogados Associados | Advocacia em Londrina-PR",
@@ -24,12 +26,13 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const { topics } = Route.useLoaderData();
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <main>
         <Hero />
-        <PracticeAreas />
+        <PracticeAreas topics={topics} />
         <NoticiasPreview />
         <About />
         <Values />

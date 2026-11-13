@@ -28,6 +28,7 @@ import { Route as AreasConsumidorRouteImport } from './routes/areas.consumidor'
 import { Route as AreasContratosRouteImport } from './routes/areas.contratos'
 import { Route as AreasFamiliaRouteImport } from './routes/areas.familia'
 import { Route as AreasPrevidenciarioRouteImport } from './routes/areas.previdenciario'
+import { Route as AreasSaudeRouteImport } from './routes/areas.saude'
 import { Route as AreasTrabalhistaRouteImport } from './routes/areas.trabalhista'
 import { Route as AuthorSplatRouteImport } from './routes/author.$'
 import { Route as CategorySplatRouteImport } from './routes/category.$'
@@ -143,6 +144,11 @@ const AreasFamiliaRoute = AreasFamiliaRouteImport.update({
 const AreasPrevidenciarioRoute = AreasPrevidenciarioRouteImport.update({
   id: '/areas/previdenciario',
   path: '/areas/previdenciario',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasSaudeRoute = AreasSaudeRouteImport.update({
+  id: '/areas/saude',
+  path: '/areas/saude',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AreasTrabalhistaRoute = AreasTrabalhistaRouteImport.update({
@@ -284,6 +290,7 @@ export interface FileRoutesByFullPath {
   '/areas/contratos': typeof AreasContratosRoute
   '/areas/familia': typeof AreasFamiliaRoute
   '/areas/previdenciario': typeof AreasPrevidenciarioRoute
+  '/areas/saude': typeof AreasSaudeRoute
   '/areas/trabalhista': typeof AreasTrabalhistaRoute
   '/author/$': typeof AuthorSplatRoute
   '/category/$': typeof CategorySplatRoute
@@ -326,6 +333,7 @@ export interface FileRoutesByTo {
   '/areas/contratos': typeof AreasContratosRoute
   '/areas/familia': typeof AreasFamiliaRoute
   '/areas/previdenciario': typeof AreasPrevidenciarioRoute
+  '/areas/saude': typeof AreasSaudeRoute
   '/areas/trabalhista': typeof AreasTrabalhistaRoute
   '/author/$': typeof AuthorSplatRoute
   '/category/$': typeof CategorySplatRoute
@@ -370,6 +378,7 @@ export interface FileRoutesById {
   '/areas/contratos': typeof AreasContratosRoute
   '/areas/familia': typeof AreasFamiliaRoute
   '/areas/previdenciario': typeof AreasPrevidenciarioRoute
+  '/areas/saude': typeof AreasSaudeRoute
   '/areas/trabalhista': typeof AreasTrabalhistaRoute
   '/author/$': typeof AuthorSplatRoute
   '/category/$': typeof CategorySplatRoute
@@ -414,6 +423,7 @@ export interface FileRouteTypes {
     | '/areas/contratos'
     | '/areas/familia'
     | '/areas/previdenciario'
+    | '/areas/saude'
     | '/areas/trabalhista'
     | '/author/$'
     | '/category/$'
@@ -456,6 +466,7 @@ export interface FileRouteTypes {
     | '/areas/contratos'
     | '/areas/familia'
     | '/areas/previdenciario'
+    | '/areas/saude'
     | '/areas/trabalhista'
     | '/author/$'
     | '/category/$'
@@ -499,6 +510,7 @@ export interface FileRouteTypes {
     | '/areas/contratos'
     | '/areas/familia'
     | '/areas/previdenciario'
+    | '/areas/saude'
     | '/areas/trabalhista'
     | '/author/$'
     | '/category/$'
@@ -543,6 +555,7 @@ export interface RootRouteChildren {
   AreasContratosRoute: typeof AreasContratosRoute
   AreasFamiliaRoute: typeof AreasFamiliaRoute
   AreasPrevidenciarioRoute: typeof AreasPrevidenciarioRoute
+  AreasSaudeRoute: typeof AreasSaudeRoute
   AreasTrabalhistaRoute: typeof AreasTrabalhistaRoute
   AuthorSplatRoute: typeof AuthorSplatRoute
   CategorySplatRoute: typeof CategorySplatRoute
@@ -698,6 +711,13 @@ declare module '@tanstack/react-router' {
       path: '/areas/previdenciario'
       fullPath: '/areas/previdenciario'
       preLoaderRoute: typeof AreasPrevidenciarioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas/saude': {
+      id: '/areas/saude'
+      path: '/areas/saude'
+      fullPath: '/areas/saude'
+      preLoaderRoute: typeof AreasSaudeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/areas/trabalhista': {
@@ -898,6 +918,7 @@ const rootRouteChildren: RootRouteChildren = {
   AreasContratosRoute: AreasContratosRoute,
   AreasFamiliaRoute: AreasFamiliaRoute,
   AreasPrevidenciarioRoute: AreasPrevidenciarioRoute,
+  AreasSaudeRoute: AreasSaudeRoute,
   AreasTrabalhistaRoute: AreasTrabalhistaRoute,
   AuthorSplatRoute: AuthorSplatRoute,
   CategorySplatRoute: CategorySplatRoute,

@@ -2,6 +2,7 @@ import { Mail, Phone, MapPin, Instagram, Facebook, Youtube } from "lucide-react"
 import { SOCIAL_LINKS } from "@/lib/seo";
 import { Link } from "@tanstack/react-router";
 import logoAsset from "@/assets/logo.png.asset.json";
+import { AREA_CARDS } from "@/lib/area-cards";
 
 const navSection = {
   title: "Navegação",
@@ -17,7 +18,7 @@ const navSection = {
 
 const areasSection = {
   title: "Áreas",
-  links: ["Trabalhista", "Previdenciário", "Consumidor", "Família", "Contratos", "Bancário", "Mediação"],
+  links: AREA_CARDS,
 };
 
 export function Footer() {
@@ -62,12 +63,12 @@ export function Footer() {
             <h4 className="font-serif text-base text-gold">{areasSection.title}</h4>
             <ul className="mt-5 space-y-3">
               {areasSection.links.map((l) => (
-                <li key={l}>
+                <li key={l.slug}>
                   <Link
-                    to="/areas-de-atuacao"
+                    to={l.to}
                     className="text-sm text-navy-foreground/70 transition-colors hover:text-gold"
                   >
-                    {l}
+                    {l.title}
                   </Link>
                 </li>
               ))}
