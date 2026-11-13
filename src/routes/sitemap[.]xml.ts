@@ -28,7 +28,7 @@ const STATIC_ENTRIES: SitemapEntry[] = [
   { path: "/areas/familia", changefreq: "monthly", priority: "0.8" },
   { path: "/areas/contratos", changefreq: "monthly", priority: "0.8" },
   { path: "/areas/bancario", changefreq: "monthly", priority: "0.8" },
-  { path: "/areas/mediacao", changefreq: "monthly", priority: "0.8" },
+  { path: "/areas/saude", changefreq: "monthly", priority: "0.8" },
   { path: "/profissionais", changefreq: "monthly", priority: "0.8" },
   { path: "/equipe/denison-henrique-leandro", changefreq: "yearly", priority: "0.6" },
   { path: "/equipe/marcio-barbosa-da-silva", changefreq: "yearly", priority: "0.6" },

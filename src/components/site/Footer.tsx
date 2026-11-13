@@ -38,7 +38,7 @@ export function Footer() {
               </div>
             </div>
             <p className="mt-6 text-sm leading-relaxed text-navy-foreground/70">
-              25 anos defendendo direitos com transparência, ética e excelência jurídica.
+              Desde 2000 defendendo direitos com transparência, ética e excelência jurídica.
             </p>
           </div>
 

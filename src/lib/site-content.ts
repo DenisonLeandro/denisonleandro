@@ -125,7 +125,7 @@ export const LAWYERS: Lawyer[] = [
     "name": "Dr. Denison Leandro",
     "role": "Sócio Fundador",
     "oab": "OAB/PR 28.764",
-    "specialty": "especialista em Direito do Trabalho, pós-graduado pela FGV"
+    "specialty": "especialista em Direito do Trabalho, pós-graduado pela FGV; pós-graduado em Direito da Saúde e Direito Médico pelo Hospital Israelita Albert Einstein"
   },
   {
     "slug": "marcio-barbosa-da-silva",

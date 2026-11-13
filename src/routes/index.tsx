@@ -17,7 +17,7 @@ export const Route = createFileRoute("/")({
       fullTitle: "Denison Leandro Advogados Associados | Advocacia em Londrina-PR",
       title: "Advocacia em Londrina",
       description:
-        "Escritório de advocacia full service com 25 anos de atuação. Direito Trabalhista, Previdenciário, do Consumidor, de Família, Contratos, Bancário e Mediação.",
+        "Escritório de advocacia full service desde 2000. Direito Trabalhista, Previdenciário, da Saúde, do Consumidor, Bancário, de Família e Contratos.",
       path: "/",
     }),
   component: Index,

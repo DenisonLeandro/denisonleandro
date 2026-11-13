@@ -11,7 +11,7 @@ export const Route = createFileRoute("/areas-de-atuacao")({
     buildHead({
       title: "Áreas de Atuação",
       description:
-        "Atuação full service em Direito Trabalhista, Previdenciário, do Consumidor, de Família, Contratos, Bancário/Financeiro e Mediação de Conflitos.",
+        "Atuação full service em Direito Trabalhista, Previdenciário, da Saúde, do Consumidor, Bancário/Financeiro, de Família e Contratos.",
       path: "/areas-de-atuacao",
     }),
   component: AreasPage,

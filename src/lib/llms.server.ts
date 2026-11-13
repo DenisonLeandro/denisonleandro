@@ -3,7 +3,7 @@ import type { Database } from "@/integrations/supabase/types";
 import { AREAS, LAWYERS } from "@/lib/site-content";
 import { SITE_URL } from "@/lib/seo";
 
-const ORDER = ["trabalhista", "previdenciario", "consumidor", "familia", "contratos", "bancario", "mediacao"];
+const ORDER = ["trabalhista", "previdenciario", "saude", "consumidor", "bancario", "familia", "contratos"];
 const areas = () => ORDER.map((s) => AREAS.find((a) => a.slug === s)!).filter(Boolean);
 
 export function stripHtml(html: string): string {
@@ -39,7 +39,7 @@ export async function loadArticles(limit: number) {
 
 export const HEADER = `# Denison Leandro Advogados Associados
 
-> Escritório de advocacia em Londrina-PR, fundado em 2000, com atuação em Direito Trabalhista, Previdenciário, do Consumidor, de Família, Contratos, Bancário e Mediação. Fundado pelo Dr. Denison Leandro (OAB/PR 28.764), pós-graduado pela FGV e especialista em Direito do Trabalho.
+> Escritório de advocacia em Londrina-PR, fundado em 2000, com atuação em Direito Trabalhista, Previdenciário, da Saúde, do Consumidor, Bancário, de Família e Contratos, com atendimento online em todo o Brasil. Fundado pelo Dr. Denison Leandro (OAB/PR 28.764), pós-graduado pela FGV, especialista em Direito do Trabalho e pós-graduado em Direito da Saúde e Direito Médico pelo Hospital Israelita Albert Einstein.
 
 ## Contato
 - Endereço: Av. Paraná, 343, 9º andar, sala 902 - Ed. Satélite, Centro, Londrina-PR, CEP 86010-920
