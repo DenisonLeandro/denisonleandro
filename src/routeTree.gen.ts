@@ -51,6 +51,7 @@ import { Route as WpContentSplatRouteImport } from './routes/wp-content.$'
 import { Route as WpIncludesSplatRouteImport } from './routes/wp-includes.$'
 import { Route as WpJsonSplatRouteImport } from './routes/wp-json.$'
 import { Route as AuthenticatedAdminArtigosRouteImport } from './routes/_authenticated/admin.artigos'
+import { Route as AreasAreaTemaRouteImport } from './routes/areas.$area.$tema'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -270,6 +271,11 @@ const AuthenticatedAdminArtigosRoute =
     path: '/admin/artigos',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AreasAreaTemaRoute = AreasAreaTemaRouteImport.update({
+  id: '/areas/$area/$tema',
+  path: '/areas/$area/$tema',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -313,6 +319,7 @@ export interface FileRoutesByFullPath {
   '/wp-json/$': typeof WpJsonSplatRoute
   '/noticias/': typeof NoticiasIndexRoute
   '/admin/artigos': typeof AuthenticatedAdminArtigosRoute
+  '/areas/$area/$tema': typeof AreasAreaTemaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -356,6 +363,7 @@ export interface FileRoutesByTo {
   '/wp-json/$': typeof WpJsonSplatRoute
   '/noticias': typeof NoticiasIndexRoute
   '/admin/artigos': typeof AuthenticatedAdminArtigosRoute
+  '/areas/$area/$tema': typeof AreasAreaTemaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -401,6 +409,7 @@ export interface FileRoutesById {
   '/wp-json/$': typeof WpJsonSplatRoute
   '/noticias/': typeof NoticiasIndexRoute
   '/_authenticated/admin/artigos': typeof AuthenticatedAdminArtigosRoute
+  '/areas/$area/$tema': typeof AreasAreaTemaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -446,6 +455,7 @@ export interface FileRouteTypes {
     | '/wp-json/$'
     | '/noticias/'
     | '/admin/artigos'
+    | '/areas/$area/$tema'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -489,6 +499,7 @@ export interface FileRouteTypes {
     | '/wp-json/$'
     | '/noticias'
     | '/admin/artigos'
+    | '/areas/$area/$tema'
   id:
     | '__root__'
     | '/'
@@ -533,6 +544,7 @@ export interface FileRouteTypes {
     | '/wp-json/$'
     | '/noticias/'
     | '/_authenticated/admin/artigos'
+    | '/areas/$area/$tema'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -576,6 +588,7 @@ export interface RootRouteChildren {
   WpIncludesSplatRoute: typeof WpIncludesSplatRoute
   WpJsonSplatRoute: typeof WpJsonSplatRoute
   NoticiasIndexRoute: typeof NoticiasIndexRoute
+  AreasAreaTemaRoute: typeof AreasAreaTemaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -874,6 +887,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminArtigosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/areas/$area/$tema': {
+      id: '/areas/$area/$tema'
+      path: '/areas/$area/$tema'
+      fullPath: '/areas/$area/$tema'
+      preLoaderRoute: typeof AreasAreaTemaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -940,6 +960,7 @@ const rootRouteChildren: RootRouteChildren = {
   WpIncludesSplatRoute: WpIncludesSplatRoute,
   WpJsonSplatRoute: WpJsonSplatRoute,
   NoticiasIndexRoute: NoticiasIndexRoute,
+  AreasAreaTemaRoute: AreasAreaTemaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

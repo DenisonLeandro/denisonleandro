@@ -68,6 +68,20 @@ export const Route = createFileRoute("/sitemap.xml")({
           console.error("[sitemap] failed to load articles", err);
         }
 
+        try {
+          const { data } = await (supabase as any)
+            .from("area_topics")
+            .select("area_slug, slug, updated_at")
+            .eq("published", true);
+          if (Array.isArray(data)) {
+            for (const t of data) {
+              dynamic.push({ path: `/areas/${t.area_slug}/${t.slug}`, lastmod: String(t.updated_at ?? "").slice(0, 10) || undefined, changefreq: "monthly", priority: "0.7" });
+            }
+          }
+        } catch (err) {
+          console.error("[sitemap] failed to load topics", err);
+        }
+
         const entries = [...STATIC_ENTRIES, ...dynamic];
         const urls = entries.map((e) =>
           [
