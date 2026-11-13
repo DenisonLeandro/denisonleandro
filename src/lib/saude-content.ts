@@ -7,7 +7,7 @@ export const SAUDE = {
   subtitle:
     "Orientação e defesa de pacientes e familiares em negativas de plano de saúde, medicamentos de alto custo, reajustes, cancelamentos, erro médico e acesso a tratamentos pelo SUS. Atendimento online em todo o Brasil e presencial em Londrina-PR.",
   resumo:
-    "Planos de saúde, hospitais e o próprio Estado têm obrigações previstas na Lei dos Planos de Saúde (Lei 9.656/1998), no Código de Defesa do Consumidor e nas normas da ANS. Desde julho de 2025, toda negativa de cobertura precisa ser informada por escrito, com o motivo. O sócio fundador, Dr. Denison Leandro, é pós-graduado em Direito da Saúde e Direito Médico pelo Hospital Israelita Albert Einstein.",
+    "Planos de saúde, hospitais e o próprio Estado têm obrigações previstas na Lei dos Planos de Saúde (Lei 9.656/1998), no Código de Defesa do Consumidor e nas normas da ANS. Desde julho de 2025, toda negativa de cobertura precisa ser informada por escrito, com o motivo.",
   whatsapp: "Olá, gostaria de falar sobre uma questão de plano de saúde / direito médico",
   passos: [
     ["Conversa inicial", "você explica a situação pelo WhatsApp, por videochamada ou presencialmente."],
