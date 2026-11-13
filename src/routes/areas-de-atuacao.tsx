@@ -32,6 +32,12 @@ function AreasPage() {
         />
         <section className="bg-background py-20">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
+            <p className="mx-auto mb-12 max-w-3xl text-center leading-[1.8] text-foreground/85">
+              Desde 2000, o escritório Denison Leandro Advogados Associados orienta e defende pessoas em questões
+              trabalhistas, previdenciárias, de saúde, consumo, bancárias, de família e contratos. Atendemos online em
+              todo o Brasil e presencialmente em Londrina-PR. Escolha a área abaixo para ver os temas mais comuns e como
+              podemos ajudar.
+            </p>
             <AreaCardsGrid topics={topics} />
             <div className="mt-14 flex justify-center">
               <WhatsAppButton message="Olá! Vim pela página de Áreas de Atuação do site Denison Leandro e gostaria de falar com um advogado." />
